@@ -77,6 +77,7 @@ private:
 		GEO_BOTTOM,
 		GEO_FRONT,
 		GEO_BACK,
+		GEO_FLOOR,
 		//==Place New Geometry variable names here==//
 		GEO_TEXT,
 		GEO_FRONTSKY,	//Front skybox
@@ -84,6 +85,7 @@ private:
 		GEO_RIGHTSKY,	//Right skybox
 		GEO_BACKSKY,	//Back skybox
 		GEO_SKY,        //Top of skybox
+		GEO_BOTTOMSKY,  //bottom of skybox
 		NUM_GEOMETRY,
 	};
 
