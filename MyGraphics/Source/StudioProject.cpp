@@ -10,6 +10,8 @@
 #include "Vertex.h"
 #include "LoadTGA.h"
 
+#include "Item.h"
+
 StudioProject::StudioProject()
 {
 }
@@ -216,6 +218,8 @@ void StudioProject::Init()
 	meshList[GEO_FLOOR] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_FLOOR]->textureID = LoadTGA("Image//road-texture.tga");
 
+
+	meshList[1] = 
 	//Light ball
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 10, 10, 1);
 
