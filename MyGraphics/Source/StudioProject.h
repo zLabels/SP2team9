@@ -84,15 +84,25 @@ private:
 		GEO_RIGHTSKY,	//Right skybox
 		GEO_BACKSKY,	//Back skybox
 		GEO_SKY,        //Top of skybox
+<<<<<<< HEAD
 		ModelHead,		//ModelHead
 		ModelTorso,		//ModelTorso
+=======
+		GEO_BOTTOMSKY,  //bottom of skybox
+		GEO_MARKET,
+		GEO_CASHIER,
+>>>>>>> 4570351359c54b989f9bc2557cff10aa8fb4b023
 		NUM_GEOMETRY,
 	};
 
 	void RenderSkybox();
+<<<<<<< HEAD
 	void RenderRoom();
 	void RenderRoomContents();
 	void RenderModel();
+=======
+	void RenderSupermarket();
+>>>>>>> 4570351359c54b989f9bc2557cff10aa8fb4b023
 
 public:
 	StudioProject();

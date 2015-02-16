@@ -187,8 +187,38 @@ void StudioProject::Init()
 	meshList[GEO_RIGHTSKY] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_RIGHTSKY]->textureID = LoadTGA("Image//Right.tga");
 	
+<<<<<<< HEAD
 	meshList[GEO_BACKSKY] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BACKSKY]->textureID = LoadTGA("Image//Back.tga");
+=======
+	meshList[GEO_BOTTOMSKY] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
+	meshList[GEO_BOTTOMSKY]->textureID = LoadTGA("Image//stormydays_dn.tga");
+
+	//===============SUPERMARKET RELATED OBJs==========================//
+
+	meshList[GEO_MARKET] = MeshBuilder::GenerateOBJ("Market" , "OBJ//Market.obj");
+	meshList[GEO_MARKET]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_MARKET]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_MARKET]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_MARKET]->material.kShininess = 8.f;
+	meshList[GEO_MARKET] ->textureID = LoadTGA("Image//WallTexture.tga");
+
+	meshList[GEO_CASHIER] = MeshBuilder::GenerateOBJ("Market" , "OBJ//cashier-table.obj");
+	meshList[GEO_CASHIER]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_CASHIER]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_CASHIER]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_CASHIER]->material.kShininess = 8.f;
+	meshList[GEO_CASHIER] ->textureID = LoadTGA("Image//Cashier-Counter-Texture.tga");
+
+	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
+	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
+
+	//meshList[GEO_BOTTOM] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
+	//meshList[GEO_BOTTOM]->textureID = LoadTGA("Image//road-texture.tga");
+
+	meshList[GEO_FLOOR] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
+	meshList[GEO_FLOOR]->textureID = LoadTGA("Image//road-texture.tga");
+>>>>>>> 4570351359c54b989f9bc2557cff10aa8fb4b023
 
 	//Light ball
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 10, 10, 1);
@@ -373,6 +403,16 @@ void StudioProject::RenderModel()
 	modelStack.PopMatrix();
 }
 
+void StudioProject::RenderSupermarket()
+{
+	modelStack.PushMatrix();
+	RenderMesh(meshList[GEO_MARKET],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	RenderMesh(meshList[GEO_CASHIER],B_Light);
+	modelStack.PopMatrix();
+}
 void StudioProject::Render()
 {
 	//clear depth and color buffer
@@ -451,13 +491,20 @@ void StudioProject::Render()
 	//RenderSkybox();
 	modelStack.PopMatrix();
 
+	//Rendering of supermarket scene
+	RenderSupermarket();
+
 
 	//============DEBUGGING PURPOSES====================//
 	RenderTextOnScreen(meshList[GEO_TEXT], Framerate + result, Color(0, 1, 0), 3, 1, 2);
 	RenderTextOnScreen(meshList[GEO_TEXT],"x: " + camerax, Color(0, 1, 0), 3, 1, 3);
 	RenderTextOnScreen(meshList[GEO_TEXT],"y: " + cameray, Color(0, 1, 0), 3, 1, 4);
 	RenderTextOnScreen(meshList[GEO_TEXT],"z: " + cameraz, Color(0, 1, 0), 3, 1, 5);
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> 4570351359c54b989f9bc2557cff10aa8fb4b023
 	//==Controls==//
 	if(isShown == true)
 	{
