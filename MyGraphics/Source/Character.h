@@ -7,6 +7,7 @@ public:
 	CCharacter(void);
 	~CCharacter(void);
 
+
 private:
 	CInventory Inventory;
 
