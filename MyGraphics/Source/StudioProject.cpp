@@ -187,10 +187,10 @@ void StudioProject::Init()
 	meshList[GEO_RIGHTSKY] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_RIGHTSKY]->textureID = LoadTGA("Image//Right.tga");
 	
-<<<<<<< HEAD
+
 	meshList[GEO_BACKSKY] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BACKSKY]->textureID = LoadTGA("Image//Back.tga");
-=======
+
 	meshList[GEO_BOTTOMSKY] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BOTTOMSKY]->textureID = LoadTGA("Image//stormydays_dn.tga");
 
@@ -218,7 +218,6 @@ void StudioProject::Init()
 
 	meshList[GEO_FLOOR] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_FLOOR]->textureID = LoadTGA("Image//road-texture.tga");
->>>>>>> 4570351359c54b989f9bc2557cff10aa8fb4b023
 
 	//Light ball
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 10, 10, 1);
@@ -398,7 +397,7 @@ void StudioProject::RenderModel()
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, -9.52072, 0);
+	modelStack.Translate(0, -9.52072f, 0);
 	RenderMesh(meshList[ModelTorso], false);
 	modelStack.PopMatrix();
 }
@@ -483,12 +482,11 @@ void StudioProject::Render()
 	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
 	glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
 	RenderMesh(meshList[GEO_AXES], false);
-	RenderSkybox();
 
 	//Rendering skybox
 	modelStack.PushMatrix();
 	modelStack.Translate(camera.position.x, camera.position.y, camera.position.z);
-	//RenderSkybox();
+	RenderSkybox();
 	modelStack.PopMatrix();
 
 	//Rendering of supermarket scene
@@ -500,11 +498,7 @@ void StudioProject::Render()
 	RenderTextOnScreen(meshList[GEO_TEXT],"x: " + camerax, Color(0, 1, 0), 3, 1, 3);
 	RenderTextOnScreen(meshList[GEO_TEXT],"y: " + cameray, Color(0, 1, 0), 3, 1, 4);
 	RenderTextOnScreen(meshList[GEO_TEXT],"z: " + cameraz, Color(0, 1, 0), 3, 1, 5);
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> 4570351359c54b989f9bc2557cff10aa8fb4b023
 	//==Controls==//
 	if(isShown == true)
 	{
