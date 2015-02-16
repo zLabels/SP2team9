@@ -48,6 +48,7 @@ void StudioProject::Init()
 	roomsize = 250.0f;
 	roomheight = 150.0f;
 	fps = 0.0f;
+	moving = 0;
 
 	//variable to animate metaknight
 	rotateAngle = 0;
@@ -205,6 +206,14 @@ void StudioProject::Init()
 	//Text Related
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//CourierNew.tga");
+
+	//Model
+	meshList[ModelHead] = MeshBuilder::GenerateOBJ("Model Head", "OBJ//modelHead.obj");
+	meshList[ModelHead]->textureID = LoadTGA("Image//modelHead.tga");
+
+	meshList[ModelTorso] = MeshBuilder::GenerateOBJ("Model Head", "OBJ//modelTorso.obj");
+	meshList[ModelTorso]->textureID = LoadTGA("Image//ModelTorso.tga");
+
 }
 
 //========Variables for use in update====//
@@ -270,6 +279,13 @@ void StudioProject::Update(double dt)
 	ss4 << camera.position.z;
 	cameraz = ss4.str();
 	camera.Update(dt);
+
+	//=======Debuging=======//
+	if (Application::IsKeyPressed('8'))
+		moving += (float)(10 * dt);
+	if (Application::IsKeyPressed('9'))
+		moving -= (float)(10 * dt);
+	std::cout << moving << std::endl;
 }
 
 //=========Rendering of Skybox to be done here=========//
@@ -340,6 +356,20 @@ void StudioProject::RenderSkybox()
 	modelStack.Scale(worldsize, worldsize, worldsize);
 	RenderMesh(meshList[GEO_LEFTSKY], false);
 	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+}
+
+//=========Rendering of Character to be done here=========//
+void StudioProject::RenderModel()
+{
+	modelStack.PushMatrix();
+	modelStack.Rotate(180, 0, 0, 180);
+	RenderMesh(meshList[ModelHead], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, -9.52072, 0);
+	RenderMesh(meshList[ModelTorso], false);
 	modelStack.PopMatrix();
 }
 
@@ -434,6 +464,8 @@ void StudioProject::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], "WASD to Move", Color(0, 0 ,0), 2, 1, 29);
 		RenderTextOnScreen(meshList[GEO_TEXT], "Arrow Keys to View", Color(0, 0, 0), 2, 1, 28);
 	}
+
+	RenderModel();
 }
 
 void StudioProject::RenderMesh(Mesh *mesh, bool enableLight)

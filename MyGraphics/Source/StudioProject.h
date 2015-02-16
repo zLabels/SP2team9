@@ -84,12 +84,15 @@ private:
 		GEO_RIGHTSKY,	//Right skybox
 		GEO_BACKSKY,	//Back skybox
 		GEO_SKY,        //Top of skybox
+		ModelHead,		//ModelHead
+		ModelTorso,		//ModelTorso
 		NUM_GEOMETRY,
 	};
 
 	void RenderSkybox();
 	void RenderRoom();
 	void RenderRoomContents();
+	void RenderModel();
 
 public:
 	StudioProject();
@@ -115,6 +118,7 @@ private:
 	float worldsize;
 	float roomsize;
 	float roomheight;
+	float moving;
 
 	Camera3 camera;
 
