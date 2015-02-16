@@ -87,12 +87,12 @@ private:
 		GEO_SKY,        //Top of skybox
 		GEO_BOTTOMSKY,  //bottom of skybox
 		GEO_MARKET,
+		GEO_CASHIER,
 		NUM_GEOMETRY,
 	};
 
 	void RenderSkybox();
-	void RenderRoom();
-	void RenderRoomContents();
+	void RenderSupermarket();
 
 public:
 	StudioProject();
