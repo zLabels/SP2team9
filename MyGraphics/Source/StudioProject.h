@@ -86,6 +86,7 @@ private:
 		GEO_BACKSKY,	//Back skybox
 		GEO_SKY,        //Top of skybox
 		GEO_BOTTOMSKY,  //bottom of skybox
+		GEO_MARKET,
 		NUM_GEOMETRY,
 	};
 

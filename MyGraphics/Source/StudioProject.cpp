@@ -209,6 +209,9 @@ void StudioProject::Init()
 	meshList[GEO_BOTTOMSKY] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BOTTOMSKY]->textureID = LoadTGA("Image//stormydays_dn.tga");
 
+	meshList[GEO_MARKET] = MeshBuilder::GenerateOBJ("Market" , "OBJ//Market.obj");
+	meshList[GEO_MARKET] ->textureID = LoadTGA("Image//WallTexture.tga");
+
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
 
@@ -529,6 +532,10 @@ void StudioProject::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], "WASD to Move", Color(0, 0 ,0), 2, 1, 29);
 		RenderTextOnScreen(meshList[GEO_TEXT], "Arrow Keys to View", Color(0, 0, 0), 2, 1, 28);
 	}
+
+	modelStack.PushMatrix();
+	RenderMesh(meshList[GEO_MARKET],false);
+	modelStack.PopMatrix();
 }
 
 void StudioProject::RenderMesh(Mesh *mesh, bool enableLight)
