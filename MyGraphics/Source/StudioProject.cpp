@@ -526,16 +526,19 @@ void StudioProject::Render()
 	RenderTextOnScreen(meshList[GEO_TEXT],"y: " + cameray, Color(0, 1, 0), 3, 1, 4);
 	RenderTextOnScreen(meshList[GEO_TEXT],"z: " + cameraz, Color(0, 1, 0), 3, 1, 5);
 	
+	modelStack.PushMatrix();
+	RenderMesh(meshList[GEO_MARKET],false);
+	modelStack.PopMatrix();
+
 	//==Controls==//
 	if(isShown == true)
 	{
 		RenderTextOnScreen(meshList[GEO_TEXT], "WASD to Move", Color(0, 0 ,0), 2, 1, 29);
-		RenderTextOnScreen(meshList[GEO_TEXT], "Arrow Keys to View", Color(0, 0, 0), 2, 1, 28);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Arrow Keys to turn", Color(0, 0, 0), 2, 1, 28);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Press E to interact", Color(0,0,0), 2, 1, 27);
 	}
 
-	modelStack.PushMatrix();
-	RenderMesh(meshList[GEO_MARKET],false);
-	modelStack.PopMatrix();
+	
 }
 
 void StudioProject::RenderMesh(Mesh *mesh, bool enableLight)
