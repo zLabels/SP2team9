@@ -171,23 +171,23 @@ void StudioProject::Init()
 	========================Sky Box=====================================
 	========================Sky Box=====================================
 	*/
-	//meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1), 1.f, 1.f);
-	//meshList[GEO_FRONT]->textureID = LoadTGA("Image//hills_ft.tga");
+	meshList[GEO_FRONTSKY] = MeshBuilder::GenerateQuad("Back", Color(1, 1, 1), 1.f , 1.f);
+	meshList[GEO_FRONTSKY]->textureID = LoadTGA("Image//Back.tga");
 
-	//meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f, 1.f);
-	//meshList[GEO_BACK]->textureID = LoadTGA("Image//hills_bk.tga");
+	meshList[GEO_BACKSKY] = MeshBuilder::GenerateQuad("Front", Color(1, 1, 1), 1.f , 1.f);
+	meshList[GEO_BACKSKY]->textureID = LoadTGA("Image//Front.tga");
 
-	//meshList[GEO_LEFT] = MeshBuilder::GenerateQuad("left", Color(1, 1, 1), 1.f, 1.f);
-	//meshList[GEO_LEFT]->textureID = LoadTGA("Image//hills_rt.tga");
+	meshList[GEO_SKY] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
+	meshList[GEO_SKY]->textureID = LoadTGA("Image//Sky.tga");
 
-	//meshList[GEO_RIGHT] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f, 1.f);
-	//meshList[GEO_RIGHT]->textureID = LoadTGA("Image//hills_lf.tga");
+	meshList[GEO_LEFTSKY] = MeshBuilder::GenerateQuad("left", Color(1, 1, 1), 1.f,1.f);
+	meshList[GEO_LEFTSKY]->textureID = LoadTGA("Image//Left.tga");
 
-	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
-	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
-
-	//meshList[GEO_BOTTOM] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
-	//meshList[GEO_BOTTOM]->textureID = LoadTGA("Image//hills_dn.tga");
+	meshList[GEO_RIGHTSKY] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f, 1.f);
+	meshList[GEO_RIGHTSKY]->textureID = LoadTGA("Image//Right.tga");
+	
+	meshList[GEO_BACKSKY] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f, 1.f);
+	meshList[GEO_BACKSKY]->textureID = LoadTGA("Image//Back.tga");
 
 	//Light ball
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 10, 10, 1);
@@ -280,7 +280,7 @@ void StudioProject::RenderSkybox()
 	modelStack.Translate(0.f, 0.f, (worldsize/2) - 1);
 	modelStack.Rotate(180, 0, 1, 0);
 	modelStack.Scale(worldsize, worldsize, worldsize);
-	RenderMesh(meshList[GEO_BACK], false);
+	RenderMesh(meshList[GEO_BACKSKY], false);
 	modelStack.PopMatrix();
 
 	//Front
@@ -292,19 +292,20 @@ void StudioProject::RenderSkybox()
 	modelStack.PushMatrix();
 	modelStack.Rotate(-180, 0, 0, 1);
 	modelStack.Scale(worldsize, worldsize, worldsize);
-	RenderMesh(meshList[GEO_FRONT], false);
+	RenderMesh(meshList[GEO_FRONTSKY], false);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 	//Top
 	modelStack.PushMatrix();
+	modelStack.Rotate(-90,0,1,0);
 	modelStack.Translate(0.f, (worldsize/2) - 1, 0.f);
 	modelStack.Rotate(90, 1, 0, 0);
 	modelStack.PushMatrix();
 	modelStack.Rotate(270, 0, 0, 1);
 	modelStack.Scale(worldsize, worldsize, worldsize);
-	RenderMesh(meshList[GEO_TOP], false);
+	RenderMesh(meshList[GEO_SKY], false);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
@@ -313,28 +314,31 @@ void StudioProject::RenderSkybox()
 	modelStack.Translate(0.f, (-worldsize/2) + 1, 0.f);
 	modelStack.Rotate(90,1,0,0);
 	modelStack.Scale(worldsize, worldsize, worldsize);
-	RenderMesh(meshList[GEO_BOTTOM], false);
+	RenderMesh(meshList[GEO_BACKSKY], false);
 	modelStack.PopMatrix();
 
 	//RIGHT
 	modelStack.PushMatrix();
+	modelStack.Rotate(90,10,0,0);
 	modelStack.Translate((worldsize/2) - 1, 0.f, 0.f);
 	modelStack.Rotate(90, 0, 1, 0);
 	modelStack.PushMatrix();
 	modelStack.Rotate(-180, 0, 1, 0);
 	modelStack.Scale(worldsize, worldsize, worldsize);
-	RenderMesh(meshList[GEO_RIGHT], false);
+	RenderMesh(meshList[GEO_RIGHTSKY], false);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 	//LEFT
 	modelStack.PushMatrix();
+	modelStack.Rotate(-900,1,0,0);
+	modelStack.PushMatrix();
 	modelStack.Translate((-worldsize/2) + 1, 0.f, 0.f);
-	modelStack.Rotate(-90, 0, 1, 0);
+	modelStack.Rotate(90, 0, 1, 0);
 	modelStack.PushMatrix();
 	modelStack.Rotate(180, 0, 1, 0);
 	modelStack.Scale(worldsize, worldsize, worldsize);
-	RenderMesh(meshList[GEO_LEFT], false);
+	RenderMesh(meshList[GEO_LEFTSKY], false);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 }
@@ -409,6 +413,7 @@ void StudioProject::Render()
 	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
 	glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
 	RenderMesh(meshList[GEO_AXES], false);
+	RenderSkybox();
 
 	//Rendering skybox
 	modelStack.PushMatrix();
