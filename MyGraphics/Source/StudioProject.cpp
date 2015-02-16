@@ -10,6 +10,8 @@
 #include "Vertex.h"
 #include "LoadTGA.h"
 
+#include "Item.h"
+
 StudioProject::StudioProject()
 {
 }
@@ -48,7 +50,6 @@ void StudioProject::Init()
 	roomsize = 250.0f;
 	roomheight = 150.0f;
 	fps = 0.0f;
-	moving = 0;
 
 	//variable to animate metaknight
 	rotateAngle = 0;
@@ -173,24 +174,20 @@ void StudioProject::Init()
 	========================Sky Box=====================================
 	*/
 	meshList[GEO_FRONTSKY] = MeshBuilder::GenerateQuad("Back", Color(1, 1, 1), 1.f , 1.f);
-	meshList[GEO_FRONTSKY]->textureID = LoadTGA("Image//Back.tga");
+	meshList[GEO_FRONTSKY]->textureID = LoadTGA("Image//stormydays_ft.tga");
 
 	meshList[GEO_BACKSKY] = MeshBuilder::GenerateQuad("Front", Color(1, 1, 1), 1.f , 1.f);
-	meshList[GEO_BACKSKY]->textureID = LoadTGA("Image//Front.tga");
+	meshList[GEO_BACKSKY]->textureID = LoadTGA("Image//stormydays_bk.tga");
 
 	meshList[GEO_SKY] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_SKY]->textureID = LoadTGA("Image//Sky.tga");
+	meshList[GEO_SKY]->textureID = LoadTGA("Image//stormydays_up.tga");
 
 	meshList[GEO_LEFTSKY] = MeshBuilder::GenerateQuad("left", Color(1, 1, 1), 1.f,1.f);
-	meshList[GEO_LEFTSKY]->textureID = LoadTGA("Image//Left.tga");
+	meshList[GEO_LEFTSKY]->textureID = LoadTGA("Image//stormydays_rt.tga");
 
 	meshList[GEO_RIGHTSKY] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_RIGHTSKY]->textureID = LoadTGA("Image//Right.tga");
+	meshList[GEO_RIGHTSKY]->textureID = LoadTGA("Image//stormydays_lf.tga");
 	
-
-	meshList[GEO_BACKSKY] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_BACKSKY]->textureID = LoadTGA("Image//Back.tga");
-
 	meshList[GEO_BOTTOMSKY] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BOTTOMSKY]->textureID = LoadTGA("Image//stormydays_dn.tga");
 
@@ -210,6 +207,13 @@ void StudioProject::Init()
 	meshList[GEO_CASHIER]->material.kShininess = 8.f;
 	meshList[GEO_CASHIER] ->textureID = LoadTGA("Image//Cashier-Counter-Texture.tga");
 
+	meshList[GEO_COLDFOODSHELF] = MeshBuilder::GenerateOBJ("Market" , "OBJ//Cold-food-shelf.obj");
+	meshList[GEO_COLDFOODSHELF]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_COLDFOODSHELF]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_COLDFOODSHELF]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_COLDFOODSHELF]->material.kShininess = 8.f;
+	meshList[GEO_COLDFOODSHELF] ->textureID = LoadTGA("Image//Shelf_Texture.tga");
+
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
 
@@ -219,6 +223,8 @@ void StudioProject::Init()
 	meshList[GEO_FLOOR] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_FLOOR]->textureID = LoadTGA("Image//road-texture.tga");
 
+
+	meshList[1] = 
 	//Light ball
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 10, 10, 1);
 
@@ -235,14 +241,6 @@ void StudioProject::Init()
 	//Text Related
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//CourierNew.tga");
-
-	//Model
-	meshList[ModelHead] = MeshBuilder::GenerateOBJ("Model Head", "OBJ//modelHead.obj");
-	meshList[ModelHead]->textureID = LoadTGA("Image//modelHead.tga");
-
-	meshList[ModelTorso] = MeshBuilder::GenerateOBJ("Model Head", "OBJ//modelTorso.obj");
-	meshList[ModelTorso]->textureID = LoadTGA("Image//ModelTorso.tga");
-
 }
 
 //========Variables for use in update====//
@@ -308,13 +306,6 @@ void StudioProject::Update(double dt)
 	ss4 << camera.position.z;
 	cameraz = ss4.str();
 	camera.Update(dt);
-
-	//=======Debuging=======//
-	if (Application::IsKeyPressed('8'))
-		moving += (float)(10 * dt);
-	if (Application::IsKeyPressed('9'))
-		moving -= (float)(10 * dt);
-	std::cout << moving << std::endl;
 }
 
 //=========Rendering of Skybox to be done here=========//
@@ -344,7 +335,7 @@ void StudioProject::RenderSkybox()
 
 	//Top
 	modelStack.PushMatrix();
-	modelStack.Rotate(-90,0,1,0);
+	modelStack.Rotate(360,0,1,0);
 	modelStack.Translate(0.f, (worldsize/2) - 1, 0.f);
 	modelStack.Rotate(90, 1, 0, 0);
 	modelStack.PushMatrix();
@@ -354,21 +345,61 @@ void StudioProject::RenderSkybox()
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
+	//modelStack.PushMatrix();
+	//modelStack.Translate(0.f, 0.f, (worldsize/2) - 1);
+	//modelStack.Rotate(180, 0, 1, 0);
+	//modelStack.Scale(worldsize, worldsize, worldsize);
+	//RenderMesh(meshList[GEO_BACK], false);
+	//modelStack.PopMatrix();
+
+	////Front
+	//modelStack.PushMatrix();
+	//modelStack.Translate(0.f, 0.f, (-worldsize/2) + 1);
+	//modelStack.Rotate(180, 0, 1, 0);
+	//modelStack.PushMatrix();
+	//modelStack.Rotate(-180, 1, 0, 0);
+	//modelStack.PushMatrix();
+	//modelStack.Rotate(-180, 0, 0, 1);
+	//modelStack.Scale(worldsize, worldsize, worldsize);
+	//RenderMesh(meshList[GEO_FRONT], false);
+	//modelStack.PopMatrix();
+	//modelStack.PopMatrix();
+	//modelStack.PopMatrix();
+
+	////Top
+	//modelStack.PushMatrix();
+	//modelStack.Translate(0.f, (worldsize/2) - 1, 0.f);
+	//modelStack.Rotate(90, 1, 0, 0);
+	//modelStack.PushMatrix();
+	//modelStack.Rotate(270, 0, 0, 1);
+	//modelStack.Scale(worldsize, worldsize, worldsize);
+	//RenderMesh(meshList[GEO_TOP], false);
+	//modelStack.PopMatrix();
+	//modelStack.PopMatrix();
+
+
 	//Bottom
+	//modelStack.PushMatrix();
+	//modelStack.Translate(0.f, (-worldsize/2) + 1, 0.f);
+	//modelStack.Rotate(90,1,0,0);
+	//modelStack.Scale(worldsize, worldsize, worldsize);
+	//RenderMesh(meshList[GEO_BOTTOM], false);
+	//modelStack.PopMatrix();
+
 	modelStack.PushMatrix();
 	modelStack.Translate(0.f, (-worldsize/2) + 1, 0.f);
 	modelStack.Rotate(90,1,0,0);
 	modelStack.Scale(worldsize, worldsize, worldsize);
-	RenderMesh(meshList[GEO_BACKSKY], false);
+	RenderMesh(meshList[GEO_BOTTOMSKY], false);
 	modelStack.PopMatrix();
 
 	//RIGHT
 	modelStack.PushMatrix();
-	modelStack.Rotate(90,10,0,0);
+	modelStack.Rotate(90,1,0,0);
 	modelStack.Translate((worldsize/2) - 1, 0.f, 0.f);
 	modelStack.Rotate(90, 0, 1, 0);
 	modelStack.PushMatrix();
-	modelStack.Rotate(-180, 0, 1, 0);
+	modelStack.Rotate(270, 0, 0, 1);
 	modelStack.Scale(worldsize, worldsize, worldsize);
 	RenderMesh(meshList[GEO_RIGHTSKY], false);
 	modelStack.PopMatrix();
@@ -376,41 +407,72 @@ void StudioProject::RenderSkybox()
 
 	//LEFT
 	modelStack.PushMatrix();
-	modelStack.Rotate(-900,1,0,0);
+	modelStack.Rotate(-90,1,0,0);
 	modelStack.PushMatrix();
 	modelStack.Translate((-worldsize/2) + 1, 0.f, 0.f);
 	modelStack.Rotate(90, 0, 1, 0);
 	modelStack.PushMatrix();
-	modelStack.Rotate(180, 0, 1, 0);
+	modelStack.Rotate(90, 0, 0, 1);
 	modelStack.Scale(worldsize, worldsize, worldsize);
 	RenderMesh(meshList[GEO_LEFTSKY], false);
 	modelStack.PopMatrix();
-	modelStack.PopMatrix();
-}
 
-//=========Rendering of Character to be done here=========//
-void StudioProject::RenderModel()
-{
-	modelStack.PushMatrix();
-	modelStack.Rotate(180, 0, 0, 180);
-	RenderMesh(meshList[ModelHead], false);
+	modelStack.PopMatrix();
+	RenderMesh(meshList[GEO_FLOOR], false);
 	modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
-	modelStack.Translate(0, -9.52072f, 0);
-	RenderMesh(meshList[ModelTorso], false);
-	modelStack.PopMatrix();
+	//RIGHT
+	//modelStack.PushMatrix();
+	//modelStack.Translate((worldsize/2) - 1, 0.f, 0.f);
+	//modelStack.Rotate(90, 0, 1, 0);
+	//modelStack.PushMatrix();
+	//modelStack.Rotate(-180, 0, 1, 0);
+	//modelStack.Scale(worldsize, worldsize, worldsize);
+	//RenderMesh(meshList[GEO_RIGHT], false);
+	//modelStack.PopMatrix();
+	//modelStack.PopMatrix();
+
+	////LEFT
+	//modelStack.PushMatrix();
+	//modelStack.Translate((-worldsize/2) + 1, 0.f, 0.f);
+	//modelStack.Rotate(-90, 0, 1, 0);
+	//modelStack.PushMatrix();
+	//modelStack.Rotate(180, 0, 1, 0);
+	//modelStack.Scale(worldsize, worldsize, worldsize);
+	//RenderMesh(meshList[GEO_LEFT], false);
+	//modelStack.PopMatrix();
+	//modelStack.PopMatrix();
 }
 
 void StudioProject::RenderSupermarket()
 {
 	modelStack.PushMatrix();
+	//modelStack.Rotate(180, 0, 1, 0);
 	RenderMesh(meshList[GEO_MARKET],B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
+	modelStack.Translate(12, 0, 12);
+	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_CASHIER],B_Light);
 	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(24, 0, 12);
+	modelStack.Rotate(90, 0, 1, 0);
+	RenderMesh(meshList[GEO_CASHIER],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(36, 0, 12);
+	modelStack.Rotate(90, 0, 1, 0);
+	RenderMesh(meshList[GEO_CASHIER],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	RenderMesh(meshList[GEO_COLDFOODSHELF],B_Light);
+	modelStack.PopMatrix();
+
 }
 void StudioProject::Render()
 {
@@ -503,10 +565,11 @@ void StudioProject::Render()
 	if(isShown == true)
 	{
 		RenderTextOnScreen(meshList[GEO_TEXT], "WASD to Move", Color(0, 0 ,0), 2, 1, 29);
-		RenderTextOnScreen(meshList[GEO_TEXT], "Arrow Keys to View", Color(0, 0, 0), 2, 1, 28);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Arrow Keys to turn", Color(0, 0, 0), 2, 1, 28);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Press E to interact", Color(0,0,0), 2, 1, 27);
 	}
 
-	RenderModel();
+	
 }
 
 void StudioProject::RenderMesh(Mesh *mesh, bool enableLight)

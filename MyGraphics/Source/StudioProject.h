@@ -77,6 +77,7 @@ private:
 		GEO_BOTTOM,
 		GEO_FRONT,
 		GEO_BACK,
+		GEO_FLOOR,
 		//==Place New Geometry variable names here==//
 		GEO_TEXT,
 		GEO_FRONTSKY,	//Front skybox
@@ -84,19 +85,14 @@ private:
 		GEO_RIGHTSKY,	//Right skybox
 		GEO_BACKSKY,	//Back skybox
 		GEO_SKY,        //Top of skybox
-		ModelHead,		//ModelHead
-		ModelTorso,		//ModelTorso
 		GEO_BOTTOMSKY,  //bottom of skybox
 		GEO_MARKET,
 		GEO_CASHIER,
-		GEO_FLOOR,
+		GEO_COLDFOODSHELF,
 		NUM_GEOMETRY,
 	};
 
 	void RenderSkybox();
-	void RenderRoom();
-	void RenderRoomContents();
-	void RenderModel();
 	void RenderSupermarket();
 
 public:
@@ -123,7 +119,6 @@ private:
 	float worldsize;
 	float roomsize;
 	float roomheight;
-	float moving;
 
 	Camera3 camera;
 
