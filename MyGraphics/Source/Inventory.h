@@ -10,8 +10,12 @@ public:
 	CInventory(void);
 	~CInventory(void);
 
+	CItem getInventory(void);
+
+	void AddItem(CItem temp);
+
 private:
-	string Invent[10];
-	CItem Item;
+	CItem Container[10];
+	int NoOfItems;
 };
 
