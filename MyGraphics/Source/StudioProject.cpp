@@ -327,6 +327,9 @@ bool isShown = true;
 
 //=====variables to animate model arms===//
 int rotatingRightArm = 1;
+int rotatingLeftArm = 1;
+int rotatingRightLeg = 1;
+int rotatingLeftLeg = 1;
 
 void StudioProject::Update(double dt)
 {
@@ -365,11 +368,8 @@ void StudioProject::Update(double dt)
 	}
 
 	//===Character Contorl===//
-	static int rotatingLeftArm = 1;
-	static int rotatingRightLeg = 1;
-	static int rotatingLeftLeg = 1;
 	int ROTATE_SPEED = 50;
-	static int count = 0, count2 = 0;
+	static int count = 0;
 
 	if (Application::IsKeyPressed('P')) //currently i set it to press 9 to animate character
 	{
@@ -384,7 +384,8 @@ void StudioProject::Update(double dt)
 	{
 		rotateRightArms += (float)(rotatingRightArm * dt * ROTATE_SPEED);
 		rotateLeftLeg += (float)(rotatingLeftLeg * dt * ROTATE_SPEED);
-		rotateRightLeg += (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+		rotateRightLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+
 		if (rotateRightArms >= 405)//rotating right arm
 		{
 			rotatingRightArm = -1;
@@ -407,35 +408,37 @@ void StudioProject::Update(double dt)
 		if (rotateLeftLeg >= 405)//rotatin left leg
 		{
 			rotatingLeftLeg = -1;
-			count2 ++;
 		}
-		if(rotateLeftLeg <= 330)
+		if(rotateLeftLeg <= 315)
 		{
 			rotatingLeftLeg = 1;
 		}
 
 		if (rotateRightLeg >= 405)//rotatin right leg
 		{
-			rotatingRightLeg = -1;
-		}
-		if(rotateRightLeg <= 330)
-		{
 			rotatingRightLeg = 1;
+		}
+		if(rotateRightLeg <= 315)
+		{
+			rotatingRightLeg = -1;
 		}
 
 		if (count >= 1)
 		{
 			rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
 		}
-		if (count2 >= 1)
-		{
-			
-		}
 	}
+
+
+
 	else if (movingModel == false)
 	{
 		rotateRightArms = rotateLeftArms = rotateLeftLeg = rotateRightLeg = 360;
-		count = count2 = 0;
+		count = 0;
+		rotatingRightArm = 1;
+		rotatingLeftArm = 1;
+		rotatingRightLeg = 1;
+		rotatingLeftLeg = 1;
 	}
 	
 	//====Camera===//
