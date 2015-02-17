@@ -98,6 +98,7 @@ private:
 		modelLeftHand,	//Model Left Hand
 		modelLeftLeg,	//Model Left Leg
 		modelRightLeg,	//Model Right Leg
+		modelButt,
 		NUM_GEOMETRY,
 	};
 
@@ -130,7 +131,7 @@ private:
 	float roomsize;
 	float roomheight;
 	bool movingModel;
-	float rotateArmsAndLegsLeft, rotateArmsAndLegsRight;
+	float rotateRightArms, rotateLeftArms, rotateLeftLeg, rotateRightLeg;
 
 	Camera3 camera;
 

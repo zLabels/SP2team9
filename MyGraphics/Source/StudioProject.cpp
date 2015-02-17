@@ -58,7 +58,7 @@ void StudioProject::Init()
 	fps = 0.0f;
 
 	//variable to animate model
-	rotateArmsAndLegsLeft = rotateArmsAndLegsRight = 0;
+	rotateRightArms = rotateLeftArms = rotateRightLeg = rotateLeftLeg = 360;
 	movingModel = false;
 	
 
@@ -282,6 +282,13 @@ void StudioProject::Init()
 	meshList[modelRightLeg]->material.kShininess = 8.f;
 	meshList[modelRightLeg]->textureID = LoadTGA("Image//modelLeg.tga");
 
+
+	meshList[modelButt] = MeshBuilder::GenerateSphere("Model Butt", Color(255/61, 255/125, 255/198), 20, 20, 0.01);
+	meshList[modelButt]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[modelButt]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[modelButt]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[modelButt]->material.kShininess = 8.f;
+
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
 
@@ -317,6 +324,9 @@ string result;
 
 //Show Controls
 bool isShown = true;
+
+//=====variables to animate model arms===//
+int rotatingRightArm = 1;
 
 void StudioProject::Update(double dt)
 {
@@ -355,32 +365,77 @@ void StudioProject::Update(double dt)
 	}
 
 	//===Character Contorl===//
-	static int rotateLeft, rotateRight = 1;
-	int ROTATE_SPEED = 10;
-	static int count = 0;
+	static int rotatingLeftArm = 1;
+	static int rotatingRightLeg = 1;
+	static int rotatingLeftLeg = 1;
+	int ROTATE_SPEED = 50;
+	static int count = 0, count2 = 0;
 
 	if (Application::IsKeyPressed('P')) //currently i set it to press 9 to animate character
 	{
-		/*movingModel = true;*/
-		if (rotateArmsAndLegsLeft * rotateLeft >= 45)
-		{
-			rotateLeft = -rotateLeft;
-		}
-		rotateArmsAndLegsLeft += (float)(20);
+		movingModel = true;
 	}
-	/*else
+	else
 	{
 		movingModel = false;
 	}
 
 	if (movingModel == true)
 	{
-		if (rotateArmsAndLegsLeft * rotateLeft >= 45)
+		rotateRightArms += (float)(rotatingRightArm * dt * ROTATE_SPEED);
+		rotateLeftLeg += (float)(rotatingLeftLeg * dt * ROTATE_SPEED);
+		if (rotateRightArms >= 405)//rotating right arm
 		{
-			rotateLeft = -rotateLeft;
+			rotatingRightArm = -1;
+			count++;
 		}
-		rotateArmsAndLegsLeft += (float)(rotateLeft * LSPEED * dt * 5);
-	}*/
+		if(rotateRightArms <= 330)
+		{
+			rotatingRightArm = 1;
+		}
+
+		if (rotateLeftArms >= 405)//rotatin left arm
+		{
+			rotatingLeftArm = -1;
+		}
+		if(rotateLeftArms <= 330)
+		{
+			rotatingLeftArm = 1;
+		}
+
+		if (rotateLeftLeg >= 405)//rotatin left leg
+		{
+			rotatingLeftLeg = -1;
+			count2 ++;
+		}
+		if(rotateLeftLeg <= 330)
+		{
+			rotatingLeftLeg = 1;
+		}
+
+		if (rotateRightLeg >= 405)//rotatin right leg
+		{
+			rotatingRightLeg = -1;
+		}
+		if(rotateRightLeg <= 330)
+		{
+			rotatingRightLeg = 1;
+		}
+
+		if (count >= 1)
+		{
+			rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
+		}
+		if (count2 >= 1)
+		{
+			rotateRightLeg += (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+		}
+	}
+	else if (movingModel == false)
+	{
+		rotateRightArms = rotateLeftArms = rotateLeftLeg = rotateRightLeg = 360;
+		count = count2 = 0;
+	}
 	
 	//====Camera===//
 	std::ostringstream ss;
@@ -643,14 +698,14 @@ void StudioProject::RenderModel()
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3 + 0.2, 0);
-	modelStack.Rotate(1+ rotateArmsAndLegsLeft, 1+rotateArmsAndLegsLeft, 0, 0);
+	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
 	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
 	RenderMesh(meshList[modelRightHand], false);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3 + 0.2, 0);
-	modelStack.Rotate(1+ rotateArmsAndLegsLeft, 1+rotateArmsAndLegsLeft, 0, 0);
+	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
 	modelStack.Translate(0.8, -1.5 + 0.2, 0);
 	RenderMesh(meshList[modelLeftHand], false);
 	modelStack.PopMatrix();
@@ -659,7 +714,7 @@ void StudioProject::RenderModel()
 	modelStack.Translate(0, 0.4, 0);
 	modelStack.PushMatrix();
 	modelStack.Translate(0.3, 1, 0);
-	modelStack.Rotate(1+ rotateArmsAndLegsLeft, 1+rotateArmsAndLegsLeft, 0, 0);
+	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
 	modelStack.Translate(0, -1.4, 0);
 	RenderMesh(meshList[modelLeftLeg], false);
 	modelStack.PopMatrix();
@@ -669,11 +724,28 @@ void StudioProject::RenderModel()
 	modelStack.Translate(0, 0.4, 0);
 	modelStack.PushMatrix();
 	modelStack.Translate(-0.3, 1, 0);
-	modelStack.Rotate(1+ rotateArmsAndLegsLeft, 1+rotateArmsAndLegsLeft, 0, 0);
+	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
 	modelStack.Translate(0, -1.4, 0);
 	RenderMesh(meshList[modelRightLeg], false);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
+
+	//modelStack.PushMatrix(); //Here lies hierachy modelling
+
+	//modelStack.PushMatrix();
+	////modelStack.Scale(0.05, 0.05, 0.05);
+	//RenderMesh(meshList[modelButt], false);
+	//modelStack.PopMatrix();
+
+	//modelStack.PushMatrix();
+	////modelStack.Scale(2, 2, 2);
+	//modelStack.Translate(-0.3, 1, 0);
+	//modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
+	//modelStack.Translate(0, -1.2, 0);
+	//RenderMesh(meshList[modelRightLeg], false);
+	//modelStack.PopMatrix();
+
+	//modelStack.PopMatrix();
 }
 void StudioProject::Render()
 {
@@ -760,7 +832,7 @@ void StudioProject::Render()
 
 	//Rendering of CharacterModel
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 0, 30);
+	modelStack.Translate(0, 0, 40);
 	modelStack.Rotate(180, 0, 180, 0);
 	RenderModel();
 	modelStack.PopMatrix();
