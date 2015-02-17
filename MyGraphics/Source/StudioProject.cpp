@@ -211,12 +211,19 @@ void StudioProject::Init()
 	meshList[GEO_MARKET]->material.kShininess = 8.f;
 	meshList[GEO_MARKET] ->textureID = LoadTGA("Image//WallTextures.tga");
 
-	meshList[GEO_CASHIER] = MeshBuilder::GenerateOBJ("Market" , "OBJ//cashier-table.obj");
+	meshList[GEO_CASHIER] = MeshBuilder::GenerateOBJ("Market" , "OBJ//Cashier_Counter.obj");
 	meshList[GEO_CASHIER]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[GEO_CASHIER]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[GEO_CASHIER]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_CASHIER]->material.kShininess = 8.f;
-	meshList[GEO_CASHIER] ->textureID = LoadTGA("Image//Cashier-Counter-Texture.tga");
+	meshList[GEO_CASHIER] ->textureID = LoadTGA("Image//cashier_counter.tga");
+
+	meshList[GEO_CASHREG] = MeshBuilder::GenerateOBJ("Market" , "OBJ//cash-register.obj");
+	meshList[GEO_CASHREG]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_CASHREG]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_CASHREG]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_CASHREG]->material.kShininess = 8.f;
+	meshList[GEO_CASHREG] ->textureID = LoadTGA("Image//cashRegisterTexture.tga");
 
 	meshList[GEO_COLDFOODSHELF] = MeshBuilder::GenerateOBJ("Market" , "OBJ//Cold-food-shelf.obj");
 	meshList[GEO_COLDFOODSHELF]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -616,6 +623,18 @@ void StudioProject::RenderSupermarket()
 	modelStack.Translate(-16, -1, 10);
 	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_CASHIER],B_Light);
+
+	modelStack.PushMatrix();
+	modelStack.Translate(-12.5, 2.8, -10.5);
+	modelStack.Scale(0.8, 0.8, 0.8);
+	RenderMesh(meshList[GEO_CASHREG],B_Light);
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(-12.5, 2.8, 9.5);
+	modelStack.Scale(0.8, 0.8, 0.8);
+	RenderMesh(meshList[GEO_CASHREG],B_Light);
 	modelStack.PopMatrix();
 
 
