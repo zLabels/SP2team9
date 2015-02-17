@@ -241,21 +241,45 @@ void StudioProject::Init()
 
 	//===============MODEL OBJs==========================//
 	meshList[modelHead] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelHead.obj");
+	meshList[modelHead]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[modelHead]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[modelHead]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[modelHead]->material.kShininess = 8.f;
 	meshList[modelHead]->textureID = LoadTGA("Image//modelHead.tga");
 
 	meshList[modelTorso] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelTorso.obj");
+	meshList[modelTorso]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[modelTorso]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[modelTorso]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[modelTorso]->material.kShininess = 8.f;
 	meshList[modelTorso]->textureID = LoadTGA("Image//modelTorso.tga");
 
 	meshList[modelRightHand] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelArm.obj");
+	meshList[modelRightHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[modelRightHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[modelRightHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[modelRightHand]->material.kShininess = 8.f;
 	meshList[modelRightHand]->textureID = LoadTGA("Image//modelHand.tga");
 
 	meshList[modelLeftHand] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelArm.obj");
+	meshList[modelLeftHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[modelLeftHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[modelLeftHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[modelLeftHand]->material.kShininess = 8.f;
 	meshList[modelLeftHand]->textureID = LoadTGA("Image//modelHand.tga");
 
 	meshList[modelLeftLeg] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelLeg.obj");
+	meshList[modelLeftLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[modelLeftLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[modelLeftLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[modelLeftLeg]->material.kShininess = 8.f;
 	meshList[modelLeftLeg]->textureID = LoadTGA("Image//modelLeg.tga");
 
 	meshList[modelRightLeg] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelLeg.obj");
+	meshList[modelRightLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[modelRightLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[modelRightLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[modelRightLeg]->material.kShininess = 8.f;
 	meshList[modelRightLeg]->textureID = LoadTGA("Image//modelLeg.tga");
 
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
@@ -690,7 +714,9 @@ void StudioProject::Render()
 	modelStack.PopMatrix();
 
 	//Rendering of supermarket scene
+	modelStack.PushMatrix();
 	RenderSupermarket();
+	modelStack.PopMatrix();
 	
 
 	//Rendering of CharacterModel
