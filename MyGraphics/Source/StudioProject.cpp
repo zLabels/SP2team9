@@ -11,6 +11,8 @@
 #include "LoadTGA.h"
 
 #include "Item.h"
+#include "Inventory.h"
+#include "Character.h"
 
 StudioProject::StudioProject()
 {
@@ -51,7 +53,6 @@ void StudioProject::Init()
 	roomheight = 150.0f;
 	fps = 0.0f;
 
-	//variable to animate metaknight
 	rotateAngle = 0;
 
 	Framerate = "FPS: ";
@@ -119,9 +120,9 @@ void StudioProject::Init()
 
 	//Light 1
 	lights[0].type = Light::LIGHT_POINT;
-	lights[0].position.Set(0, 135, 0);
+	lights[0].position.Set(0, 20, 0);
 	lights[0].color.Set(1, 1, 1);
-	lights[0].power = 20;
+	lights[0].power = 2;
 	lights[0].kC = 1.f;
 	lights[0].kL = 0.01f;
 	lights[0].kQ = 0.001f;
@@ -198,7 +199,7 @@ void StudioProject::Init()
 	meshList[GEO_MARKET]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[GEO_MARKET]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_MARKET]->material.kShininess = 8.f;
-	meshList[GEO_MARKET] ->textureID = LoadTGA("Image//WallTexture.tga");
+	meshList[GEO_MARKET] ->textureID = LoadTGA("Image//WallTextures.tga");
 
 	meshList[GEO_CASHIER] = MeshBuilder::GenerateOBJ("Market" , "OBJ//cashier-table.obj");
 	meshList[GEO_CASHIER]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -224,10 +225,8 @@ void StudioProject::Init()
 	meshList[GEO_FLOOR]->textureID = LoadTGA("Image//road-texture.tga");
 
 
-	meshList[1] = 
 	//Light ball
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 10, 10, 1);
-
 	meshList[GEO_LIGHTBALL2] = MeshBuilder::GenerateSphere("lightball2", Color(1, 1, 1), 10, 10, 1);
 
 	//Quad texture
@@ -306,6 +305,7 @@ void StudioProject::Update(double dt)
 	ss4 << camera.position.z;
 	cameraz = ss4.str();
 	camera.Update(dt);
+
 }
 
 //=========Rendering of Skybox to be done here=========//

@@ -2,8 +2,8 @@
 
 CInventory::CInventory(void)
 {
-	Container[10];
-	NoOfItems = -1;
+	NoOfItems = 0;
+	ptr = (NULL);
 }
 
 
@@ -11,16 +11,26 @@ CInventory::~CInventory(void)
 {
 }
 
-void CInventory::AddItem(CItem temp)
+void CInventory::AddItem(CItem* temp)
 {
-	if(NoOfItems + 1 < 10)
+	if(NoOfItems < 10)
 	{
-		Container[NoOfItems + 1] = temp;
+		Container.push_back(temp);
 		NoOfItems++;
 	}
 }
 
-CItem CInventory::getInventory(void)
+CItem* CInventory::getItem(int pos)
 {
-	return Container[10];
+	return Container[pos];
+}
+
+void CInventory::DeleteAll(void)
+{
+	while(!Container.empty())
+	{
+		ptr = Container.back();
+		Container.pop_back();
+		delete ptr;
+	}
 }

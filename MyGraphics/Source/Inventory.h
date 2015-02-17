@@ -1,8 +1,10 @@
 #pragma once
 #include <string>
+#include <vector>
 #include "Item.h"
 
 using std::string;
+using std::vector;
 
 class CInventory
 {
@@ -10,12 +12,13 @@ public:
 	CInventory(void);
 	~CInventory(void);
 
-	CItem getInventory(void);
-
-	void AddItem(CItem temp);
+	void AddItem(CItem* temp);
+	CItem* getItem(int pos);
+	void DeleteAll(void);
 
 private:
-	CItem Container[10];
+	vector<CItem*> Container;
+	CItem* ptr;
 	int NoOfItems;
 };
 
