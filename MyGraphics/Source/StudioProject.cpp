@@ -588,6 +588,16 @@ void StudioProject::RenderSupermarket()
 		modelStack.PopMatrix();
 	}
 
+	for(int i = -5; i < 5; ++i)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(38,-1,i*14);
+		modelStack.Rotate(180,0,-1,0);
+		RenderMesh(meshList[GEO_COLDFOODSHELF],B_Light);
+		modelStack.PopMatrix();
+	}
+	
+
 }
 
 void StudioProject::RenderModel()
