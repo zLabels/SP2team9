@@ -548,35 +548,17 @@ void StudioProject::RenderSupermarket()
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(12, 0, 12);
+	modelStack.Translate(-16, -1, -10);
 	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_CASHIER],B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(24, 0, 12);
+	modelStack.Translate(-16, -1, 10);
 	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_CASHIER],B_Light);
 	modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
-	modelStack.Translate(36, 0, 12);
-	modelStack.Rotate(90, 0, 1, 0);
-	RenderMesh(meshList[GEO_CASHIER],B_Light);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-	RenderMesh(meshList[GEO_SHELF],B_Light);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-	modelStack.Translate(10, 0, 0);
-	RenderMesh(meshList[GEO_SHELF2],B_Light);
-
-	modelStack.PushMatrix();//I need to move the shelf away for awhile
-	modelStack.Translate(5, 0, 0);
-	RenderMesh(meshList[GEO_COLDFOODSHELF],B_Light);
-	modelStack.PopMatrix();
 
 	//Extreme left cold food shelf
 	for(int i = -2; i < 3; ++i)
@@ -587,7 +569,7 @@ void StudioProject::RenderSupermarket()
 		RenderMesh(meshList[GEO_COLDFOODSHELF],B_Light);
 		modelStack.PopMatrix();
 	}
-
+	//Back of market (Cold food shelf)
 	for(int i = -5; i < 5; ++i)
 	{
 		modelStack.PushMatrix();
@@ -597,6 +579,53 @@ void StudioProject::RenderSupermarket()
 		modelStack.PopMatrix();
 	}
 	
+	//Left side (metal Shelf 2)
+	for(int i = -5; i <4; ++i)
+	{
+	modelStack.PushMatrix();
+	modelStack.Translate(i*6, -1, -58);
+	modelStack.Rotate(90,0,1,0);
+	RenderMesh(meshList[GEO_SHELF2],B_Light);
+	modelStack.PopMatrix();
+	}
+	
+	//Left side wooden shelf
+	for(int i = -2; i <2; ++i)
+	{
+	modelStack.PushMatrix();
+	modelStack.Translate(i*12 , -1 , -30);
+	RenderMesh(meshList[GEO_SHELF],B_Light);
+	modelStack.PopMatrix();
+	}
+
+
+	//Right side (metal Shelf 2)
+	for(int i = -5; i <4; ++i)
+	{
+	modelStack.PushMatrix();
+	modelStack.Translate(i*6, -1, 58);
+	modelStack.Rotate(90,0,1,0);
+	RenderMesh(meshList[GEO_SHELF2],B_Light);
+	modelStack.PopMatrix();
+	}
+
+	//Right side wooden shelf
+	for(int i = -2; i <2; ++i)
+	{
+	modelStack.PushMatrix();
+	modelStack.Translate(i*12 , -1 , 30);
+	RenderMesh(meshList[GEO_SHELF],B_Light);
+	modelStack.PopMatrix();
+	}
+	
+	//Middle metal shelf
+	for(int i = -1; i<3; ++i)
+	{
+	modelStack.PushMatrix();
+	modelStack.Translate(11, -1, i*6);
+	RenderMesh(meshList[GEO_SHELF2],B_Light);
+	modelStack.PopMatrix();
+	}
 
 }
 
