@@ -199,7 +199,7 @@ void StudioProject::Init()
 	meshList[GEO_MARKET]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[GEO_MARKET]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_MARKET]->material.kShininess = 8.f;
-	meshList[GEO_MARKET] ->textureID = LoadTGA("Image//WallTexture.tga");
+	meshList[GEO_MARKET] ->textureID = LoadTGA("Image//WallTextures.tga");
 
 	meshList[GEO_CASHIER] = MeshBuilder::GenerateOBJ("Market" , "OBJ//cashier-table.obj");
 	meshList[GEO_CASHIER]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
