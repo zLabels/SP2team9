@@ -57,7 +57,7 @@ void StudioProject::Init()
 
 	Framerate = "FPS: ";
 	//Initialize camera settings
-	camera.Init(Vector3(0, 30, 60), Vector3(0, 0, 0), Vector3(0, 1, 0));
+	camera.Init(Vector3(-116, 17, -2), Vector3(0, 0, 0), Vector3(0, 1, 0));
 
 	//Initialize all meshes to NULL
 	for(int i = 0; i < NUM_GEOMETRY; ++i)
@@ -447,31 +447,35 @@ void StudioProject::RenderSkybox()
 void StudioProject::RenderSupermarket()
 {
 	modelStack.PushMatrix();
-	//modelStack.Rotate(180, 0, 1, 0);
+	//modelStack.Rotate(180, 0, 1, 0); 
+	modelStack.Scale(5,5,5);
 	RenderMesh(meshList[GEO_MARKET],B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(12, 0, 12);
-	modelStack.Rotate(90, 0, 1, 0);
+	modelStack.Translate(-38, -1, -26);
 	RenderMesh(meshList[GEO_CASHIER],B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(24, 0, 12);
-	modelStack.Rotate(90, 0, 1, 0);
+	modelStack.Translate(-38, -1, 1);
 	RenderMesh(meshList[GEO_CASHIER],B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(36, 0, 12);
-	modelStack.Rotate(90, 0, 1, 0);
+	modelStack.Translate(-38, -1, 30);
 	RenderMesh(meshList[GEO_CASHIER],B_Light);
 	modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
-	RenderMesh(meshList[GEO_COLDFOODSHELF],B_Light);
-	modelStack.PopMatrix();
+	//Extreme left cold food shelf
+	for(int i = -2; i < 3; ++i)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(i*14,-1,-83.5);
+		modelStack.Rotate(90,0,-1,0);
+		RenderMesh(meshList[GEO_COLDFOODSHELF],B_Light);
+		modelStack.PopMatrix();
+	}
 
 }
 void StudioProject::Render()
@@ -553,6 +557,7 @@ void StudioProject::Render()
 
 	//Rendering of supermarket scene
 	RenderSupermarket();
+	
 
 
 	//============DEBUGGING PURPOSES====================//
