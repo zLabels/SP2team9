@@ -14,6 +14,10 @@
 #include "Inventory.h"
 #include "Character.h"
 
+using std::cout;
+using std::cin;
+using std::endl;
+
 StudioProject::StudioProject()
 {
 }
@@ -53,6 +57,12 @@ void StudioProject::Init()
 	roomheight = 150.0f;
 	fps = 0.0f;
 
+	//variable to animate model
+	rotateArmsAndLegsLeft = rotateArmsAndLegsRight = 0;
+	movingModel = false;
+	
+
+	//variable to animate metaknight
 	rotateAngle = 0;
 
 	Framerate = "FPS: ";
@@ -229,6 +239,25 @@ void StudioProject::Init()
 	meshList[GEO_SHELF2]->material.kShininess = 8.f;
 	meshList[GEO_SHELF2] ->textureID = LoadTGA("Image//Shelf_Texture2.tga");
 
+	//===============MODEL OBJs==========================//
+	meshList[modelHead] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelHead.obj");
+	meshList[modelHead]->textureID = LoadTGA("Image//modelHead.tga");
+
+	meshList[modelTorso] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelTorso.obj");
+	meshList[modelTorso]->textureID = LoadTGA("Image//modelTorso.tga");
+
+	meshList[modelRightHand] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelArm.obj");
+	meshList[modelRightHand]->textureID = LoadTGA("Image//modelHand.tga");
+
+	meshList[modelLeftHand] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelArm.obj");
+	meshList[modelLeftHand]->textureID = LoadTGA("Image//modelHand.tga");
+
+	meshList[modelLeftLeg] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelLeg.obj");
+	meshList[modelLeftLeg]->textureID = LoadTGA("Image//modelLeg.tga");
+
+	meshList[modelRightLeg] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelLeg.obj");
+	meshList[modelRightLeg]->textureID = LoadTGA("Image//modelLeg.tga");
+
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
 
@@ -300,6 +329,35 @@ void StudioProject::Update(double dt)
 	{
 		isShown = false;
 	}
+
+	//===Character Contorl===//
+	static int rotateLeft, rotateRight = 1;
+	int ROTATE_SPEED = 10;
+	static int count = 0;
+
+	if (Application::IsKeyPressed('P')) //currently i set it to press 9 to animate character
+	{
+		/*movingModel = true;*/
+		if (rotateArmsAndLegsLeft * rotateLeft >= 45)
+		{
+			rotateLeft = -rotateLeft;
+		}
+		rotateArmsAndLegsLeft += (float)(20);
+	}
+	std::cout << rotateArmsAndLegsLeft << std::endl;
+	/*else
+	{
+		movingModel = false;
+	}
+
+	if (movingModel == true)
+	{
+		if (rotateArmsAndLegsLeft * rotateLeft >= 45)
+		{
+			rotateLeft = -rotateLeft;
+		}
+		rotateArmsAndLegsLeft += (float)(rotateLeft * LSPEED * dt * 5);
+	}*/
 	
 	//====Camera===//
 	std::ostringstream ss;
@@ -485,13 +543,16 @@ void StudioProject::RenderSupermarket()
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-
 	RenderMesh(meshList[GEO_SHELF],B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(10, 0, 0);
 	RenderMesh(meshList[GEO_SHELF2],B_Light);
+
+	modelStack.PushMatrix();//I need to move the shelf away for awhile
+	modelStack.Translate(5, 0, 0);
+	RenderMesh(meshList[GEO_COLDFOODSHELF],B_Light);
 	modelStack.PopMatrix();
 
 	//Extreme left cold food shelf
@@ -504,6 +565,43 @@ void StudioProject::RenderSupermarket()
 		modelStack.PopMatrix();
 	}
 
+}
+
+void StudioProject::RenderModel()
+{
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 3.6, 0);
+	RenderMesh(meshList[modelHead], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0.15, 0);
+	RenderMesh(meshList[modelTorso], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Rotate(1+ rotateArmsAndLegsLeft, 1+rotateArmsAndLegsLeft, 0, 0);
+	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
+	RenderMesh(meshList[modelRightHand], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Rotate(1+ rotateArmsAndLegsLeft, 1+rotateArmsAndLegsLeft, 0, 0);
+	modelStack.Translate(0.8, -1.5 + 0.2, 0);
+	RenderMesh(meshList[modelLeftHand], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0.23, 0);
+	RenderMesh(meshList[modelLeftLeg], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(-0.6, 0.23, 0);
+	RenderMesh(meshList[modelRightLeg], false);
+	modelStack.PopMatrix();
 }
 void StudioProject::Render()
 {
@@ -585,6 +683,13 @@ void StudioProject::Render()
 	//Rendering of supermarket scene
 	RenderSupermarket();
 	
+
+	//Rendering of CharacterModel
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0, 30);
+	modelStack.Rotate(180, 0, 180, 0);
+	RenderModel();
+	modelStack.PopMatrix();
 
 
 	//============DEBUGGING PURPOSES====================//

@@ -91,11 +91,19 @@ private:
 		GEO_COLDFOODSHELF,
 		GEO_SHELF,
 		GEO_SHELF2,
+
+		modelHead,		//Model Head
+		modelTorso,		//Model Torso
+		modelRightHand,	//Model Right Hand
+		modelLeftHand,	//Model Left Hand
+		modelLeftLeg,	//Model Left Leg
+		modelRightLeg,	//Model Right Leg
 		NUM_GEOMETRY,
 	};
 
 	void RenderSkybox();
 	void RenderSupermarket();
+	void RenderModel();
 
 public:
 	StudioProject();
@@ -121,6 +129,8 @@ private:
 	float worldsize;
 	float roomsize;
 	float roomheight;
+	bool movingModel;
+	float rotateArmsAndLegsLeft, rotateArmsAndLegsRight;
 
 	Camera3 camera;
 
