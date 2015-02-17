@@ -344,7 +344,6 @@ void StudioProject::Update(double dt)
 		}
 		rotateArmsAndLegsLeft += (float)(20);
 	}
-	std::cout << rotateArmsAndLegsLeft << std::endl;
 	/*else
 	{
 		movingModel = false;
@@ -575,7 +574,7 @@ void StudioProject::RenderModel()
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 0.15, 0);
+	modelStack.Translate(0, 1.5, 0);
 	RenderMesh(meshList[modelTorso], false);
 	modelStack.PopMatrix();
 
@@ -594,13 +593,23 @@ void StudioProject::RenderModel()
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 0.23, 0);
+	modelStack.Translate(0, 0.4, 0);
+	modelStack.PushMatrix();
+	modelStack.Translate(0.3, 1, 0);
+	modelStack.Rotate(1+ rotateArmsAndLegsLeft, 1+rotateArmsAndLegsLeft, 0, 0);
+	modelStack.Translate(0, -1.4, 0);
 	RenderMesh(meshList[modelLeftLeg], false);
+	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(-0.6, 0.23, 0);
+	modelStack.Translate(0, 0.4, 0);
+	modelStack.PushMatrix();
+	modelStack.Translate(-0.3, 1, 0);
+	modelStack.Rotate(1+ rotateArmsAndLegsLeft, 1+rotateArmsAndLegsLeft, 0, 0);
+	modelStack.Translate(0, -1.4, 0);
 	RenderMesh(meshList[modelRightLeg], false);
+	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 }
 void StudioProject::Render()
