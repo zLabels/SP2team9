@@ -88,6 +88,7 @@ private:
 		GEO_BOTTOMSKY,  //bottom of skybox
 		GEO_MARKET,
 		GEO_CASHIER,
+		GEO_COLDFOODSHELF,
 		NUM_GEOMETRY,
 	};
 

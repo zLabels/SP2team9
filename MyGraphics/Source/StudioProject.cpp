@@ -207,6 +207,13 @@ void StudioProject::Init()
 	meshList[GEO_CASHIER]->material.kShininess = 8.f;
 	meshList[GEO_CASHIER] ->textureID = LoadTGA("Image//Cashier-Counter-Texture.tga");
 
+	meshList[GEO_COLDFOODSHELF] = MeshBuilder::GenerateOBJ("Market" , "OBJ//Cold-food-shelf.obj");
+	meshList[GEO_COLDFOODSHELF]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_COLDFOODSHELF]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_COLDFOODSHELF]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_COLDFOODSHELF]->material.kShininess = 8.f;
+	meshList[GEO_COLDFOODSHELF] ->textureID = LoadTGA("Image//Shelf_Texture.tga");
+
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
 
@@ -440,12 +447,32 @@ void StudioProject::RenderSkybox()
 void StudioProject::RenderSupermarket()
 {
 	modelStack.PushMatrix();
+	//modelStack.Rotate(180, 0, 1, 0);
 	RenderMesh(meshList[GEO_MARKET],B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
+	modelStack.Translate(12, 0, 12);
+	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_CASHIER],B_Light);
 	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(24, 0, 12);
+	modelStack.Rotate(90, 0, 1, 0);
+	RenderMesh(meshList[GEO_CASHIER],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(36, 0, 12);
+	modelStack.Rotate(90, 0, 1, 0);
+	RenderMesh(meshList[GEO_CASHIER],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	RenderMesh(meshList[GEO_COLDFOODSHELF],B_Light);
+	modelStack.PopMatrix();
+
 }
 void StudioProject::Render()
 {
