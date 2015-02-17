@@ -384,6 +384,7 @@ void StudioProject::Update(double dt)
 	{
 		rotateRightArms += (float)(rotatingRightArm * dt * ROTATE_SPEED);
 		rotateLeftLeg += (float)(rotatingLeftLeg * dt * ROTATE_SPEED);
+		rotateRightLeg += (float)(rotatingRightLeg * dt * ROTATE_SPEED);
 		if (rotateRightArms >= 405)//rotating right arm
 		{
 			rotatingRightArm = -1;
@@ -428,7 +429,7 @@ void StudioProject::Update(double dt)
 		}
 		if (count2 >= 1)
 		{
-			rotateRightLeg += (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+			
 		}
 	}
 	else if (movingModel == false)
