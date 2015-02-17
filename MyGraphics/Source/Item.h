@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include "Mesh.h"
 
 using std::string;
 
@@ -16,6 +15,7 @@ public:
 	float getPrice(void);
 
 private:
+	CItem* itemPtr;
 	string name;
 	float price;
 

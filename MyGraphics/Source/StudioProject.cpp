@@ -11,6 +11,8 @@
 #include "LoadTGA.h"
 
 #include "Item.h"
+#include "Inventory.h"
+#include "Character.h"
 
 StudioProject::StudioProject()
 {
@@ -51,7 +53,6 @@ void StudioProject::Init()
 	roomheight = 150.0f;
 	fps = 0.0f;
 
-	//variable to animate metaknight
 	rotateAngle = 0;
 
 	Framerate = "FPS: ";
@@ -224,10 +225,8 @@ void StudioProject::Init()
 	meshList[GEO_FLOOR]->textureID = LoadTGA("Image//road-texture.tga");
 
 
-	meshList[1] = 
 	//Light ball
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 10, 10, 1);
-
 	meshList[GEO_LIGHTBALL2] = MeshBuilder::GenerateSphere("lightball2", Color(1, 1, 1), 10, 10, 1);
 
 	//Quad texture
@@ -306,6 +305,7 @@ void StudioProject::Update(double dt)
 	ss4 << camera.position.z;
 	cameraz = ss4.str();
 	camera.Update(dt);
+
 }
 
 //=========Rendering of Skybox to be done here=========//
