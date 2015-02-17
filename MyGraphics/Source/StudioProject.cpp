@@ -57,7 +57,7 @@ void StudioProject::Init()
 
 	Framerate = "FPS: ";
 	//Initialize camera settings
-	camera.Init(Vector3(-116, 17, -2), Vector3(0, 0, 0), Vector3(0, 1, 0));
+	camera.Init(Vector3(0, 30, 60), Vector3(0, 0, 0), Vector3(0, 1, 0));
 
 	//Initialize all meshes to NULL
 	for(int i = 0; i < NUM_GEOMETRY; ++i)
@@ -214,6 +214,20 @@ void StudioProject::Init()
 	meshList[GEO_COLDFOODSHELF]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_COLDFOODSHELF]->material.kShininess = 8.f;
 	meshList[GEO_COLDFOODSHELF] ->textureID = LoadTGA("Image//Shelf_Texture.tga");
+
+	meshList[GEO_SHELF] = MeshBuilder::GenerateOBJ("Market" , "OBJ//shelf1.obj");
+	meshList[GEO_SHELF]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_SHELF]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_SHELF]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_SHELF]->material.kShininess = 8.f;
+	meshList[GEO_SHELF] ->textureID = LoadTGA("Image//Shelf.tga");
+
+	meshList[GEO_SHELF2] = MeshBuilder::GenerateOBJ("Market" , "OBJ//Shelf2.obj");
+	meshList[GEO_SHELF2]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_SHELF2]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_SHELF2]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_SHELF2]->material.kShininess = 8.f;
+	meshList[GEO_SHELF2] ->textureID = LoadTGA("Image//Shelf_Texture2.tga");
 
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
@@ -447,24 +461,37 @@ void StudioProject::RenderSkybox()
 void StudioProject::RenderSupermarket()
 {
 	modelStack.PushMatrix();
-	//modelStack.Rotate(180, 0, 1, 0); 
+	//modelStack.Rotate(180, 0, 1, 0);
 	modelStack.Scale(5,5,5);
 	RenderMesh(meshList[GEO_MARKET],B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(-38, -1, -26);
+	modelStack.Translate(12, 0, 12);
+	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_CASHIER],B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(-38, -1, 1);
+	modelStack.Translate(24, 0, 12);
+	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_CASHIER],B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(-38, -1, 30);
+	modelStack.Translate(36, 0, 12);
+	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_CASHIER],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+
+	RenderMesh(meshList[GEO_SHELF],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(10, 0, 0);
+	RenderMesh(meshList[GEO_SHELF2],B_Light);
 	modelStack.PopMatrix();
 
 	//Extreme left cold food shelf
