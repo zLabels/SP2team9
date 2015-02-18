@@ -282,12 +282,12 @@ void StudioProject::Init()
 	meshList[GEO_MILOCAN]->material.kShininess = 8.f;
 	meshList[GEO_MILOCAN] ->textureID = LoadTGA("Image//milocan.tga");
 
-	meshList[GEO_DRINKCAN1] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//drink-can1.obj");
-	meshList[GEO_DRINKCAN1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	meshList[GEO_DRINKCAN1]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	meshList[GEO_DRINKCAN1]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	meshList[GEO_DRINKCAN1]->material.kShininess = 8.f;
-	meshList[GEO_DRINKCAN1] ->textureID = LoadTGA("Image//drink_can1.tga");
+	meshList[GEO_COKE_CAN] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//drink-can1.obj");
+	meshList[GEO_COKE_CAN]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_COKE_CAN]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_COKE_CAN]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_COKE_CAN]->material.kShininess = 8.f;
+	meshList[GEO_COKE_CAN] ->textureID = LoadTGA("Image//drink_can1.tga");
 
 	meshList[GEO_DRINKCAN2] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//drink-can2.obj");
 	meshList[GEO_DRINKCAN2]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -296,12 +296,12 @@ void StudioProject::Init()
 	meshList[GEO_DRINKCAN2]->material.kShininess = 8.f;
 	meshList[GEO_DRINKCAN2] ->textureID = LoadTGA("Image//drink_can2.tga");
 
-	meshList[GEO_DRINKCAN3] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//drink-can3.obj");
-	meshList[GEO_DRINKCAN3]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	meshList[GEO_DRINKCAN3]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	meshList[GEO_DRINKCAN3]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	meshList[GEO_DRINKCAN3]->material.kShininess = 8.f;
-	meshList[GEO_DRINKCAN3] ->textureID = LoadTGA("Image//drink_can3.tga");
+	meshList[GEO_PEPSI_CAN] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//drink-can3.obj");
+	meshList[GEO_PEPSI_CAN]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_PEPSI_CAN]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_PEPSI_CAN]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_PEPSI_CAN]->material.kShininess = 8.f;
+	meshList[GEO_PEPSI_CAN] ->textureID = LoadTGA("Image//drink_can3.tga");
 
 	meshList[GEO_CEREALBOX1] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//cereal-box1.obj");
 	meshList[GEO_CEREALBOX1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -800,6 +800,9 @@ void StudioProject::RenderSkybox()
 
 void StudioProject::RenderSupermarket()
 {
+	/*===============================================================
+						Level 1 Of Supermarket
+	================================================================*/
 	modelStack.PushMatrix();
 	//modelStack.Rotate(180, 0, 1, 0);
 	modelStack.Scale(5,5,5);
@@ -929,7 +932,10 @@ void StudioProject::RenderSupermarket()
 	RenderMesh(meshList[GEO_RAIL],B_Light);
 	modelStack.PopMatrix();
 
-	//Food items
+}
+
+void StudioProject::RenderItems()
+{
 	modelStack.PushMatrix();
 	modelStack.Translate(10, 4.3, 0);
 	modelStack.Rotate(90,0,1,0);
@@ -950,19 +956,19 @@ void StudioProject::RenderSupermarket()
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 0, 6);
 	modelStack.Scale(2, 2, 2);
-	RenderMesh(meshList[GEO_DRINKCAN1],B_Light);
+	RenderMesh(meshList[GEO_COKE_CAN],B_Light);// Coke
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 0, 5);
-	RenderMesh(meshList[GEO_DRINKCAN2],B_Light);
+	RenderMesh(meshList[GEO_DRINKCAN2],B_Light); 
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	//modelStack.Translate(8, 0, 0);
 	modelStack.Translate(0, 0, 6);
 	modelStack.Scale(2, 2, 2);
-	RenderMesh(meshList[GEO_DRINKCAN3],B_Light);
+	RenderMesh(meshList[GEO_PEPSI_CAN],B_Light); // Pepsi
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
@@ -995,6 +1001,7 @@ void StudioProject::RenderSupermarket()
 	modelStack.Rotate(-90,0,1,0);
 	RenderMesh(meshList[GEO_POTATOCHIPS],B_Light);
 	modelStack.PopMatrix();
+
 }
 
 void StudioProject::RenderModel()
@@ -1195,6 +1202,7 @@ void StudioProject::Render()
 	//Rendering of supermarket scene
 	modelStack.PushMatrix();
 	RenderSupermarket();
+	RenderItems();
 	modelStack.PopMatrix();
 	
 

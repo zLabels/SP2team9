@@ -97,9 +97,9 @@ private:
 		GEO_CANFOOD1, //food items
 		GEO_CANFOOD2,
 		GEO_CANFOOD3,
-		GEO_DRINKCAN1,
+		GEO_COKE_CAN,
 		GEO_DRINKCAN2,
-		GEO_DRINKCAN3,
+		GEO_PEPSI_CAN,
 		GEO_MILOCAN,
 		GEO_CEREALBOX1,
 		GEO_CEREALBOX2,
@@ -125,6 +125,7 @@ private:
 	void RenderSupermarket();
 	void RenderModel();
 	void RenderCashier();
+	void RenderItems();
 
 public:
 	StudioProject();
