@@ -100,13 +100,19 @@ private:
 		modelLeftHand,	//Model Left Hand
 		modelLeftLeg,	//Model Left Leg
 		modelRightLeg,	//Model Right Leg
-		modelButt,
+		cashierHead,		//Cashier Head
+		cashierTorso,		//Cashier Torso
+		cashierRightHand,	//Cashier Right Hand
+		cashierLeftHand,	//Cashier Left Hand
+		cashierLeftLeg,		//Cashier Left Leg
+		cashierRightLeg,	//Cashier Right Leg
 		NUM_GEOMETRY,
 	};
 
 	void RenderSkybox();
 	void RenderSupermarket();
 	void RenderModel();
+	void RenderCashier();
 
 public:
 	StudioProject();

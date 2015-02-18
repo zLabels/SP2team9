@@ -262,48 +262,83 @@ void StudioProject::Init()
 	meshList[modelHead]->material.kShininess = 8.f;
 	meshList[modelHead]->textureID = LoadTGA("Image//modelHead.tga");
 
-	meshList[modelTorso] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelTorso.obj");
+	meshList[modelTorso] = MeshBuilder::GenerateOBJ("Character Torso", "OBJ//modelTorso.obj");
 	meshList[modelTorso]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[modelTorso]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[modelTorso]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[modelTorso]->material.kShininess = 8.f;
 	meshList[modelTorso]->textureID = LoadTGA("Image//modelTorso.tga");
 
-	meshList[modelRightHand] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelArm.obj");
+	meshList[modelRightHand] = MeshBuilder::GenerateOBJ("Character Right Hand", "OBJ//modelArm.obj");
 	meshList[modelRightHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[modelRightHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[modelRightHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[modelRightHand]->material.kShininess = 8.f;
 	meshList[modelRightHand]->textureID = LoadTGA("Image//modelHand.tga");
 
-	meshList[modelLeftHand] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelArm.obj");
+	meshList[modelLeftHand] = MeshBuilder::GenerateOBJ("Character Left Hand", "OBJ//modelArm.obj");
 	meshList[modelLeftHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[modelLeftHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[modelLeftHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[modelLeftHand]->material.kShininess = 8.f;
 	meshList[modelLeftHand]->textureID = LoadTGA("Image//modelHand.tga");
 
-	meshList[modelLeftLeg] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelLeg.obj");
+	meshList[modelLeftLeg] = MeshBuilder::GenerateOBJ("Character Left Leg", "OBJ//modelLeg.obj");
 	meshList[modelLeftLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[modelLeftLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[modelLeftLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[modelLeftLeg]->material.kShininess = 8.f;
 	meshList[modelLeftLeg]->textureID = LoadTGA("Image//modelLeg.tga");
 
-	meshList[modelRightLeg] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelLeg.obj");
+	meshList[modelRightLeg] = MeshBuilder::GenerateOBJ("Character Right Leg", "OBJ//modelLeg.obj");
 	meshList[modelRightLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[modelRightLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[modelRightLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[modelRightLeg]->material.kShininess = 8.f;
 	meshList[modelRightLeg]->textureID = LoadTGA("Image//modelLeg.tga");
 
+	//===============CASHIER OBJs==========================//
+	meshList[cashierHead] = MeshBuilder::GenerateOBJ("Cashier Head", "OBJ//cashierHead.obj");
+	meshList[cashierHead]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[cashierHead]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[cashierHead]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[cashierHead]->material.kShininess = 8.f;
+	meshList[cashierHead]->textureID = LoadTGA("Image//cashierHead.tga");
 
-	meshList[modelButt] = MeshBuilder::GenerateSphere("Model Butt", Color(255/61, 255/125, 255/198), 20, 20, 0.01);
-	meshList[modelButt]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	meshList[modelButt]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	meshList[modelButt]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	meshList[modelButt]->material.kShininess = 8.f;
+	meshList[cashierTorso] = MeshBuilder::GenerateOBJ("Cashier Torso", "OBJ//cashierTorso.obj");
+	meshList[cashierTorso]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[cashierTorso]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[cashierTorso]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[cashierTorso]->material.kShininess = 8.f;
+	meshList[cashierTorso]->textureID = LoadTGA("Image//cashierTorso.tga");
 
+	meshList[cashierRightHand] = MeshBuilder::GenerateOBJ("Cashier Right Hand", "OBJ//cashierHand.obj");
+	meshList[cashierRightHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[cashierRightHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[cashierRightHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[cashierRightHand]->material.kShininess = 8.f;
+	meshList[cashierRightHand]->textureID = LoadTGA("Image//cashierHand.tga");
+
+	meshList[cashierLeftHand] = MeshBuilder::GenerateOBJ("Cashier Left Hand", "OBJ//cashierHand.obj");
+	meshList[cashierLeftHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[cashierLeftHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[cashierLeftHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[cashierLeftHand]->material.kShininess = 8.f;
+	meshList[cashierLeftHand]->textureID = LoadTGA("Image//cashierHand.tga");
+
+	meshList[cashierLeftLeg] = MeshBuilder::GenerateOBJ("Cashier Left Leg", "OBJ//cashierLeg.obj");
+	meshList[cashierLeftLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[cashierLeftLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[cashierLeftLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[cashierLeftLeg]->material.kShininess = 8.f;
+	meshList[cashierLeftLeg]->textureID = LoadTGA("Image//cashierLeg.tga");
+
+	meshList[cashierRightLeg] = MeshBuilder::GenerateOBJ("Cashier Right Leg", "OBJ//cashierLeg.obj");
+	meshList[cashierRightLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[cashierRightLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[cashierRightLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[cashierRightLeg]->material.kShininess = 8.f;
+	meshList[cashierRightLeg]->textureID = LoadTGA("Image//cashierLeg.tga");
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
 
@@ -885,6 +920,61 @@ void StudioProject::RenderModel()
 
 	//modelStack.PopMatrix();
 }
+
+void StudioProject::RenderCashier()
+{
+	modelStack.PushMatrix();
+	modelStack.Translate(0, -2.285, 0);
+	RenderMesh(meshList[cashierHead], B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 1.5, 0);
+	RenderMesh(meshList[cashierTorso], B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
+	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
+	RenderMesh(meshList[cashierRightHand], B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
+	modelStack.Translate(0.8, -1.5 + 0.2, 0);
+	RenderMesh(meshList[cashierLeftHand], B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0.4, 0);
+	modelStack.PushMatrix();
+	modelStack.Translate(0.3, 1, 0);
+	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
+	modelStack.Translate(0, -1.4, 0);
+	RenderMesh(meshList[cashierLeftLeg], B_Light);
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0.4, 0);
+	modelStack.PushMatrix();
+	modelStack.Translate(-0.3, 1, 0);
+	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
+	modelStack.Translate(0, -1.4, 0);
+	RenderMesh(meshList[cashierRightLeg], B_Light);
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix(); //Notation
+	modelStack.Scale(0.5, 0.5, 0.5);
+	modelStack.Rotate(180, 0, 180, 0);
+	modelStack.Translate(-3, 10, 0);
+	RenderText(meshList[GEO_TEXT], "Cashier", Color(0, 0, 1));
+	modelStack.PopMatrix();
+}
+
 void StudioProject::Render()
 {
 	//clear depth and color buffer
@@ -976,6 +1066,17 @@ void StudioProject::Render()
 	modelStack.Scale(1.2, 1.2, 1.2);
 	modelStack.Rotate(90, 0, 90, 0);
 	RenderModel();
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	//Rendering of CashierModel
+	modelStack.PushMatrix(); //Moving of cashier
+	modelStack.Translate(movingCharacterX, 0, -5 + movingCharacterZ);
+
+	modelStack.PushMatrix();
+	modelStack.Scale(1.2, 1.2, 1.2);
+	modelStack.Rotate(90, 0, 90, 0);
+	RenderCashier();
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
