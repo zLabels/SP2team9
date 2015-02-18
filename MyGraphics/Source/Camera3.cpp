@@ -33,6 +33,16 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 
 void Camera3::BoundsCheck()
 {
+	if(position.y >= 5)
+	{
+		position.y = tempPos.y;
+		target.y = tempTarg.y;
+	}
+	if(position.y <= 5)
+	{
+		position.y = tempPos.y;
+		target.y = tempTarg.y;
+	}
 }
 
 void Camera3::bound(Vector3 maximum, Vector3 minimum)
@@ -69,8 +79,8 @@ void Camera3::Update(double dt)
 		target -= right * CAMERA_SPEED * dt;
 
 		//===Collision Check==//
-		/*BoundsCheck();
-		
+		BoundsCheck();
+		/*
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);
@@ -100,8 +110,8 @@ void Camera3::Update(double dt)
 		target += right * CAMERA_SPEED * dt;
 
 		//===Collision Check==//
-		/*BoundsCheck();
-
+		BoundsCheck();
+		/*
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);
@@ -128,8 +138,8 @@ void Camera3::Update(double dt)
 		position += view * CAMERA_SPEED * dt;
 
 		//===Collision Check==//
-		/*BoundsCheck();
-
+		BoundsCheck();
+		/*
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);
@@ -166,8 +176,8 @@ void Camera3::Update(double dt)
 
 		//===Collision Check==//
 
-		/*BoundsCheck();
-
+		BoundsCheck();
+		/*
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);

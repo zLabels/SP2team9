@@ -67,7 +67,7 @@ void StudioProject::Init()
 
 	Framerate = "FPS: ";
 	//Initialize camera settings
-	camera.Init(Vector3(0, 30, 60), Vector3(0, 0, 0), Vector3(0, 1, 0));
+	camera.Init(Vector3(0, 5, 60), Vector3(0, 0, 0), Vector3(0, 1, 0));
 
 	//Initialize all meshes to NULL
 	for(int i = 0; i < NUM_GEOMETRY; ++i)
