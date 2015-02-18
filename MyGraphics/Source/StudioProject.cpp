@@ -440,12 +440,78 @@ void StudioProject::Update(double dt)
 
 	else if (movingModel == false)
 	{
-		rotateRightArms = rotateLeftArms = rotateLeftLeg = rotateRightLeg = 360;
 		count = 0;
 		rotatingRightArm = 1;
 		rotatingLeftArm = 1;
 		rotatingRightLeg = 1;
 		rotatingLeftLeg = 1;
+		if (rotateRightArms > 360)//moving back right arm
+		{
+			rotateRightArms -= (float)(rotatingRightArm * dt * ROTATE_SPEED);
+			if (rotateRightArms <= 360)
+			{
+				rotateRightArms = 360;
+			}
+		}
+		else if (rotateRightArms < 360)
+		{
+			rotateRightArms += (float)(rotatingRightArm * dt * ROTATE_SPEED);
+			if (rotateRightArms >= 360)
+			{
+				rotateRightArms = 360;
+			}
+		}
+
+		if (rotateLeftArms > 360)//moving back left arm
+		{
+			rotateLeftArms -= (float)(rotatingLeftArm * dt * ROTATE_SPEED);
+			if (rotateLeftArms <= 360)
+			{
+				rotateLeftArms = 360;
+			}
+		}
+		else if (rotateLeftArms < 360)
+		{
+			rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
+			if (rotateLeftArms >= 360)
+			{
+				rotateLeftArms = 360;
+			}
+		}
+
+		if (rotateRightLeg > 360)//moving back right leg
+		{
+			rotateRightLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+			if (rotateRightLeg <= 360)
+			{
+				rotateRightLeg = 360;
+			}
+		}
+		else if (rotateRightLeg < 360)
+		{
+			rotateRightLeg += (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+			if (rotateRightLeg >= 360)
+			{
+				rotateRightLeg = 360;
+			}
+		}
+
+		if (rotateLeftLeg > 360)//moving back left arm
+		{
+			rotateLeftLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+			if (rotateLeftLeg <= 360)
+			{
+				rotateLeftLeg = 360;
+			}
+		}
+		else if (rotateLeftLeg < 360)
+		{
+			rotateLeftLeg += (float)(rotatingLeftLeg * dt * ROTATE_SPEED);
+			if (rotateLeftLeg >= 360)
+			{
+				rotateLeftLeg = 360;
+			}
+		}
 	}
 	
 	//====Camera===//
