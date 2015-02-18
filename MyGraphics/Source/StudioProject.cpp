@@ -949,16 +949,19 @@ void StudioProject::RenderSupermarket()
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 0, 6);
+	modelStack.Scale(2, 2, 2);
 	RenderMesh(meshList[GEO_DRINKCAN1],B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(6, 0, 0);
+	modelStack.Translate(0, 0, 5);
 	RenderMesh(meshList[GEO_DRINKCAN2],B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	//modelStack.Translate(8, 0, 0);
+	modelStack.Translate(0, 0, 6);
+	modelStack.Scale(2, 2, 2);
 	RenderMesh(meshList[GEO_DRINKCAN3],B_Light);
 	modelStack.PopMatrix();
 
@@ -976,6 +979,8 @@ void StudioProject::RenderSupermarket()
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 0, 10);
+	modelStack.Rotate(-90,0,1,0);
+	modelStack.Scale(1.2, 1.2, 1.2);
 	RenderMesh(meshList[GEO_CEREALBOX2],B_Light);
 	modelStack.PopMatrix();
 
