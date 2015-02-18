@@ -680,8 +680,8 @@ void StudioProject::RenderSupermarket()
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(-16, -1, -10);
-	modelStack.Rotate(90, 0, 1, 0);
+	modelStack.Translate(-28, -1, -15);
+	modelStack.Rotate(180, 0, 1, 0);
 	RenderMesh(meshList[GEO_CASHIER],B_Light);
 
 	modelStack.PushMatrix();
@@ -693,8 +693,8 @@ void StudioProject::RenderSupermarket()
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(-16, -1, 10);
-	modelStack.Rotate(90, 0, 1, 0);
+	modelStack.Translate(-28, -1, 3);
+	modelStack.Rotate(180, 0, 1, 0);
 	RenderMesh(meshList[GEO_CASHIER],B_Light);
 
 	modelStack.PushMatrix();
@@ -704,6 +704,20 @@ void StudioProject::RenderSupermarket()
 	RenderMesh(meshList[GEO_CASHREG],B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(-28, -1, 20);
+	modelStack.Rotate(180, 0, 1, 0);
+	RenderMesh(meshList[GEO_CASHIER],B_Light);
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0.5, 3.7, 3.5);
+	modelStack.Rotate(-90, 0, 1, 0);
+	modelStack.Scale(0.8, 0.8, 0.8);
+	RenderMesh(meshList[GEO_CASHREG],B_Light);
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
 
 
 
@@ -741,7 +755,7 @@ void StudioProject::RenderSupermarket()
 	for(int i = -2; i <2; ++i)
 	{
 	modelStack.PushMatrix();
-	modelStack.Translate(i*12 , -1 , -30);
+	modelStack.Translate(i*12, -1 , -35);
 	RenderMesh(meshList[GEO_SHELF],B_Light);
 	modelStack.PopMatrix();
 	}
@@ -761,7 +775,7 @@ void StudioProject::RenderSupermarket()
 	for(int i = -2; i <2; ++i)
 	{
 	modelStack.PushMatrix();
-	modelStack.Translate(i*12 , -1 , 30);
+	modelStack.Translate(i*12, -1 , 35);
 	RenderMesh(meshList[GEO_SHELF],B_Light);
 	modelStack.PopMatrix();
 	}
