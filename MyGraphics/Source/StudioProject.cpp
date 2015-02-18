@@ -61,10 +61,6 @@ void StudioProject::Init()
 	rotateRightArms = rotateLeftArms = rotateRightLeg = rotateLeftLeg = 360;
 	movingModel = false;
 	movingCharacterX = movingCharacterZ = 0;
-	
-
-	//variable to animate metaknight
-	rotateAngle = 0;
 
 	Framerate = "FPS: ";
 	//Initialize camera settings
@@ -641,7 +637,7 @@ void StudioProject::Update(double dt)
 	if (Application::IsKeyPressed('O'))
 		movingCharacterZ -= 10 * dt;
 	
-	//====Camera===//
+	//====Camera coordinates===//
 	std::ostringstream ss;
 	fps = 1/dt;
 	ss << fps;
@@ -658,6 +654,19 @@ void StudioProject::Update(double dt)
 	std::ostringstream ss4;
 	ss4 << camera.position.z;
 	cameraz = ss4.str();
+
+	//====Camera view======//
+	std::ostringstream ss5;
+	ss5 << camera.tempView.x;
+	viewx = ss5.str();
+
+	std::ostringstream ss6;
+	ss6 << camera.tempView.y;
+	viewy = ss6.str();
+
+	std::ostringstream ss7;
+	ss7 <<  camera.tempView.z;
+	viewz = ss7.str();
 	camera.Update(dt);
 
 }
@@ -1234,6 +1243,12 @@ void StudioProject::Render()
 	RenderTextOnScreen(meshList[GEO_TEXT],"x: " + camerax, Color(0, 1, 0), 3, 1, 3);
 	RenderTextOnScreen(meshList[GEO_TEXT],"y: " + cameray, Color(0, 1, 0), 3, 1, 4);
 	RenderTextOnScreen(meshList[GEO_TEXT],"z: " + cameraz, Color(0, 1, 0), 3, 1, 5);
+
+	RenderTextOnScreen(meshList[GEO_TEXT],"ViewX: " + viewx, Color(0, 1, 0), 3, 10, 3);
+	RenderTextOnScreen(meshList[GEO_TEXT],"ViewY: " + viewy, Color(0, 1, 0), 3, 10, 4);
+	RenderTextOnScreen(meshList[GEO_TEXT],"ViewZ: " + viewz, Color(0, 1, 0), 3, 10, 5);
+
+	RenderTextOnScreen(meshList[GEO_TEXT],"+", Color(1, 0, 0), 3, 13.55, 10);
 
 	//==Controls==//
 	if(isShown == true)

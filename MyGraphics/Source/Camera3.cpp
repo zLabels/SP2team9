@@ -78,6 +78,7 @@ void Camera3::Update(double dt)
 		position -= right * CAMERA_SPEED * dt;
 		target -= right * CAMERA_SPEED * dt;
 
+		tempView = view;
 		//===Collision Check==//
 		BoundsCheck();
 		/*
@@ -96,6 +97,8 @@ void Camera3::Update(double dt)
 		view = rotation * view;
 		up = rotation * up;
 		target = view + position;
+
+		tempView = view;
 	}
 	if(Application::IsKeyPressed('D'))
 	{
@@ -108,6 +111,8 @@ void Camera3::Update(double dt)
 		right.Normalize();
 		position += right * CAMERA_SPEED * dt;
 		target += right * CAMERA_SPEED * dt;
+
+		tempView = view;
 
 		//===Collision Check==//
 		BoundsCheck();
@@ -127,6 +132,8 @@ void Camera3::Update(double dt)
 		view = rotation * view;
 		target = view + position;
 		up = rotation * up;
+
+		tempView = view;
 	}
 	if(Application::IsKeyPressed('W'))
 	{
@@ -136,6 +143,8 @@ void Camera3::Update(double dt)
 		Vector3 view = (target - position).Normalized();
 		target += view * CAMERA_SPEED * dt;
 		position += view * CAMERA_SPEED * dt;
+
+		tempView = view;
 
 		//===Collision Check==//
 		BoundsCheck();
@@ -160,6 +169,8 @@ void Camera3::Update(double dt)
 			view = rotation * view;
 			target = view + position;
 
+			tempView = view;
+
 			//==View Limiter==//
 			temp--;
 		}
@@ -173,6 +184,8 @@ void Camera3::Update(double dt)
 		Vector3 view = (target - position).Normalized();
 		target -= view * CAMERA_SPEED * dt;
 		position -= view * CAMERA_SPEED * dt;
+
+		tempView = view;
 
 		//===Collision Check==//
 
@@ -197,6 +210,8 @@ void Camera3::Update(double dt)
 			rotation.SetToRotation(pitch, right.x, right.y, right.z);
 			view = rotation * view;
 			target = view + position;
+
+			tempView = view;
 
 			//==View Limiter==//
 			temp++;

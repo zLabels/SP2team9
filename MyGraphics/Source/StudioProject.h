@@ -148,6 +148,9 @@ private:
 	string camerax;
 	string cameray;
 	string cameraz;
+	string viewx;
+	string viewy;
+	string viewz;
 	float worldsize;
 	float roomsize;
 	float roomheight;
