@@ -683,6 +683,13 @@ void StudioProject::RenderSupermarket()
 	modelStack.Translate(-16, -1, -10);
 	modelStack.Rotate(90, 0, 1, 0);
 	RenderMesh(meshList[GEO_CASHIER],B_Light);
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0.5, 3.7, 3.5);
+	modelStack.Rotate(-90, 0, 1, 0);
+	modelStack.Scale(0.8, 0.8, 0.8);
+	RenderMesh(meshList[GEO_CASHREG],B_Light);
+	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
@@ -691,17 +698,14 @@ void StudioProject::RenderSupermarket()
 	RenderMesh(meshList[GEO_CASHIER],B_Light);
 
 	modelStack.PushMatrix();
-	modelStack.Translate(-12.5, 2.8, -10.5);
+	modelStack.Translate(0.5, 3.7, 3.5);
+	modelStack.Rotate(-90, 0, 1, 0);
 	modelStack.Scale(0.8, 0.8, 0.8);
 	RenderMesh(meshList[GEO_CASHREG],B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
-	modelStack.Translate(-12.5, 2.8, 9.5);
-	modelStack.Scale(0.8, 0.8, 0.8);
-	RenderMesh(meshList[GEO_CASHREG],B_Light);
-	modelStack.PopMatrix();
+
 
 
 	//Extreme left cold food shelf
