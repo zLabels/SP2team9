@@ -254,6 +254,83 @@ void StudioProject::Init()
 	meshList[GEO_RAIL]->material.kShininess = 8.f;
 	meshList[GEO_RAIL] ->textureID = LoadTGA("Image//Railing.tga");
 
+	meshList[GEO_CANFOOD1] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//canned-food1.obj");
+	meshList[GEO_CANFOOD1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_CANFOOD1]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_CANFOOD1]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_CANFOOD1]->material.kShininess = 8.f;
+	meshList[GEO_CANFOOD1] ->textureID = LoadTGA("Image//canned_food_1.tga");
+
+	meshList[GEO_CANFOOD2] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//canned-food2.obj");
+	meshList[GEO_CANFOOD2]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_CANFOOD2]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_CANFOOD2]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_CANFOOD2]->material.kShininess = 8.f;
+	meshList[GEO_CANFOOD2] ->textureID = LoadTGA("Image//canned_food_2.tga");
+
+	meshList[GEO_CANFOOD3] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//canned-food3.obj");
+	meshList[GEO_CANFOOD3]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_CANFOOD3]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_CANFOOD3]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_CANFOOD3]->material.kShininess = 8.f;
+	meshList[GEO_CANFOOD3] ->textureID = LoadTGA("Image//canned_food_3.tga");
+
+	meshList[GEO_MILOCAN] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//milocan.obj");
+	meshList[GEO_MILOCAN]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_MILOCAN]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_MILOCAN]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_MILOCAN]->material.kShininess = 8.f;
+	meshList[GEO_MILOCAN] ->textureID = LoadTGA("Image//milocan.tga");
+
+	meshList[GEO_DRINKCAN1] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//drink-can1.obj");
+	meshList[GEO_DRINKCAN1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_DRINKCAN1]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_DRINKCAN1]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_DRINKCAN1]->material.kShininess = 8.f;
+	meshList[GEO_DRINKCAN1] ->textureID = LoadTGA("Image//drink_can1.tga");
+
+	meshList[GEO_DRINKCAN2] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//drink-can2.obj");
+	meshList[GEO_DRINKCAN2]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_DRINKCAN2]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_DRINKCAN2]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_DRINKCAN2]->material.kShininess = 8.f;
+	meshList[GEO_DRINKCAN2] ->textureID = LoadTGA("Image//drink_can2.tga");
+
+	meshList[GEO_DRINKCAN3] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//drink-can3.obj");
+	meshList[GEO_DRINKCAN3]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_DRINKCAN3]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_DRINKCAN3]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_DRINKCAN3]->material.kShininess = 8.f;
+	meshList[GEO_DRINKCAN3] ->textureID = LoadTGA("Image//drink_can3.tga");
+
+	meshList[GEO_CEREALBOX1] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//cereal-box1.obj");
+	meshList[GEO_CEREALBOX1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_CEREALBOX1]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_CEREALBOX1]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_CEREALBOX1]->material.kShininess = 8.f;
+	meshList[GEO_CEREALBOX1] ->textureID = LoadTGA("Image//Cereal-box1.tga");
+
+	meshList[GEO_CEREALBOX2] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//cereal-box2.obj");
+	meshList[GEO_CEREALBOX2]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_CEREALBOX2]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_CEREALBOX2]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_CEREALBOX2]->material.kShininess = 8.f;
+	meshList[GEO_CEREALBOX2] ->textureID = LoadTGA("Image//cereal_box2.tga");
+
+	meshList[GEO_PIZZABOX] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//frozenpizza.obj");
+	meshList[GEO_PIZZABOX]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_PIZZABOX]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_PIZZABOX]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_PIZZABOX]->material.kShininess = 8.f;
+	meshList[GEO_PIZZABOX] ->textureID = LoadTGA("Image//frozen_pizza.tga");
+
+	meshList[GEO_POTATOCHIPS] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//potato-chips.obj");
+	meshList[GEO_POTATOCHIPS]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_POTATOCHIPS]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_POTATOCHIPS]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_POTATOCHIPS]->material.kShininess = 8.f;
+	meshList[GEO_POTATOCHIPS] ->textureID = LoadTGA("Image//potato_chips.tga");
+
 	//===============MODEL OBJs==========================//
 	meshList[modelHead] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelHead.obj");
 	meshList[modelHead]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -768,10 +845,6 @@ void StudioProject::RenderSupermarket()
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
-
-
-
-
 	//Extreme left cold food shelf
 	for(int i = -2; i < 3; ++i)
 	{
@@ -854,6 +927,68 @@ void StudioProject::RenderSupermarket()
 	modelStack.PushMatrix();
 	modelStack.Translate(-21,-1,1-11);
 	RenderMesh(meshList[GEO_RAIL],B_Light);
+	modelStack.PopMatrix();
+
+	//Food items
+	modelStack.PushMatrix();
+	modelStack.Translate(10, 4.3, 0);
+	modelStack.Rotate(90,0,1,0);
+	RenderMesh(meshList[GEO_CANFOOD1],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(4, 0, 0);
+	RenderMesh(meshList[GEO_CANFOOD2],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(6, 0, 0);
+	modelStack.Scale(0.5, 0.5, 0.5);
+	RenderMesh(meshList[GEO_CANFOOD3],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0, 6);
+	RenderMesh(meshList[GEO_DRINKCAN1],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(6, 0, 0);
+	RenderMesh(meshList[GEO_DRINKCAN2],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	//modelStack.Translate(8, 0, 0);
+	RenderMesh(meshList[GEO_DRINKCAN3],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0, 2);
+	RenderMesh(meshList[GEO_MILOCAN],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0, 4);
+	modelStack.Rotate(90,0,1,0);
+	modelStack.Scale(2, 2, 2);
+	RenderMesh(meshList[GEO_CEREALBOX1],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0, 10);
+	RenderMesh(meshList[GEO_CEREALBOX2],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0, -2);
+	modelStack.Rotate(-90,0,1,0);
+	RenderMesh(meshList[GEO_PIZZABOX],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0, -4);
+	modelStack.Rotate(-90,0,1,0);
+	RenderMesh(meshList[GEO_POTATOCHIPS],B_Light);
 	modelStack.PopMatrix();
 }
 

@@ -94,6 +94,18 @@ private:
 		GEO_SHELF2,
 		GEO_RAIL,
 
+		GEO_CANFOOD1, //food items
+		GEO_CANFOOD2,
+		GEO_CANFOOD3,
+		GEO_DRINKCAN1,
+		GEO_DRINKCAN2,
+		GEO_DRINKCAN3,
+		GEO_MILOCAN,
+		GEO_CEREALBOX1,
+		GEO_CEREALBOX2,
+		GEO_PIZZABOX,
+		GEO_POTATOCHIPS,
+
 		modelHead,		//Model Head
 		modelTorso,		//Model Torso
 		modelRightHand,	//Model Right Hand
