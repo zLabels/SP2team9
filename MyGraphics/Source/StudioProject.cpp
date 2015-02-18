@@ -246,6 +246,13 @@ void StudioProject::Init()
 	meshList[GEO_SHELF2]->material.kShininess = 8.f;
 	meshList[GEO_SHELF2] ->textureID = LoadTGA("Image//Shelf_Texture2.tga");
 
+	meshList[GEO_RAIL] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//Railing.obj");
+	meshList[GEO_RAIL]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_RAIL]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_RAIL]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_RAIL]->material.kShininess = 8.f;
+	meshList[GEO_RAIL] ->textureID = LoadTGA("Image//Railing.tga");
+
 	//===============MODEL OBJs==========================//
 	meshList[modelHead] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelHead.obj");
 	meshList[modelHead]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -788,7 +795,23 @@ void StudioProject::RenderSupermarket()
 	RenderMesh(meshList[GEO_SHELF2],B_Light);
 	modelStack.PopMatrix();
 	}
+	//Right most railing (POV from the entrance)
+	modelStack.PushMatrix();
+	modelStack.Translate(-21,-1,26);
+	RenderMesh(meshList[GEO_RAIL],B_Light);
+	modelStack.PopMatrix();
 
+	//middle most railing (POV from the entrance)
+	modelStack.PushMatrix();
+	modelStack.Translate(-21,-1,8);
+	RenderMesh(meshList[GEO_RAIL],B_Light);
+	modelStack.PopMatrix();
+
+	//left most railing (POV from the entrance)
+	modelStack.PushMatrix();
+	modelStack.Translate(-21,-1,1-11);
+	RenderMesh(meshList[GEO_RAIL],B_Light);
+	modelStack.PopMatrix();
 }
 
 void StudioProject::RenderModel()

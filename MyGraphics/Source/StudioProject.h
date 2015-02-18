@@ -92,6 +92,7 @@ private:
 		GEO_COLDFOODSHELF,
 		GEO_SHELF,
 		GEO_SHELF2,
+		GEO_RAIL,
 
 		modelHead,		//Model Head
 		modelTorso,		//Model Torso
