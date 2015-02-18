@@ -60,6 +60,7 @@ void StudioProject::Init()
 	//variable to animate model
 	rotateRightArms = rotateLeftArms = rotateRightLeg = rotateLeftLeg = 360;
 	movingModel = false;
+	movingCharacterX = movingCharacterZ = 0;
 	
 
 	//variable to animate metaknight
@@ -385,7 +386,7 @@ void StudioProject::Update(double dt)
 	int ROTATE_SPEED = 50;
 	static int count = 0;
 
-	if (Application::IsKeyPressed('P')) //currently i set it to press 9 to animate character
+	if (Application::IsKeyPressed('8') || Application::IsKeyPressed('9')) //currently i set it to press 9 to animate character
 	{
 		movingModel = true;
 	}
@@ -442,8 +443,6 @@ void StudioProject::Update(double dt)
 			rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
 		}
 	}
-
-
 
 	else if (movingModel == false)
 	{
@@ -520,6 +519,15 @@ void StudioProject::Update(double dt)
 			}
 		}
 	}
+
+	if (Application::IsKeyPressed('8'))
+		movingCharacterX += 10 * dt;
+	if (Application::IsKeyPressed('9'))
+		movingCharacterX -= 10 * dt;
+	if (Application::IsKeyPressed('I'))
+		movingCharacterZ += 10 * dt;
+	if (Application::IsKeyPressed('O'))
+		movingCharacterZ -= 10 * dt;
 	
 	//====Camera===//
 	std::ostringstream ss;
@@ -818,26 +826,26 @@ void StudioProject::RenderModel()
 {
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3.6, 0);
-	RenderMesh(meshList[modelHead], false);
+	RenderMesh(meshList[modelHead], B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 1.5, 0);
-	RenderMesh(meshList[modelTorso], false);
+	RenderMesh(meshList[modelTorso], B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3 + 0.2, 0);
 	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
 	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
-	RenderMesh(meshList[modelRightHand], false);
+	RenderMesh(meshList[modelRightHand], B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3 + 0.2, 0);
 	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
 	modelStack.Translate(0.8, -1.5 + 0.2, 0);
-	RenderMesh(meshList[modelLeftHand], false);
+	RenderMesh(meshList[modelLeftHand], B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
@@ -846,7 +854,7 @@ void StudioProject::RenderModel()
 	modelStack.Translate(0.3, 1, 0);
 	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
 	modelStack.Translate(0, -1.4, 0);
-	RenderMesh(meshList[modelLeftLeg], false);
+	RenderMesh(meshList[modelLeftLeg], B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
@@ -856,7 +864,7 @@ void StudioProject::RenderModel()
 	modelStack.Translate(-0.3, 1, 0);
 	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
 	modelStack.Translate(0, -1.4, 0);
-	RenderMesh(meshList[modelRightLeg], false);
+	RenderMesh(meshList[modelRightLeg], B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
@@ -961,10 +969,14 @@ void StudioProject::Render()
 	
 
 	//Rendering of CharacterModel
+	modelStack.PushMatrix(); //Moving of character
+	modelStack.Translate(movingCharacterX, 0, movingCharacterZ);
+
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 0, 40);
-	modelStack.Rotate(180, 0, 180, 0);
+	modelStack.Scale(1.2, 1.2, 1.2);
+	modelStack.Rotate(90, 0, 90, 0);
 	RenderModel();
+	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 

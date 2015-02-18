@@ -134,6 +134,7 @@ private:
 	float roomheight;
 	bool movingModel;
 	float rotateRightArms, rotateLeftArms, rotateLeftLeg, rotateRightLeg;
+	float movingCharacterX, movingCharacterZ;
 
 	Camera3 camera;
 
