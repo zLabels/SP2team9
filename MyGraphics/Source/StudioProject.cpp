@@ -52,6 +52,7 @@ void StudioProject::Init()
 	roomsize = 250.0f;
 	roomheight = 150.0f;
 	fps = 0.0f;
+	angle = 3600;
 
 	//===============Sardine Can Variables============//
 	Mesh* newMesh;
@@ -430,6 +431,92 @@ void StudioProject::Init()
 	meshList[cashierRightLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[cashierRightLeg]->material.kShininess = 8.f;
 	meshList[cashierRightLeg]->textureID = LoadTGA("Image//cashierLeg.tga");
+
+	//===============GUARD OBJs==========================//
+	meshList[guardHead] = MeshBuilder::GenerateOBJ("Guard Head", "OBJ//cashierHead.obj");
+	meshList[guardHead]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[guardHead]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[guardHead]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[guardHead]->material.kShininess = 8.f;
+	meshList[guardHead]->textureID = LoadTGA("Image//guardHead.tga");
+
+	meshList[guardTorso] = MeshBuilder::GenerateOBJ("Guard Torso", "OBJ//cashierTorso.obj");
+	meshList[guardTorso]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[guardTorso]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[guardTorso]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[guardTorso]->material.kShininess = 8.f;
+	meshList[guardTorso]->textureID = LoadTGA("Image//guardTorso.tga");
+
+	meshList[guardRightHand] = MeshBuilder::GenerateOBJ("guard Right Hand", "OBJ//cashierHand.obj");
+	meshList[guardRightHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[guardRightHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[guardRightHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[guardRightHand]->material.kShininess = 8.f;
+	meshList[guardRightHand]->textureID = LoadTGA("Image//guardHand.tga");
+
+	meshList[guardLeftHand] = MeshBuilder::GenerateOBJ("guard Left Hand", "OBJ//cashierHand.obj");
+	meshList[guardLeftHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[guardLeftHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[guardLeftHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[guardLeftHand]->material.kShininess = 8.f;
+	meshList[guardLeftHand]->textureID = LoadTGA("Image//guardHand.tga");
+
+	meshList[guardLeftLeg] = MeshBuilder::GenerateOBJ("guard Left Leg", "OBJ//cashierLeg.obj");
+	meshList[guardLeftLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[guardLeftLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[guardLeftLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[guardLeftLeg]->material.kShininess = 8.f;
+	meshList[guardLeftLeg]->textureID = LoadTGA("Image//guardLeg.tga");
+
+	meshList[guardRightLeg] = MeshBuilder::GenerateOBJ("guard Right Leg", "OBJ//cashierLeg.obj");
+	meshList[guardRightLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[guardRightLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[guardRightLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[guardRightLeg]->material.kShininess = 8.f;
+	meshList[guardRightLeg]->textureID = LoadTGA("Image//guardLeg.tga");
+
+	//===============CUSTOMER OBJs==========================//
+	meshList[customerHead] = MeshBuilder::GenerateOBJ("customer Head", "OBJ//cashierHead.obj");
+	meshList[customerHead]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[customerHead]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[customerHead]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[customerHead]->material.kShininess = 8.f;
+	meshList[customerHead]->textureID = LoadTGA("Image//customerHead.tga");
+
+	meshList[customerTorso] = MeshBuilder::GenerateOBJ("customer Torso", "OBJ//cashierTorso.obj");
+	meshList[customerTorso]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[customerTorso]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[customerTorso]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[customerTorso]->material.kShininess = 8.f;
+	meshList[customerTorso]->textureID = LoadTGA("Image//customerTorso.tga");
+
+	meshList[customerRightHand] = MeshBuilder::GenerateOBJ("customer Right Hand", "OBJ//cashierHand.obj");
+	meshList[customerRightHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[customerRightHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[customerRightHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[customerRightHand]->material.kShininess = 8.f;
+	meshList[customerRightHand]->textureID = LoadTGA("Image//customerHand.tga");
+
+	meshList[customerLeftHand] = MeshBuilder::GenerateOBJ("customer Left Hand", "OBJ//cashierHand.obj");
+	meshList[customerLeftHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[customerLeftHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[customerLeftHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[customerLeftHand]->material.kShininess = 8.f;
+	meshList[customerLeftHand]->textureID = LoadTGA("Image//customerHand.tga");
+
+	meshList[customerLeftLeg] = MeshBuilder::GenerateOBJ("customer Left Leg", "OBJ//cashierLeg.obj");
+	meshList[customerLeftLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[customerLeftLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[customerLeftLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[customerLeftLeg]->material.kShininess = 8.f;
+	meshList[customerLeftLeg]->textureID = LoadTGA("Image//customerLeg.tga");
+
+	meshList[customerRightLeg] = MeshBuilder::GenerateOBJ("customer Right Leg", "OBJ//cashierLeg.obj");
+	meshList[customerRightLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[customerRightLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[customerRightLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[customerRightLeg]->material.kShininess = 8.f;
+	meshList[customerRightLeg]->textureID = LoadTGA("Image//customerLeg.tga");
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
 
@@ -649,13 +736,23 @@ void StudioProject::Update(double dt)
 	}
 
 	if (Application::IsKeyPressed('8'))
-		movingCharacterX += 10 * dt;
+	{
+		charPosition.z += cos(Math::DegreeToRadian(angle)) * 10 * dt;
+		charPosition.x += sin(Math::DegreeToRadian(angle)) * 10 * dt;
+	}
 	if (Application::IsKeyPressed('9'))
-		movingCharacterX -= 10 * dt;
+	{
+		charPosition.z -= cos(Math::DegreeToRadian(angle)) * 10 * dt;
+		charPosition.x -= sin(Math::DegreeToRadian(angle)) * 10 * dt;
+	}
 	if (Application::IsKeyPressed('I'))
-		movingCharacterZ += 10 * dt;
+	{
+		angle += 100 * dt;
+	}
 	if (Application::IsKeyPressed('O'))
-		movingCharacterZ -= 10 * dt;
+	{
+		angle -= 100 * dt;
+	}
 	
 	/*=======================================================
 						Interactions
@@ -1104,6 +1201,12 @@ void StudioProject::RenderItems()
 
 void StudioProject::RenderModel()
 {
+
+	modelStack.PushMatrix();
+	modelStack.Translate(charPosition.x, 0, charPosition.z);
+	modelStack.Rotate(angle, 0, angle, 1);
+
+
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3.6, 0);
 	RenderMesh(meshList[modelHead], B_Light);
@@ -1148,6 +1251,8 @@ void StudioProject::RenderModel()
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
+
+	modelStack.PopMatrix();
 	//modelStack.PushMatrix(); //Here lies hierachy modelling
 
 	//modelStack.PushMatrix();
@@ -1168,6 +1273,10 @@ void StudioProject::RenderModel()
 
 void StudioProject::RenderCashier()
 {
+	modelStack.PushMatrix();
+	modelStack.Translate(charPosition.x, 0, charPosition.z);
+	modelStack.Rotate(angle, 0, angle, 1);
+
 	modelStack.PushMatrix();
 	modelStack.Translate(0, -2.285, 0);
 	RenderMesh(meshList[cashierHead], B_Light);
@@ -1217,6 +1326,128 @@ void StudioProject::RenderCashier()
 	modelStack.Rotate(180, 0, 180, 0);
 	modelStack.Translate(-3, 10, 0);
 	RenderText(meshList[GEO_TEXT], "Cashier", Color(0, 0, 1));
+	modelStack.PopMatrix();
+
+	modelStack.PopMatrix();
+}
+
+void StudioProject::RenderGuard()
+{
+	modelStack.PushMatrix();
+	modelStack.Translate(charPosition.x, 0, charPosition.z);
+	modelStack.Rotate(angle, 0, angle, 1);
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, -2.285, 0);
+	RenderMesh(meshList[guardHead], B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 1.5, 0);
+	RenderMesh(meshList[guardTorso], B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
+	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
+	RenderMesh(meshList[guardRightHand], B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
+	modelStack.Translate(0.8, -1.5 + 0.2, 0);
+	RenderMesh(meshList[guardLeftHand], B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0.4, 0);
+	modelStack.PushMatrix();
+	modelStack.Translate(0.3, 1, 0);
+	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
+	modelStack.Translate(0, -1.4, 0);
+	RenderMesh(meshList[guardLeftLeg], B_Light);
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0.4, 0);
+	modelStack.PushMatrix();
+	modelStack.Translate(-0.3, 1, 0);
+	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
+	modelStack.Translate(0, -1.4, 0);
+	RenderMesh(meshList[guardRightLeg], B_Light);
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix(); //Notation
+	modelStack.Scale(0.5, 0.5, 0.5);
+	modelStack.Rotate(180, 0, 180, 0);
+	modelStack.Translate(-2, 10, 0);
+	RenderText(meshList[GEO_TEXT], "Guard", Color(0, 0, 1));
+	modelStack.PopMatrix();
+
+	modelStack.PopMatrix();
+}
+
+void StudioProject::RenderCustomer()
+{
+	modelStack.PushMatrix();
+	modelStack.Translate(charPosition.x, 0, charPosition.z);
+	modelStack.Rotate(angle, 0, angle, 1);
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, -2.285, 0);
+	RenderMesh(meshList[customerHead], B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 1.5, 0);
+	RenderMesh(meshList[customerTorso], B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
+	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
+	RenderMesh(meshList[customerRightHand], B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
+	modelStack.Translate(0.8, -1.5 + 0.2, 0);
+	RenderMesh(meshList[customerLeftHand], B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0.4, 0);
+	modelStack.PushMatrix();
+	modelStack.Translate(0.3, 1, 0);
+	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
+	modelStack.Translate(0, -1.4, 0);
+	RenderMesh(meshList[customerLeftLeg], B_Light);
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0.4, 0);
+	modelStack.PushMatrix();
+	modelStack.Translate(-0.3, 1, 0);
+	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
+	modelStack.Translate(0, -1.4, 0);
+	RenderMesh(meshList[customerRightLeg], B_Light);
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix(); //Notation
+	modelStack.Scale(0.5, 0.5, 0.5);
+	modelStack.Rotate(180, 0, 180, 0);
+	modelStack.Translate(-3, 10, 0);
+	RenderText(meshList[GEO_TEXT], "Customer", Color(0, 0, 1));
+	modelStack.PopMatrix();
+
 	modelStack.PopMatrix();
 }
 
@@ -1305,19 +1536,15 @@ void StudioProject::Render()
 
 
 	//Rendering of CharacterModel
-	modelStack.PushMatrix(); //Moving of character
-	modelStack.Translate(movingCharacterX, 0, movingCharacterZ);
-
 	modelStack.PushMatrix();
 	modelStack.Scale(1.2, 1.2, 1.2);
 	modelStack.Rotate(90, 0, 90, 0);
 	RenderModel();
 	modelStack.PopMatrix();
-	modelStack.PopMatrix();
 
 	//Rendering of CashierModel
 	modelStack.PushMatrix(); //Moving of cashier
-	modelStack.Translate(movingCharacterX, 0, -5 + movingCharacterZ);
+	modelStack.Translate(0, 0, -5);
 
 	modelStack.PushMatrix();
 	modelStack.Scale(1.2, 1.2, 1.2);
@@ -1325,6 +1552,29 @@ void StudioProject::Render()
 	RenderCashier();
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
+
+	//Rendering of GuardModel
+	modelStack.PushMatrix(); //Moving of guard
+	modelStack.Translate(0, 0, 5);
+
+	modelStack.PushMatrix();
+	modelStack.Scale(1.2, 1.2, 1.2);
+	modelStack.Rotate(90, 0, 90, 0);
+	RenderGuard();
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	//Rendering of CustomerModel
+	modelStack.PushMatrix(); //Moving of customer
+	modelStack.Translate(0, 0, 10);
+
+	modelStack.PushMatrix();
+	modelStack.Scale(1.2, 1.2, 1.2);
+	modelStack.Rotate(90, 0, 90, 0);
+	RenderCustomer();
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
 
 
 	//============DEBUGGING PURPOSES====================//

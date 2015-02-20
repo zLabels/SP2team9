@@ -123,18 +123,30 @@ private:
 		GEO_PIZZABOX,
 		GEO_POTATOCHIPS,
 
-		modelHead,		//Model Head
-		modelTorso,		//Model Torso
-		modelRightHand,	//Model Right Hand
-		modelLeftHand,	//Model Left Hand
-		modelLeftLeg,	//Model Left Leg
-		modelRightLeg,	//Model Right Leg
+		modelHead,			//Model Head
+		modelTorso,			//Model Torso
+		modelRightHand,		//Model Right Hand
+		modelLeftHand,		//Model Left Hand
+		modelLeftLeg,		//Model Left Leg
+		modelRightLeg,		//Model Right Leg
 		cashierHead,		//Cashier Head
 		cashierTorso,		//Cashier Torso
 		cashierRightHand,	//Cashier Right Hand
 		cashierLeftHand,	//Cashier Left Hand
 		cashierLeftLeg,		//Cashier Left Leg
 		cashierRightLeg,	//Cashier Right Leg
+		guardHead,			//Guard Head
+		guardTorso,			//Guard Torso
+		guardRightHand,		//Guard Right Hand
+		guardLeftHand,		//Guard Left Hand
+		guardLeftLeg,		//Guard Left Leg
+		guardRightLeg,		//Guard Right Leg
+		customerHead,		//Customer Head
+		customerTorso,		//Customer Torso
+		customerRightHand,	//Customer Right Hand
+		customerLeftHand,	//Customer Left Hand
+		customerLeftLeg,	//Customer Left Leg
+		customerRightLeg,	//Customer Right Leg
 		NUM_GEOMETRY,
 	};
 
@@ -142,6 +154,8 @@ private:
 	void RenderSupermarket();
 	void RenderModel();
 	void RenderCashier();
+	void RenderGuard();
+	void RenderCustomer();
 	void RenderItems();
 
 public:
@@ -171,9 +185,13 @@ private:
 	float worldsize;
 	float roomsize;
 	float roomheight;
+
+	//=========Character=========//
 	bool movingModel;
 	float rotateRightArms, rotateLeftArms, rotateLeftLeg, rotateRightLeg;
 	float movingCharacterX, movingCharacterZ;
+	Vector3 charPosition;
+	float angle;
 
 	//=========Items=========//
 	CItem sardineCan;
