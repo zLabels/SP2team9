@@ -10,10 +10,6 @@
 #include "Vertex.h"
 #include "LoadTGA.h"
 
-#include "Item.h"
-#include "Inventory.h"
-#include "Character.h"
-
 using std::cout;
 using std::cin;
 using std::endl;
@@ -57,6 +53,27 @@ void StudioProject::Init()
 	roomheight = 150.0f;
 	fps = 0.0f;
 
+	//===============Sardine Can Variables============//
+	Mesh* newMesh;
+	newMesh = MeshBuilder::GenerateOBJ("SardineCan" , "OBJ//canned-food1.obj");
+	newMesh->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newMesh->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newMesh->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newMesh->material.kShininess = 8.f;
+	newMesh->textureID = LoadTGA("Image//canned_food_1.tga");
+	sardineCan.SetData("sardine", 3.5f, true, newMesh);
+	hitBox sardineBox;
+	for(int i = 0; i < 5;i++)
+	{
+		Vector3 Min, Max;
+		Max.Set(10+0.695,4.3+0.567,i+0.695);
+		Min.Set(-0.695+10,-0.567+4.3,-0.695+i);
+		sardineContainer.push_back(sardineCan);
+		sardineBox.SetBox(Max, Min);
+		boxContainer.push_back(sardineBox);
+	}
+
+
 	//variable to animate model
 	rotateRightArms = rotateLeftArms = rotateRightLeg = rotateLeftLeg = 360;
 	movingModel = false;
@@ -64,7 +81,7 @@ void StudioProject::Init()
 
 	Framerate = "FPS: ";
 	//Initialize camera settings
-	camera.Init(Vector3(0, 5, 60), Vector3(0, 0, 0), Vector3(0, 1, 0));
+	camera.Init(Vector3(0, 5, 60), Vector3(0, 5, 58), Vector3(0, 1, 0));
 
 	//Initialize all meshes to NULL
 	for(int i = 0; i < NUM_GEOMETRY; ++i)
@@ -72,6 +89,7 @@ void StudioProject::Init()
 		meshList[i] = NULL;
 	}
 	meshList[GEO_AXES] = MeshBuilder::GenerateAxes("reference",Color(1,1,1),1000, 1000, 1000);
+	meshList[GEO_CUBE] = MeshBuilder::GenerateCube("cube",Color(1,1,1), 1);
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 10000.f);
@@ -195,27 +213,27 @@ void StudioProject::Init()
 
 	meshList[GEO_RIGHTSKY] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_RIGHTSKY]->textureID = LoadTGA("Image//stormydays_lf.tga");
-	
+
 	meshList[GEO_BOTTOMSKY] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BOTTOMSKY]->textureID = LoadTGA("Image//stormydays_dn.tga");
 
 	//===============SUPERMARKET RELATED OBJs==========================//
 
-	meshList[GEO_MARKET] = MeshBuilder::GenerateOBJ("Market" , "OBJ//Market.obj");
+	meshList[GEO_MARKET] = MeshBuilder::GenerateOBJ("Market", "OBJ//Market.obj");
 	meshList[GEO_MARKET]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[GEO_MARKET]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[GEO_MARKET]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_MARKET]->material.kShininess = 8.f;
 	meshList[GEO_MARKET] ->textureID = LoadTGA("Image//WallTextures.tga");
 
-	meshList[GEO_CASHIER] = MeshBuilder::GenerateOBJ("Market" , "OBJ//Cashier_Counter.obj");
+	meshList[GEO_CASHIER] = MeshBuilder::GenerateOBJ("Market", "OBJ//Cashier_Counter.obj");
 	meshList[GEO_CASHIER]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[GEO_CASHIER]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[GEO_CASHIER]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_CASHIER]->material.kShininess = 8.f;
 	meshList[GEO_CASHIER] ->textureID = LoadTGA("Image//cashier_counter.tga");
 
-	meshList[GEO_CASHREG] = MeshBuilder::GenerateOBJ("Market" , "OBJ//cash-register.obj");
+	meshList[GEO_CASHREG] = MeshBuilder::GenerateOBJ("Market", "OBJ//cash-register.obj");
 	meshList[GEO_CASHREG]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[GEO_CASHREG]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[GEO_CASHREG]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
@@ -250,12 +268,12 @@ void StudioProject::Init()
 	meshList[GEO_RAIL]->material.kShininess = 8.f;
 	meshList[GEO_RAIL] ->textureID = LoadTGA("Image//Railing.tga");
 
-	meshList[GEO_CANFOOD1] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//canned-food1.obj");
-	meshList[GEO_CANFOOD1]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	meshList[GEO_CANFOOD1]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	meshList[GEO_CANFOOD1]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	meshList[GEO_CANFOOD1]->material.kShininess = 8.f;
-	meshList[GEO_CANFOOD1] ->textureID = LoadTGA("Image//canned_food_1.tga");
+	//meshList[GEO_SARDINE_CAN] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//canned-food1.obj");
+	//meshList[GEO_SARDINE_CAN]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	//meshList[GEO_SARDINE_CAN]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	//meshList[GEO_SARDINE_CAN]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	//meshList[GEO_SARDINE_CAN]->material.kShininess = 8.f;
+	//meshList[GEO_SARDINE_CAN] ->textureID = LoadTGA("Image//canned_food_1.tga");
 
 	meshList[GEO_CANFOOD2] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//canned-food2.obj");
 	meshList[GEO_CANFOOD2]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -454,6 +472,8 @@ int rotatingLeftArm = 1;
 int rotatingRightLeg = 1;
 int rotatingLeftLeg = 1;
 
+bool collide = false;
+
 void StudioProject::Update(double dt)
 {
 	float LSPEED = 10.f;
@@ -637,6 +657,55 @@ void StudioProject::Update(double dt)
 	if (Application::IsKeyPressed('O'))
 		movingCharacterZ -= 10 * dt;
 	
+	/*=======================================================
+						Interactions
+	==========================================================*/
+	if(Application::IsKeyPressed('E'))
+	{
+		for(int i = 0; i < boxContainer.size(); ++i)
+		{
+			//==========Taking Items from shelf=============//
+			if(sardineContainer[i].getRender() == true)
+			{
+				if((camera.target.x <= boxContainer[i].max.x) && (camera.target.y <= boxContainer[i].max.y) && (camera.target.z <= boxContainer[i].max.z)
+					&& (camera.target.x >= boxContainer[i].min.x) && (camera.target.y >= boxContainer[i].min.y) && (camera.target.z >= boxContainer[i].min.z))
+				{
+					sardineContainer[i].setRender(false);
+					break;
+				}
+			}
+		}
+	}
+	if(Application::IsKeyPressed('Q'))
+	{
+		for(int i = 0; i < boxContainer.size(); ++i)
+		{
+		//==========Putting items back to shelf=============//
+			if(sardineContainer[i].getRender() == false)
+			{
+				if((camera.target.x <= boxContainer[i].max.x) && (camera.target.y <= boxContainer[i].max.y) && (camera.target.z <= boxContainer[i].max.z)
+					&& (camera.target.x >= boxContainer[i].min.x) && (camera.target.y >= boxContainer[i].min.y) && (camera.target.z >= boxContainer[i].min.z))
+				{
+					sardineContainer[i].setRender(true);
+					break;
+				}
+			}
+		}
+	}
+
+	if((camera.target.x <= boxContainer[0].max.x) && (camera.target.y <= boxContainer[0].max.y) && (camera.target.z <= boxContainer[0].max.z)
+					&& (camera.target.x >= boxContainer[0].min.x) && (camera.target.y >= boxContainer[0].min.y) && (camera.target.z >= boxContainer[0].min.z))
+	{
+		collide = true;
+	}
+	else
+	{
+		collide = false;
+	}
+	cout << collide;
+
+
+
 	//====Camera coordinates===//
 	std::ostringstream ss;
 	fps = 1/dt;
@@ -657,15 +726,15 @@ void StudioProject::Update(double dt)
 
 	//====Camera view======//
 	std::ostringstream ss5;
-	ss5 << camera.tempView.x;
+	ss5 << camera.target.x;
 	viewx = ss5.str();
 
 	std::ostringstream ss6;
-	ss6 << camera.tempView.y;
+	ss6 << camera.target.y;
 	viewy = ss6.str();
 
 	std::ostringstream ss7;
-	ss7 <<  camera.tempView.z;
+	ss7 <<  camera.target.z;
 	viewz = ss7.str();
 	camera.Update(dt);
 
@@ -810,7 +879,7 @@ void StudioProject::RenderSkybox()
 void StudioProject::RenderSupermarket()
 {
 	/*===============================================================
-						Level 1 Of Supermarket
+	Level 1 Of Supermarket
 	================================================================*/
 	modelStack.PushMatrix();
 	//modelStack.Rotate(180, 0, 1, 0);
@@ -875,53 +944,53 @@ void StudioProject::RenderSupermarket()
 		RenderMesh(meshList[GEO_COLDFOODSHELF],B_Light);
 		modelStack.PopMatrix();
 	}
-	
+
 	//Left side (metal Shelf 2)
 	for(int i = -5; i <4; ++i)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(i*6, -1, -58);
-	modelStack.Rotate(90,0,1,0);
-	RenderMesh(meshList[GEO_SHELF2],B_Light);
-	modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		modelStack.Translate(i*6, -1, -58);
+		modelStack.Rotate(90,0,1,0);
+		RenderMesh(meshList[GEO_SHELF2],B_Light);
+		modelStack.PopMatrix();
 	}
-	
+
 	//Left side wooden shelf
 	for(int i = -2; i <2; ++i)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(i*12, -1 , -35);
-	RenderMesh(meshList[GEO_SHELF],B_Light);
-	modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		modelStack.Translate(i*12, -1 , -35);
+		RenderMesh(meshList[GEO_SHELF],B_Light);
+		modelStack.PopMatrix();
 	}
 
 
 	//Right side (metal Shelf 2)
 	for(int i = -5; i <4; ++i)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(i*6, -1, 58);
-	modelStack.Rotate(90,0,1,0);
-	RenderMesh(meshList[GEO_SHELF2],B_Light);
-	modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		modelStack.Translate(i*6, -1, 58);
+		modelStack.Rotate(90,0,1,0);
+		RenderMesh(meshList[GEO_SHELF2],B_Light);
+		modelStack.PopMatrix();
 	}
 
 	//Right side wooden shelf
 	for(int i = -2; i <2; ++i)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(i*12, -1 , 35);
-	RenderMesh(meshList[GEO_SHELF],B_Light);
-	modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		modelStack.Translate(i*12, -1 , 35);
+		RenderMesh(meshList[GEO_SHELF],B_Light);
+		modelStack.PopMatrix();
 	}
-	
+
 	//Middle metal shelf
 	for(int i = -1; i<3; ++i)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(11, -1, i*6);
-	RenderMesh(meshList[GEO_SHELF2],B_Light);
-	modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		modelStack.Translate(11, -1, i*6);
+		RenderMesh(meshList[GEO_SHELF2],B_Light);
+		modelStack.PopMatrix();
 	}
 	//Right most railing (POV from the entrance)
 	modelStack.PushMatrix();
@@ -945,12 +1014,32 @@ void StudioProject::RenderSupermarket()
 
 void StudioProject::RenderItems()
 {
-	modelStack.PushMatrix();
-	modelStack.Translate(10, 4.3, 0);
+	for(int i = 0; i < sardineContainer.size(); ++i)
+	{
+		if(sardineContainer[i].getRender() == true)
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(10, 4.3, i);
+			modelStack.Rotate(90,0,1,0);
+			RenderMesh(sardineContainer[i].getMesh(),B_Light);
+			modelStack.PopMatrix();
+		}
+		////Max.Set(10+3,5.067,i+0.695);
+		////Min.Set(-3+10,-0.767+4.3,-0.695+i);
+		modelStack.PushMatrix();
+		modelStack.Translate(10, 4.3, i);
+		modelStack.Rotate(90,0,1,0);
+		modelStack.Scale(0.695,0.567,0.695);
+		RenderMesh(meshList[GEO_CUBE],B_Light);
+		modelStack.PopMatrix();
+	}
+	/*modelStack.PushMatrix();
+	modelStack.Translate(camera.target.x,camera.target.y, camera.target.z);
 	modelStack.Rotate(90,0,1,0);
-	RenderMesh(meshList[GEO_CANFOOD1],B_Light);
-	modelStack.PopMatrix();
-
+	modelStack.Scale(0.695,0.767,0.695);
+	RenderMesh(meshList[GEO_CUBE],B_Light);
+	modelStack.PopMatrix();*/
+	
 	modelStack.PushMatrix();
 	modelStack.Translate(4, 0, 0);
 	RenderMesh(meshList[GEO_CANFOOD2],B_Light);
@@ -1213,7 +1302,7 @@ void StudioProject::Render()
 	RenderSupermarket();
 	RenderItems();
 	modelStack.PopMatrix();
-	
+
 
 	//Rendering of CharacterModel
 	modelStack.PushMatrix(); //Moving of character
@@ -1258,7 +1347,7 @@ void StudioProject::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press E to interact", Color(0,0,0), 2, 1, 27);
 	}
 
-	
+
 }
 
 void StudioProject::RenderMesh(Mesh *mesh, bool enableLight)

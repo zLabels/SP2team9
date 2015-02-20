@@ -63,7 +63,7 @@ void Camera3::bound(Vector3 maximum, Vector3 minimum)
 
 void Camera3::Update(double dt)
 {
-	static const float CAMERA_SPEED = 50.f;
+	static const float CAMERA_SPEED = 30.f;
 	
 
 	if(Application::IsKeyPressed('A'))
@@ -88,7 +88,7 @@ void Camera3::Update(double dt)
 		}*/
 	}
 	
-	if(Application::IsKeyPressed(VK_RIGHT))
+	/*if(Application::IsKeyPressed(VK_RIGHT))
 	{
 		Vector3 view = (target - position).Normalized();
 		float yaw = (float)(-CAMERA_SPEED * dt);
@@ -99,6 +99,19 @@ void Camera3::Update(double dt)
 		target = view + position;
 
 		tempView = view;
+	}*/
+	if(Application::IsKeyPressed(VK_RIGHT))
+	{
+		float pitch = (float)(-CAMERA_SPEED * dt);
+		Vector3 view = (target - position).Normalized();
+		Vector3 right = view.Cross(up);
+		right.y = 0;
+		right.Normalize();
+		up = right.Cross(view).Normalized();
+		Mtx44 rotation;
+		rotation.SetToRotation(pitch, up.x, up.y, up.z);
+		view = rotation * view;
+		target = (rotation * (target - position)) + position;
 	}
 	if(Application::IsKeyPressed('D'))
 	{
@@ -123,7 +136,7 @@ void Camera3::Update(double dt)
 		}*/
 	}
 		
-	if(Application::IsKeyPressed(VK_LEFT))
+	/*if(Application::IsKeyPressed(VK_LEFT))
 	{
 		Vector3 view = (target - position).Normalized();
 		float yaw = (float)(CAMERA_SPEED * dt);
@@ -134,7 +147,21 @@ void Camera3::Update(double dt)
 		up = rotation * up;
 
 		tempView = view;
+	}*/
+	if(Application::IsKeyPressed(VK_LEFT))
+	{
+		float pitch = (float)(CAMERA_SPEED * dt);
+		Vector3 view = (target - position).Normalized();
+		Vector3 right = view.Cross(up);
+		right.y = 0;
+		right.Normalize();
+		up = right.Cross(view).Normalized();
+		Mtx44 rotation;
+		rotation.SetToRotation(pitch, up.x, up.y, up.z);
+		view = rotation * view;
+		target = (rotation * (target - position)) + position;
 	}
+
 	if(Application::IsKeyPressed('W'))
 	{
 		tempPos = position;
@@ -167,7 +194,7 @@ void Camera3::Update(double dt)
 			Mtx44 rotation;
 			rotation.SetToRotation(pitch, right.x, right.y, right.z);
 			view = rotation * view;
-			target = view + position;
+			target = (rotation * (target - position)) + position;
 
 			tempView = view;
 
@@ -209,7 +236,7 @@ void Camera3::Update(double dt)
 			Mtx44 rotation;
 			rotation.SetToRotation(pitch, right.x, right.y, right.z);
 			view = rotation * view;
-			target = view + position;
+			target = (rotation * (target - position)) + position;
 
 			tempView = view;
 

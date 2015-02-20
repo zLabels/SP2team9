@@ -11,7 +11,23 @@
 #include <string>
 #include <sstream>
 
+#include "Item.h"
+#include "Inventory.h"
+#include "Character.h"
+
 using std::string;
+
+struct hitBox
+{
+	Vector3 max;
+	Vector3 min;
+
+	void SetBox(Vector3 a, Vector3 b)
+	{
+		max = a; 
+		min = b;
+	}
+};
 
 class StudioProject: public Scene
 {
@@ -70,6 +86,7 @@ private:
 		GEO_QUAD,
 		GEO_LIGHTBALL,
 		GEO_LIGHTBALL2,
+		GEO_CUBE,
 		GEO_CYLINDER,
 		GEO_LEFT,
 		GEO_RIGHT,
@@ -94,7 +111,7 @@ private:
 		GEO_SHELF2,
 		GEO_RAIL,
 
-		GEO_CANFOOD1, //food items
+		GEO_SARDINE_CAN, //food items
 		GEO_CANFOOD2,
 		GEO_CANFOOD3,
 		GEO_COKE_CAN,
@@ -158,6 +175,12 @@ private:
 	float rotateRightArms, rotateLeftArms, rotateLeftLeg, rotateRightLeg;
 	float movingCharacterX, movingCharacterZ;
 
+	//=========Items=========//
+	CItem sardineCan;
+	vector<CItem> sardineContainer;
+
+	vector<hitBox> boxContainer;
+
 	Camera3 camera;
 
 	MS modelStack, viewStack, projectionStack;
@@ -171,5 +194,6 @@ private:
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 
 };
+
 
 #endif
