@@ -12,12 +12,13 @@ public:
 	CInventory(void);
 	~CInventory(void);
 
-	void AddItem(CItem* temp);
-	CItem* getItem(int pos);
+	void AddItem(CItem temp);
+	CItem getItem(int pos);
 	void DeleteAll(void);
+	void removeItem(int pos);
 
 private:
-	vector<CItem*> Container;
+	vector<CItem> Container;
 	CItem* ptr;
 	int NoOfItems;
 };

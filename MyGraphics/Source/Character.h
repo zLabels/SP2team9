@@ -8,11 +8,11 @@ public:
 	CCharacter(void);
 	~CCharacter(void);
 
-
 private:
 	CInventory Inventory;
 	float Money;
 	Vector3 Position;
 
+	
 };
 

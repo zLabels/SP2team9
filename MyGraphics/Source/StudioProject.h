@@ -166,6 +166,9 @@ public:
 	virtual void Update(double dt);
 	virtual void Render();
 	virtual void Exit();
+	void InitMesh();
+	void InitVariables();
+	void InitShaders();
 
 private:
 	unsigned m_vertexArrayID;
@@ -193,9 +196,12 @@ private:
 	Vector3 charPosition;
 	float angle;
 
+	CInventory Inventory;
+
 	//=========Items=========//
 	CItem sardineCan;
 	vector<CItem> sardineContainer;
+
 
 	vector<hitBox> boxContainer;
 

@@ -4,5 +4,8 @@ class CCashier
 public:
 	CCashier(void);
 	~CCashier(void);
+
+private:
+
 };
 

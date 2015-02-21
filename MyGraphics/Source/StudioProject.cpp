@@ -21,69 +21,8 @@ StudioProject::StudioProject()
 StudioProject::~StudioProject()
 {
 }
-
-void StudioProject::Init()
+void StudioProject::InitMesh()
 {
-	// Set background color to black
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	//Enable depth buffer and depth testing
-	glEnable(GL_DEPTH_TEST);
-	//Enable back face culling
-	glDisable(GL_CULL_FACE);
-	// Enable blending
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	//Default to fill mode
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-	// Generate a default VAO for now
-	glGenVertexArrays(1, &m_vertexArrayID);
-	glBindVertexArray(m_vertexArrayID);
-
-	//Load vertex and fragment shaders
-	//m_programID = LoadShaders( "Shader//TransformVertexShader.vertexshader", "Shader//SimpleFragmentShader.fragmentshader" );
-	//m_programID = LoadShaders( "Shader//Texture.vertexshader", "Shader//Texture.fragmentshader" );
-	//m_programID = LoadShaders( "Shader//Texture.vertexshader", "Shader//Blending.fragmentshader" );
-	// Use our shader
-
-	//variable to rotate geometry
-	rotateAngle = 0;
-	worldsize = 1000.0f;
-	roomsize = 250.0f;
-	roomheight = 150.0f;
-	fps = 0.0f;
-	angle = 3600;
-
-	//===============Sardine Can Variables============//
-	Mesh* newMesh;
-	newMesh = MeshBuilder::GenerateOBJ("SardineCan" , "OBJ//canned-food1.obj");
-	newMesh->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	newMesh->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	newMesh->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	newMesh->material.kShininess = 8.f;
-	newMesh->textureID = LoadTGA("Image//canned_food_1.tga");
-	sardineCan.SetData("sardine", 3.5f, true, newMesh);
-	hitBox sardineBox;
-	for(int i = 0; i < 5;i++)
-	{
-		Vector3 Min, Max;
-		Max.Set(10+0.695,4.3+0.567,i+0.695);
-		Min.Set(-0.695+10,-0.567+4.3,-0.695+i);
-		sardineContainer.push_back(sardineCan);
-		sardineBox.SetBox(Max, Min);
-		boxContainer.push_back(sardineBox);
-	}
-
-
-	//variable to animate model
-	rotateRightArms = rotateLeftArms = rotateRightLeg = rotateLeftLeg = 360;
-	movingModel = false;
-	movingCharacterX = movingCharacterZ = 0;
-
-	Framerate = "FPS: ";
-	//Initialize camera settings
-	camera.Init(Vector3(0, 5, 60), Vector3(0, 5, 58), Vector3(0, 1, 0));
-
 	//Initialize all meshes to NULL
 	for(int i = 0; i < NUM_GEOMETRY; ++i)
 	{
@@ -91,109 +30,6 @@ void StudioProject::Init()
 	}
 	meshList[GEO_AXES] = MeshBuilder::GenerateAxes("reference",Color(1,1,1),1000, 1000, 1000);
 	meshList[GEO_CUBE] = MeshBuilder::GenerateCube("cube",Color(1,1,1), 1);
-
-	Mtx44 projection;
-	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 10000.f);
-	projectionStack.LoadMatrix(projection);
-
-	m_programID = LoadShaders( "Shader//Texture.vertexshader", "Shader//MultiLight.fragmentshader");
-	m_parameters[U_COLOR_TEXTURE_ENABLED] = glGetUniformLocation(m_programID, "colorTextureEnabled");
-	m_parameters[U_COLOR_TEXTURE] = glGetUniformLocation(m_programID, "colorTexture");
-	m_parameters[U_MVP] = glGetUniformLocation(m_programID, "MVP");
-	m_parameters[U_MODELVIEW] = glGetUniformLocation(m_programID, "MV");
-	m_parameters[U_MODELVIEW_INVERSE_TRANSPOSE] = glGetUniformLocation(m_programID, "MV_inverse_transpose");
-	m_parameters[U_MATERIAL_AMBIENT] = glGetUniformLocation(m_programID, "material.kAmbient");
-	m_parameters[U_MATERIAL_DIFFUSE] = glGetUniformLocation(m_programID, "material.kDiffuse");
-	m_parameters[U_MATERIAL_SPECULAR] = glGetUniformLocation(m_programID, "material.kSpecular");
-	m_parameters[U_MATERIAL_SHININESS] = glGetUniformLocation(m_programID, "material.kShininess");
-	m_parameters[U_LIGHTENABLED] = glGetUniformLocation(m_programID, "lightEnabled");
-	m_parameters[U_NUMLIGHTS] = glGetUniformLocation(m_programID, "numLights");
-
-	// Light 1
-	m_parameters[U_LIGHT0_POSITION] = glGetUniformLocation(m_programID, "lights[0].position_cameraspace");
-	m_parameters[U_LIGHT0_COLOR] = glGetUniformLocation(m_programID, "lights[0].color");
-	m_parameters[U_LIGHT0_POWER] = glGetUniformLocation(m_programID, "lights[0].power");
-	m_parameters[U_LIGHT0_KC] = glGetUniformLocation(m_programID, "lights[0].kC");
-	m_parameters[U_LIGHT0_KL] = glGetUniformLocation(m_programID, "lights[0].kL");
-	m_parameters[U_LIGHT0_KQ] = glGetUniformLocation(m_programID, "lights[0].kQ");
-	m_parameters[U_LIGHT0_TYPE] = glGetUniformLocation(m_programID, "lights[0].type");
-	m_parameters[U_LIGHT0_SPOTDIRECTION] = glGetUniformLocation(m_programID, "lights[0].spotDirection");
-	m_parameters[U_LIGHT0_COSCUTOFF] = glGetUniformLocation(m_programID, "lights[0].cosCutoff");
-	m_parameters[U_LIGHT0_COSINNER] = glGetUniformLocation(m_programID, "lights[0].cosInner");
-	m_parameters[U_LIGHT0_EXPONENT] = glGetUniformLocation(m_programID, "lights[0].exponent");
-	m_parameters[U_NUMLIGHTS] = glGetUniformLocation(m_programID, "numLights");
-
-	// Light2
-	m_parameters[U_LIGHT1_POSITION] = glGetUniformLocation(m_programID, "lights[1].position_cameraspace");
-	m_parameters[U_LIGHT1_COLOR] = glGetUniformLocation(m_programID, "lights[1].color");
-	m_parameters[U_LIGHT1_POWER] = glGetUniformLocation(m_programID, "lights[1].power");
-	m_parameters[U_LIGHT1_KC] = glGetUniformLocation(m_programID, "lights[1].kC");
-	m_parameters[U_LIGHT1_KL] = glGetUniformLocation(m_programID, "lights[1].kL");
-	m_parameters[U_LIGHT1_KQ] = glGetUniformLocation(m_programID, "lights[1].kQ");
-	m_parameters[U_LIGHT1_TYPE] = glGetUniformLocation(m_programID, "lights[1].type");
-	m_parameters[U_LIGHT1_SPOTDIRECTION] = glGetUniformLocation(m_programID, "lights[1].spotDirection");
-	m_parameters[U_LIGHT1_COSCUTOFF] = glGetUniformLocation(m_programID, "lights[1].cosCutoff");
-	m_parameters[U_LIGHT1_COSINNER] = glGetUniformLocation(m_programID, "lights[1].cosInner");
-	m_parameters[U_LIGHT1_EXPONENT] = glGetUniformLocation(m_programID, "lights[1].exponent");
-	m_parameters[U_NUMLIGHTS] = glGetUniformLocation(m_programID, "numLights");
-
-	//Text Related
-	// Get a handle for our "textColor" uniform
-	m_parameters[U_TEXT_ENABLED] = glGetUniformLocation(m_programID, "textEnabled");
-	m_parameters[U_TEXT_COLOR] = glGetUniformLocation(m_programID, "textColor");
-
-	glUseProgram(m_programID);
-
-	//Light 1
-	lights[0].type = Light::LIGHT_POINT;
-	lights[0].position.Set(0, 20, 0);
-	lights[0].color.Set(1, 1, 1);
-	lights[0].power = 2;
-	lights[0].kC = 1.f;
-	lights[0].kL = 0.01f;
-	lights[0].kQ = 0.001f;
-	lights[0].cosCutoff = cos(Math::DegreeToRadian(45));
-	lights[0].cosInner = cos(Math::DegreeToRadian(30));
-	lights[0].exponent = 3.f;
-	lights[0].spotDirection.Set(0.f, 1.f, 0.f);
-
-	//Light 2
-	lights[1].type = Light::LIGHT_DIRECTIONAL;
-	lights[1].position.Set(-450, 200, 120);
-	lights[1].color.Set(1, 1, 1);
-	lights[1].power = 0.5f;
-	lights[1].kC = 1.f;
-	lights[1].kL = 0.01f;
-	lights[1].kQ = 0.001f;
-	lights[1].cosCutoff = cos(Math::DegreeToRadian(45));
-	lights[1].cosInner = cos(Math::DegreeToRadian(30));
-	lights[1].exponent = 3.f;
-	lights[1].spotDirection.Set(0.f, 1.f, 0.f);
-
-	// Make sure you pass uniform parameters after glUseProgram()
-	glUniform1i(m_parameters[U_NUMLIGHTS], 2);
-
-	//Light 1
-	glUniform1i(m_parameters[U_LIGHT0_TYPE], lights[0].type);
-	glUniform3fv(m_parameters[U_LIGHT0_COLOR], 1, &lights[0].color.r);
-	glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
-	glUniform1f(m_parameters[U_LIGHT0_KC], lights[0].kC);
-	glUniform1f(m_parameters[U_LIGHT0_KL], lights[0].kL);
-	glUniform1f(m_parameters[U_LIGHT0_KQ], lights[0].kQ);
-	glUniform1f(m_parameters[U_LIGHT0_COSCUTOFF], lights[0].cosCutoff);
-	glUniform1f(m_parameters[U_LIGHT0_COSINNER], lights[0].cosInner);
-	glUniform1f(m_parameters[U_LIGHT0_EXPONENT], lights[0].exponent);
-
-	//Light 2
-	glUniform1i(m_parameters[U_LIGHT1_TYPE], lights[1].type);
-	glUniform3fv(m_parameters[U_LIGHT1_COLOR], 1, &lights[1].color.r);
-	glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
-	glUniform1f(m_parameters[U_LIGHT1_KC], lights[1].kC);
-	glUniform1f(m_parameters[U_LIGHT1_KL], lights[1].kL);
-	glUniform1f(m_parameters[U_LIGHT1_KQ], lights[1].kQ);
-	glUniform1f(m_parameters[U_LIGHT1_COSCUTOFF], lights[1].cosCutoff);
-	glUniform1f(m_parameters[U_LIGHT1_COSINNER], lights[1].cosInner);
-	glUniform1f(m_parameters[U_LIGHT1_EXPONENT], lights[1].exponent);
 
 	/*
 	========================Sky Box=====================================
@@ -526,7 +362,6 @@ void StudioProject::Init()
 	meshList[GEO_FLOOR] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_FLOOR]->textureID = LoadTGA("Image//road-texture.tga");
 
-
 	//Light ball
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 10, 10, 1);
 	meshList[GEO_LIGHTBALL2] = MeshBuilder::GenerateSphere("lightball2", Color(1, 1, 1), 10, 10, 1);
@@ -542,6 +377,178 @@ void StudioProject::Init()
 	//Text Related
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//CourierNew.tga");
+}
+void StudioProject::InitVariables()
+{
+
+	//variable to rotate geometry
+	rotateAngle = 0;
+	worldsize = 1000.0f;
+	roomsize = 250.0f;
+	roomheight = 150.0f;
+	fps = 0.0f;
+	angle = 3600;
+
+	//===============Sardine Can Variables============//
+	Mesh* newMesh;
+	newMesh = MeshBuilder::GenerateOBJ("SardineCan" , "OBJ//canned-food1.obj");
+	newMesh->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newMesh->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newMesh->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newMesh->material.kShininess = 8.f;
+	newMesh->textureID = LoadTGA("Image//canned_food_1.tga");
+	sardineCan.SetData("sardine", 3.5f, true, newMesh);
+	hitBox sardineBox;
+	for(int i = 0; i < 5;i++)
+	{
+		Vector3 Min, Max;
+		Max.Set(10+0.59,4.5+0.7,i+0.35);
+		Min.Set(-0.59+10,-0.7+4.5,-0.35+i);
+		sardineContainer.push_back(sardineCan);
+		sardineBox.SetBox(Max, Min);
+		boxContainer.push_back(sardineBox);
+	}
+
+
+	//variable to animate model
+	rotateRightArms = rotateLeftArms = rotateRightLeg = rotateLeftLeg = 360;
+	movingModel = false;
+	movingCharacterX = movingCharacterZ = 0;
+
+	Framerate = "FPS: ";
+}
+void StudioProject::InitShaders()
+{
+	m_programID = LoadShaders( "Shader//Texture.vertexshader", "Shader//MultiLight.fragmentshader");
+	m_parameters[U_COLOR_TEXTURE_ENABLED] = glGetUniformLocation(m_programID, "colorTextureEnabled");
+	m_parameters[U_COLOR_TEXTURE] = glGetUniformLocation(m_programID, "colorTexture");
+	m_parameters[U_MVP] = glGetUniformLocation(m_programID, "MVP");
+	m_parameters[U_MODELVIEW] = glGetUniformLocation(m_programID, "MV");
+	m_parameters[U_MODELVIEW_INVERSE_TRANSPOSE] = glGetUniformLocation(m_programID, "MV_inverse_transpose");
+	m_parameters[U_MATERIAL_AMBIENT] = glGetUniformLocation(m_programID, "material.kAmbient");
+	m_parameters[U_MATERIAL_DIFFUSE] = glGetUniformLocation(m_programID, "material.kDiffuse");
+	m_parameters[U_MATERIAL_SPECULAR] = glGetUniformLocation(m_programID, "material.kSpecular");
+	m_parameters[U_MATERIAL_SHININESS] = glGetUniformLocation(m_programID, "material.kShininess");
+	m_parameters[U_LIGHTENABLED] = glGetUniformLocation(m_programID, "lightEnabled");
+	m_parameters[U_NUMLIGHTS] = glGetUniformLocation(m_programID, "numLights");
+
+	// Light 1
+	m_parameters[U_LIGHT0_POSITION] = glGetUniformLocation(m_programID, "lights[0].position_cameraspace");
+	m_parameters[U_LIGHT0_COLOR] = glGetUniformLocation(m_programID, "lights[0].color");
+	m_parameters[U_LIGHT0_POWER] = glGetUniformLocation(m_programID, "lights[0].power");
+	m_parameters[U_LIGHT0_KC] = glGetUniformLocation(m_programID, "lights[0].kC");
+	m_parameters[U_LIGHT0_KL] = glGetUniformLocation(m_programID, "lights[0].kL");
+	m_parameters[U_LIGHT0_KQ] = glGetUniformLocation(m_programID, "lights[0].kQ");
+	m_parameters[U_LIGHT0_TYPE] = glGetUniformLocation(m_programID, "lights[0].type");
+	m_parameters[U_LIGHT0_SPOTDIRECTION] = glGetUniformLocation(m_programID, "lights[0].spotDirection");
+	m_parameters[U_LIGHT0_COSCUTOFF] = glGetUniformLocation(m_programID, "lights[0].cosCutoff");
+	m_parameters[U_LIGHT0_COSINNER] = glGetUniformLocation(m_programID, "lights[0].cosInner");
+	m_parameters[U_LIGHT0_EXPONENT] = glGetUniformLocation(m_programID, "lights[0].exponent");
+	m_parameters[U_NUMLIGHTS] = glGetUniformLocation(m_programID, "numLights");
+
+	// Light2
+	m_parameters[U_LIGHT1_POSITION] = glGetUniformLocation(m_programID, "lights[1].position_cameraspace");
+	m_parameters[U_LIGHT1_COLOR] = glGetUniformLocation(m_programID, "lights[1].color");
+	m_parameters[U_LIGHT1_POWER] = glGetUniformLocation(m_programID, "lights[1].power");
+	m_parameters[U_LIGHT1_KC] = glGetUniformLocation(m_programID, "lights[1].kC");
+	m_parameters[U_LIGHT1_KL] = glGetUniformLocation(m_programID, "lights[1].kL");
+	m_parameters[U_LIGHT1_KQ] = glGetUniformLocation(m_programID, "lights[1].kQ");
+	m_parameters[U_LIGHT1_TYPE] = glGetUniformLocation(m_programID, "lights[1].type");
+	m_parameters[U_LIGHT1_SPOTDIRECTION] = glGetUniformLocation(m_programID, "lights[1].spotDirection");
+	m_parameters[U_LIGHT1_COSCUTOFF] = glGetUniformLocation(m_programID, "lights[1].cosCutoff");
+	m_parameters[U_LIGHT1_COSINNER] = glGetUniformLocation(m_programID, "lights[1].cosInner");
+	m_parameters[U_LIGHT1_EXPONENT] = glGetUniformLocation(m_programID, "lights[1].exponent");
+	m_parameters[U_NUMLIGHTS] = glGetUniformLocation(m_programID, "numLights");
+
+	//Text Related
+	// Get a handle for our "textColor" uniform
+	m_parameters[U_TEXT_ENABLED] = glGetUniformLocation(m_programID, "textEnabled");
+	m_parameters[U_TEXT_COLOR] = glGetUniformLocation(m_programID, "textColor");
+
+	glUseProgram(m_programID);
+
+	//Light 1
+	lights[0].type = Light::LIGHT_POINT;
+	lights[0].position.Set(0, 20, 0);
+	lights[0].color.Set(1, 1, 1);
+	lights[0].power = 2;
+	lights[0].kC = 1.f;
+	lights[0].kL = 0.01f;
+	lights[0].kQ = 0.001f;
+	lights[0].cosCutoff = cos(Math::DegreeToRadian(45));
+	lights[0].cosInner = cos(Math::DegreeToRadian(30));
+	lights[0].exponent = 3.f;
+	lights[0].spotDirection.Set(0.f, 1.f, 0.f);
+
+	//Light 2
+	lights[1].type = Light::LIGHT_DIRECTIONAL;
+	lights[1].position.Set(-450, 200, 120);
+	lights[1].color.Set(1, 1, 1);
+	lights[1].power = 0.5f;
+	lights[1].kC = 1.f;
+	lights[1].kL = 0.01f;
+	lights[1].kQ = 0.001f;
+	lights[1].cosCutoff = cos(Math::DegreeToRadian(45));
+	lights[1].cosInner = cos(Math::DegreeToRadian(30));
+	lights[1].exponent = 3.f;
+	lights[1].spotDirection.Set(0.f, 1.f, 0.f);
+
+	// Make sure you pass uniform parameters after glUseProgram()
+	glUniform1i(m_parameters[U_NUMLIGHTS], 2);
+
+	//Light 1
+	glUniform1i(m_parameters[U_LIGHT0_TYPE], lights[0].type);
+	glUniform3fv(m_parameters[U_LIGHT0_COLOR], 1, &lights[0].color.r);
+	glUniform1f(m_parameters[U_LIGHT0_POWER], lights[0].power);
+	glUniform1f(m_parameters[U_LIGHT0_KC], lights[0].kC);
+	glUniform1f(m_parameters[U_LIGHT0_KL], lights[0].kL);
+	glUniform1f(m_parameters[U_LIGHT0_KQ], lights[0].kQ);
+	glUniform1f(m_parameters[U_LIGHT0_COSCUTOFF], lights[0].cosCutoff);
+	glUniform1f(m_parameters[U_LIGHT0_COSINNER], lights[0].cosInner);
+	glUniform1f(m_parameters[U_LIGHT0_EXPONENT], lights[0].exponent);
+
+	//Light 2
+	glUniform1i(m_parameters[U_LIGHT1_TYPE], lights[1].type);
+	glUniform3fv(m_parameters[U_LIGHT1_COLOR], 1, &lights[1].color.r);
+	glUniform1f(m_parameters[U_LIGHT1_POWER], lights[1].power);
+	glUniform1f(m_parameters[U_LIGHT1_KC], lights[1].kC);
+	glUniform1f(m_parameters[U_LIGHT1_KL], lights[1].kL);
+	glUniform1f(m_parameters[U_LIGHT1_KQ], lights[1].kQ);
+	glUniform1f(m_parameters[U_LIGHT1_COSCUTOFF], lights[1].cosCutoff);
+	glUniform1f(m_parameters[U_LIGHT1_COSINNER], lights[1].cosInner);
+	glUniform1f(m_parameters[U_LIGHT1_EXPONENT], lights[1].exponent);
+}
+
+void StudioProject::Init()
+{
+	// Set background color to black
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	//Enable depth buffer and depth testing
+	glEnable(GL_DEPTH_TEST);
+	//Enable back face culling
+	glDisable(GL_CULL_FACE);
+	// Enable blending
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//Default to fill mode
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	// Generate a default VAO for now
+	glGenVertexArrays(1, &m_vertexArrayID);
+	glBindVertexArray(m_vertexArrayID);
+
+	//Initialize camera settings
+	camera.Init(Vector3(0, 5, 60), Vector3(0, 5, 58), Vector3(0, 1, 0));
+
+	Mtx44 projection;
+	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 10000.f);
+	projectionStack.LoadMatrix(projection);
+
+	InitVariables();
+
+	InitShaders();
+
+	InitMesh();
 }
 
 //========Variables for use in update====//
@@ -559,7 +566,9 @@ int rotatingLeftArm = 1;
 int rotatingRightLeg = 1;
 int rotatingLeftLeg = 1;
 
+//========variables used for debugging purposes==========//
 bool collide = false;
+bool checking = false;
 
 void StudioProject::Update(double dt)
 {
@@ -757,20 +766,25 @@ void StudioProject::Update(double dt)
 	/*=======================================================
 						Interactions
 	==========================================================*/
-	if(Application::IsKeyPressed('E'))
+	if(checking == false)
 	{
-		for(int i = 0; i < boxContainer.size(); ++i)
+		if(Application::IsKeyPressed('E'))
 		{
-			//==========Taking Items from shelf=============//
-			if(sardineContainer[i].getRender() == true)
+			for(int i = 0; i < boxContainer.size(); ++i)
 			{
-				if((camera.target.x <= boxContainer[i].max.x) && (camera.target.y <= boxContainer[i].max.y) && (camera.target.z <= boxContainer[i].max.z)
-					&& (camera.target.x >= boxContainer[i].min.x) && (camera.target.y >= boxContainer[i].min.y) && (camera.target.z >= boxContainer[i].min.z))
+				checking = true;
+				//==========Taking Items from shelf=============//
+				if(sardineContainer[i].getRender() == true)
 				{
-					sardineContainer[i].setRender(false);
-					break;
+					if((camera.target.x <= boxContainer[i].max.x) && (camera.target.y <= boxContainer[i].max.y) && (camera.target.z <= boxContainer[i].max.z)
+						&& (camera.target.x >= boxContainer[i].min.x) && (camera.target.y >= boxContainer[i].min.y) && (camera.target.z >= boxContainer[i].min.z))
+					{
+						sardineContainer[i].setRender(false);
+						break;
+					}
 				}
 			}
+			checking = false;
 		}
 	}
 	if(Application::IsKeyPressed('Q'))
@@ -799,7 +813,7 @@ void StudioProject::Update(double dt)
 	{
 		collide = false;
 	}
-	cout << collide;
+	//cout << collide;
 
 
 
@@ -821,7 +835,7 @@ void StudioProject::Update(double dt)
 	ss4 << camera.position.z;
 	cameraz = ss4.str();
 
-	//====Camera view======//
+	//====Camera Target======//
 	std::ostringstream ss5;
 	ss5 << camera.target.x;
 	viewx = ss5.str();
@@ -1119,23 +1133,23 @@ void StudioProject::RenderItems()
 			modelStack.Translate(10, 4.3, i);
 			modelStack.Rotate(90,0,1,0);
 			RenderMesh(sardineContainer[i].getMesh(),B_Light);
+			modelStack.PushMatrix();
+			//RenderMesh(meshList[GEO_CUBE],B_Light);
+			modelStack.PopMatrix();
 			modelStack.PopMatrix();
 		}
-		////Max.Set(10+3,5.067,i+0.695);
-		////Min.Set(-3+10,-0.767+4.3,-0.695+i);
 		modelStack.PushMatrix();
-		modelStack.Translate(10, 4.3, i);
-		modelStack.Rotate(90,0,1,0);
-		modelStack.Scale(0.695,0.567,0.695);
+		modelStack.Translate(10, 4.68, i);
+		modelStack.Scale(0.59,0.7,0.35);
 		RenderMesh(meshList[GEO_CUBE],B_Light);
 		modelStack.PopMatrix();
 	}
-	/*modelStack.PushMatrix();
+	modelStack.PushMatrix();
 	modelStack.Translate(camera.target.x,camera.target.y, camera.target.z);
 	modelStack.Rotate(90,0,1,0);
-	modelStack.Scale(0.695,0.767,0.695);
-	RenderMesh(meshList[GEO_CUBE],B_Light);
-	modelStack.PopMatrix();*/
+	modelStack.Scale(0.5,0.5,0.5);
+	RenderMesh(meshList[GEO_AXES],false);
+	modelStack.PopMatrix();
 	
 	modelStack.PushMatrix();
 	modelStack.Translate(4, 0, 0);
@@ -1501,8 +1515,8 @@ void StudioProject::Render()
 		Position lightPosition_cameraspace = viewStack.Top() * lights[1].position;
 		glUniform3fv(m_parameters[U_LIGHT1_POSITION], 1, &lightPosition_cameraspace.x);
 	}
-	//Texture
 
+	//====Rendering of light ball====//
 	modelStack.PushMatrix();
 	modelStack.Translate(lights[1].position.x, lights[1].position.y, lights[1].position.z);
 	RenderMesh(meshList[GEO_LIGHTBALL2], false);
@@ -1583,9 +1597,9 @@ void StudioProject::Render()
 	RenderTextOnScreen(meshList[GEO_TEXT],"y: " + cameray, Color(0, 1, 0), 3, 1, 4);
 	RenderTextOnScreen(meshList[GEO_TEXT],"z: " + cameraz, Color(0, 1, 0), 3, 1, 5);
 
-	RenderTextOnScreen(meshList[GEO_TEXT],"ViewX: " + viewx, Color(0, 1, 0), 3, 10, 3);
-	RenderTextOnScreen(meshList[GEO_TEXT],"ViewY: " + viewy, Color(0, 1, 0), 3, 10, 4);
-	RenderTextOnScreen(meshList[GEO_TEXT],"ViewZ: " + viewz, Color(0, 1, 0), 3, 10, 5);
+	RenderTextOnScreen(meshList[GEO_TEXT],"targetX: " + viewx, Color(0, 1, 0), 3, 10, 3);
+	RenderTextOnScreen(meshList[GEO_TEXT],"targetY: " + viewy, Color(0, 1, 0), 3, 10, 4);
+	RenderTextOnScreen(meshList[GEO_TEXT],"targetZ: " + viewz, Color(0, 1, 0), 3, 10, 5);
 
 	RenderTextOnScreen(meshList[GEO_TEXT],"+", Color(1, 0, 0), 3, 13.55, 10);
 

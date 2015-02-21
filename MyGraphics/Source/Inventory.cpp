@@ -11,7 +11,7 @@ CInventory::~CInventory(void)
 {
 }
 
-void CInventory::AddItem(CItem* temp)
+void CInventory::AddItem(CItem temp)
 {
 	if(NoOfItems < 10)
 	{
@@ -20,17 +20,17 @@ void CInventory::AddItem(CItem* temp)
 	}
 }
 
-CItem* CInventory::getItem(int pos)
+CItem CInventory::getItem(int pos)
 {
 	return Container[pos];
 }
 
+void CInventory::removeItem(int pos)
+{
+
+}
+
 void CInventory::DeleteAll(void)
 {
-	while(!Container.empty())
-	{
-		ptr = Container.back();
-		Container.pop_back();
-		delete ptr;
-	}
+	Container.clear();
 }

@@ -63,8 +63,8 @@ void Camera3::bound(Vector3 maximum, Vector3 minimum)
 
 void Camera3::Update(double dt)
 {
-	static const float CAMERA_SPEED = 30.f;
-	
+	static const float CAMERA_SPEED = 15.f;
+	static const float TURN_SPEED = 60.f;
 
 	if(Application::IsKeyPressed('A'))
 	{
@@ -102,7 +102,7 @@ void Camera3::Update(double dt)
 	}*/
 	if(Application::IsKeyPressed(VK_RIGHT))
 	{
-		float pitch = (float)(-CAMERA_SPEED * dt);
+		float pitch = (float)(-TURN_SPEED * dt);
 		Vector3 view = (target - position).Normalized();
 		Vector3 right = view.Cross(up);
 		right.y = 0;
@@ -150,7 +150,7 @@ void Camera3::Update(double dt)
 	}*/
 	if(Application::IsKeyPressed(VK_LEFT))
 	{
-		float pitch = (float)(CAMERA_SPEED * dt);
+		float pitch = (float)(TURN_SPEED * dt);
 		Vector3 view = (target - position).Normalized();
 		Vector3 right = view.Cross(up);
 		right.y = 0;
@@ -185,7 +185,7 @@ void Camera3::Update(double dt)
 	{
 		if(Application::IsKeyPressed(VK_DOWN))
 		{
-			float pitch = (float)(-CAMERA_SPEED * dt);
+			float pitch = (float)(-TURN_SPEED * dt);
 			Vector3 view = (target - position).Normalized();
 			Vector3 right = view.Cross(up);
 			right.y = 0;
@@ -227,7 +227,7 @@ void Camera3::Update(double dt)
 	{
 		if(Application::IsKeyPressed(VK_UP))
 		{
-			float pitch = (float)(CAMERA_SPEED * dt);
+			float pitch = (float)(TURN_SPEED * dt);
 			Vector3 view = (target - position).Normalized();
 			Vector3 right = view.Cross(up);
 			right.y = 0;
