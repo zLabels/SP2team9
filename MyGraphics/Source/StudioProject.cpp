@@ -61,7 +61,7 @@ void StudioProject::InitMesh()
 	meshList[GEO_MARKET]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[GEO_MARKET]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_MARKET]->material.kShininess = 8.f;
-	meshList[GEO_MARKET] ->textureID = LoadTGA("Image//WallTextures.tga");
+	meshList[GEO_MARKET] ->textureID = LoadTGA("Image//Supermarket.tga");
 
 	meshList[GEO_CASHIER] = MeshBuilder::GenerateOBJ("Market", "OBJ//Cashier_Counter.obj");
 	meshList[GEO_CASHIER]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
