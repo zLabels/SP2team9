@@ -264,7 +264,49 @@ void Camera3::Update(double dt)
 	}
 	//=====================================Escalator===============================================
 	
-	if (escal == true)
+	//if (escal == true)
+	//{
+	//	position.x +=(float)(14*dt);
+	//	position.y +=(float)(4.5*dt);
+	//	target.x +=(float)(14*dt);
+	//	target.y +=(float)(4.5*dt);
+	//	
+	//}
+
+	//if (escaldown == true)
+	//{
+	//	position.x -=(float)(14*dt);
+	//	position.y -=(float)(4.5*dt);
+	//	target.x -=(float)(14*dt);
+	//	target.y -=(float)(4.5*dt);
+	//	
+	//}
+
+	//if(position.x >= -40 && position.x <=-30 && position.y <= 5 && position.z >= 64.9 && position.z <= 75) //Going up
+	//{	
+	//	escal = true;
+	//	std::cout << "haha" << std::endl;
+
+	//}
+	//if(position.x <=29.9 && position.y >= 20 && position.y <=30 && position.z >= 80 && position.z <=90) // going down
+	//{
+	//	escaldown = true;
+	//}
+	//else if(position.x >= 28)
+	//{
+	//	escal = false;
+	//	
+	//}
+	//else if (position.y <= 5)
+	//{
+	//	escaldown = false;
+	//}
+	//
+	//else
+	//{
+	//	std::cout << "Mr Sim is awesome" << std::endl;
+	//}
+	if (position.x >= -31)
 	{
 		position.x +=(float)(14*dt);
 		position.y +=(float)(4.5*dt);
@@ -299,7 +341,10 @@ void Camera3::Update(double dt)
 	{
 		escaldown = false;
 	}
-
+		if (position.y == 5)
+		{
+			std::cout << "Escalator detected" << std::endl;
+		}
 	//==================================== end of escalator ============================= //
 	
 	if(Application::IsKeyPressed('F'))
@@ -312,6 +357,7 @@ void Camera3::Update(double dt)
 		Reset();
 	}
 }
+	
 
 void Camera3::Reset()
 {
