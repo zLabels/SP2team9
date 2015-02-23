@@ -33,7 +33,6 @@ public:
 	bool escaldown;
 	void escalator();
 	int temp;
-
 };
 
 #endif

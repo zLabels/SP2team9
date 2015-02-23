@@ -21,7 +21,6 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	right.y = 0;
 	right.Normalize();
 	this->up = defaultUp = right.Cross(view).Normalized();
-
 	temp = 0;
 	
 	//=======Collision=========//
@@ -286,8 +285,6 @@ void Camera3::Update(double dt)
 	if(position.x >= -40 && position.x <=-30 && position.y <= 5 && position.z >= 64.9 && position.z <= 75) //Going up
 	{	
 		escal = true;
-		std::cout << "haha" << std::endl;
-
 	}
 	if(position.x <=29.9 && position.y >= 20 && position.y <=30 && position.z >= 80 && position.z <=90) // going down
 	{
@@ -302,12 +299,7 @@ void Camera3::Update(double dt)
 	{
 		escaldown = false;
 	}
-	
-	else
-	{
-		std::cout << "Mr Sim is awesome" << std::endl;
-	}
-	
+
 	//==================================== end of escalator ============================= //
 	
 	if(Application::IsKeyPressed('F'))

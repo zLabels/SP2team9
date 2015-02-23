@@ -382,7 +382,6 @@ void StudioProject::InitMesh()
 void StudioProject::InitVariables()
 {
 	//variable to rotate geometry
-	rotateAngle = 0;
 	worldsize = 1000.0f;
 	roomsize = 250.0f;
 	roomheight = 150.0f;
@@ -593,8 +592,6 @@ void StudioProject::Update(double dt)
 	{
 		B_Light = false;
 	}
-
-	rotateAngle += (float)(10 * dt);
 
 	//===Controls===//
 

@@ -176,7 +176,6 @@ private:
 	unsigned m_programID;
 	unsigned m_parameters[U_TOTAL];
 
-	float rotateAngle;
 	double fps;
 	string Framerate;
 	string camerax;
