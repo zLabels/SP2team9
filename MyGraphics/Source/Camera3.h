@@ -29,7 +29,7 @@ public:
 	Vector3 tempPos;
 	Vector3 tempTarg;
 	Vector3 tempView;
-
+	void escalator(void);
 	int temp;
 
 };

@@ -849,6 +849,8 @@ void StudioProject::Update(double dt)
 	viewz = ss7.str();
 	camera.Update(dt);
 
+	//================Testing =================//
+	camera.escalator();
 }
 
 //=========Rendering of Skybox to be done here=========//
@@ -1558,8 +1560,30 @@ void StudioProject::Render()
 
 	//Rendering of CashierModel
 	modelStack.PushMatrix(); //Moving of cashier
-	modelStack.Translate(0, 0, -5);
+	modelStack.Translate(-24, 0, 17);
+	modelStack.Rotate(90,0,1,0);
+	modelStack.PushMatrix();
+	modelStack.Scale(1.2, 1.2, 1.2);
+	modelStack.Rotate(90, 0, 90, 0);
+	RenderCashier();
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
 
+	//Rendering of CashierModel
+	modelStack.PushMatrix(); //Moving of cashier
+	modelStack.Translate(-24, 0, 0);
+	modelStack.Rotate(90,0,1,0);
+	modelStack.PushMatrix();
+	modelStack.Scale(1.2, 1.2, 1.2);
+	modelStack.Rotate(90, 0, 90, 0);
+	RenderCashier();
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	//Rendering of CashierModel
+	modelStack.PushMatrix(); //Moving of cashier
+	modelStack.Translate(-24, 0, -18);
+	modelStack.Rotate(90,0,1,0);
 	modelStack.PushMatrix();
 	modelStack.Scale(1.2, 1.2, 1.2);
 	modelStack.Rotate(90, 0, 90, 0);

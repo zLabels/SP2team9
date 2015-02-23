@@ -45,6 +45,27 @@ void Camera3::BoundsCheck()
 	}
 }
 
+void Camera3::escalator()
+{
+	if(position.x >= -40 && position.x <=-30)
+	{
+		if (position.y == 5)
+		{
+			if (position.z >= 64.9 && position.z <= 75)
+			{
+				position.z = 73;
+				position.y = 25;
+				position.x = 28;
+			}
+		}
+	}
+	else
+	{
+		std::cout << "Mr Sim is awesome" << std::endl;
+	}
+	
+}
+
 void Camera3::bound(Vector3 maximum, Vector3 minimum)
 {
 	//===Collision==//
