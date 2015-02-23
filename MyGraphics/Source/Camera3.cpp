@@ -12,6 +12,8 @@ Camera3::~Camera3()
 
 void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 {
+	escal = false;
+	escaldown = false;
 	this->position = defaultPosition = pos;
 	this->target = defaultTarget = target;
 	Vector3 view = (target - position).Normalized();
@@ -47,23 +49,19 @@ void Camera3::BoundsCheck()
 
 void Camera3::escalator()
 {
-	if(position.x >= -40 && position.x <=-30)
-	{
-		if (position.y == 5)
+	/*if(position.x >= -40 && position.x <=-30 && position.y == 5 && position.z >= 64.9 && position.z <= 75)
+	{	
+		if(position.x < 28 && position.y <28)
 		{
-			if (position.z >= 64.9 && position.z <= 75)
-			{
-				position.z = 73;
-				position.y = 25;
-				position.x = 28;
-			}
-		}
+			position.x +=(float)(100*dt);
+			position.y +=(float)(100*dt);
+		}	
 	}
 	else
 	{
 		std::cout << "Mr Sim is awesome" << std::endl;
 	}
-	
+	*/
 }
 
 void Camera3::bound(Vector3 maximum, Vector3 minimum)
@@ -265,6 +263,52 @@ void Camera3::Update(double dt)
 			temp++;
 		}
 	}
+	//=====================================Escalator===============================================
+	
+	if (escal == true)
+	{
+		position.x +=(float)(14*dt);
+		position.y +=(float)(4.5*dt);
+		target.x +=(float)(14*dt);
+		target.y +=(float)(4.5*dt);
+		
+	}
+
+	if (escaldown == true)
+	{
+		position.x -=(float)(14*dt);
+		position.y -=(float)(4.5*dt);
+		target.x -=(float)(14*dt);
+		target.y -=(float)(4.5*dt);
+		
+	}
+
+	if(position.x >= -40 && position.x <=-30 && position.y <= 5 && position.z >= 64.9 && position.z <= 75) //Going up
+	{	
+		escal = true;
+		std::cout << "haha" << std::endl;
+
+	}
+	if(position.x <=29.9 && position.y >= 20 && position.y <=30 && position.z >= 80 && position.z <=90) // going down
+	{
+		escaldown = true;
+	}
+	else if(position.x >= 28)
+	{
+		escal = false;
+		
+	}
+	else if (position.y <= 5)
+	{
+		escaldown = false;
+	}
+	
+	else
+	{
+		std::cout << "Mr Sim is awesome" << std::endl;
+	}
+	
+	//==================================== end of escalator ============================= //
 	
 	if(Application::IsKeyPressed('F'))
 	{
