@@ -1085,7 +1085,7 @@ void StudioProject::RenderSupermarket()
 	for(int i = -2; i < 3; ++i)
 	{
 		modelStack.PushMatrix();
-		modelStack.Translate(i*14,-1,-83.5);
+		modelStack.Translate(i*14,-1,-91);
 		modelStack.Rotate(90,0,-1,0);
 		RenderMesh(meshList[GEO_COLDFOODSHELF],B_Light);
 		modelStack.PopMatrix();
@@ -1094,7 +1094,7 @@ void StudioProject::RenderSupermarket()
 	for(int i = -5; i < 5; ++i)
 	{
 		modelStack.PushMatrix();
-		modelStack.Translate(47,-1,i*14);
+		modelStack.Translate(51.5,-1,i*14);
 		modelStack.Rotate(180,0,-1,0);
 		RenderMesh(meshList[GEO_COLDFOODSHELF],B_Light);
 		modelStack.PopMatrix();
@@ -1404,6 +1404,7 @@ void StudioProject::RenderGuard()
 	modelStack.PushMatrix();
 	modelStack.Translate(charPosition.x, 0, charPosition.z);
 	modelStack.Rotate(angle, 0, angle, 1);
+
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, -2.285, 0);

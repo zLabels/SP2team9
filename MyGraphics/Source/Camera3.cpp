@@ -24,12 +24,71 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	temp = 0;
 	
 	//=======Collision=========//
+	//Middle shelf
+	maxPos.Set(13.4, 10, 15.2);
+	minPos.Set(8.3, -10, -9.3);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
 
-	//maxPos.Set(125, 140, -80);
-	//minPos.Set(-25, -10, -125);
-	//maximum.push_back(maxPos);
-	//minimum.push_back(minPos);
+	//Left shelf (closer to cashier)
+	maxPos.Set(18.3,10,-33.5);
+	minPos.Set(-30.6,-10,-37.5);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
 
+	//Extreme left shelf
+	maxPos.Set(21.5,10,-55.7);
+	minPos.Set(-33.1,-10,-60.7);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+	
+	//Left frozen food shelf
+	maxPos.Set(36.1,10,-88.2);
+	minPos.Set(-35.5,-10,-94);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Back frozen food shelf
+	maxPos.Set(54.8,10,63.4);
+	minPos.Set(48.9,-10,-77.5);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Right wooden shelf
+	maxPos.Set(18.6,10,36.8);
+	minPos.Set(-30.3,-10,32.4);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//extreme Right Metal shelf
+	maxPos.Set(21.4,10,60.3);
+	minPos.Set(-33.2,-10,55.3);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Right metal fence
+	maxPos.Set(-18.7,5,27.2);
+	minPos.Set(-30.6,-5,24.9);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Middle metal fence
+	maxPos.Set(-19.6,5,8.7);
+	minPos.Set(-29.3,-5,7.2);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Left metal fence
+	maxPos.Set(-18.9,5,-9.1);
+	minPos.Set(-29.6,-5,-11.4);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Right cashier
+	maxPos.Set(-18,5,22);
+	minPos.Set(-30,-5,17.6);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
 }
 
 void Camera3::BoundsCheck()
@@ -67,7 +126,7 @@ void Camera3::bound(Vector3 maximum, Vector3 minimum)
 {
 	//===Collision==//
 
-	/*if((position.x <= maximum.x) && (position.y <= maximum.y) &&(position.z <= maximum.z) && (position.x >= minimum.x) && (position.y >= minimum.y)&& (position.z >= minimum.z) )
+	if((position.x <= maximum.x) && (position.y <= maximum.y) &&(position.z <= maximum.z) && (position.x >= minimum.x) && (position.y >= minimum.y)&& (position.z >= minimum.z) )
 	{
 		position.x = tempPos.x;
 		position.y = tempPos.y;
@@ -76,7 +135,7 @@ void Camera3::bound(Vector3 maximum, Vector3 minimum)
 		target.x = tempTarg.x;
 		target.y = tempTarg.y;
 		target.z = tempTarg.z;
-	}*/
+	}
 }
 
 void Camera3::Update(double dt)
@@ -99,11 +158,11 @@ void Camera3::Update(double dt)
 		tempView = view;
 		//===Collision Check==//
 		BoundsCheck();
-		/*
+		
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);
-		}*/
+		}
 	}
 	
 	/*if(Application::IsKeyPressed(VK_RIGHT))
@@ -147,11 +206,11 @@ void Camera3::Update(double dt)
 
 		//===Collision Check==//
 		BoundsCheck();
-		/*
+		
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);
-		}*/
+		}
 	}
 		
 	/*if(Application::IsKeyPressed(VK_LEFT))
@@ -193,11 +252,11 @@ void Camera3::Update(double dt)
 
 		//===Collision Check==//
 		BoundsCheck();
-		/*
+		
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);
-		}*/
+		}
 	}
 	if(temp > -60)
 	{
@@ -235,11 +294,11 @@ void Camera3::Update(double dt)
 		//===Collision Check==//
 
 		BoundsCheck();
-		/*
+		
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);
-		}*/
+		}
 	}
 	if(temp < 80)
 	{

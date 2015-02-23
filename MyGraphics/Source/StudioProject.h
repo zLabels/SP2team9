@@ -14,6 +14,7 @@
 #include "Item.h"
 #include "Inventory.h"
 #include "Character.h"
+#include "Guard.h"
 
 using std::string;
 
@@ -196,6 +197,7 @@ private:
 	float angle;
 
 	CCharacter player;
+	CGuard testing;
 
 	//=========Items=========//
 	CItem sardineCan;
