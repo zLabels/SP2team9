@@ -8,13 +8,14 @@ CItem::CItem(void)
 	isRender = true;
 	meshPtr = (NULL);
 	objType = 0;
+	TRS.SetToIdentity();
 }
 
 CItem::~CItem(void)
 {
 }
 
-void CItem::SetData(string a, float b, bool d, Mesh* e,int f)
+void CItem::SetData(string a, float b, bool d, Mesh* e,int f,Mtx44 g)
 {
 	name = a;
 	
@@ -25,6 +26,8 @@ void CItem::SetData(string a, float b, bool d, Mesh* e,int f)
 	meshPtr = e;
 
 	objType = f;
+
+	TRS = g;
 }
 
 string CItem::getName(void)
@@ -55,4 +58,9 @@ int CItem::getobjType(void)
 void CItem::setRender(bool a)
 {
 	isRender = a;
+}
+
+Mtx44 CItem::getTRS(void)
+{
+	return TRS;
 }

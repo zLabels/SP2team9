@@ -397,14 +397,16 @@ void StudioProject::InitVariables()
 	newMesh->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	newMesh->material.kShininess = 8.f;
 	newMesh->textureID = LoadTGA("Image//canned_food_1.tga");
-	sardineCan.SetData("sardine", 3.5f, true, newMesh,GEO_SARDINE_CAN);
 	hitBox sardineBox;
 	for(int i = 0; i < 5;i++)
 	{
-		Vector3 Min, Max;
-		Max.Set(10+0.59,4.5+0.7,(-2+i)+0.35);
-		Min.Set(-0.59+10,-0.7+4.5,-0.35+(-2+i));
+		Mtx44 newTRS;
+		newTRS.SetToTranslation(10,6.2,-8+i);
+		sardineCan.SetData("sardine", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS);
 		sardineContainer.push_back(sardineCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
 		sardineBox.SetBox(Max, Min);
 		boxContainer.push_back(sardineBox);
 	}
@@ -1132,7 +1134,7 @@ void StudioProject::RenderItems()
 		if(sardineContainer[i].getRender() == true)
 		{
 			modelStack.PushMatrix();
-			modelStack.Translate(10, 4.3, -2+i);
+			modelStack.LoadMatrix(sardineContainer[i].getTRS());
 			modelStack.Rotate(90,0,1,0);
 			RenderMesh(sardineContainer[i].getMesh(),B_Light);
 			//modelStack.PushMatrix();
