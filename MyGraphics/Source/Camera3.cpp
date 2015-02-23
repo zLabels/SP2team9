@@ -22,6 +22,7 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	right.Normalize();
 	this->up = defaultUp = right.Cross(view).Normalized();
 	temp = 0;
+	CAMERA_SPEED = 15.f;
 	
 	//=======Collision=========//
 	//Middle shelf
@@ -140,11 +141,46 @@ void Camera3::bound(Vector3 maximum, Vector3 minimum)
 
 void Camera3::Update(double dt)
 {
-	static const float CAMERA_SPEED = 15.f;
 	static const float TURN_SPEED = 60.f;
-
-	if(Application::IsKeyPressed('A'))
+	/*===========================================================
+							MOVING AROUND
+	==============================================================*/
+	//==========STRAFE LEFT===========//
+	//Sprint
+	if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('A'))
 	{
+		if(CAMERA_SPEED <= 30)
+		{
+			CAMERA_SPEED += (float)(10*dt);
+		}
+
+		tempPos = position;
+		tempTarg = target;
+
+		Vector3 view = (target - position).Normalized();
+		Vector3 right = view.Cross(up);
+		right.y = 0;
+		right.Normalize();
+		position -= right * CAMERA_SPEED * dt;
+		target -= right * CAMERA_SPEED * dt;
+
+		tempView = view;
+		//===Collision Check==//
+		BoundsCheck();
+		
+		for(int i = 0; i < maximum.size();i++)
+		{
+			bound(maximum[i], minimum[i]);
+		}
+
+	}
+	//Walk
+	else if(Application::IsKeyPressed('A'))
+	{
+		if(CAMERA_SPEED >15.f)
+		{
+			CAMERA_SPEED -= (float)(10*dt);
+		}
 		tempPos = position;
 		tempTarg = target;
 
@@ -164,34 +200,66 @@ void Camera3::Update(double dt)
 			bound(maximum[i], minimum[i]);
 		}
 	}
-	
-	/*if(Application::IsKeyPressed(VK_RIGHT))
+	//=========MOVE BACKWARDS==========//
+	//Sprint
+	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('S'))
 	{
+		if(CAMERA_SPEED <= 30)
+		{
+			CAMERA_SPEED += (float)(10*dt);
+		}
+		tempPos = position;
+		tempTarg = target;
+
 		Vector3 view = (target - position).Normalized();
-		float yaw = (float)(-CAMERA_SPEED * dt);
-		Mtx44 rotation;
-		rotation.SetToRotation(yaw, 0, 1, 0);
-		view = rotation * view;
-		up = rotation * up;
-		target = view + position;
+		target -= view * CAMERA_SPEED * dt;
+		position -= view * CAMERA_SPEED * dt;
 
 		tempView = view;
-	}*/
-	if(Application::IsKeyPressed(VK_RIGHT))
-	{
-		float pitch = (float)(-TURN_SPEED * dt);
-		Vector3 view = (target - position).Normalized();
-		Vector3 right = view.Cross(up);
-		right.y = 0;
-		right.Normalize();
-		up = right.Cross(view).Normalized();
-		Mtx44 rotation;
-		rotation.SetToRotation(pitch, up.x, up.y, up.z);
-		view = rotation * view;
-		target = (rotation * (target - position)) + position;
+
+		//===Collision Check==//
+
+		BoundsCheck();
+		
+		for(int i = 0; i < maximum.size();i++)
+		{
+			bound(maximum[i], minimum[i]);
+		}
 	}
-	if(Application::IsKeyPressed('D'))
+	//Walk
+	else if(Application::IsKeyPressed('S'))
 	{
+		if(CAMERA_SPEED >15.f)
+		{
+			CAMERA_SPEED -= (float)(10*dt);
+		}
+		tempPos = position;
+		tempTarg = target;
+
+		Vector3 view = (target - position).Normalized();
+		target -= view * CAMERA_SPEED * dt;
+		position -= view * CAMERA_SPEED * dt;
+
+		tempView = view;
+
+		//===Collision Check==//
+
+		BoundsCheck();
+		
+		for(int i = 0; i < maximum.size();i++)
+		{
+			bound(maximum[i], minimum[i]);
+		}
+	}
+
+	//=============STRAFE RIGHT================//
+	//Sprint
+	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('D'))
+	{
+		if(CAMERA_SPEED <= 30)
+		{
+			CAMERA_SPEED += (float)(10*dt);
+		}
 		tempPos = position;
 		tempTarg = target;
 
@@ -212,35 +280,42 @@ void Camera3::Update(double dt)
 			bound(maximum[i], minimum[i]);
 		}
 	}
-		
-	/*if(Application::IsKeyPressed(VK_LEFT))
+	//Walk
+	else if(Application::IsKeyPressed('D'))
 	{
-		Vector3 view = (target - position).Normalized();
-		float yaw = (float)(CAMERA_SPEED * dt);
-		Mtx44 rotation;
-		rotation.SetToRotation(yaw, 0, 1, 0);
-		view = rotation * view;
-		target = view + position;
-		up = rotation * up;
+		if(CAMERA_SPEED >15.f)
+		{
+			CAMERA_SPEED -= (float)(10*dt);
+		}
+		tempPos = position;
+		tempTarg = target;
 
-		tempView = view;
-	}*/
-	if(Application::IsKeyPressed(VK_LEFT))
-	{
-		float pitch = (float)(TURN_SPEED * dt);
 		Vector3 view = (target - position).Normalized();
 		Vector3 right = view.Cross(up);
 		right.y = 0;
 		right.Normalize();
-		up = right.Cross(view).Normalized();
-		Mtx44 rotation;
-		rotation.SetToRotation(pitch, up.x, up.y, up.z);
-		view = rotation * view;
-		target = (rotation * (target - position)) + position;
+		position += right * CAMERA_SPEED * dt;
+		target += right * CAMERA_SPEED * dt;
+
+		tempView = view;
+
+		//===Collision Check==//
+		BoundsCheck();
+		
+		for(int i = 0; i < maximum.size();i++)
+		{
+			bound(maximum[i], minimum[i]);
+		}
 	}
 
-	if(Application::IsKeyPressed('W'))
+	//===============MOVE FORWARD==========//
+	//Sprint
+	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('W'))
 	{
+		if(CAMERA_SPEED <= 30)
+		{
+			CAMERA_SPEED += (float)(10*dt);
+		}
 		tempPos = position;
 		tempTarg = target;
 
@@ -258,6 +333,70 @@ void Camera3::Update(double dt)
 			bound(maximum[i], minimum[i]);
 		}
 	}
+	//Walk
+	else if(Application::IsKeyPressed('W'))
+	{
+		if(CAMERA_SPEED >15.f)
+		{
+			CAMERA_SPEED -= (float)(10*dt);
+		}
+		tempPos = position;
+		tempTarg = target;
+
+		Vector3 view = (target - position).Normalized();
+		target += view * CAMERA_SPEED * dt;
+		position += view * CAMERA_SPEED * dt;
+
+		tempView = view;
+
+		//===Collision Check==//
+		BoundsCheck();
+		
+		for(int i = 0; i < maximum.size();i++)
+		{
+			bound(maximum[i], minimum[i]);
+		}
+	}
+	//Return to normal Speed
+	else
+	{
+		if(CAMERA_SPEED >15.f)
+		{
+			CAMERA_SPEED -= (float)(10*dt);
+		}
+	}
+	/*===================================================
+						LOOKING AROUND
+	=====================================================*/
+	//==Look Right==//
+	if(Application::IsKeyPressed(VK_RIGHT))
+	{
+		float pitch = (float)(-TURN_SPEED * dt);
+		Vector3 view = (target - position).Normalized();
+		Vector3 right = view.Cross(up);
+		right.y = 0;
+		right.Normalize();
+		up = right.Cross(view).Normalized();
+		Mtx44 rotation;
+		rotation.SetToRotation(pitch, up.x, up.y, up.z);
+		view = rotation * view;
+		target = (rotation * (target - position)) + position;
+	}
+	//==Look Left==//
+	if(Application::IsKeyPressed(VK_LEFT))
+	{
+		float pitch = (float)(TURN_SPEED * dt);
+		Vector3 view = (target - position).Normalized();
+		Vector3 right = view.Cross(up);
+		right.y = 0;
+		right.Normalize();
+		up = right.Cross(view).Normalized();
+		Mtx44 rotation;
+		rotation.SetToRotation(pitch, up.x, up.y, up.z);
+		view = rotation * view;
+		target = (rotation * (target - position)) + position;
+	}
+	//==Look Down==//
 	if(temp > -60)
 	{
 		if(Application::IsKeyPressed(VK_DOWN))
@@ -279,27 +418,7 @@ void Camera3::Update(double dt)
 			temp--;
 		}
 	}
-	
-	if(Application::IsKeyPressed('S'))
-	{
-		tempPos = position;
-		tempTarg = target;
-
-		Vector3 view = (target - position).Normalized();
-		target -= view * CAMERA_SPEED * dt;
-		position -= view * CAMERA_SPEED * dt;
-
-		tempView = view;
-
-		//===Collision Check==//
-
-		BoundsCheck();
-		
-		for(int i = 0; i < maximum.size();i++)
-		{
-			bound(maximum[i], minimum[i]);
-		}
-	}
+	//==Look Up==//
 	if(temp < 80)
 	{
 		if(Application::IsKeyPressed(VK_UP))
@@ -321,6 +440,8 @@ void Camera3::Update(double dt)
 			temp++;
 		}
 	}
+	
+	std::cout<< CAMERA_SPEED << std::endl;
 	//=====================================Escalator===============================================
 	
 	//if (escal == true)

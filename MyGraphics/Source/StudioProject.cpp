@@ -892,7 +892,7 @@ void StudioProject::Update(double dt)
 
 	//================Testing =================//
 	camera.escalator();
-	cout << Container.size() << endl;
+	//cout << Container.size() << endl;
 }
 
 //=========Rendering of Skybox to be done here=========//

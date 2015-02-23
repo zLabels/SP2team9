@@ -33,6 +33,7 @@ public:
 	bool escaldown;
 	void escalator();
 	int temp;
+	float CAMERA_SPEED;
 };
 
 #endif
