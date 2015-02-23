@@ -7,12 +7,12 @@ class CCharacter
 public:
 	CCharacter(void);
 	~CCharacter(void);
+	CInventory getInventory(void);
+	float getMoney(void);
 
 private:
 	CInventory Inventory;
 	float Money;
-	Vector3 Position;
-
 	
 };
 

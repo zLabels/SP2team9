@@ -16,10 +16,10 @@ public:
 	CItem getItem(int pos);
 	void DeleteAll(void);
 	void removeItem(int pos);
+	void removeItem(CItem temp);
 
 private:
 	vector<CItem> Container;
-	CItem* ptr;
 	int NoOfItems;
 };
 

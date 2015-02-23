@@ -196,7 +196,7 @@ private:
 	Vector3 charPosition;
 	float angle;
 
-	CInventory Inventory;
+	CCharacter player;
 
 	//=========Items=========//
 	CItem sardineCan;

@@ -8,3 +8,13 @@ CCharacter::CCharacter(void)
 CCharacter::~CCharacter(void)
 {
 }
+
+CInventory CCharacter::getInventory(void)
+{
+	return Inventory;
+}
+
+float CCharacter::getMoney(void)
+{
+	return Money;
+}

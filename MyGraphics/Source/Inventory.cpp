@@ -3,7 +3,6 @@
 CInventory::CInventory(void)
 {
 	NoOfItems = 0;
-	ptr = (NULL);
 }
 
 
@@ -27,7 +26,23 @@ CItem CInventory::getItem(int pos)
 
 void CInventory::removeItem(int pos)
 {
+	if( pos <= NoOfItems)
+	{
+		Container.erase(Container.begin()+pos);
+		NoOfItems--;
+	}
+}
 
+void CInventory::removeItem(CItem temp)
+{
+	for(int i = 0; i < Container.size(); ++i)
+	{
+		if(Container[i].getobjType() == temp.getobjType())
+		{
+			Container.erase(Container.begin()+i);
+			NoOfItems--;
+		}
+	}
 }
 
 void CInventory::DeleteAll(void)

@@ -381,7 +381,6 @@ void StudioProject::InitMesh()
 }
 void StudioProject::InitVariables()
 {
-
 	//variable to rotate geometry
 	rotateAngle = 0;
 	worldsize = 1000.0f;
@@ -398,13 +397,13 @@ void StudioProject::InitVariables()
 	newMesh->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	newMesh->material.kShininess = 8.f;
 	newMesh->textureID = LoadTGA("Image//canned_food_1.tga");
-	sardineCan.SetData("sardine", 3.5f, true, newMesh);
+	sardineCan.SetData("sardine", 3.5f, true, newMesh,GEO_SARDINE_CAN);
 	hitBox sardineBox;
 	for(int i = 0; i < 5;i++)
 	{
 		Vector3 Min, Max;
-		Max.Set(10+0.59,4.5+0.7,i+0.35);
-		Min.Set(-0.59+10,-0.7+4.5,-0.35+i);
+		Max.Set(10+0.59,4.5+0.7,(-2+i)+0.35);
+		Min.Set(-0.59+10,-0.7+4.5,-0.35+(-2+i));
 		sardineContainer.push_back(sardineCan);
 		sardineBox.SetBox(Max, Min);
 		boxContainer.push_back(sardineBox);
@@ -780,6 +779,7 @@ void StudioProject::Update(double dt)
 					if((camera.target.x <= boxContainer[i].max.x) && (camera.target.y <= boxContainer[i].max.y) && (camera.target.z <= boxContainer[i].max.z)
 						&& (camera.target.x >= boxContainer[i].min.x) && (camera.target.y >= boxContainer[i].min.y) && (camera.target.z >= boxContainer[i].min.z))
 					{
+						player.getInventory().AddItem(sardineContainer[i]);
 						sardineContainer[i].setRender(false);
 						break;
 					}
@@ -798,6 +798,7 @@ void StudioProject::Update(double dt)
 				if((camera.target.x <= boxContainer[i].max.x) && (camera.target.y <= boxContainer[i].max.y) && (camera.target.z <= boxContainer[i].max.z)
 					&& (camera.target.x >= boxContainer[i].min.x) && (camera.target.y >= boxContainer[i].min.y) && (camera.target.z >= boxContainer[i].min.z))
 				{
+					player.getInventory().removeItem(sardineContainer[i]);
 					sardineContainer[i].setRender(true);
 					break;
 				}
@@ -816,8 +817,6 @@ void StudioProject::Update(double dt)
 	}
 	//cout << collide;
 
-
-
 	//====Camera coordinates===//
 	std::ostringstream ss;
 	fps = 1/dt;
@@ -825,7 +824,7 @@ void StudioProject::Update(double dt)
 	result = ss.str();
 
 	std::ostringstream ss2;
-	ss2 <<camera.position.x;
+	ss2 << camera.position.x;
 	camerax = ss2.str();
 
 	std::ostringstream ss3;
@@ -1131,19 +1130,19 @@ void StudioProject::RenderItems()
 		if(sardineContainer[i].getRender() == true)
 		{
 			modelStack.PushMatrix();
-			modelStack.Translate(10, 4.3, i);
+			modelStack.Translate(10, 4.3, -2+i);
 			modelStack.Rotate(90,0,1,0);
 			RenderMesh(sardineContainer[i].getMesh(),B_Light);
-			modelStack.PushMatrix();
-			//RenderMesh(meshList[GEO_CUBE],B_Light);
-			modelStack.PopMatrix();
+			//modelStack.PushMatrix();
+			////RenderMesh(meshList[GEO_CUBE],B_Light);
+			//modelStack.PopMatrix();
 			modelStack.PopMatrix();
 		}
-		modelStack.PushMatrix();
+		/*modelStack.PushMatrix();
 		modelStack.Translate(10, 4.68, i);
 		modelStack.Scale(0.59,0.7,0.35);
 		RenderMesh(meshList[GEO_CUBE],B_Light);
-		modelStack.PopMatrix();
+		modelStack.PopMatrix();*/
 	}
 	modelStack.PushMatrix();
 	modelStack.Translate(camera.target.x,camera.target.y, camera.target.z);

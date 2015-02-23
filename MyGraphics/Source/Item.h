@@ -11,19 +11,20 @@ public:
 	CItem(void);
 	~CItem(void);
 
-	void SetData(string a, float b, bool d, Mesh* e);
+	void SetData(string a, float b, bool d, Mesh* e,int f);
 	
 	void setRender(bool a);
 	string getName(void);
 	float getPrice(void);
 	bool getRender(void);
 	Mesh* getMesh(void);
+	int getobjType(void);
 
 private:
 	Mesh* meshPtr;
 	string name;
 	float price;
 	bool isRender;
-
+	int objType;
 };
 

@@ -7,24 +7,24 @@ CItem::CItem(void)
 	price = 0.0f;
 	isRender = true;
 	meshPtr = (NULL);
+	objType = 0;
 }
-
 
 CItem::~CItem(void)
 {
 }
 
-
-void CItem::SetData(string a, float b, bool d, Mesh* e)
+void CItem::SetData(string a, float b, bool d, Mesh* e,int f)
 {
 	name = a;
 	
 	price = b;
 	
-	
 	isRender = d;
 
 	meshPtr = e;
+
+	objType = f;
 }
 
 string CItem::getName(void)
@@ -45,6 +45,11 @@ bool CItem::getRender(void)
 Mesh* CItem::getMesh(void)
 {
 	return meshPtr;
+}
+
+int CItem::getobjType(void)
+{
+	return objType;
 }
 
 void CItem::setRender(bool a)
