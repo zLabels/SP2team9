@@ -112,8 +112,8 @@ private:
 		GEO_RAIL,
 
 		GEO_SARDINE_CAN, //food items
-		GEO_CANFOOD2,
-		GEO_CANFOOD3,
+		GEO_PEA_N_CARROTS,
+		GEO_BAKED_BEANS_CAN,
 		GEO_COKE_CAN,
 		GEO_DRINKCAN2,
 		GEO_PEPSI_CAN,
@@ -199,8 +199,9 @@ private:
 
 	//=========Items=========//
 	CItem sardineCan;
-	vector<CItem> sardineContainer;
-
+	CItem PnCCan;
+	CItem BBCan;
+	vector<CItem> Container;
 
 	vector<hitBox> boxContainer;
 

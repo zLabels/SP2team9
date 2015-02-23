@@ -314,6 +314,11 @@ void Camera3::Update(double dt)
 		position.y += (float)(CAMERA_SPEED * dt);
 		target.y  += (float)(CAMERA_SPEED * dt);
 	}
+	if(Application::IsKeyPressed('G'))
+	{
+		position.y -= (float)(CAMERA_SPEED * dt);
+		target.y  -= (float)(CAMERA_SPEED * dt);
+	}
 	if(Application::IsKeyPressed('R'))
 	{
 		Reset();
