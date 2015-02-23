@@ -581,7 +581,7 @@ void StudioProject::Init()
 	glBindVertexArray(m_vertexArrayID);
 
 	//Initialize camera settings
-	camera.Init(Vector3(0, 5, 60), Vector3(0, 5, 58), Vector3(0, 1, 0));
+	camera.Init(Vector3(0, 5, 70), Vector3(0, 5, 58), Vector3(0, 1, 0));
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 10000.f);
