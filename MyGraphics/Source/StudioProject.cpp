@@ -56,7 +56,7 @@ void StudioProject::InitMesh()
 
 	//===============SUPERMARKET RELATED OBJs==========================//
 
-	meshList[GEO_MARKET] = MeshBuilder::GenerateOBJ("Market", "OBJ//Market.obj");
+	meshList[GEO_MARKET] = MeshBuilder::GenerateOBJ("Market", "OBJ//market2.obj");
 	meshList[GEO_MARKET]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[GEO_MARKET]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[GEO_MARKET]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
@@ -353,6 +353,7 @@ void StudioProject::InitMesh()
 	meshList[customerRightLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[customerRightLeg]->material.kShininess = 8.f;
 	meshList[customerRightLeg]->textureID = LoadTGA("Image//customerLeg.tga");
+
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
 
