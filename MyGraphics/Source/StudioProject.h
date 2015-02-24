@@ -10,6 +10,7 @@
 #include "Camera3.h"
 #include <string>
 #include <sstream>
+#include "timer.h"
 
 #include "Item.h"
 #include "Inventory.h"
@@ -148,6 +149,8 @@ private:
 		customerLeftHand,	//Customer Left Hand
 		customerLeftLeg,	//Customer Left Leg
 		customerRightLeg,	//Customer Right Leg
+
+		itemInventory,		//Item Inventory page
 		NUM_GEOMETRY,
 	};
 
@@ -188,6 +191,9 @@ private:
 	float worldsize;
 	float roomsize;
 	float roomheight;
+	float moving;
+	bool showInventory;
+	StopWatch Timer;
 
 	//=========Character=========//
 	bool movingModel;
@@ -200,9 +206,7 @@ private:
 	CGuard testing;
 
 	//=========Items=========//
-	CItem sardineCan;
-	CItem PnCCan;
-	CItem BBCan;
+	CItem sardineCan, PnCCan, BBCan, MiloCan;
 	vector<CItem> Container;
 
 	vector<hitBox> boxContainer;
@@ -218,6 +222,7 @@ private:
 	//Text
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
+	void RenderImageOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 
 };
 

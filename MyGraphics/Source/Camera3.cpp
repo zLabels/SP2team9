@@ -26,10 +26,10 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	
 	//=======Collision=========//
 	//Middle shelf
-	maxPos.Set(13.4, 10, 15.2);
+	/*maxPos.Set(13.4, 10, 15.2);
 	minPos.Set(8.3, -10, -9.3);
 	maximum.push_back(maxPos);
-	minimum.push_back(minPos);
+	minimum.push_back(minPos);*/
 
 	//Left shelf (closer to cashier)
 	maxPos.Set(18.3,10,-33.5);
@@ -440,8 +440,7 @@ void Camera3::Update(double dt)
 			temp++;
 		}
 	}
-	
-	std::cout<< CAMERA_SPEED << std::endl;
+
 	//=====================================Escalator===============================================
 	
 	//if (escal == true)

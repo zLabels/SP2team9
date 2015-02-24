@@ -126,14 +126,14 @@ void StudioProject::InitMesh()
 	meshList[GEO_CANFOOD3]->material.kShininess = 8.f;
 	meshList[GEO_CANFOOD3] ->textureID = LoadTGA("Image//canned_food_3.tga");*/
 
-	meshList[GEO_MILOCAN] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//milocan.obj");
+	/*meshList[GEO_MILOCAN] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//milocan.obj");
 	meshList[GEO_MILOCAN]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[GEO_MILOCAN]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[GEO_MILOCAN]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_MILOCAN]->material.kShininess = 8.f;
-	meshList[GEO_MILOCAN] ->textureID = LoadTGA("Image//milocan.tga");
+	meshList[GEO_MILOCAN] ->textureID = LoadTGA("Image//milocan.tga");*/
 
-	meshList[GEO_COKE_CAN] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//drink-can1.obj");
+	meshList[GEO_COKE_CAN] = MeshBuilder::GenerateOBJ("Coke" , "OBJ//drink-can1.obj");
 	meshList[GEO_COKE_CAN]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[GEO_COKE_CAN]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[GEO_COKE_CAN]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
@@ -354,6 +354,10 @@ void StudioProject::InitMesh()
 	meshList[customerRightLeg]->material.kShininess = 8.f;
 	meshList[customerRightLeg]->textureID = LoadTGA("Image//customerLeg.tga");
 
+	//=======================Item Inventory Page================//
+	meshList[itemInventory] = MeshBuilder::GenerateQuad("item Inventory", Color(1, 1, 1), 1.f , 1.f);
+	meshList[itemInventory]->textureID = LoadTGA("Image//Item.tga");
+
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
 
@@ -387,6 +391,8 @@ void StudioProject::InitVariables()
 	roomheight = 150.0f;
 	fps = 0.0f;
 	angle = 3600;
+	moving = 0;
+	showInventory = false;
 
 	//===============Sardine Can Variables============//
 	Mesh* newMesh;
@@ -404,8 +410,8 @@ void StudioProject::InitVariables()
 		sardineCan.SetData("sardine", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS);
 		Container.push_back(sardineCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12] + 0.59, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
+		Min.Set(-0.59 + newTRS.a[12], -0.7+newTRS.a[13], -0.35+newTRS.a[14]);
 		sardineBox.SetBox(Max, Min);
 		boxContainer.push_back(sardineBox);
 	}
@@ -450,6 +456,27 @@ void StudioProject::InitVariables()
 		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
 		BB.SetBox(Max, Min);
 		boxContainer.push_back(BB);
+	}
+
+	//===============Milo Can Variables============//
+	newMesh = MeshBuilder::GenerateOBJ("Milo Can" , "OBJ//milocan.obj");
+	newMesh->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newMesh->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newMesh->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newMesh->material.kShininess = 8.f;
+	newMesh->textureID = LoadTGA("Image//milocan.tga");
+	hitBox MC;
+	for(int i = 0; i < 5;i++)
+	{
+		Mtx44 newTRS;
+		newTRS.SetToTranslation(10, 0.5,-8+i);
+		MiloCan.SetData("Milo Cans", 3.5f, true, newMesh, GEO_MILOCAN,newTRS);
+		Container.push_back(MiloCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		MC.SetBox(Max, Min);
+		boxContainer.push_back(MC);
 	}
 
 
@@ -581,7 +608,7 @@ void StudioProject::Init()
 	glBindVertexArray(m_vertexArrayID);
 
 	//Initialize camera settings
-	camera.Init(Vector3(0, 5, 70), Vector3(0, 5, 58), Vector3(0, 1, 0));
+	camera.Init(Vector3(0, 5, 15), Vector3(0, 5, 13), Vector3(0, 1, 0));
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 10000.f);
@@ -890,9 +917,42 @@ void StudioProject::Update(double dt)
 	viewz = ss7.str();
 	camera.Update(dt);
 
+	//================Item Inventory=================//
+	static float elapsedTime1 = 0, elapsedTime2 = 0;
+	elapsedTime1 = fmod(Timer.getElapsedTime(), 1);
+
+	if (elapsedTime2 <= 0.15)
+	{
+		elapsedTime2 += elapsedTime1;
+	}
+	else
+	{
+		elapsedTime2 += 0;
+	}
+
+	if (Application::IsKeyPressed(VK_TAB) && elapsedTime2 >= 0.15)
+	{
+		if (showInventory == false)
+		{
+			showInventory = true;
+			elapsedTime2 -= 0.15;
+		}
+		else if (showInventory == true)
+		{
+			showInventory = false;
+			elapsedTime2 -= 0.15;
+		}
+	}
+	//std::cout << elapsedTime2 << endl;
+
 	//================Testing =================//
 	camera.escalator();
 	//cout << Container.size() << endl;
+	if (Application::IsKeyPressed('M'))
+		moving += (float) (5 * dt);
+	if (Application::IsKeyPressed('N'))
+		moving -= (float) (5 * dt);
+	cout << moving << endl;
 }
 
 //=========Rendering of Skybox to be done here=========//
@@ -1179,23 +1239,6 @@ void StudioProject::RenderItems()
 			modelStack.Rotate(90,0,1,0);
 			RenderMesh(Container[i].getMesh(),B_Light);
 			modelStack.PopMatrix(); //pop back to origin
-
-			//========FIRST Middle Shelf, SECOND row=============//
-			//modelStack.PushMatrix();
-			//modelStack.LoadMatrix(Container[i].getTRS());
-			//modelStack.Rotate(90,0,1,0);
-			//RenderMesh(Container[i].getMesh(),B_Light);
-			//modelStack.PopMatrix(); //pop back to origin
-			//modelStack.PushMatrix();
-			////RenderMesh(meshList[GEO_CUBE],B_Light);
-			//modelStack.PopMatrix();
-
-			//========FIRST Middle Shelf, THIRD row=============//
-			//modelStack.PushMatrix();
-			//modelStack.LoadMatrix(Container[i].getTRS());
-			//modelStack.Rotate(360,0,1,0);
-			//RenderMesh(Container[i].getMesh(),B_Light);
-			//modelStack.PopMatrix(); //pop back to origin
 		}
 	}
 	modelStack.PushMatrix();
@@ -1232,11 +1275,6 @@ void StudioProject::RenderItems()
 	modelStack.Translate(0, 0, 6);
 	modelStack.Scale(2, 2, 2);
 	RenderMesh(meshList[GEO_PEPSI_CAN],B_Light); // Pepsi
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-	modelStack.Translate(0, 0, 2);
-	RenderMesh(meshList[GEO_MILOCAN],B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
@@ -1666,7 +1704,13 @@ void StudioProject::Render()
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
+	//Rendering of itempage
+	if (showInventory == true)
+	{
+		RenderImageOnScreen(meshList[itemInventory], "Item Inventory", Color(1, 1, 1), 100, 1, 1);
+	}
 
+	
 
 	//============DEBUGGING PURPOSES====================//
 	RenderTextOnScreen(meshList[GEO_TEXT], Framerate + result, Color(0, 1, 0), 3, 1, 2);
@@ -1759,6 +1803,55 @@ void StudioProject::RenderText(Mesh* mesh, std::string text, Color color)
 	}
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glUniform1i(m_parameters[U_TEXT_ENABLED], 0);
+	glEnable(GL_DEPTH_TEST);
+}
+
+void StudioProject::RenderImageOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y)
+{
+	if(!mesh || mesh->textureID <= 0) //Proper error check
+		return;
+
+	glDisable(GL_DEPTH_TEST);
+	//Add these code just after glDisable(GL_DEPTH_TEST);
+	Mtx44 ortho;
+	ortho.SetToOrtho(0, 80, 0, 60, -10, 10); //size of screen UI
+	projectionStack.PushMatrix();
+	projectionStack.LoadMatrix(ortho);
+	viewStack.PushMatrix();
+	viewStack.LoadIdentity(); //No need camera for ortho mode
+	modelStack.PushMatrix();
+	modelStack.LoadIdentity(); //Reset modelStack
+	modelStack.Scale(size, size, size);
+	modelStack.Translate(x, y, 0);
+
+	glUniform1i(m_parameters[U_TEXT_ENABLED], 1);
+	glUniform3fv(m_parameters[U_TEXT_COLOR], 1, &color.r);
+	glUniform1i(m_parameters[U_LIGHTENABLED], 0);
+	glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 1);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
+	glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);
+
+	//for(unsigned i = 0; i < text.length(); ++i)
+	//{
+	//	Mtx44 characterSpacing;
+	//	characterSpacing.SetToTranslation(i * 1.0f, 0, 0); //1.0f is the spacing of each character, you may change this value
+	//	Mtx44 MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
+	//	glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
+
+	//	mesh->Render((unsigned)text[i] * 6, 6);
+	//}
+	modelStack.PushMatrix();
+	modelStack.Scale(0.5, 0.5, 0.5);
+	modelStack.Translate(-1.43656 + -0.065, -1.43656 + 0.15, 0);
+	RenderMesh(meshList[itemInventory], false);
+	modelStack.PopMatrix();
+	
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glUniform1i(m_parameters[U_TEXT_ENABLED], 0);
+	projectionStack.PopMatrix();
+	viewStack.PopMatrix();
+	modelStack.PopMatrix();
 	glEnable(GL_DEPTH_TEST);
 }
 
