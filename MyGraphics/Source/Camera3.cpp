@@ -162,7 +162,6 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	minPos.Set(-28.4,-6,63.4);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
-	
 }
 
 void Camera3::BoundsCheck()
@@ -179,12 +178,9 @@ void Camera3::BoundsCheck()
 	}
 }
 
-
-
 void Camera3::bound(Vector3 maximum, Vector3 minimum)
 {
 	//===Collision==//
-
 	if((position.x <= maximum.x) && (position.y <= maximum.y) &&(position.z <= maximum.z) && (position.x >= minimum.x) && (position.y >= minimum.y)&& (position.z >= minimum.z) )
 	{
 		position.x = tempPos.x;
@@ -508,7 +504,6 @@ void Camera3::Update(double dt)
 	float x = 24.6-position.y; //Length Height
 	float z = (pow(y ,2)+pow(x,2)); 
 	float hyp = sqrt(z);
-	std::cout << escal << std::endl;
 	
 	if (escal == true)
 	{

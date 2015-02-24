@@ -182,9 +182,6 @@ void StudioProject::InitMesh()
 	meshList[GEO_POTATOCHIPS]->material.kShininess = 8.f;
 	meshList[GEO_POTATOCHIPS] ->textureID = LoadTGA("Image//potato_chips.tga");
 
-	meshList[GEO_CANTEST] = MeshBuilder::GenerateQuad("CANTEST", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_CANTEST] ->textureID = LoadTGA("Image//UI-canned_food_1.tga");
-
 	//===============MODEL OBJs==========================//
 	meshList[modelHead] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelHead.obj");
 	meshList[modelHead]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -1226,7 +1223,6 @@ void StudioProject::RenderSupermarket()
 	modelStack.Translate(-21,-1,1-11);
 	RenderMesh(meshList[GEO_RAIL],B_Light);
 	modelStack.PopMatrix();
-
 }
 
 void StudioProject::RenderItems()
@@ -1243,6 +1239,7 @@ void StudioProject::RenderItems()
 			modelStack.PopMatrix(); //pop back to origin
 		}
 	}
+
 	modelStack.PushMatrix();
 	modelStack.Translate(camera.target.x,camera.target.y, camera.target.z);
 	modelStack.Rotate(90,0,1,0);
@@ -1304,21 +1301,13 @@ void StudioProject::RenderItems()
 	modelStack.Rotate(-90,0,1,0);
 	RenderMesh(meshList[GEO_POTATOCHIPS],B_Light);
 	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-	modelStack.Translate(5, 0, 0);
-	RenderMesh(meshList[GEO_CANTEST],false);
-	modelStack.PopMatrix();
-
 }
 
 void StudioProject::RenderModel()
 {
-
 	modelStack.PushMatrix();
 	modelStack.Translate(charPosition.x, 0, charPosition.z);
 	modelStack.Rotate(angle, 0, angle, 1);
-
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3.6, 0);

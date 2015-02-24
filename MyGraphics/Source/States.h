@@ -1,6 +1,5 @@
 #pragma once
 
-
 class CStates
 {
 public:
