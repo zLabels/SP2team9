@@ -24,8 +24,12 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	temp = 0;
 	isCrouching = false;
 	Crouching = false;
+	Jumping = false;
+	isJumping = false;
+	isFalling = false;
+	tempJumpY = 0.f;
 	CAMERA_SPEED = 15.f;
-
+	JUMP_SPEED = 12.f;
 	//=======Collision=========//
 	//Middle shelf
 	maxPos.Set(13.4, 10, 15.2);
@@ -203,9 +207,9 @@ void Camera3::bound(Vector3 maximum, Vector3 minimum)
 
 void Camera3::Update(double dt)
 {
-	static const float TURN_SPEED = 80.f;
+	static const float TURN_SPEED = 100.f;
 	/*===========================================================
-	MOVING AROUND
+							MOVING AROUND
 	==============================================================*/
 	//==========STRAFE LEFT===========//
 	//Sprint
@@ -428,7 +432,7 @@ void Camera3::Update(double dt)
 		}
 	}
 	/*===================================================
-	LOOKING AROUND
+					LOOKING AROUND
 	=====================================================*/
 	//==Look Right==//
 	if(Application::IsKeyPressed(VK_RIGHT))
@@ -549,15 +553,49 @@ void Camera3::Update(double dt)
 	//}
 
 	//==================================== end of escalator ============================= //
-
-	if(Application::IsKeyPressed(VK_SPACE))
+	/*====================================================================================
+										JUMPING
+	=======================================================================================*/
+ 	if(Application::IsKeyPressed(VK_SPACE) && isJumping == false && isFalling == false && Crouching == false && isCrouching == false)
 	{
-		if(position.y <= 5)
+		Jumping = true;
+		tempJumpY = position.y;
+	}
+
+	if(Jumping == true)
+	{
+		isJumping = true;
+		
+		if(position.y <= (tempJumpY + 3))
 		{
-			position.y += (float)(CAMERA_SPEED * dt);
-			target.y  += (float)(CAMERA_SPEED * dt);
+			position.y += (float)(JUMP_SPEED * dt);
+			target.y += (float)(JUMP_SPEED * dt);
+			JUMP_SPEED -= (float)(20 * dt);
+		}
+		else
+		{
+			isJumping = false;
+			Jumping = false;
+			isFalling = true;
 		}
 	}
+	if(isFalling == true)
+	{
+		if(position.y >= tempJumpY)
+		{
+			position.y -= (float)(JUMP_SPEED * dt);
+			target.y -= (float)(JUMP_SPEED * dt);
+			JUMP_SPEED += (float)(20 * dt);
+		}
+		if(position.y <= tempJumpY)
+		{
+			isFalling = false;
+		}
+	}
+
+	/*=======================================================================================
+										CROUCHING
+	======================================================================================*/
 	if(Application::IsKeyPressed(VK_LCONTROL) && isCrouching == false && Crouching == false)
 	{
 		Crouching = true;

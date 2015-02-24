@@ -34,8 +34,13 @@ public:
 	void escalator();
 	bool isCrouching;
 	bool Crouching;
+	bool Jumping;
+	bool isJumping;
+	bool isFalling;
+	float tempJumpY;
 	int temp;
 	float CAMERA_SPEED;
+	float JUMP_SPEED;
 };
 
 #endif
