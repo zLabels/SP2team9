@@ -157,6 +157,11 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
 
+	//Escalator bottom
+	maxPos.Set(-6.9,10,91);
+	minPos.Set(-28.4,-6,63.4);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
 	
 }
 
@@ -509,7 +514,8 @@ void Camera3::Update(double dt)
 	{
 		position.x +=(float)(hyp*dt);
 		position.y +=(float)(x*dt);
-		target.x += 100;
+		target.x +=(float)(14*dt);
+		target.y +=(float)(4.5*dt);
 		
 	}
 
