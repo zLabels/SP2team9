@@ -585,11 +585,12 @@ void Camera3::Update(double dt)
 		{
 			position.y -= (float)(JUMP_SPEED * dt);
 			target.y -= (float)(JUMP_SPEED * dt);
-			JUMP_SPEED += (float)(20 * dt);
+			JUMP_SPEED += (float)(40 * dt);
 		}
 		if(position.y <= tempJumpY)
 		{
 			isFalling = false;
+			JUMP_SPEED = 12.f;
 		}
 	}
 
