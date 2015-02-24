@@ -162,6 +162,31 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	minPos.Set(-28.4,-6,63.4);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
+
+	//Escalator Left Handle (Bottom facing escalator)
+	maxPos.Set(-29,10,64.7);
+	minPos.Set(-33,-5,63);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Escalator Left Handle (Bottom facing escalator)
+	maxPos.Set(-30.1,10,91.3);
+	minPos.Set(-32.7,-5,89.8);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Escalator Right Handle (Top facing escalator)
+	maxPos.Set(28.4,30,64.6);
+	minPos.Set(25.6,23,63);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Escalator Left Handle (Top facing escalator)
+	maxPos.Set(29,30,93);
+	minPos.Set(27,23,89.6);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
 }
 
 void Camera3::BoundsCheck()
@@ -203,7 +228,7 @@ void Camera3::Update(double dt)
 	//==========STRAFE LEFT===========//
 	//Sprint
 	
-	if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('A') && escal == false)
+	if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('A') && escal == false && escaldown == false)
 	{
 		if(CAMERA_SPEED <= 30)
 		{
@@ -231,7 +256,7 @@ void Camera3::Update(double dt)
 
 	}
 	//Walk
-	else if(Application::IsKeyPressed('A'))
+	else if(Application::IsKeyPressed('A') && escal == false && escaldown == false)
 	{
 		if(CAMERA_SPEED >15.f)
 		{
@@ -258,7 +283,7 @@ void Camera3::Update(double dt)
 	}
 	//=========MOVE BACKWARDS==========//
 	//Sprint
-	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('S'))
+	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('S') && escal == false && escaldown == false)
 	{
 		if(CAMERA_SPEED <= 30)
 		{
@@ -283,7 +308,7 @@ void Camera3::Update(double dt)
 		}
 	}
 	//Walk
-	else if(Application::IsKeyPressed('S'))
+	else if(Application::IsKeyPressed('S') && escal == false && escaldown == false)
 	{
 		if(CAMERA_SPEED >15.f)
 		{
@@ -310,7 +335,7 @@ void Camera3::Update(double dt)
 
 	//=============STRAFE RIGHT================//
 	//Sprint
-	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('D'))
+	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('D') && escal == false && escaldown == false)
 	{
 		if(CAMERA_SPEED <= 30)
 		{
@@ -337,7 +362,7 @@ void Camera3::Update(double dt)
 		}
 	}
 	//Walk
-	else if(Application::IsKeyPressed('D'))
+	else if(Application::IsKeyPressed('D') && escal == false && escaldown == false)
 	{
 		if(CAMERA_SPEED >15.f)
 		{
@@ -366,7 +391,7 @@ void Camera3::Update(double dt)
 
 	//===============MOVE FORWARD==========//
 	//Sprint
-	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('W'))
+	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('W') && escal == false && escaldown == false)
 	{
 		if(CAMERA_SPEED <= 30)
 		{
@@ -390,7 +415,7 @@ void Camera3::Update(double dt)
 		}
 	}
 	//Walk
-	else if(Application::IsKeyPressed('W'))
+	else if(Application::IsKeyPressed('W') && escal == false && escaldown == false)
 	{
 		if(CAMERA_SPEED >15.f)
 		{
@@ -500,41 +525,35 @@ void Camera3::Update(double dt)
 
 	//=====================================Escalator===============================================
 
-	float y = 30-position.x; //Length across
-	float x = 24.6-position.y; //Length Height
-	float z = (pow(y ,2)+pow(x,2)); 
-	float hyp = sqrt(z);
-	
-	if (escal == true)
+	Vector3 direction = Vector3(30,23,0) - Vector3(-25,5,0);
+	direction.Normalized();
+
+	if (escal == true) //Movement from bottom to top
 	{
-		position.x +=(float)(hyp*dt);
-		position.y +=(float)(x*dt);
-		target.x +=(float)(14*dt);
-		target.y +=(float)(4.5*dt);
+		position += direction *(0.5*dt);
+		target += direction * (0.5*dt);
 		
 	}
 
-	if (escaldown == true)
+	if (escaldown == true) //Movement from top to bottom
 	{
-		position.x -=(float)(14*dt);
-		position.y -=(float)(4.5*dt);
-		target.x -=(float)(14*dt);
-		target.y -=(float)(4.5*dt);
+		position -= direction *(0.5*dt);
+		target -= direction * (0.5*dt);
 		
 	}
 
-	if(position.x >= -40 && position.x <=-30 && position.y >= 3 && position.y <=6 && position.z >= 64.9 && position.z <= 75) //Going up
+	if(position.x >= -35 && position.x <=-28 && position.y >= 3 && position.y <=6 && position.z >= 64.9 && position.z <= 75) //Area to trigger going up
 	{	
+		escaldown = false;
 		escal = true;
-		walk = false;
-
-
+	
 	}
-	if(position.x <=29.9 && position.y >= 20 && position.y <=30 && position.z >= 80 && position.z <=90) // going down
+	if(position.x <=29.9 && position.y >= 20 && position.y <=30 && position.z >= 80 && position.z <=90) //Area to trigger going down.
 	{
+		escal = false;
 		escaldown = true;
 	}
-	else if(position.x >= 28)
+	else if(position.x >= 27.5)
 	{
 		escal = false;
 		
