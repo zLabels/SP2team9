@@ -946,7 +946,6 @@ void StudioProject::Update(double dt)
 	//std::cout << elapsedTime2 << endl;
 
 	//================Testing =================//
-	camera.escalator();
 	//cout << Container.size() << endl;
 	if (Application::IsKeyPressed('M'))
 		moving += (float) (5 * dt);

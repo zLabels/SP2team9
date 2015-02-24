@@ -74,55 +74,55 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	minimum.push_back(minPos);
 
 	//Right metal fence
-	maxPos.Set(-18.7,5,27.2);
+	maxPos.Set(-18.7,6,27.2);
 	minPos.Set(-30.6,-5,24.9);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
 
 	//Middle metal fence
-	maxPos.Set(-19.6,5,8.7);
+	maxPos.Set(-19.6,6,8.7);
 	minPos.Set(-29.3,-5,7.2);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
 
 	//Left metal fence
-	maxPos.Set(-18.9,5,-9.1);
+	maxPos.Set(-18.9,6,-9.1);
 	minPos.Set(-29.6,-5,-11.4);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
 
 	//Right cashier
-	maxPos.Set(-18,5,22);
+	maxPos.Set(-18,6,22);
 	minPos.Set(-30,-5,17.6);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
 
 	//Right cashier (cash register)
-	maxPos.Set(-26.6,5,19);
+	maxPos.Set(-26.6,6,19);
 	minPos.Set(-29.9,-5,14);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
 
 	//Middle cashier
-	maxPos.Set(-18.1,5,4.6);
+	maxPos.Set(-18.1,6,4.6);
 	minPos.Set(-30.1,-5,0.84);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
 
 	//Middle cashier(Cash Register)
-	maxPos.Set(-26,5,2.1);
+	maxPos.Set(-26,6,2.1);
 	minPos.Set(-30.1,-5,-2.1);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
 
 	//Left Cashier
-	maxPos.Set(-18,5,-13);
+	maxPos.Set(-18,6,-13);
 	minPos.Set(-30.4,-5,-17.1);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
 
 	//Left Cashier(Cash Register)
-	maxPos.Set(-26,5,-17);
+	maxPos.Set(-26,6,-17);
 	minPos.Set(-30.5,-5,-20.4);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
@@ -156,6 +156,8 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	minPos.Set(-57.5,-5,93.2);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
+
+	
 }
 
 void Camera3::BoundsCheck()
@@ -172,22 +174,7 @@ void Camera3::BoundsCheck()
 	}
 }
 
-void Camera3::escalator()
-{
-	/*if(position.x >= -40 && position.x <=-30 && position.y == 5 && position.z >= 64.9 && position.z <= 75)
-	{	
-	if(position.x < 28 && position.y <28)
-	{
-	position.x +=(float)(100*dt);
-	position.y +=(float)(100*dt);
-	}	
-	}
-	else
-	{
-	std::cout << "Mr Sim is awesome" << std::endl;
-	}
-	*/
-}
+
 
 void Camera3::bound(Vector3 maximum, Vector3 minimum)
 {
@@ -208,12 +195,14 @@ void Camera3::bound(Vector3 maximum, Vector3 minimum)
 void Camera3::Update(double dt)
 {
 	static const float TURN_SPEED = 100.f;
+	bool walk = true;
 	/*===========================================================
 							MOVING AROUND
 	==============================================================*/
 	//==========STRAFE LEFT===========//
 	//Sprint
-	if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('A'))
+	
+	if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('A') && escal == false)
 	{
 		if(CAMERA_SPEED <= 30)
 		{
@@ -506,51 +495,54 @@ void Camera3::Update(double dt)
 			temp++;
 		}
 	}
+	
 
 	//=====================================Escalator===============================================
 
-	//if (escal == true)
-	//{
-	//	position.x +=(float)(14*dt);
-	//	position.y +=(float)(4.5*dt);
-	//	target.x +=(float)(14*dt);
-	//	target.y +=(float)(4.5*dt);
-	//	
-	//}
+	float y = 30-position.x; //Length across
+	float x = 24.6-position.y; //Length Height
+	float z = (pow(y ,2)+pow(x,2)); 
+	float hyp = sqrt(z);
+	std::cout << escal << std::endl;
+	
+	if (escal == true)
+	{
+		position.x +=(float)(hyp*dt);
+		position.y +=(float)(x*dt);
+		target.x += 100;
+		
+	}
 
-	//if (escaldown == true)
-	//{
-	//	position.x -=(float)(14*dt);
-	//	position.y -=(float)(4.5*dt);
-	//	target.x -=(float)(14*dt);
-	//	target.y -=(float)(4.5*dt);
-	//	
-	//}
+	if (escaldown == true)
+	{
+		position.x -=(float)(14*dt);
+		position.y -=(float)(4.5*dt);
+		target.x -=(float)(14*dt);
+		target.y -=(float)(4.5*dt);
+		
+	}
 
-	//if(position.x >= -40 && position.x <=-30 && position.y <= 5 && position.z >= 64.9 && position.z <= 75) //Going up
-	//{	
-	//	escal = true;
-	//	std::cout << "haha" << std::endl;
+	if(position.x >= -40 && position.x <=-30 && position.y >= 3 && position.y <=6 && position.z >= 64.9 && position.z <= 75) //Going up
+	{	
+		escal = true;
+		walk = false;
 
-	//}
-	//if(position.x <=29.9 && position.y >= 20 && position.y <=30 && position.z >= 80 && position.z <=90) // going down
-	//{
-	//	escaldown = true;
-	//}
-	//else if(position.x >= 28)
-	//{
-	//	escal = false;
-	//	
-	//}
-	//else if (position.y <= 5)
-	//{
-	//	escaldown = false;
-	//}
-	//
-	//else
-	//{
-	//	std::cout << "Mr Sim is awesome" << std::endl;
-	//}
+
+	}
+	if(position.x <=29.9 && position.y >= 20 && position.y <=30 && position.z >= 80 && position.z <=90) // going down
+	{
+		escaldown = true;
+	}
+	else if(position.x >= 28)
+	{
+		escal = false;
+		
+	}
+	else if (position.y <= 5)
+	{
+		escaldown = false;
+	}
+	
 
 	//==================================== end of escalator ============================= //
 	/*====================================================================================

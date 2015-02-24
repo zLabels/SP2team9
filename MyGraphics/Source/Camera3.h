@@ -31,12 +31,12 @@ public:
 	Vector3 tempView;
 	bool escal;
 	bool escaldown;
-	void escalator();
 	bool isCrouching;
 	bool Crouching;
 	bool Jumping;
 	bool isJumping;
 	bool isFalling;
+	bool walk;
 	float tempJumpY;
 	int temp;
 	float CAMERA_SPEED;
