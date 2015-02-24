@@ -124,6 +124,7 @@ private:
 		GEO_CEREALBOX2,
 		GEO_PIZZABOX,
 		GEO_POTATOCHIPS,
+		GEO_CANTEST,
 
 		modelHead,			//Model Head
 		modelTorso,			//Model Torso

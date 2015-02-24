@@ -182,6 +182,9 @@ void StudioProject::InitMesh()
 	meshList[GEO_POTATOCHIPS]->material.kShininess = 8.f;
 	meshList[GEO_POTATOCHIPS] ->textureID = LoadTGA("Image//potato_chips.tga");
 
+	meshList[GEO_CANTEST] = MeshBuilder::GenerateQuad("CANTEST", Color(1, 1, 1), 1.f, 1.f);
+	meshList[GEO_CANTEST] ->textureID = LoadTGA("Image//UI-canned_food_1.tga");
+
 	//===============MODEL OBJs==========================//
 	meshList[modelHead] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelHead.obj");
 	meshList[modelHead]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -1300,6 +1303,11 @@ void StudioProject::RenderItems()
 	modelStack.Translate(0, 0, -4);
 	modelStack.Rotate(-90,0,1,0);
 	RenderMesh(meshList[GEO_POTATOCHIPS],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(5, 0, 0);
+	RenderMesh(meshList[GEO_CANTEST],false);
 	modelStack.PopMatrix();
 
 }
