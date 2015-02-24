@@ -22,14 +22,16 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	right.Normalize();
 	this->up = defaultUp = right.Cross(view).Normalized();
 	temp = 0;
+	isCrouching = false;
+	Crouching = false;
 	CAMERA_SPEED = 15.f;
-	
+
 	//=======Collision=========//
-	////Middle shelf
-	//maxPos.Set(13.4, 10, 15.2);
-	//minPos.Set(8.3, -10, -9.3);
-	//maximum.push_back(maxPos);
-	//minimum.push_back(minPos);
+	//Middle shelf
+	maxPos.Set(13.4, 10, 15.2);
+	minPos.Set(8.3, -10, -9.3);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
 
 	//Left shelf (closer to cashier)
 	maxPos.Set(18.3,10,-33.5);
@@ -42,7 +44,7 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	minPos.Set(-33.1,-10,-60.7);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
-	
+
 	//Left frozen food shelf
 	maxPos.Set(36.1,10,-88.2);
 	minPos.Set(-35.5,-10,-94);
@@ -170,15 +172,15 @@ void Camera3::escalator()
 {
 	/*if(position.x >= -40 && position.x <=-30 && position.y == 5 && position.z >= 64.9 && position.z <= 75)
 	{	
-		if(position.x < 28 && position.y <28)
-		{
-			position.x +=(float)(100*dt);
-			position.y +=(float)(100*dt);
-		}	
+	if(position.x < 28 && position.y <28)
+	{
+	position.x +=(float)(100*dt);
+	position.y +=(float)(100*dt);
+	}	
 	}
 	else
 	{
-		std::cout << "Mr Sim is awesome" << std::endl;
+	std::cout << "Mr Sim is awesome" << std::endl;
 	}
 	*/
 }
@@ -192,7 +194,7 @@ void Camera3::bound(Vector3 maximum, Vector3 minimum)
 		position.x = tempPos.x;
 		position.y = tempPos.y;
 		position.z = tempPos.z;
-		
+
 		target.x = tempTarg.x;
 		target.y = tempTarg.y;
 		target.z = tempTarg.z;
@@ -201,9 +203,9 @@ void Camera3::bound(Vector3 maximum, Vector3 minimum)
 
 void Camera3::Update(double dt)
 {
-	static const float TURN_SPEED = 60.f;
+	static const float TURN_SPEED = 80.f;
 	/*===========================================================
-							MOVING AROUND
+	MOVING AROUND
 	==============================================================*/
 	//==========STRAFE LEFT===========//
 	//Sprint
@@ -227,7 +229,7 @@ void Camera3::Update(double dt)
 		tempView = view;
 		//===Collision Check==//
 		BoundsCheck();
-		
+
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);
@@ -254,7 +256,7 @@ void Camera3::Update(double dt)
 		tempView = view;
 		//===Collision Check==//
 		BoundsCheck();
-		
+
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);
@@ -280,7 +282,7 @@ void Camera3::Update(double dt)
 		//===Collision Check==//
 
 		BoundsCheck();
-		
+
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);
@@ -305,7 +307,7 @@ void Camera3::Update(double dt)
 		//===Collision Check==//
 
 		BoundsCheck();
-		
+
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);
@@ -334,7 +336,7 @@ void Camera3::Update(double dt)
 
 		//===Collision Check==//
 		BoundsCheck();
-		
+
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);
@@ -361,7 +363,7 @@ void Camera3::Update(double dt)
 
 		//===Collision Check==//
 		BoundsCheck();
-		
+
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);
@@ -387,7 +389,7 @@ void Camera3::Update(double dt)
 
 		//===Collision Check==//
 		BoundsCheck();
-		
+
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);
@@ -411,7 +413,7 @@ void Camera3::Update(double dt)
 
 		//===Collision Check==//
 		BoundsCheck();
-		
+
 		for(int i = 0; i < maximum.size();i++)
 		{
 			bound(maximum[i], minimum[i]);
@@ -426,7 +428,7 @@ void Camera3::Update(double dt)
 		}
 	}
 	/*===================================================
-						LOOKING AROUND
+	LOOKING AROUND
 	=====================================================*/
 	//==Look Right==//
 	if(Application::IsKeyPressed(VK_RIGHT))
@@ -502,7 +504,7 @@ void Camera3::Update(double dt)
 	}
 
 	//=====================================Escalator===============================================
-	
+
 	//if (escal == true)
 	//{
 	//	position.x +=(float)(14*dt);
@@ -547,23 +549,55 @@ void Camera3::Update(double dt)
 	//}
 
 	//==================================== end of escalator ============================= //
-	
-	if(Application::IsKeyPressed('F'))
+
+	if(Application::IsKeyPressed(VK_SPACE))
 	{
-		position.y += (float)(CAMERA_SPEED * dt);
-		target.y  += (float)(CAMERA_SPEED * dt);
+		if(position.y <= 5)
+		{
+			position.y += (float)(CAMERA_SPEED * dt);
+			target.y  += (float)(CAMERA_SPEED * dt);
+		}
 	}
-	if(Application::IsKeyPressed('G'))
+	if(Application::IsKeyPressed(VK_LCONTROL) && isCrouching == false && Crouching == false)
 	{
-		position.y -= (float)(CAMERA_SPEED * dt);
-		target.y  -= (float)(CAMERA_SPEED * dt);
+		Crouching = true;
+	}
+	else if(Application::IsKeyPressed(VK_LCONTROL) && isCrouching == false && Crouching == true)
+	{
+		Crouching = false;
+	}
+	if(Crouching == true)
+	{
+		isCrouching = true;
+		if(position.y >= 2.5)
+		{
+			position.y -= (float)(CAMERA_SPEED * dt);
+			target.y  -= (float)(CAMERA_SPEED * dt);
+		}
+		else
+		{
+			isCrouching = false;
+		}
+	}
+	else if(Crouching == false)
+	{
+		isCrouching = true;
+		if(position.y < 5)
+		{
+			position.y += (float)(CAMERA_SPEED * dt);
+			target.y  += (float)(CAMERA_SPEED * dt);
+		}
+		else
+		{
+			isCrouching = false;
+		}
 	}
 	if(Application::IsKeyPressed('R'))
 	{
 		Reset();
 	}
 }
-	
+
 
 void Camera3::Reset()
 {

@@ -32,6 +32,8 @@ public:
 	bool escal;
 	bool escaldown;
 	void escalator();
+	bool isCrouching;
+	bool Crouching;
 	int temp;
 	float CAMERA_SPEED;
 };

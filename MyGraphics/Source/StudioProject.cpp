@@ -952,7 +952,7 @@ void StudioProject::Update(double dt)
 		moving += (float) (5 * dt);
 	if (Application::IsKeyPressed('N'))
 		moving -= (float) (5 * dt);
-	cout << moving << endl;
+	//cout << moving << endl;
 }
 
 //=========Rendering of Skybox to be done here=========//
