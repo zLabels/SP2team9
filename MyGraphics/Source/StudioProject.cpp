@@ -133,12 +133,12 @@ void StudioProject::InitMesh()
 	meshList[GEO_MILOCAN]->material.kShininess = 8.f;
 	meshList[GEO_MILOCAN] ->textureID = LoadTGA("Image//milocan.tga");*/
 
-	meshList[GEO_COKE_CAN] = MeshBuilder::GenerateOBJ("Coke" , "OBJ//drink-can1.obj");
+	/*meshList[GEO_COKE_CAN] = MeshBuilder::GenerateOBJ("Coke" , "OBJ//drink-can1.obj");
 	meshList[GEO_COKE_CAN]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[GEO_COKE_CAN]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
 	meshList[GEO_COKE_CAN]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	meshList[GEO_COKE_CAN]->material.kShininess = 8.f;
-	meshList[GEO_COKE_CAN] ->textureID = LoadTGA("Image//drink_can1.tga");
+	meshList[GEO_COKE_CAN] ->textureID = LoadTGA("Image//drink_can1.tga");*/
 
 	meshList[GEO_DRINKCAN2] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//drink-can2.obj");
 	meshList[GEO_DRINKCAN2]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -393,6 +393,7 @@ void StudioProject::InitVariables()
 	angle = 3600;
 	moving = 0;
 	showInventory = false;
+	int a = 0;
 
 	//===============Sardine Can Variables============//
 	Mesh* newMesh;
@@ -403,10 +404,14 @@ void StudioProject::InitVariables()
 	newMesh->material.kShininess = 8.f;
 	newMesh->textureID = LoadTGA("Image//canned_food_1.tga");
 	hitBox sardineBox;
-	for(int i = 0; i < 5;i++)
+	for(int i = 0; i < 20;i++)
 	{
 		Mtx44 newTRS;
-		newTRS.SetToTranslation(10,6.2,-8+i);
+		if(i % 5 == 0 && i > 0) //When i mod 5 == 0, it will create a spacing 
+		{
+			a += 1;
+		}
+		newTRS.SetToTranslation(10,6.2,-8+i + a);
 		sardineCan.SetData("sardine", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS);
 		Container.push_back(sardineCan);
 		Vector3 Min, Max;
@@ -415,6 +420,27 @@ void StudioProject::InitVariables()
 		sardineBox.SetBox(Max, Min);
 		boxContainer.push_back(sardineBox);
 	}
+	a = 0; //reset a t 0
+
+	//BACK MIDDLE SHELF Back row
+	for(int i = 0; i < 20;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0)
+		{
+			a += 1;
+		}
+		newTRS.SetToTranslation(12,6.2,-8+i + a);
+		sardineCan.SetData("sardine", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS);
+		Container2.push_back(sardineCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12] + 0.59, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
+		Min.Set(-0.59 + newTRS.a[12], -0.7+newTRS.a[13], -0.35+newTRS.a[14]);
+		sardineBox.SetBox(Max, Min);
+		boxContainer2.push_back(sardineBox);
+	}
+	a = 0;
+
 
 	//===============Pea and Carrots Variables============//
 	newMesh = MeshBuilder::GenerateOBJ("Peas and Carrots can" , "OBJ//canned-food2.obj");
@@ -424,10 +450,14 @@ void StudioProject::InitVariables()
 	newMesh->material.kShininess = 8.f;
 	newMesh->textureID = LoadTGA("Image//canned_food_2.tga");
 	hitBox PnC;
-	for(int i = 0; i < 5;i++)
+	for(int i = 0; i < 20;i++) //first middle shelf
 	{
 		Mtx44 newTRS;
-		newTRS.SetToTranslation(10,4.3,-8+i);
+		if(i % 5 == 0 && i > 0)
+		{
+			a += 1;
+		}
+		newTRS.SetToTranslation(10,4.3,-8+i + a);
 		PnCCan.SetData("Peas and Carrot Cans", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS);
 		Container.push_back(PnCCan);
 		Vector3 Min, Max;
@@ -436,6 +466,25 @@ void StudioProject::InitVariables()
 		PnC.SetBox(Max, Min);
 		boxContainer.push_back(PnC);
 	}
+	a = 0;
+
+	for(int i = 0; i < 20;i++) //BACK MIDDLE SHELF Back row
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0)
+		{
+			a += 1;
+		}
+		newTRS.SetToTranslation(12,4.3,-8+i + a);
+		PnCCan.SetData("Peas and Carrot Cans", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS);
+		Container2.push_back(PnCCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		PnC.SetBox(Max, Min);
+		boxContainer2.push_back(PnC);
+	}
+	a = 0;
 
 	//===============Baked Beans Variables============//
 	newMesh = MeshBuilder::GenerateOBJ("Baked Beans Can" , "OBJ//canned-food3.obj");
@@ -445,10 +494,14 @@ void StudioProject::InitVariables()
 	newMesh->material.kShininess = 8.f;
 	newMesh->textureID = LoadTGA("Image//canned_food_3.tga");
 	hitBox BB;
-	for(int i = 0; i < 5;i++)
+	for(int i = 0; i < 20;i++)
 	{
 		Mtx44 newTRS;
-		newTRS.SetToTranslation(10,2.3,-8+i);
+		if(i % 5 == 0 && i > 0)
+		{
+			a += 1;
+		}
+		newTRS.SetToTranslation(10,2.3,-8+i + a);
 		BBCan.SetData("Baked Beans Cans", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS);
 		Container.push_back(BBCan);
 		Vector3 Min, Max;
@@ -457,6 +510,25 @@ void StudioProject::InitVariables()
 		BB.SetBox(Max, Min);
 		boxContainer.push_back(BB);
 	}
+	a = 0;
+
+	for(int i = 0; i < 20;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0)
+		{
+			a += 1;
+		}
+		newTRS.SetToTranslation(12,2.3,-8+i + a);
+		BBCan.SetData("Baked Beans Cans", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS);
+		Container2.push_back(BBCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		BB.SetBox(Max, Min);
+		boxContainer2.push_back(BB);
+	}
+	a = 0;
 
 	//===============Milo Can Variables============//
 	newMesh = MeshBuilder::GenerateOBJ("Milo Can" , "OBJ//milocan.obj");
@@ -466,10 +538,14 @@ void StudioProject::InitVariables()
 	newMesh->material.kShininess = 8.f;
 	newMesh->textureID = LoadTGA("Image//milocan.tga");
 	hitBox MC;
-	for(int i = 0; i < 5;i++)
+	for(int i = 0; i < 20;i++)
 	{
 		Mtx44 newTRS;
-		newTRS.SetToTranslation(10, 0.5,-8+i);
+		if(i % 5 == 0 && i > 0)
+		{
+			a += 1;
+		}
+		newTRS.SetToTranslation(10, 0.5,-8+i + a);
 		MiloCan.SetData("Milo Cans", 3.5f, true, newMesh, GEO_MILOCAN,newTRS);
 		Container.push_back(MiloCan);
 		Vector3 Min, Max;
@@ -478,7 +554,51 @@ void StudioProject::InitVariables()
 		MC.SetBox(Max, Min);
 		boxContainer.push_back(MC);
 	}
+	a = 0;
 
+	for(int i = 0; i < 20;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0)
+		{
+			a += 1;
+		}
+		newTRS.SetToTranslation(12, 20,-8+i + a);
+		MiloCan.SetData("Milo Cans", 3.5f, true, newMesh, GEO_MILOCAN,newTRS);
+		Container2.push_back(MiloCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		MC.SetBox(Max, Min);
+		boxContainer2.push_back(MC);
+	}
+	a = 0;
+	
+	//===============Coke Can Variables============//
+	newMesh = MeshBuilder::GenerateOBJ("Coke" , "OBJ//drink-can1.obj");
+	newMesh->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newMesh->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newMesh->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newMesh->material.kShininess = 8.f;
+	newMesh ->textureID = LoadTGA("Image//drink_can1.tga");
+	hitBox Coke;
+	for(int i = 0; i < 5;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0)
+		{
+			a += 1;
+		}
+		newTRS.SetToTranslation(50, 3,-8+i + a);
+		CokeCan.SetData("Coke Cans", 3.5f, true, newMesh, GEO_COKE_CAN,newTRS);
+		Container3.push_back(CokeCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Coke.SetBox(Max, Min);
+		boxContainer3.push_back(Coke);
+	}
+	a = 0;
 
 	//variable to animate model
 	rotateRightArms = rotateLeftArms = rotateRightLeg = rotateLeftLeg = 360;
@@ -838,17 +958,61 @@ void StudioProject::Update(double dt)
 	{
 		if(Application::IsKeyPressed('E'))
 		{
-			for(int i = 0; i < boxContainer.size(); ++i)
+			for(int i = 0; i < boxContainer.size(); ++i) //Container 1
 			{
 				checking = true;
 				//==========Taking Items from shelf=============//
 				if(Container[i].getRender() == true)
 				{
-					if((camera.target.x <= boxContainer[i].max.x) && (camera.target.y <= boxContainer[i].max.y) && (camera.target.z <= boxContainer[i].max.z)
-						&& (camera.target.x >= boxContainer[i].min.x) && (camera.target.y >= boxContainer[i].min.y) && (camera.target.z >= boxContainer[i].min.z))
+					if((camera.target.x <= boxContainer[i].max.x) &&
+						(camera.target.y <= boxContainer[i].max.y) && 
+						(camera.target.z <= boxContainer[i].max.z) &&
+						(camera.target.x >= boxContainer[i].min.x) && 
+						(camera.target.y >= boxContainer[i].min.y) && 
+						(camera.target.z >= boxContainer[i].min.z))
 					{
 						player.getInventory().AddItem(Container[i]);
 						Container[i].setRender(false);
+						break;
+					}
+				}
+			}
+
+			for(int i = 0; i < boxContainer2.size(); ++i)//Container 2
+			{
+				checking = true;
+				//==========Taking Items from shelf=============//
+				if(Container2[i].getRender() == true)
+				{
+					if((camera.target.x <= boxContainer2[i].max.x) && 
+						(camera.target.y <= boxContainer2[i].max.y) && 
+						(camera.target.z <= boxContainer2[i].max.z) && 
+						(camera.target.x >= boxContainer2[i].min.x) && 
+						(camera.target.y >= boxContainer2[i].min.y) && 
+						(camera.target.z >= boxContainer2[i].min.z))
+					{
+						player.getInventory().AddItem(Container2[i]);
+						Container2[i].setRender(false);
+						break;
+					}
+				}
+			}
+
+			for(int i = 0; i < boxContainer3.size(); ++i) //Container 3
+			{
+				checking = true;
+				//==========Taking Items from shelf=============//
+				if(Container3[i].getRender() == true)
+				{
+					if((camera.target.x <= boxContainer3[i].max.x) && 
+						(camera.target.y <= boxContainer3[i].max.y) && 
+						(camera.target.z <= boxContainer3[i].max.z) && 
+						(camera.target.x >= boxContainer3[i].min.x) && 
+						(camera.target.y >= boxContainer3[i].min.y) && 
+						(camera.target.z >= boxContainer3[i].min.z))
+					{
+						player.getInventory().AddItem(Container3[i]);
+						Container3[i].setRender(false);
 						break;
 					}
 				}
@@ -861,10 +1025,14 @@ void StudioProject::Update(double dt)
 		for(int i = 0; i < boxContainer.size(); ++i)
 		{
 		//==========Putting items back to shelf=============//
-			if(Container[i].getRender() == false)
+			if(Container[i].getRender() == false)//Container 1
 			{
-				if((camera.target.x <= boxContainer[i].max.x) && (camera.target.y <= boxContainer[i].max.y) && (camera.target.z <= boxContainer[i].max.z)
-					&& (camera.target.x >= boxContainer[i].min.x) && (camera.target.y >= boxContainer[i].min.y) && (camera.target.z >= boxContainer[i].min.z))
+				if((camera.target.x <= boxContainer[i].max.x) && 
+					(camera.target.y <= boxContainer[i].max.y) && 
+					(camera.target.z <= boxContainer[i].max.z) &&
+					(camera.target.x >= boxContainer[i].min.x) && 
+					(camera.target.y >= boxContainer[i].min.y) && 
+					(camera.target.z >= boxContainer[i].min.z))
 				{
 					player.getInventory().removeItem(Container[i]);
 					Container[i].setRender(true);
@@ -872,10 +1040,63 @@ void StudioProject::Update(double dt)
 				}
 			}
 		}
+		for(int i = 0; i < boxContainer2.size(); ++i)//Container 2
+		{
+			if(Container2[i].getRender() == false)
+			{
+				if((camera.target.x <= boxContainer2[i].max.x) && 
+					(camera.target.y <= boxContainer2[i].max.y) && 
+					(camera.target.z <= boxContainer2[i].max.z) &&
+					(camera.target.x >= boxContainer2[i].min.x) && 
+					(camera.target.y >= boxContainer2[i].min.y) &&
+					(camera.target.z >= boxContainer2[i].min.z))
+				{
+					player.getInventory().removeItem(Container2[i]);
+					Container2[i].setRender(true);
+					break;
+				}
+			}
+		}
+
+		for(int i = 0; i < boxContainer2.size(); ++i)//Container 3
+		{
+			if(Container2[i].getRender() == false)
+			{
+				if((camera.target.x <= boxContainer2[i].max.x) && 
+					(camera.target.y <= boxContainer2[i].max.y) && 
+					(camera.target.z <= boxContainer2[i].max.z) &&
+					(camera.target.x >= boxContainer2[i].min.x) && 
+					(camera.target.y >= boxContainer2[i].min.y) &&
+					(camera.target.z >= boxContainer2[i].min.z))
+				{
+					player.getInventory().removeItem(Container2[i]);
+					Container2[i].setRender(true);
+					break;
+				}
+			}
+		}
 	}
 
-	if((camera.target.x <= boxContainer[0].max.x) && (camera.target.y <= boxContainer[0].max.y) && (camera.target.z <= boxContainer[0].max.z)
-					&& (camera.target.x >= boxContainer[0].min.x) && (camera.target.y >= boxContainer[0].min.y) && (camera.target.z >= boxContainer[0].min.z))
+	if((camera.target.x <= boxContainer[0].max.x) && 
+		(camera.target.y <= boxContainer[0].max.y) && 
+		(camera.target.z <= boxContainer[0].max.z) &&
+		(camera.target.x >= boxContainer[0].min.x) &&
+		(camera.target.y >= boxContainer[0].min.y) &&
+		(camera.target.z >= boxContainer[0].min.z) 
+		||
+		(camera.target.x <= boxContainer2[0].max.x) && 
+		(camera.target.y <= boxContainer2[0].max.y) && 
+		(camera.target.z <= boxContainer2[0].max.z) &&
+		(camera.target.x >= boxContainer2[0].min.x) &&
+		(camera.target.y >= boxContainer2[0].min.y) &&
+		(camera.target.z >= boxContainer2[0].min.z)
+		||
+		(camera.target.x <= boxContainer3[0].max.x) && 
+		(camera.target.y <= boxContainer3[0].max.y) && 
+		(camera.target.z <= boxContainer3[0].max.z) &&
+		(camera.target.x >= boxContainer3[0].min.x) &&
+		(camera.target.y >= boxContainer3[0].min.y) &&
+		(camera.target.z >= boxContainer3[0].min.z))
 	{
 		collide = true;
 	}
@@ -883,7 +1104,6 @@ void StudioProject::Update(double dt)
 	{
 		collide = false;
 	}
-	//cout << collide;
 
 	//====Camera coordinates===//
 	std::ostringstream ss;
@@ -935,13 +1155,12 @@ void StudioProject::Update(double dt)
 		if (showInventory == false)
 		{
 			showInventory = true;
-			elapsedTime2 -= 0.15;
 		}
 		else if (showInventory == true)
 		{
 			showInventory = false;
-			elapsedTime2 -= 0.15;
 		}
+		elapsedTime2 -= 0.15;
 	}
 	//std::cout << elapsedTime2 << endl;
 
@@ -1223,15 +1442,16 @@ void StudioProject::RenderSupermarket()
 	modelStack.Translate(-21,-1,1-11);
 	RenderMesh(meshList[GEO_RAIL],B_Light);
 	modelStack.PopMatrix();
+
 }
 
 void StudioProject::RenderItems()
 {
-	for(int i = 0; i < Container.size(); ++i)
+	for(int i = 0; i < Container.size(); ++i) //Container 1
 	{
 		if(Container[i].getRender() == true)
 		{
-			//========FIRST Middle Shelf, TOP row=============//
+			//========MIDDLE ROW FRONT=========//
 			modelStack.PushMatrix();
 			modelStack.LoadMatrix(Container[i].getTRS());
 			modelStack.Rotate(90,0,1,0);
@@ -1239,7 +1459,42 @@ void StudioProject::RenderItems()
 			modelStack.PopMatrix(); //pop back to origin
 		}
 	}
-
+	for(int i = 0; i < Container2.size(); ++i) //Container 2
+	{
+		if(Container2[i].getRender() == true)
+		{
+			//========MIDDLE ROW BACK=========//
+			modelStack.PushMatrix();
+			modelStack.LoadMatrix(Container2[i].getTRS());
+			modelStack.Rotate(270,0,1,0);
+			RenderMesh(Container2[i].getMesh(),B_Light);
+			modelStack.PopMatrix(); //pop back to origin
+		}
+	}
+	for(int i = 0; i < Container2.size(); ++i) //Container 3
+	{
+		if(Container2[i].getRender() == true)
+		{
+			//========MIDDLE ROW BACK=========//
+			modelStack.PushMatrix();
+			modelStack.LoadMatrix(Container2[i].getTRS());
+			modelStack.Rotate(270,0,1,0);
+			RenderMesh(Container2[i].getMesh(),B_Light);
+			modelStack.PopMatrix(); //pop back to origin
+		}
+	}
+	for(int i = 0; i < Container3.size(); ++i) //Container 3
+	{
+		if(Container3[i].getRender() == true)
+		{
+			//========MIDDLE ROW BACK=========//
+			modelStack.PushMatrix();
+			modelStack.LoadMatrix(Container3[i].getTRS());
+			modelStack.Rotate(270,0,1,0);
+			RenderMesh(Container3[i].getMesh(),B_Light);
+			modelStack.PopMatrix(); //pop back to origin
+		}
+	}
 	modelStack.PushMatrix();
 	modelStack.Translate(camera.target.x,camera.target.y, camera.target.z);
 	modelStack.Rotate(90,0,1,0);
@@ -1258,11 +1513,11 @@ void StudioProject::RenderItems()
 	RenderMesh(meshList[GEO_CANFOOD3],B_Light);
 	modelStack.PopMatrix();*/
 
-	modelStack.PushMatrix();
-	modelStack.Translate(0, 0, 6);
-	modelStack.Scale(2, 2, 2);
-	RenderMesh(meshList[GEO_COKE_CAN],B_Light);// Coke
-	modelStack.PopMatrix();
+	//modelStack.PushMatrix();
+	//modelStack.Translate(0, 0, 6);
+	//modelStack.Scale(2, 2, 2);
+	//RenderMesh(meshList[GEO_COKE_CAN],B_Light);// Coke
+	//modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 0, 5);
@@ -1301,13 +1556,16 @@ void StudioProject::RenderItems()
 	modelStack.Rotate(-90,0,1,0);
 	RenderMesh(meshList[GEO_POTATOCHIPS],B_Light);
 	modelStack.PopMatrix();
+
 }
 
 void StudioProject::RenderModel()
 {
+
 	modelStack.PushMatrix();
 	modelStack.Translate(charPosition.x, 0, charPosition.z);
 	modelStack.Rotate(angle, 0, angle, 1);
+
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3.6, 0);

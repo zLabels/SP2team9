@@ -124,7 +124,6 @@ private:
 		GEO_CEREALBOX2,
 		GEO_PIZZABOX,
 		GEO_POTATOCHIPS,
-		GEO_CANTEST,
 
 		modelHead,			//Model Head
 		modelTorso,			//Model Torso
@@ -207,10 +206,10 @@ private:
 	CGuard testing;
 
 	//=========Items=========//
-	CItem sardineCan, PnCCan, BBCan, MiloCan;
-	vector<CItem> Container;
+	CItem sardineCan, PnCCan, BBCan, MiloCan, CokeCan;
+	vector<CItem> Container, Container2, Container3;
 
-	vector<hitBox> boxContainer;
+	vector<hitBox> boxContainer, boxContainer2, boxContainer3;
 
 	Camera3 camera;
 
