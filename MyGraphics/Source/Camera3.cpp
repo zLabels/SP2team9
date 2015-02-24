@@ -25,11 +25,11 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	CAMERA_SPEED = 15.f;
 	
 	//=======Collision=========//
-	//Middle shelf
-	/*maxPos.Set(13.4, 10, 15.2);
-	minPos.Set(8.3, -10, -9.3);
-	maximum.push_back(maxPos);
-	minimum.push_back(minPos);*/
+	////Middle shelf
+	//maxPos.Set(13.4, 10, 15.2);
+	//minPos.Set(8.3, -10, -9.3);
+	//maximum.push_back(maxPos);
+	//minimum.push_back(minPos);
 
 	//Left shelf (closer to cashier)
 	maxPos.Set(18.3,10,-33.5);
@@ -88,6 +88,66 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	//Right cashier
 	maxPos.Set(-18,5,22);
 	minPos.Set(-30,-5,17.6);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Right cashier (cash register)
+	maxPos.Set(-26.6,5,19);
+	minPos.Set(-29.9,-5,14);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Middle cashier
+	maxPos.Set(-18.1,5,4.6);
+	minPos.Set(-30.1,-5,0.84);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Middle cashier(Cash Register)
+	maxPos.Set(-26,5,2.1);
+	minPos.Set(-30.1,-5,-2.1);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Left Cashier
+	maxPos.Set(-18,5,-13);
+	minPos.Set(-30.4,-5,-17.1);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Left Cashier(Cash Register)
+	maxPos.Set(-26,5,-17);
+	minPos.Set(-30.5,-5,-20.4);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Right entrance (wall)
+	maxPos.Set(-53.8,40,96.2);
+	minPos.Set(-57,-5,19.4);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Left entrance (wall)
+	maxPos.Set(-54.3,40,-19.2);
+	minPos.Set(-57,-5,-96.2);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Left side (wall)
+	maxPos.Set(56.8,40,-93.5);
+	minPos.Set(-57,-5,-96.4);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Back (wall)
+	maxPos.Set(57.5,40,96.2);
+	minPos.Set(54.5,-5,-96);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Right side (wall)
+	maxPos.Set(95,40,96.4);
+	minPos.Set(-57.5,-5,93.2);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
 }
