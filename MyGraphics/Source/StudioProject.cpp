@@ -1488,20 +1488,8 @@ void StudioProject::Update(double dt)
 	/*========================================================
 							Player
 	=========================================================*/
-	player.setPosition(camera.position.x,camera.position.y-4,camera.position.z-5);
-	//player.setPosition(camera.position.y);
-	//player.setPosition(camera.position.z);
-	cout << player.getPosition().x << endl;
-	cout << player.getPosition().y << endl;
-	cout << player.getPosition().z << endl;
-	if(Application::IsKeyPressed(VK_LEFT))
-	{
-		playerAngle += (float)(100.f * dt);
-	}
-	if(Application::IsKeyPressed(VK_RIGHT))
-	{
-		playerAngle -= (float)(100.f * dt);
-	}
+	player.setPosition(camera.position.x,camera.position.y,camera.position.z);
+
 	/*=======================================================
 						Interactions
 	==========================================================*/
@@ -1518,7 +1506,7 @@ void StudioProject::Update(double dt)
 
 		if(Closed == false && doorMoving == true)
 		{
-			doorTranslate -=(float)(100*dt);
+			doorTranslate -=(float)(35*dt);
 			if(doorTranslate < -20)
 			{
 				doorMoving = false;
@@ -1534,7 +1522,7 @@ void StudioProject::Update(double dt)
 		Opened = false;
 		if(Opened == false && Closed == false )
 		{
-			doorTranslate +=(float)(50*dt);
+			doorTranslate +=(float)(35*dt);
 			if(doorTranslate > 0)
 			{
 				Closed = true;
@@ -2587,8 +2575,13 @@ void StudioProject::RenderItems()
 void StudioProject::RenderModel()
 {
 	modelStack.PushMatrix();
-	modelStack.Translate(player.getPosition().x,player.getPosition().y,player.getPosition().z);
+	modelStack.Translate(0.f,0.f,0.f);
 	modelStack.Rotate(playerAngle, 0, 1, 0);
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 3.6, 0);
+	RenderMesh(player.getTorso(), B_Light);
+	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 1.5, 0);
