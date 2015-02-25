@@ -228,10 +228,10 @@ private:
 	CCustomer Customer;
 
 	//=========Items=========//
-	CItem sardineCan, PnCCan, BBCan, MiloCan, CokeCan;
-	vector<CItem> Container, Container2, Container3;
+	CItem sardineCan, PnCCan, BBCan, MiloCan, CokeCan, PizzaBox, CokeZeroCan, PepsiCan, cerealBox1, cerealBox2, PotatoChip;
+	vector<CItem> Container, Container2, Container3, Container4, Container5, Container6, Container7, Container8, Container9;
 
-	vector<hitBox> boxContainer, boxContainer2, boxContainer3;
+	vector<hitBox> boxContainer, boxContainer2, boxContainer3, boxContainer4, boxContainer5, boxContainer6, boxContainer7, boxContainer8, boxContainer9;
 
 	Camera3 camera;
 
