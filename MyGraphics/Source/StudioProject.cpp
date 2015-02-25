@@ -1261,11 +1261,16 @@ void StudioProject::Init()
 }
 
 //========Variables for use in update====//
+bool Closed = true;
+bool Opened = false;
+bool doorMoving = false;
+bool doorStop = true;
 bool B_Light = true;
 static float ROT_LIMIT = 45.f;
 static float SCALE_LIMIT = 5.f;
 string result;
 
+float doorTranslate = 0;
 //Show Controls
 bool isShown = true;
 
@@ -1473,6 +1478,46 @@ void StudioProject::Update(double dt)
 	/*=======================================================
 						Interactions
 	==========================================================*/
+	//============================DOOR===========================//
+
+	//This part is code for door opening
+	if (camera.position.z <20.1 && camera.position.z >=-19.7 && camera.position.y >=5 && camera.position.y <= 10 && camera.position.x <=-41.5 && camera.position.x >= -76.3)
+	{
+		if(Opened == false &&  Closed == true && doorStop == true)
+		{
+			Closed = false;
+			doorMoving = true;
+		}
+
+		if(Closed == false && doorMoving == true)
+		{
+			doorTranslate -=(float)(100*dt);
+			if(doorTranslate < -20)
+			{
+				doorMoving = false;
+				Opened = true;
+				doorStop = true;
+			}	
+
+		}
+	}
+	//This part is for closing of the door
+	else
+	{
+		Opened = false;
+		if(Opened == false && Closed == false )
+		{
+			doorTranslate +=(float)(50*dt);
+			if(doorTranslate > 0)
+			{
+				Closed = true;
+			}
+
+		}
+	}
+//==============================END OF DOOR ==========================//
+
+
 	if(checking == false)
 	{
 		if(Application::IsKeyPressed('E'))
@@ -2911,6 +2956,22 @@ void StudioProject::Render()
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
+	//=======DOORS=====//
+	//LEFTDOOR
+	modelStack.PushMatrix();
+	modelStack.Translate(-55.75,0.15,doorTranslate);
+	modelStack.Scale(5,5,5);
+	RenderMesh(meshList[GEO_DOORLEFT],B_Light);
+	modelStack.PopMatrix();
+	
+
+	//RIGHTDOOR
+	modelStack.PushMatrix();
+	modelStack.Translate(-56,0,-doorTranslate);
+	modelStack.Scale(5,5,5);
+	RenderMesh(meshList[GEO_DOORRIGHT],B_Light);
+	modelStack.PopMatrix();
+
 	//Rendering of itempage
 	if (showInventory == true)
 	{
@@ -2938,21 +2999,7 @@ void StudioProject::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], "Arrow Keys to turn", Color(0, 0, 0), 2, 1, 28);
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press E to interact", Color(0,0,0), 2, 1, 27);
 	}
-	//=======DOORS=====//
-	//LEFTDOOR
-	modelStack.PushMatrix();
-	modelStack.Translate(-55.75,0.15,0);
-	modelStack.Scale(5,5,5);
-	RenderMesh(meshList[GEO_DOORLEFT],B_Light);
-	modelStack.PopMatrix();
 	
-
-	//RIGHTDOOR
-	modelStack.PushMatrix();
-	modelStack.Translate(-56,0,0);
-	modelStack.Scale(5,5,5);
-	RenderMesh(meshList[GEO_DOORRIGHT],B_Light);
-	modelStack.PopMatrix();
 
 
 
