@@ -182,6 +182,20 @@ void StudioProject::InitMesh()
 	meshList[GEO_POTATOCHIPS]->material.kShininess = 8.f;
 	meshList[GEO_POTATOCHIPS] ->textureID = LoadTGA("Image//potato_chips.tga");
 
+	meshList[GEO_DOORLEFT] = MeshBuilder::GenerateOBJ("Market door left", "OBJ//MarketDoorLeft.obj");
+	meshList[GEO_DOORLEFT]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_DOORLEFT]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_DOORLEFT]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_DOORLEFT]->material.kShininess = 8.f;
+	meshList[GEO_DOORLEFT]->textureID = LoadTGA("Image//MarketDoor.tga");
+
+	meshList[GEO_DOORRIGHT] = MeshBuilder::GenerateOBJ("Market Door Right", "OBJ/MarketDoorRight.obj");
+	meshList[GEO_DOORRIGHT]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_DOORRIGHT]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_DOORRIGHT]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_DOORRIGHT]->material.kShininess = 8.f;
+	meshList[GEO_DOORRIGHT]->textureID = LoadTGA("Image//MarketDoor.tga");
+
 
 
 	//meshList[GEO_CANTEST] = MeshBuilder::GenerateQuad("CANTEST", Color(1, 1, 1), 1.f, 1.f);
@@ -2077,6 +2091,7 @@ void StudioProject::RenderSupermarket()
 	RenderMesh(meshList[GEO_RAIL],B_Light);
 	modelStack.PopMatrix();
 
+	
 }
 
 void StudioProject::RenderItems()
@@ -2693,6 +2708,22 @@ void StudioProject::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], "Arrow Keys to turn", Color(0, 0, 0), 2, 1, 28);
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press E to interact", Color(0,0,0), 2, 1, 27);
 	}
+	//=======DOORS=====//
+	//LEFTDOOR
+	modelStack.PushMatrix();
+	modelStack.Translate(-55.75,0.15,0);
+	modelStack.Scale(5,5,5);
+	RenderMesh(meshList[GEO_DOORLEFT],B_Light);
+	modelStack.PopMatrix();
+	
+
+	//RIGHTDOOR
+	modelStack.PushMatrix();
+	modelStack.Translate(-56,0,0);
+	modelStack.Scale(5,5,5);
+	RenderMesh(meshList[GEO_DOORRIGHT],B_Light);
+	modelStack.PopMatrix();
+
 
 
 }
