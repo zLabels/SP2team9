@@ -217,6 +217,7 @@ private:
 	float rotateRightArms, rotateLeftArms, rotateLeftLeg, rotateRightLeg;
 	float movingCharacterX, movingCharacterZ;
 	Vector3 charPosition;
+	float playerAngle;
 	float angle;
 
 	CPlayer player;

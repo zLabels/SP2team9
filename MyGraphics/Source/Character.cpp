@@ -8,13 +8,15 @@ CCharacter::CCharacter(void)
 	rightHandPtr = (NULL);
 	leftLegPtr = (NULL);
 	rightLegPtr = (NULL);
+
+	position.Set(0.0f,0.0f,0.0f);
 }
 
 CCharacter::~CCharacter(void)
 {
 }
 
-void CCharacter::setCharacter(Mesh* head, Mesh* torso, Mesh* Lhand, Mesh* Rhand, Mesh* Lleg, Mesh* Rleg)
+void CCharacter::setCharacter(Mesh* head, Mesh* torso, Mesh* Lhand, Mesh* Rhand, Mesh* Lleg, Mesh* Rleg,Vector3 pos)
 {
 	HeadPtr = head;
 	TorsoPtr = torso;
@@ -22,7 +24,16 @@ void CCharacter::setCharacter(Mesh* head, Mesh* torso, Mesh* Lhand, Mesh* Rhand,
 	rightHandPtr = Rhand;
 	leftLegPtr = Lleg;
 	rightLegPtr = Rleg;
+	position = pos;
 }
+
+void CCharacter::setPosition(float x,float y,float z)
+{
+	position.x = x;
+	position.y = y;
+	position.z = z;
+}
+
 Mesh* CCharacter::getHead(void)
 {
 	return HeadPtr;
@@ -46,4 +57,9 @@ Mesh* CCharacter::getLLeg(void)
 Mesh* CCharacter::getRLeg(void)
 {
 	return rightLegPtr;
+}
+
+Vector3 CCharacter::getPosition(void)
+{
+	return position;
 }

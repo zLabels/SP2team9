@@ -399,9 +399,18 @@ void StudioProject::InitVariables()
 	roomheight = 150.0f;
 	fps = 0.0f;
 	angle = 3600;
+	playerAngle = 0;
 	moving = 0;
 	showInventory = false;
 	int a = 0;
+
+	//variable to animate model
+	rotateRightArms = rotateLeftArms = rotateRightLeg = rotateLeftLeg = 360;
+	charPosition.Set(0.f, 0.f,0.f);
+	movingModel = false;
+	movingCharacterX = movingCharacterZ = 0;
+
+	Framerate = "FPS: ";
 
 	//===============Sardine Can Variables============//
 	Mesh* newMesh;
@@ -470,7 +479,7 @@ void StudioProject::InitVariables()
 		Container.push_back(PnCCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Min.Set(-0.59+newTRS.a[12],-0.1+newTRS.a[13],-0.35+newTRS.a[14]);
 		PnC.SetBox(Max, Min);
 		boxContainer.push_back(PnC);
 	}
@@ -828,7 +837,6 @@ void StudioProject::InitVariables()
 		boxContainer9.push_back(PC);
 	}
 	a = 0;
-
 	for(int i = 0; i < 40;i++)
 	{
 		Mtx44 newTRS;
@@ -1086,6 +1094,8 @@ void StudioProject::InitCharacters()
 	Mesh* newRHand;
 	Mesh* newLLeg;
 	Mesh* newRLeg;
+	Vector3 newPosition;
+	newPosition.Set(0.0f,0.0f,0.0f);
 
 	/*========================================================================
 									PLAYER
@@ -1133,7 +1143,7 @@ void StudioProject::InitCharacters()
 	newRLeg->material.kShininess = 8.f;
 	newRLeg->textureID = LoadTGA("Image//modelLeg.tga");
 
-	player.setCharacter(newHead,newTorso,newLHand,newRHand,newLLeg,newRLeg);
+	player.setCharacter(newHead,newTorso,newLHand,newRHand,newLLeg,newRLeg,newPosition);
 
 	/*========================================================================
 									Guard
@@ -1181,7 +1191,7 @@ void StudioProject::InitCharacters()
 	newRLeg->material.kShininess = 8.f;
 	newRLeg->textureID = LoadTGA("Image//guardLeg.tga");
 
-	Guard1.setCharacter(newHead,newTorso,newLHand,newRHand,newLLeg,newRLeg);
+	Guard1.setCharacter(newHead,newTorso,newLHand,newRHand,newLLeg,newRLeg,newPosition);
 	////===============GUARD OBJs==========================//
 	//meshList[guardHead] = MeshBuilder::GenerateOBJ("Guard Head", "OBJ//cashierHead.obj");
 	//meshList[guardHead]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -1318,11 +1328,11 @@ void StudioProject::Update(double dt)
 		isShown = false;
 	}
 
-	//===Character Contorl===//
-	int ROTATE_SPEED = 50;
+	//===Character Control===//
+	static float ROTATE_SPEED = 50.f;
 	static int count = 0;
 
-	if (Application::IsKeyPressed('8') || Application::IsKeyPressed('9')) //currently i set it to press 9 to animate character
+	if (Application::IsKeyPressed('W') || Application::IsKeyPressed('A')  || Application::IsKeyPressed('S')  || Application::IsKeyPressed('D')) //currently i set it to press 9 to animate character
 	{
 		movingModel = true;
 	}
@@ -1456,7 +1466,7 @@ void StudioProject::Update(double dt)
 		}
 	}
 
-	if (Application::IsKeyPressed('8'))
+	/*if (Application::IsKeyPressed('8'))
 	{
 		charPosition.z += cos(Math::DegreeToRadian(angle)) * 10 * dt;
 		charPosition.x += sin(Math::DegreeToRadian(angle)) * 10 * dt;
@@ -1465,7 +1475,7 @@ void StudioProject::Update(double dt)
 	{
 		charPosition.z -= cos(Math::DegreeToRadian(angle)) * 10 * dt;
 		charPosition.x -= sin(Math::DegreeToRadian(angle)) * 10 * dt;
-	}
+	}*/
 	if (Application::IsKeyPressed('I'))
 	{
 		angle += 100 * dt;
@@ -1474,7 +1484,24 @@ void StudioProject::Update(double dt)
 	{
 		angle -= 100 * dt;
 	}
-	
+
+	/*========================================================
+							Player
+	=========================================================*/
+	player.setPosition(camera.position.x,camera.position.y-4,camera.position.z-5);
+	//player.setPosition(camera.position.y);
+	//player.setPosition(camera.position.z);
+	cout << player.getPosition().x << endl;
+	cout << player.getPosition().y << endl;
+	cout << player.getPosition().z << endl;
+	if(Application::IsKeyPressed(VK_LEFT))
+	{
+		playerAngle += (float)(100.f * dt);
+	}
+	if(Application::IsKeyPressed(VK_RIGHT))
+	{
+		playerAngle -= (float)(100.f * dt);
+	}
 	/*=======================================================
 						Interactions
 	==========================================================*/
@@ -2559,16 +2586,9 @@ void StudioProject::RenderItems()
 
 void StudioProject::RenderModel()
 {
-
 	modelStack.PushMatrix();
-	modelStack.Translate(charPosition.x, 0, charPosition.z);
-	modelStack.Rotate(angle, 0, angle, 1);
-
-
-	modelStack.PushMatrix();
-	modelStack.Translate(0, 3.6, 0);
-	RenderMesh(player.getHead(), B_Light);
-	modelStack.PopMatrix();
+	modelStack.Translate(player.getPosition().x,player.getPosition().y,player.getPosition().z);
+	modelStack.Rotate(playerAngle, 0, 1, 0);
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 1.5, 0);
@@ -2896,8 +2916,7 @@ void StudioProject::Render()
 
 	//Rendering of CharacterModel
 	modelStack.PushMatrix();
-	modelStack.Scale(1.2, 1.2, 1.2);
-	modelStack.Rotate(90, 0, 90, 0);
+	//modelStack.Scale(1.2, 1.2, 1.2);
 	RenderModel();
 	modelStack.PopMatrix();
 
