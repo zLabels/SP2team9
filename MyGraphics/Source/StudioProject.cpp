@@ -883,6 +883,93 @@ void StudioProject::InitVariables()
 	}
 	a = 0;
 
+	//===============Milo Cam Variables============//
+	newMesh = MeshBuilder::GenerateOBJ("Milo Can" , "OBJ//milocan.obj");
+	newMesh->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newMesh->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newMesh->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newMesh->material.kShininess = 8.f;
+	newMesh->textureID = LoadTGA("Image//milocan.tga");
+	hitBox MC;
+	for(int i = 0; i < 54; i += 2) //Milo front Shelves Left
+	{
+		Mtx44 newTRS;
+		if(i % 3 == 0 && i > 0)
+		{
+			a += 0.5;
+		}
+		newTRS.SetToTranslation(-32 +i + a, 6.3,-57);
+		MiloCan.SetData("MiloCan", 3.5f, true, newMesh, GEO_MILOCAN,newTRS);
+		Container11.push_back(MiloCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
+		MC.SetBox(Max, Min);
+		boxContainer11.push_back(MC);
+	}
+	a = 0;
+
+	for(int i = 0; i < 54; i += 2) //Milo back Shelves Right
+	{
+		Mtx44 newTRS;
+		if(i % 3 == 0 && i > 0)
+		{
+			a += 0.5;
+		}
+		newTRS.SetToTranslation(-32 +i + a, 6.3, 59);
+		MiloCan.SetData("MiloCan", 3.5f, true, newMesh, GEO_MILOCAN,newTRS);
+		Container11.push_back(MiloCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
+		MC.SetBox(Max, Min);
+		boxContainer11.push_back(MC);
+	}
+	a = 0;
+
+	for(int i = 0; i < 54; i += 2) //Milo back Shelves Left
+	{
+		Mtx44 newTRS;
+		if(i % 3 == 0 && i > 0)
+		{
+			a += 0.5;
+		}
+		newTRS.SetToTranslation(-32 +i + a, 6.3,-59.3);
+		MiloCan.SetData("MiloCan", 3.5f, true, newMesh, GEO_MILOCAN,newTRS);
+		Container12.push_back(MiloCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
+		MC.SetBox(Max, Min);
+		boxContainer12.push_back(MC);
+	}
+	a = 0;
+
+	for(int i = 0; i < 54; i += 2) //Milo back Shelves Left
+	{
+		Mtx44 newTRS;
+		if(i % 3 == 0 && i > 0)
+		{
+			a += 0.5;
+		}
+		newTRS.SetToTranslation(-32 +i + a, 6.3,57);
+		MiloCan.SetData("MiloCan", 3.5f, true, newMesh, GEO_MILOCAN,newTRS);
+		Container12.push_back(MiloCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
+		MC.SetBox(Max, Min);
+		boxContainer12.push_back(MC);
+	}
+	a = 0;
+
+	/*meshList[GEO_MILOCAN] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//milocan.obj");
+	meshList[GEO_MILOCAN]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_MILOCAN]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_MILOCAN]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_MILOCAN]->material.kShininess = 8.f;
+	meshList[GEO_MILOCAN] ->textureID = LoadTGA("Image//milocan.tga");*/
+
 	//variable to animate model
 	rotateRightArms = rotateLeftArms = rotateRightLeg = rotateLeftLeg = 360;
 	movingModel = false;
@@ -1587,6 +1674,45 @@ void StudioProject::Update(double dt)
 					}
 				}
 			}
+
+			for(int i = 0; i < boxContainer11.size(); ++i) //Container 11
+			{
+				checking = true;
+				//==========Taking Items from shelf=============//
+				if(Container11[i].getRender() == true)
+				{
+					if((camera.target.x <= boxContainer11[i].max.x) && 
+						(camera.target.y <= boxContainer11[i].max.y) && 
+						(camera.target.z <= boxContainer11[i].max.z) && 
+						(camera.target.x >= boxContainer11[i].min.x) && 
+						(camera.target.y >= boxContainer11[i].min.y) && 
+						(camera.target.z >= boxContainer11[i].min.z))
+					{
+						player.getInventory().AddItem(Container11[i]);
+						Container11[i].setRender(false);
+						break;
+					}
+				}
+			}
+			for(int i = 0; i < boxContainer12.size(); ++i) //Container 12
+			{
+				checking = true;
+				//==========Taking Items from shelf=============//
+				if(Container12[i].getRender() == true)
+				{
+					if((camera.target.x <= boxContainer12[i].max.x) && 
+						(camera.target.y <= boxContainer12[i].max.y) && 
+						(camera.target.z <= boxContainer12[i].max.z) && 
+						(camera.target.x >= boxContainer12[i].min.x) && 
+						(camera.target.y >= boxContainer12[i].min.y) && 
+						(camera.target.z >= boxContainer12[i].min.z))
+					{
+						player.getInventory().AddItem(Container12[i]);
+						Container12[i].setRender(false);
+						break;
+					}
+				}
+			}
 			checking = false;
 		}
 	}
@@ -1764,6 +1890,40 @@ void StudioProject::Update(double dt)
 				{
 					player.getInventory().removeItem(Container10[i]);
 					Container10[i].setRender(true);
+					break;
+				}
+			}
+		}
+		for(int i = 0; i < boxContainer11.size(); ++i)//Container 11
+		{
+			if(Container11[i].getRender() == false)
+			{
+				if((camera.target.x <= boxContainer11[i].max.x) && 
+					(camera.target.y <= boxContainer11[i].max.y) && 
+					(camera.target.z <= boxContainer11[i].max.z) &&
+					(camera.target.x >= boxContainer11[i].min.x) && 
+					(camera.target.y >= boxContainer11[i].min.y) &&
+					(camera.target.z >= boxContainer11[i].min.z))
+				{
+					player.getInventory().removeItem(Container11[i]);
+					Container11[i].setRender(true);
+					break;
+				}
+			}
+		}
+		for(int i = 0; i < boxContainer12.size(); ++i)//Container 12
+		{
+			if(Container12[i].getRender() == false)
+			{
+				if((camera.target.x <= boxContainer12[i].max.x) && 
+					(camera.target.y <= boxContainer12[i].max.y) && 
+					(camera.target.z <= boxContainer12[i].max.z) &&
+					(camera.target.x >= boxContainer12[i].min.x) && 
+					(camera.target.y >= boxContainer12[i].min.y) &&
+					(camera.target.z >= boxContainer12[i].min.z))
+				{
+					player.getInventory().removeItem(Container11[i]);
+					Container11[i].setRender(true);
 					break;
 				}
 			}
@@ -2261,6 +2421,30 @@ void StudioProject::RenderItems()
 			modelStack.LoadMatrix(Container10[i].getTRS());
 			modelStack.Rotate(180,0,1,0);
 			RenderMesh(Container10[i].getMesh(),B_Light);
+			modelStack.PopMatrix(); //pop back to origin
+		}
+	}
+	for(int i = 0; i < Container11.size(); ++i) //Container 11
+	{
+		if(Container11[i].getRender() == true)
+		{
+			//========MIDDLE ROW BACK=========//
+			modelStack.PushMatrix();
+			modelStack.LoadMatrix(Container11[i].getTRS());
+			modelStack.Rotate(180,0,1,0);
+			RenderMesh(Container11[i].getMesh(),B_Light);
+			modelStack.PopMatrix(); //pop back to origin
+		}
+	}
+	for(int i = 0; i < Container12.size(); ++i) //Container 12
+	{
+		if(Container12[i].getRender() == true)
+		{
+			//========MIDDLE ROW BACK=========//
+			modelStack.PushMatrix();
+			modelStack.LoadMatrix(Container12[i].getTRS());
+			//modelStack.Rotate(180,0,1,0);
+			RenderMesh(Container12[i].getMesh(),B_Light);
 			modelStack.PopMatrix(); //pop back to origin
 		}
 	}
