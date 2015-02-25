@@ -28,7 +28,7 @@ public:
 	Vector3 minPos;
 	Vector3 tempPos;
 	Vector3 tempTarg;
-	Vector3 tempView;
+
 	bool escal;
 	bool escaldown;
 	bool isCrouching;

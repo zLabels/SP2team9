@@ -2,7 +2,6 @@
 
 CInventory::CInventory(void)
 {
-	NoOfItems = 0;
 }
 
 
@@ -12,16 +11,24 @@ CInventory::~CInventory(void)
 
 void CInventory::AddItem(CItem temp)
 {
-	if(NoOfItems < 10)
+	if(Container.size() < 10)
 	{
 		Container.push_back(temp);
-		NoOfItems++;
 	}
 }
 
 CItem CInventory::getItem(int pos)
 {
-	return Container[pos];
+	pos = pos - 1;
+	if(pos < Container.size())
+	{
+		return Container[pos];
+	}
+}
+
+int CInventory::getNoOfItems(void)
+{
+	return Container.size();
 }
 
 void CInventory::removeItem(int pos)

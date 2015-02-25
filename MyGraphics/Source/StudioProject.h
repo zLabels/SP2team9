@@ -177,6 +177,7 @@ private:
 	void RenderGuard();
 	void RenderCustomer();
 	void RenderItems();
+	void RenderPlayerInfo();
 
 public:
 	StudioProject();
@@ -219,6 +220,7 @@ private:
 	Vector3 charPosition;
 	float playerAngle;
 	float angle;
+	string Cash;
 
 	CPlayer player;
 	CGuard Guard1;

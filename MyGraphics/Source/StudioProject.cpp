@@ -412,6 +412,8 @@ void StudioProject::InitVariables()
 
 	Framerate = "FPS: ";
 
+	Cash = "";
+
 	//===============Sardine Can Variables============//
 	Mesh* newMesh;
 	newMesh = MeshBuilder::GenerateOBJ("SardineCan" , "OBJ//canned-food1.obj");
@@ -1332,7 +1334,7 @@ void StudioProject::Update(double dt)
 	static float ROTATE_SPEED = 50.f;
 	static int count = 0;
 
-	if (Application::IsKeyPressed('W') || Application::IsKeyPressed('A')  || Application::IsKeyPressed('S')  || Application::IsKeyPressed('D')) //currently i set it to press 9 to animate character
+	if (Application::IsKeyPressed('8') || Application::IsKeyPressed('9')) //currently i set it to press 9 to animate character
 	{
 		movingModel = true;
 	}
@@ -1982,8 +1984,8 @@ void StudioProject::Update(double dt)
 					(camera.target.y >= boxContainer12[i].min.y) &&
 					(camera.target.z >= boxContainer12[i].min.z))
 				{
-					player.getInventory().removeItem(Container11[i]);
-					Container11[i].setRender(true);
+					player.getInventory().removeItem(Container12[i]);
+					Container12[i].setRender(true);
 					break;
 				}
 			}
@@ -2003,6 +2005,12 @@ void StudioProject::Update(double dt)
 	{
 		collide = false;
 	}
+
+
+	//if(player.getInventory().getNoOfItems() > 0)
+	//{
+	//	cout << player.getInventory().getItem(1).getName() << endl;
+	//}
 
 	//====Camera coordinates===//
 	std::ostringstream ss;
@@ -2034,6 +2042,11 @@ void StudioProject::Update(double dt)
 	std::ostringstream ss7;
 	ss7 <<  camera.target.z;
 	viewz = ss7.str();
+
+	//====Player Money===//
+	std::ostringstream ss8;
+	ss8 <<  player.getMoney();
+	Cash = ss8.str();
 
 	//================Item Inventory Image=================//
 	static float elapsedTime1 = 0, elapsedTime2 = 0;
@@ -2823,6 +2836,11 @@ void StudioProject::RenderCustomer()
 	modelStack.PopMatrix();
 }
 
+void StudioProject::RenderPlayerInfo()
+{
+	RenderTextOnScreen(meshList[GEO_TEXT],"Money: " + Cash, Color(0, 0, 1), 3, 1, 18);
+}
+
 void StudioProject::Render()
 {
 	//clear depth and color buffer
@@ -2990,6 +3008,7 @@ void StudioProject::Render()
 		RenderImageOnScreen(meshList[itemInventory], "Item Inventory", Color(1, 1, 1), 100, 1, 1);
 	}
 
+	RenderPlayerInfo();
 	
 
 	//============DEBUGGING PURPOSES====================//

@@ -245,7 +245,6 @@ void Camera3::Update(double dt)
 		position -= right * CAMERA_SPEED * dt;
 		target -= right * CAMERA_SPEED * dt;
 
-		tempView = view;
 		//===Collision Check==//
 		BoundsCheck();
 
@@ -272,7 +271,6 @@ void Camera3::Update(double dt)
 		position -= right * CAMERA_SPEED * dt;
 		target -= right * CAMERA_SPEED * dt;
 
-		tempView = view;
 		//===Collision Check==//
 		BoundsCheck();
 
@@ -296,8 +294,6 @@ void Camera3::Update(double dt)
 		target -= view * CAMERA_SPEED * dt;
 		position -= view * CAMERA_SPEED * dt;
 
-		tempView = view;
-
 		//===Collision Check==//
 
 		BoundsCheck();
@@ -320,8 +316,6 @@ void Camera3::Update(double dt)
 		Vector3 view = (target - position).Normalized();
 		target -= view * CAMERA_SPEED * dt;
 		position -= view * CAMERA_SPEED * dt;
-
-		tempView = view;
 
 		//===Collision Check==//
 
@@ -351,8 +345,6 @@ void Camera3::Update(double dt)
 		position += right * CAMERA_SPEED * dt;
 		target += right * CAMERA_SPEED * dt;
 
-		tempView = view;
-
 		//===Collision Check==//
 		BoundsCheck();
 
@@ -378,8 +370,6 @@ void Camera3::Update(double dt)
 		position += right * CAMERA_SPEED * dt;
 		target += right * CAMERA_SPEED * dt;
 
-		tempView = view;
-
 		//===Collision Check==//
 		BoundsCheck();
 
@@ -404,8 +394,6 @@ void Camera3::Update(double dt)
 		target += view * CAMERA_SPEED * dt;
 		position += view * CAMERA_SPEED * dt;
 
-		tempView = view;
-
 		//===Collision Check==//
 		BoundsCheck();
 
@@ -427,8 +415,6 @@ void Camera3::Update(double dt)
 		Vector3 view = (target - position).Normalized();
 		target += view * CAMERA_SPEED * dt;
 		position += view * CAMERA_SPEED * dt;
-
-		tempView = view;
 
 		//===Collision Check==//
 		BoundsCheck();
@@ -454,12 +440,9 @@ void Camera3::Update(double dt)
 	{
 		float pitch = (float)(-TURN_SPEED * dt);
 		Vector3 view = (target - position).Normalized();
-		Vector3 right = view.Cross(up);
-		right.y = 0;
-		right.Normalize();
-		up = right.Cross(view).Normalized();
 		Mtx44 rotation;
-		rotation.SetToRotation(pitch, up.x, up.y, up.z);
+		rotation.SetToRotation(pitch, 0,1, 0);
+		up = rotation * up;
 		view = rotation * view;
 		target = (rotation * (target - position)) + position;
 	}
@@ -467,18 +450,15 @@ void Camera3::Update(double dt)
 	if(Application::IsKeyPressed(VK_LEFT))
 	{
 		float pitch = (float)(TURN_SPEED * dt);
-		Vector3 view = (target - position).Normalized();
-		Vector3 right = view.Cross(up);
-		right.y = 0;
-		right.Normalize();
-		up = right.Cross(view).Normalized();
+		Vector3 view = (target - position).Normalized();	
 		Mtx44 rotation;
-		rotation.SetToRotation(pitch, up.x, up.y, up.z);
+		rotation.SetToRotation(pitch, 0,1, 0);
+		up = rotation * up;
 		view = rotation * view;
 		target = (rotation * (target - position)) + position;
 	}
 	//==Look Down==//
-	if(temp > -60)
+	if(temp > -20)
 	{
 		if(Application::IsKeyPressed(VK_DOWN))
 		{
@@ -493,14 +473,12 @@ void Camera3::Update(double dt)
 			view = rotation * view;
 			target = (rotation * (target - position)) + position;
 
-			tempView = view;
-
 			//==View Limiter==//
 			temp--;
 		}
 	}
 	//==Look Up==//
-	if(temp < 80)
+	if(temp < 20)
 	{
 		if(Application::IsKeyPressed(VK_UP))
 		{
@@ -515,7 +493,6 @@ void Camera3::Update(double dt)
 			view = rotation * view;
 			target = (rotation * (target - position)) + position;
 
-			tempView = view;
 
 			//==View Limiter==//
 			temp++;
@@ -643,6 +620,7 @@ void Camera3::Update(double dt)
 			isCrouching = false;
 		}
 	}
+
 	if(Application::IsKeyPressed('R'))
 	{
 		Reset();
