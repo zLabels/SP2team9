@@ -274,49 +274,6 @@ void StudioProject::InitMesh()
 	meshList[cashierRightLeg]->material.kShininess = 8.f;
 	meshList[cashierRightLeg]->textureID = LoadTGA("Image//cashierLeg.tga");
 
-	//===============GUARD OBJs==========================//
-	meshList[guardHead] = MeshBuilder::GenerateOBJ("Guard Head", "OBJ//cashierHead.obj");
-	meshList[guardHead]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	meshList[guardHead]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	meshList[guardHead]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	meshList[guardHead]->material.kShininess = 8.f;
-	meshList[guardHead]->textureID = LoadTGA("Image//guardHead.tga");
-
-	meshList[guardTorso] = MeshBuilder::GenerateOBJ("Guard Torso", "OBJ//cashierTorso.obj");
-	meshList[guardTorso]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	meshList[guardTorso]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	meshList[guardTorso]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	meshList[guardTorso]->material.kShininess = 8.f;
-	meshList[guardTorso]->textureID = LoadTGA("Image//guardTorso.tga");
-
-	meshList[guardRightHand] = MeshBuilder::GenerateOBJ("guard Right Hand", "OBJ//cashierHand.obj");
-	meshList[guardRightHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	meshList[guardRightHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	meshList[guardRightHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	meshList[guardRightHand]->material.kShininess = 8.f;
-	meshList[guardRightHand]->textureID = LoadTGA("Image//guardHand.tga");
-
-	meshList[guardLeftHand] = MeshBuilder::GenerateOBJ("guard Left Hand", "OBJ//cashierHand.obj");
-	meshList[guardLeftHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	meshList[guardLeftHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	meshList[guardLeftHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	meshList[guardLeftHand]->material.kShininess = 8.f;
-	meshList[guardLeftHand]->textureID = LoadTGA("Image//guardHand.tga");
-
-	meshList[guardLeftLeg] = MeshBuilder::GenerateOBJ("guard Left Leg", "OBJ//cashierLeg.obj");
-	meshList[guardLeftLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	meshList[guardLeftLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	meshList[guardLeftLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	meshList[guardLeftLeg]->material.kShininess = 8.f;
-	meshList[guardLeftLeg]->textureID = LoadTGA("Image//guardLeg.tga");
-
-	meshList[guardRightLeg] = MeshBuilder::GenerateOBJ("guard Right Leg", "OBJ//cashierLeg.obj");
-	meshList[guardRightLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	meshList[guardRightLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	meshList[guardRightLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	meshList[guardRightLeg]->material.kShininess = 8.f;
-	meshList[guardRightLeg]->textureID = LoadTGA("Image//guardLeg.tga");
-
 	//===============CUSTOMER OBJs==========================//
 	meshList[customerHead] = MeshBuilder::GenerateOBJ("customer Head", "OBJ//cashierHead.obj");
 	meshList[customerHead]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -418,6 +375,7 @@ void StudioProject::InitMesh()
 	//Text Related
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//CourierNew.tga");
+
 }
 void StudioProject::InitVariables()
 {
@@ -744,7 +702,153 @@ void StudioProject::InitShaders()
 	glUniform1f(m_parameters[U_LIGHT1_COSINNER], lights[1].cosInner);
 	glUniform1f(m_parameters[U_LIGHT1_EXPONENT], lights[1].exponent);
 }
+void StudioProject::InitCharacters()
+{
+	Mesh* newHead;
+	Mesh* newTorso;
+	Mesh* newLHand;
+	Mesh* newRHand;
+	Mesh* newLLeg;
+	Mesh* newRLeg;
 
+	/*========================================================================
+									PLAYER
+	===========================================================================*/
+
+	newHead = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelHead.obj");
+	newHead->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newHead->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newHead->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newHead->material.kShininess = 8.f;
+	newHead->textureID = LoadTGA("Image//modelHead.tga");
+
+	newTorso = MeshBuilder::GenerateOBJ("Character Torso", "OBJ//modelTorso.obj");
+	newTorso->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newTorso->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newTorso->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newTorso->material.kShininess = 8.f;
+	newTorso->textureID = LoadTGA("Image//modelTorso.tga");
+
+	newLHand = MeshBuilder::GenerateOBJ("Character Left Hand", "OBJ//modelArm.obj");
+	newLHand->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newLHand->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newLHand->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newLHand->material.kShininess = 8.f;
+	newLHand->textureID = LoadTGA("Image//modelHand.tga");
+	
+	newRHand = MeshBuilder::GenerateOBJ("Character Right Hand ", "OBJ//modelArm.obj");
+	newRHand->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newRHand->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newRHand->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newRHand->material.kShininess = 8.f;
+	newRHand->textureID = LoadTGA("Image//modelHand.tga");
+
+	newLLeg = MeshBuilder::GenerateOBJ("Character Left Leg", "OBJ//modelLeg.obj");
+	newLLeg->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newLLeg->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newLLeg->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newLLeg->material.kShininess = 8.f;
+	newLLeg->textureID = LoadTGA("Image//modelLeg.tga");
+
+	newRLeg = MeshBuilder::GenerateOBJ("Character Right Leg", "OBJ//modelLeg.obj");
+	newRLeg->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newRLeg->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newRLeg->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newRLeg->material.kShininess = 8.f;
+	newRLeg->textureID = LoadTGA("Image//modelLeg.tga");
+
+	player.setCharacter(newHead,newTorso,newLHand,newRHand,newLLeg,newRLeg);
+
+	/*========================================================================
+									Guard
+	===========================================================================*/
+
+	newHead = MeshBuilder::GenerateOBJ("Guard Head", "OBJ//cashierHead.obj");
+	newHead->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newHead->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newHead->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newHead->material.kShininess = 8.f;
+	newHead->textureID = LoadTGA("Image//guardHead.tga");
+
+	newTorso = MeshBuilder::GenerateOBJ("Guard Torso", "OBJ//cashierTorso.obj");
+	newTorso->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newTorso->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newTorso->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newTorso->material.kShininess = 8.f;
+	newTorso->textureID = LoadTGA("Image//guardTorso.tga");
+
+	newLHand = MeshBuilder::GenerateOBJ("guard Left Hand", "OBJ//cashierHand.obj");
+	newLHand->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newLHand->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newLHand->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newLHand->material.kShininess = 8.f;
+	newLHand->textureID = LoadTGA("Image//guardHand.tga");
+	
+	newRHand = MeshBuilder::GenerateOBJ("guard Right Hand ", "OBJ//cashierHand.obj");
+	newRHand->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newRHand->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newRHand->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newRHand->material.kShininess = 8.f;
+	newRHand->textureID = LoadTGA("Image//guardHand.tga");
+
+	newLLeg = MeshBuilder::GenerateOBJ("guard Left Leg", "OBJ//cashierLeg.obj");
+	newLLeg->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newLLeg->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newLLeg->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newLLeg->material.kShininess = 8.f;
+	newLLeg->textureID = LoadTGA("Image//guardLeg.tga");
+
+	newRLeg = MeshBuilder::GenerateOBJ("guard Right Leg", "OBJ//cashierLeg.obj");
+	newRLeg->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newRLeg->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newRLeg->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newRLeg->material.kShininess = 8.f;
+	newRLeg->textureID = LoadTGA("Image//guardLeg.tga");
+
+	Guard1.setCharacter(newHead,newTorso,newLHand,newRHand,newLLeg,newRLeg);
+	////===============GUARD OBJs==========================//
+	//meshList[guardHead] = MeshBuilder::GenerateOBJ("Guard Head", "OBJ//cashierHead.obj");
+	//meshList[guardHead]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	//meshList[guardHead]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	//meshList[guardHead]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	//meshList[guardHead]->material.kShininess = 8.f;
+	//meshList[guardHead]->textureID = LoadTGA("Image//guardHead.tga");
+
+	//meshList[guardTorso] = MeshBuilder::GenerateOBJ("Guard Torso", "OBJ//cashierTorso.obj");
+	//meshList[guardTorso]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	//meshList[guardTorso]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	//meshList[guardTorso]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	//meshList[guardTorso]->material.kShininess = 8.f;
+	//meshList[guardTorso]->textureID = LoadTGA("Image//guardTorso.tga");
+
+	//meshList[guardRightHand] = MeshBuilder::GenerateOBJ("guard Right Hand", "OBJ//cashierHand.obj");
+	//meshList[guardRightHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	//meshList[guardRightHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	//meshList[guardRightHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	//meshList[guardRightHand]->material.kShininess = 8.f;
+	//meshList[guardRightHand]->textureID = LoadTGA("Image//guardHand.tga");
+
+	//meshList[guardLeftHand] = MeshBuilder::GenerateOBJ("guard Left Hand", "OBJ//cashierHand.obj");
+	//meshList[guardLeftHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	//meshList[guardLeftHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	//meshList[guardLeftHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	//meshList[guardLeftHand]->material.kShininess = 8.f;
+	//meshList[guardLeftHand]->textureID = LoadTGA("Image//guardHand.tga");
+
+	//meshList[guardLeftLeg] = MeshBuilder::GenerateOBJ("guard Left Leg", "OBJ//cashierLeg.obj");
+	//meshList[guardLeftLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	//meshList[guardLeftLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	//meshList[guardLeftLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	//meshList[guardLeftLeg]->material.kShininess = 8.f;
+	//meshList[guardLeftLeg]->textureID = LoadTGA("Image//guardLeg.tga");
+
+	//meshList[guardRightLeg] = MeshBuilder::GenerateOBJ("guard Right Leg", "OBJ//cashierLeg.obj");
+	//meshList[guardRightLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	//meshList[guardRightLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	//meshList[guardRightLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	//meshList[guardRightLeg]->material.kShininess = 8.f;
+	//meshList[guardRightLeg]->textureID = LoadTGA("Image//guardLeg.tga");
+}
 void StudioProject::Init()
 {
 	// Set background color to black
@@ -772,9 +876,12 @@ void StudioProject::Init()
 
 	InitVariables();
 
+	InitCharacters();
+
 	InitShaders();
 
 	InitMesh();
+
 }
 
 //========Variables for use in update====//
@@ -1171,9 +1278,8 @@ void StudioProject::Update(double dt)
 	std::ostringstream ss7;
 	ss7 <<  camera.target.z;
 	viewz = ss7.str();
-	camera.Update(dt);
 
-	//================Item Inventory=================//
+	//================Item Inventory Image=================//
 	static float elapsedTime1 = 0, elapsedTime2 = 0;
 	elapsedTime1 = fmod(Timer.getElapsedTime(), 1);
 
@@ -1206,7 +1312,11 @@ void StudioProject::Update(double dt)
 		moving += (float) (5 * dt);
 	if (Application::IsKeyPressed('N'))
 		moving -= (float) (5 * dt);
-	cout << moving << endl;
+
+	//cout << moving << endl;
+
+	camera.Update(dt);
+
 }
 
 //=========Rendering of Skybox to be done here=========//
@@ -1605,26 +1715,26 @@ void StudioProject::RenderModel()
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3.6, 0);
-	RenderMesh(meshList[modelHead], B_Light);
+	RenderMesh(player.getHead(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 1.5, 0);
-	RenderMesh(meshList[modelTorso], B_Light);
+	RenderMesh(player.getTorso(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3 + 0.2, 0);
 	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
 	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
-	RenderMesh(meshList[modelRightHand], B_Light);
+	RenderMesh(player.getRHand(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3 + 0.2, 0);
 	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
 	modelStack.Translate(0.8, -1.5 + 0.2, 0);
-	RenderMesh(meshList[modelLeftHand], B_Light);
+	RenderMesh(player.getLHand(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
@@ -1633,7 +1743,7 @@ void StudioProject::RenderModel()
 	modelStack.Translate(0.3, 1, 0);
 	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
 	modelStack.Translate(0, -1.4, 0);
-	RenderMesh(meshList[modelLeftLeg], B_Light);
+	RenderMesh(player.getLLeg(), B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
@@ -1643,7 +1753,7 @@ void StudioProject::RenderModel()
 	modelStack.Translate(-0.3, 1, 0);
 	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
 	modelStack.Translate(0, -1.4, 0);
-	RenderMesh(meshList[modelRightLeg], B_Light);
+	RenderMesh(player.getRLeg(), B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
@@ -1736,26 +1846,26 @@ void StudioProject::RenderGuard()
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, -2.285, 0);
-	RenderMesh(meshList[guardHead], B_Light);
+	RenderMesh(Guard1.getHead(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 1.5, 0);
-	RenderMesh(meshList[guardTorso], B_Light);
+	RenderMesh(Guard1.getTorso(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3 + 0.2, 0);
 	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
 	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
-	RenderMesh(meshList[guardRightHand], B_Light);
+	RenderMesh(Guard1.getRHand(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3 + 0.2, 0);
 	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
 	modelStack.Translate(0.8, -1.5 + 0.2, 0);
-	RenderMesh(meshList[guardLeftHand], B_Light);
+	RenderMesh(Guard1.getLHand(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
@@ -1764,7 +1874,7 @@ void StudioProject::RenderGuard()
 	modelStack.Translate(0.3, 1, 0);
 	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
 	modelStack.Translate(0, -1.4, 0);
-	RenderMesh(meshList[guardLeftLeg], B_Light);
+	RenderMesh(Guard1.getLLeg(), B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
@@ -1774,7 +1884,7 @@ void StudioProject::RenderGuard()
 	modelStack.Translate(-0.3, 1, 0);
 	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
 	modelStack.Translate(0, -1.4, 0);
-	RenderMesh(meshList[guardRightLeg], B_Light);
+	RenderMesh(Guard1.getRLeg(), B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 

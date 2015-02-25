@@ -1,5 +1,7 @@
 #pragma once
-class CCustomer
+#include "Character.h"
+
+class CCustomer : public CCharacter
 {
 public:
 	CCustomer(void);

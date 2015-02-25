@@ -1,5 +1,7 @@
 #pragma once
-class CCashier
+#include "Character.h"
+
+class CCashier : public CCharacter
 {
 public:
 	CCashier(void);

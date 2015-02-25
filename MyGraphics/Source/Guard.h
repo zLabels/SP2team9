@@ -1,5 +1,7 @@
 #pragma once
-class CGuard
+#include "Character.h"
+
+class CGuard : public CCharacter
 {
 public:
 	CGuard(void);

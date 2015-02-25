@@ -16,6 +16,9 @@
 #include "Inventory.h"
 #include "Character.h"
 #include "Guard.h"
+#include "Player.h"
+#include "Customer.h"
+#include "Cashier.h"
 
 using std::string;
 
@@ -184,6 +187,7 @@ public:
 	void InitMesh();
 	void InitVariables();
 	void InitShaders();
+	void InitCharacters();
 
 private:
 	unsigned m_vertexArrayID;
@@ -213,8 +217,15 @@ private:
 	Vector3 charPosition;
 	float angle;
 
-	CCharacter player;
-	CGuard testing;
+	CPlayer player;
+	CGuard Guard1;
+	CGuard Guard2;
+
+	CCashier Cashier1;
+	CCashier Cashier2;
+	CCashier Cashier3;
+
+	CCustomer Customer;
 
 	//=========Items=========//
 	CItem sardineCan, PnCCan, BBCan, MiloCan, CokeCan;

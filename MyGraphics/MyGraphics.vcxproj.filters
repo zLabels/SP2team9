@@ -66,7 +66,11 @@
     <ClCompile Include="Source\States.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< 38516f56c6ab4f32dfe7414a74b5d0d98b687873
     <ClCompile Include="Source\StudioProject.cpp">
+=======
+    <ClCompile Include="Source\Player.cpp">
+>>>>>>> 5ec42c0a50648a4021f6933dada38428ba7f16bb
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -131,7 +135,11 @@
     <ClInclude Include="Source\States.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< 38516f56c6ab4f32dfe7414a74b5d0d98b687873
     <ClInclude Include="Source\StudioProject.h">
+=======
+    <ClInclude Include="Source\Player.h">
+>>>>>>> 5ec42c0a50648a4021f6933dada38428ba7f16bb
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
