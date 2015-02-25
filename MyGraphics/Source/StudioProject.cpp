@@ -182,6 +182,12 @@ void StudioProject::InitMesh()
 	meshList[GEO_POTATOCHIPS]->material.kShininess = 8.f;
 	meshList[GEO_POTATOCHIPS] ->textureID = LoadTGA("Image//potato_chips.tga");
 
+
+
+	//meshList[GEO_CANTEST] = MeshBuilder::GenerateQuad("CANTEST", Color(1, 1, 1), 1.f, 1.f);
+	//meshList[GEO_CANTEST] ->textureID = LoadTGA("UI sprites//UI-canned_food_1.tga");
+
+
 	//===============MODEL OBJs==========================//
 	meshList[modelHead] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelHead.obj");
 	meshList[modelHead]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -357,6 +363,36 @@ void StudioProject::InitMesh()
 	//=======================Item Inventory Page================//
 	meshList[itemInventory] = MeshBuilder::GenerateQuad("item Inventory", Color(1, 1, 1), 1.f , 1.f);
 	meshList[itemInventory]->textureID = LoadTGA("Image//Item.tga");
+
+	meshList[UI_SARDINE_CAN] = MeshBuilder::GenerateQuad("sardine can", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_SARDINE_CAN]->textureID = LoadTGA("UI sprites//UI-canned_food_1.tga");
+
+	meshList[UI_PEA_N_CARROTS] = MeshBuilder::GenerateQuad("peas n carrots can", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_PEA_N_CARROTS]->textureID = LoadTGA("UI sprites//UI-canned_food_2.tga");
+
+	meshList[UI_BAKED_BEANS_CAN] = MeshBuilder::GenerateQuad("bakes beans can", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_BAKED_BEANS_CAN]->textureID = LoadTGA("UI sprites/UI-canned_food_3.tga");
+
+	meshList[UI_PIZZABOX] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_PIZZABOX]->textureID = LoadTGA("UI sprites/UI-frozen_pizza.tga");
+
+	meshList[UI_POTATOCHIPS] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_POTATOCHIPS]->textureID = LoadTGA("UI sprites/UI-potato_chips.tga");
+
+	meshList[UI_COKE_CAN] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_COKE_CAN]->textureID = LoadTGA("UI sprites/UI-drink_can1.tga");
+
+	meshList[UI_PEPSI_CAN] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_PEPSI_CAN]->textureID = LoadTGA("UI sprites/UI-drink_can3.tga");
+
+	meshList[UI_CEREALBOX1] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_CEREALBOX1]->textureID = LoadTGA("UI sprites/UI-Cereal-box1.tga");
+
+	meshList[UI_CEREALBOX2] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_CEREALBOX2]->textureID = LoadTGA("UI sprites/UI-cereal_box2.tga");
+
+	meshList[UI_MILOCAN] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_MILOCAN]->textureID = LoadTGA("UI sprites/UI-milocan.tga");
 
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
@@ -1170,7 +1206,7 @@ void StudioProject::Update(double dt)
 		moving += (float) (5 * dt);
 	if (Application::IsKeyPressed('N'))
 		moving -= (float) (5 * dt);
-	//cout << moving << endl;
+	cout << moving << endl;
 }
 
 //=========Rendering of Skybox to be done here=========//
@@ -2101,6 +2137,66 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, std::string text, Color colo
 	RenderMesh(meshList[itemInventory], false);
 	modelStack.PopMatrix();
 	
+	modelStack.PushMatrix();
+	modelStack.Scale(0.1, 0.1, 0.1);
+	modelStack.Translate(-7.5, -7.48149, 0);
+	RenderMesh(meshList[UI_SARDINE_CAN], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Scale(0.1, 0.1, 0.1);
+	modelStack.Translate(-6.5, -7.48149, 0);
+	RenderMesh(meshList[UI_PEA_N_CARROTS], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Scale(0.1, 0.1, 0.1);
+	modelStack.Translate(-5.5, -7.48149, 0);
+	RenderMesh(meshList[UI_BAKED_BEANS_CAN], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Scale(0.1, 0.1, 0.1);
+	modelStack.Translate(-8.5, -7.48149, 0);
+	RenderMesh(meshList[UI_PIZZABOX], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Scale(0.1, 0.1, 0.1);
+	modelStack.Translate(-9.5, -7.48149, 0);
+	RenderMesh(meshList[UI_POTATOCHIPS], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Scale(0.1, 0.1, 0.1);
+	modelStack.Translate(-9.5, -5.8, 0);
+	RenderMesh(meshList[UI_COKE_CAN], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Scale(0.1, 0.1, 0.1);
+	modelStack.Translate(-8.5, -5.8, 0);
+	RenderMesh(meshList[UI_PEPSI_CAN], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Scale(0.1, 0.1, 0.1);
+	modelStack.Translate(-7.5, -5.8, 0);
+	RenderMesh(meshList[UI_CEREALBOX1], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Scale(0.1, 0.1, 0.1);
+	modelStack.Translate(-6.5, -5.8, 0);
+	RenderMesh(meshList[UI_CEREALBOX2], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Scale(0.1, 0.1, 0.1);
+	modelStack.Translate(-5.5, -5.8, 0);
+	RenderMesh(meshList[UI_MILOCAN], false);
+	modelStack.PopMatrix();
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glUniform1i(m_parameters[U_TEXT_ENABLED], 0);
 	projectionStack.PopMatrix();
