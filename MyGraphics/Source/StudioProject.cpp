@@ -557,7 +557,7 @@ void StudioProject::InitVariables()
 		CokeCan.SetData("Coke Cans", 3.5f, true, newMesh, GEO_COKE_CAN,newTRS);
 		Container3.push_back(CokeCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.5);
 		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
 		Coke.SetBox(Max, Min);
 		boxContainer3.push_back(Coke);
@@ -583,8 +583,8 @@ void StudioProject::InitVariables()
 		PizzaBox.SetData("Pizza Box", 3.5f, true, newMesh, GEO_PIZZABOX,newTRS);
 		Container3.push_back(PizzaBox);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12],newTRS.a[13]+0.8,newTRS.a[14]+1);
+		Min.Set(-3+newTRS.a[12],-0.5+newTRS.a[13],-2+newTRS.a[14]);
 		Pizza.SetBox(Max, Min);
 		boxContainer3.push_back(Pizza);
 	}
@@ -660,8 +660,8 @@ void StudioProject::InitVariables()
 		cerealBox1.SetData("Cereal Box 1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
 		Container5.push_back(cerealBox1);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.59, newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-1+newTRS.a[13],-0.35+newTRS.a[14]);
 		cereal1.SetBox(Max, Min);
 		boxContainer5.push_back(cereal1);
 	}
@@ -678,8 +678,8 @@ void StudioProject::InitVariables()
 		cerealBox1.SetData("Cereal Box 1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
 		Container6.push_back(cerealBox1);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-1+newTRS.a[13],-0.35+newTRS.a[14]);
 		cereal1.SetBox(Max, Min);
 		boxContainer6.push_back(cereal1);
 	}
@@ -696,8 +696,8 @@ void StudioProject::InitVariables()
 		cerealBox1.SetData("Cereal Box 1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
 		Container7.push_back(cerealBox1);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-1+newTRS.a[13],-0.35+newTRS.a[14]);
 		cereal1.SetBox(Max, Min);
 		boxContainer7.push_back(cereal1);
 	}
@@ -714,8 +714,8 @@ void StudioProject::InitVariables()
 		cerealBox1.SetData("Cereal Box 1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
 		Container8.push_back(cerealBox1);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-1+newTRS.a[13],-0.35+newTRS.a[14]);
 		cereal1.SetBox(Max, Min);
 		boxContainer8.push_back(cereal1);
 	}
@@ -740,8 +740,8 @@ void StudioProject::InitVariables()
 		cerealBox2.SetData("Cereal Box 2", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS);
 		Container5.push_back(cerealBox2);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-1+newTRS.a[13],-0.35+newTRS.a[14]);
 		cereal2.SetBox(Max, Min);
 		boxContainer5.push_back(cereal2);
 	}
@@ -760,8 +760,8 @@ void StudioProject::InitVariables()
 		cerealBox2.SetData("Cereal Box 2", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS);
 		Container6.push_back(cerealBox2);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-1+newTRS.a[13],-0.35+newTRS.a[14]);
 		cereal2.SetBox(Max, Min);
 		boxContainer6.push_back(cereal2);
 	}
@@ -778,8 +778,8 @@ void StudioProject::InitVariables()
 		cerealBox2.SetData("Cereal Box 2", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS);
 		Container8.push_back(cerealBox2);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-1+newTRS.a[13],-0.35+newTRS.a[14]);
 		cereal2.SetBox(Max, Min);
 		boxContainer8.push_back(cereal2);
 	}
@@ -811,21 +811,75 @@ void StudioProject::InitVariables()
 	newMesh->material.kShininess = 8.f;
 	newMesh->textureID = LoadTGA("Image//potato_chips.tga");
 	hitBox PC;
-	for(int i = 0; i < 20;i++)
+	for(int i = 0; i < 40;i++) //Potato Top Shelves Left
 	{
 		Mtx44 newTRS;
-		if(i % 5 == 0 && i > 0)
+		if(i % 10 == 0 && i > 0)
 		{
-			a += 1;
+			a += 2;
 		}
-		newTRS.SetToTranslation(-32 +i + a, 4.3,-30);
+		newTRS.SetToTranslation(-28.5 +i + a, 5,-35);
 		PotatoChip.SetData("Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
 		Container9.push_back(PotatoChip);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
 		PC.SetBox(Max, Min);
 		boxContainer9.push_back(PC);
+	}
+	a = 0;
+
+	for(int i = 0; i < 40;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 10 == 0 && i > 0) //Potato Bottom Shelves Left
+		{
+			a += 2;
+		}
+		newTRS.SetToTranslation(-28.5 +i + a, 2.,-35);
+		PotatoChip.SetData("Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
+		Container9.push_back(PotatoChip);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
+		PC.SetBox(Max, Min);
+		boxContainer9.push_back(PC);
+	}
+	a = 0;
+
+	for(int i = 0; i < 40;i++) //Potato Top Shelves Right
+	{
+		Mtx44 newTRS;
+		if(i % 10 == 0 && i > 0)
+		{
+			a += 2;
+		}
+		newTRS.SetToTranslation(-28.5 +i + a, 5,33);
+		PotatoChip.SetData("Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
+		Container10.push_back(PotatoChip);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
+		PC.SetBox(Max, Min);
+		boxContainer10.push_back(PC);
+	}
+	a = 0;
+
+	for(int i = 0; i < 40;i++) //Potato bottom  Shelves Right
+	{
+		Mtx44 newTRS;
+		if(i % 10 == 0 && i > 0)
+		{
+			a += 2;
+		}
+		newTRS.SetToTranslation(-28.5 +i + a, 2,33);
+		PotatoChip.SetData("Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
+		Container10.push_back(PotatoChip);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
+		PC.SetBox(Max, Min);
+		boxContainer10.push_back(PC);
 	}
 	a = 0;
 
@@ -1495,7 +1549,7 @@ void StudioProject::Update(double dt)
 					}
 				}
 			}
-			for(int i = 0; i < boxContainer9.size(); ++i) //Container 8
+			for(int i = 0; i < boxContainer9.size(); ++i) //Container 9
 			{
 				checking = true;
 				//==========Taking Items from shelf=============//
@@ -1510,6 +1564,25 @@ void StudioProject::Update(double dt)
 					{
 						player.getInventory().AddItem(Container9[i]);
 						Container9[i].setRender(false);
+						break;
+					}
+				}
+			}
+			for(int i = 0; i < boxContainer10.size(); ++i) //Container 10
+			{
+				checking = true;
+				//==========Taking Items from shelf=============//
+				if(Container10[i].getRender() == true)
+				{
+					if((camera.target.x <= boxContainer10[i].max.x) && 
+						(camera.target.y <= boxContainer10[i].max.y) && 
+						(camera.target.z <= boxContainer10[i].max.z) && 
+						(camera.target.x >= boxContainer10[i].min.x) && 
+						(camera.target.y >= boxContainer10[i].min.y) && 
+						(camera.target.z >= boxContainer10[i].min.z))
+					{
+						player.getInventory().AddItem(Container10[i]);
+						Container10[i].setRender(false);
 						break;
 					}
 				}
@@ -1678,6 +1751,23 @@ void StudioProject::Update(double dt)
 				}
 			}
 		}
+		for(int i = 0; i < boxContainer10.size(); ++i)//Container 10
+		{
+			if(Container10[i].getRender() == false)
+			{
+				if((camera.target.x <= boxContainer10[i].max.x) && 
+					(camera.target.y <= boxContainer10[i].max.y) && 
+					(camera.target.z <= boxContainer10[i].max.z) &&
+					(camera.target.x >= boxContainer10[i].min.x) && 
+					(camera.target.y >= boxContainer10[i].min.y) &&
+					(camera.target.z >= boxContainer10[i].min.z))
+				{
+					player.getInventory().removeItem(Container10[i]);
+					Container10[i].setRender(true);
+					break;
+				}
+			}
+		}
 	}
 
 	if((camera.target.x <= boxContainer[0].max.x) && 
@@ -1685,63 +1775,7 @@ void StudioProject::Update(double dt)
 		(camera.target.z <= boxContainer[0].max.z) &&
 		(camera.target.x >= boxContainer[0].min.x) &&
 		(camera.target.y >= boxContainer[0].min.y) &&
-		(camera.target.z >= boxContainer[0].min.z) 
-		||
-		(camera.target.x <= boxContainer2[0].max.x) && 
-		(camera.target.y <= boxContainer2[0].max.y) && 
-		(camera.target.z <= boxContainer2[0].max.z) &&
-		(camera.target.x >= boxContainer2[0].min.x) &&
-		(camera.target.y >= boxContainer2[0].min.y) &&
-		(camera.target.z >= boxContainer2[0].min.z)
-		||
-		(camera.target.x <= boxContainer3[0].max.x) && 
-		(camera.target.y <= boxContainer3[0].max.y) && 
-		(camera.target.z <= boxContainer3[0].max.z) &&
-		(camera.target.x >= boxContainer3[0].min.x) &&
-		(camera.target.y >= boxContainer3[0].min.y) &&
-		(camera.target.z >= boxContainer3[0].min.z)
-		||
-		(camera.target.x <= boxContainer4[0].max.x) && 
-		(camera.target.y <= boxContainer4[0].max.y) && 
-		(camera.target.z <= boxContainer4[0].max.z) &&
-		(camera.target.x >= boxContainer4[0].min.x) &&
-		(camera.target.y >= boxContainer4[0].min.y) &&
-		(camera.target.z >= boxContainer4[0].min.z)
-		||
-		(camera.target.x <= boxContainer5[0].max.x) && 
-		(camera.target.y <= boxContainer5[0].max.y) && 
-		(camera.target.z <= boxContainer5[0].max.z) &&
-		(camera.target.x >= boxContainer5[0].min.x) &&
-		(camera.target.y >= boxContainer5[0].min.y) &&
-		(camera.target.z >= boxContainer5[0].min.z)
-		||
-		(camera.target.x <= boxContainer6[0].max.x) && 
-		(camera.target.y <= boxContainer6[0].max.y) && 
-		(camera.target.z <= boxContainer6[0].max.z) &&
-		(camera.target.x >= boxContainer6[0].min.x) &&
-		(camera.target.y >= boxContainer6[0].min.y) &&
-		(camera.target.z >= boxContainer6[0].min.z)
-		||
-		(camera.target.x <= boxContainer7[0].max.x) && 
-		(camera.target.y <= boxContainer7[0].max.y) && 
-		(camera.target.z <= boxContainer7[0].max.z) &&
-		(camera.target.x >= boxContainer7[0].min.x) &&
-		(camera.target.y >= boxContainer7[0].min.y) &&
-		(camera.target.z >= boxContainer7[0].min.z)
-		||
-		(camera.target.x <= boxContainer8[0].max.x) && 
-		(camera.target.y <= boxContainer8[0].max.y) && 
-		(camera.target.z <= boxContainer8[0].max.z) &&
-		(camera.target.x >= boxContainer8[0].min.x) &&
-		(camera.target.y >= boxContainer8[0].min.y) &&
-		(camera.target.z >= boxContainer8[0].min.z)
-		||
-		(camera.target.x <= boxContainer9[0].max.x) && 
-		(camera.target.y <= boxContainer9[0].max.y) && 
-		(camera.target.z <= boxContainer9[0].max.z) &&
-		(camera.target.x >= boxContainer9[0].min.x) &&
-		(camera.target.y >= boxContainer9[0].min.y) &&
-		(camera.target.z >= boxContainer9[0].min.z))
+		(camera.target.z >= boxContainer[0].min.z))
 	{
 		collide = true;
 	}
@@ -2215,6 +2249,18 @@ void StudioProject::RenderItems()
 			modelStack.LoadMatrix(Container9[i].getTRS());
 			modelStack.Rotate(180,0,1,0);
 			RenderMesh(Container9[i].getMesh(),B_Light);
+			modelStack.PopMatrix(); //pop back to origin
+		}
+	}
+	for(int i = 0; i < Container10.size(); ++i) //Container 10
+	{
+		if(Container10[i].getRender() == true)
+		{
+			//========MIDDLE ROW BACK=========//
+			modelStack.PushMatrix();
+			modelStack.LoadMatrix(Container10[i].getTRS());
+			modelStack.Rotate(180,0,1,0);
+			RenderMesh(Container10[i].getMesh(),B_Light);
 			modelStack.PopMatrix(); //pop back to origin
 		}
 	}
