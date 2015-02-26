@@ -45,15 +45,17 @@ void CInventory::removeItem(int pos)
 	}
 }
 
-void CInventory::removeItem(CItem temp)
+bool CInventory::removeItem(CItem temp)
 {
 	for(int i = 0; i < Inventory.size(); ++i)
 	{
 		if(Inventory[i].getobjType() == temp.getobjType())
 		{
 			Inventory.erase(Inventory.begin()+i);
+			return true;
 		}
 	}
+	return false;
 }
 
 void CInventory::DeleteAll(void)

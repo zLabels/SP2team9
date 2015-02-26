@@ -1591,8 +1591,6 @@ void StudioProject::Update(double dt)
 		}
 	}
 //==============================END OF DOOR ==========================//
-
-
 	if(checking == false)
 	{
 		if(Application::IsKeyPressed('E'))
@@ -1907,9 +1905,11 @@ void StudioProject::Update(double dt)
 					(camera.target.y >= boxContainer[i].min.y) && 
 					(camera.target.z >= boxContainer[i].min.z))
 				{
-					player.getInventory().removeItem(Container[i]);
-					Container[i].setRender(true);
-					break;
+					if(player.getInventory().removeItem(Container[i]) == true)
+					{
+						Container[i].setRender(true);
+						break;
+					}
 				}
 			}
 		}
@@ -1924,9 +1924,11 @@ void StudioProject::Update(double dt)
 					(camera.target.y >= boxContainer2[i].min.y) &&
 					(camera.target.z >= boxContainer2[i].min.z))
 				{
-					player.getInventory().removeItem(Container2[i]);
-					Container2[i].setRender(true);
-					break;
+					if(player.getInventory().removeItem(Container2[i]) == true)
+					{
+						Container2[i].setRender(true);
+						break;
+					}
 				}
 			}
 		}
@@ -1942,9 +1944,11 @@ void StudioProject::Update(double dt)
 					(camera.target.y >= boxContainer3[i].min.y) &&
 					(camera.target.z >= boxContainer3[i].min.z))
 				{
-					player.getInventory().removeItem(Container3[i]);
-					Container3[i].setRender(true);
-					break;
+					if(player.getInventory().removeItem(Container3[i]) == true)
+					{
+						Container3[i].setRender(true);
+						break;
+					}
 				}
 			}
 		}
@@ -1961,9 +1965,11 @@ void StudioProject::Update(double dt)
 					(camera.target.y >= boxContainer4[i].min.y) && 
 					(camera.target.z >= boxContainer4[i].min.z))
 				{
-					player.getInventory().removeItem(Container4[i]);
-					Container4[i].setRender(true);
-					break;
+					if(player.getInventory().removeItem(Container4[i]) == true)
+					{
+						Container4[i].setRender(true);
+						break;
+					}
 				}
 			}
 		}
@@ -1978,9 +1984,11 @@ void StudioProject::Update(double dt)
 					(camera.target.y >= boxContainer5[i].min.y) &&
 					(camera.target.z >= boxContainer5[i].min.z))
 				{
-					player.getInventory().removeItem(Container5[i]);
-					Container5[i].setRender(true);
-					break;
+					if(player.getInventory().removeItem(Container5[i]) == true)
+					{
+						Container5[i].setRender(true);
+						break;
+					}
 				}
 			}
 		}
@@ -1996,9 +2004,11 @@ void StudioProject::Update(double dt)
 					(camera.target.y >= boxContainer6[i].min.y) &&
 					(camera.target.z >= boxContainer6[i].min.z))
 				{
-					player.getInventory().removeItem(Container6[i]);
-					Container6[i].setRender(true);
-					break;
+					if(player.getInventory().removeItem(Container6[i]) == true)
+					{
+						Container6[i].setRender(true);
+						break;
+					}
 				}
 			}
 		}
@@ -2013,9 +2023,11 @@ void StudioProject::Update(double dt)
 					(camera.target.y >= boxContainer7[i].min.y) &&
 					(camera.target.z >= boxContainer7[i].min.z))
 				{
-					player.getInventory().removeItem(Container7[i]);
-					Container7[i].setRender(true);
-					break;
+					if(player.getInventory().removeItem(Container7[i]) == true)
+					{
+						Container7[i].setRender(true);
+						break;
+					}
 				}
 			}
 		}
@@ -2031,9 +2043,11 @@ void StudioProject::Update(double dt)
 					(camera.target.y >= boxContainer8[i].min.y) &&
 					(camera.target.z >= boxContainer8[i].min.z))
 				{
-					player.getInventory().removeItem(Container8[i]);
-					Container8[i].setRender(true);
-					break;
+					if(player.getInventory().removeItem(Container8[i]) == true)
+					{
+						Container8[i].setRender(true);
+						break;
+					}
 				}
 			}
 		}
@@ -2048,9 +2062,11 @@ void StudioProject::Update(double dt)
 					(camera.target.y >= boxContainer9[i].min.y) &&
 					(camera.target.z >= boxContainer9[i].min.z))
 				{
-					player.getInventory().removeItem(Container9[i]);
-					Container9[i].setRender(true);
-					break;
+					if(player.getInventory().removeItem(Container9[i]) == true)
+					{
+						Container9[i].setRender(true);
+						break;
+					}
 				}
 			}
 		}
@@ -2065,9 +2081,11 @@ void StudioProject::Update(double dt)
 					(camera.target.y >= boxContainer10[i].min.y) &&
 					(camera.target.z >= boxContainer10[i].min.z))
 				{
-					player.getInventory().removeItem(Container10[i]);
-					Container10[i].setRender(true);
-					break;
+					if(player.getInventory().removeItem(Container10[i]) == true)
+					{
+						Container10[i].setRender(true);
+						break;
+					}
 				}
 			}
 		}
@@ -2082,9 +2100,11 @@ void StudioProject::Update(double dt)
 					(camera.target.y >= boxContainer11[i].min.y) &&
 					(camera.target.z >= boxContainer11[i].min.z))
 				{
-					player.getInventory().removeItem(Container11[i]);
-					Container11[i].setRender(true);
-					break;
+					if(player.getInventory().removeItem(Container11[i]) == true)
+					{
+						Container11[i].setRender(true);
+						break;
+					}
 				}
 			}
 		}
@@ -2099,9 +2119,11 @@ void StudioProject::Update(double dt)
 					(camera.target.y >= boxContainer12[i].min.y) &&
 					(camera.target.z >= boxContainer12[i].min.z))
 				{
-					player.getInventory().removeItem(Container12[i]);
-					Container12[i].setRender(true);
-					break;
+					if(player.getInventory().removeItem(Container12[i]) == true)
+					{
+						Container12[i].setRender(true);
+						break;
+					}
 				}
 			}
 		}

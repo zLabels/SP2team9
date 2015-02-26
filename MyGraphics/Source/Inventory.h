@@ -18,7 +18,7 @@ public:
 	int getNoOfItems(void);
 	void DeleteAll(void);
 	void removeItem(int pos);
-	void removeItem(CItem temp);
+	bool removeItem(CItem temp);
 
 private:
 	vector<CItem> Inventory;
