@@ -74,6 +74,19 @@ private:
 		U_LIGHT1_COSCUTOFF,
 		U_LIGHT1_COSINNER,
 		U_LIGHT1_EXPONENT,
+
+		//Light 3
+		U_LIGHT2_POSITION,
+		U_LIGHT2_COLOR,
+		U_LIGHT2_POWER,
+		U_LIGHT2_KC,
+		U_LIGHT2_KL,
+		U_LIGHT2_KQ,
+		U_LIGHT2_TYPE,
+		U_LIGHT2_SPOTDIRECTION,
+		U_LIGHT2_COSCUTOFF,
+		U_LIGHT2_COSINNER,
+		U_LIGHT2_EXPONENT,
 		//add these enum in UNIFORM_TYPE before U_TOTAL
 		U_COLOR_TEXTURE_ENABLED,
 		U_COLOR_TEXTURE,
@@ -91,6 +104,7 @@ private:
 		GEO_QUAD,
 		GEO_LIGHTBALL,
 		GEO_LIGHTBALL2,
+		GEO_LIGHTBALL3,
 		GEO_CUBE,
 		GEO_CYLINDER,
 		GEO_LEFT,
@@ -275,7 +289,7 @@ private:
 
 	MS modelStack, viewStack, projectionStack;
 
-	Light lights[2];
+	Light lights[7];
 
 	void RenderMesh(Mesh *mesh, bool enableLight);
 
