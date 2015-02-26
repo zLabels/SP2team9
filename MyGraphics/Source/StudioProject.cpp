@@ -1434,15 +1434,15 @@ void StudioProject::InitSecurity()
 	meshList[SC]->material.kShininess = 8.f;
 	meshList[SC]->textureID = LoadTGA("Image//SC.tga");*/
 
-	CameraObj = MeshBuilder::GenerateOBJ("Security Camera", "OBJ//SC.obj");
-	CameraObj->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	CameraObj->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	CameraObj->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	CameraObj->material.kShininess = 8.f;
-	CameraObj->textureID = LoadTGA("Image//SC.tga");
+	//CameraObj = MeshBuilder::GenerateOBJ("Security Camera", "OBJ//SC.obj");
+	//CameraObj->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	//CameraObj->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	//CameraObj->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	//CameraObj->material.kShininess = 8.f;
+	//CameraObj->textureID = LoadTGA("Image//SC.tga");
 
-	CameraOBJ[0].setCharacter(CameraObj, newPosition1);
-	CameraOBJ[1].setCharacter(CameraObj, newPosition1);
+	/*CameraOBJ[0].setCharacter(CameraObj, newPosition1);
+	CameraOBJ[1].setCharacter(CameraObj, newPosition1);*/
 }
 void StudioProject::Init()
 {
@@ -1507,10 +1507,10 @@ bool checking = false;
 
 void StudioProject::Update(double dt)
 {
-	for (int a = 0; a < 3; a++)
+	/*for (int a = 0; a < 3; a++)
 	{
 		CameraOBJ[a].PassinDt(dt);
-	}
+	}*/
 	float LSPEED = 10.f;
 
 	if(Application::IsKeyPressed('1')) //enable back face culling
@@ -3133,32 +3133,32 @@ void StudioProject::RenderPlayerInfo()
 
 void StudioProject::RenderingSecurityCamera()
 {
-	//=========================Camera 1=======================//
-	modelStack.PushMatrix(); //Rotating Camera;
-	modelStack.Rotate(180, 0, 1, 0);
-	modelStack.PushMatrix();//Moving Camera
-	modelStack.Translate(CameraOBJ[0].getPosition().x, CameraOBJ[0].getPosition().y, CameraOBJ[0].getPosition().z);
-	modelStack.Rotate(20, 1, 0, 0);
-	modelStack.PushMatrix();//Fixing rotatin angle
-	modelStack.Translate(0, 0, -0.2);
-	modelStack.Rotate(CameraOBJ[0].getCameraRotation(), 0, 1, 0);
-	modelStack.Translate(0, 0, +0.3);
-	RenderMesh(CameraOBJ[0].getCamera(), B_Light);
-	modelStack.PopMatrix();
-	modelStack.PopMatrix(); //Moving camera
-	modelStack.PopMatrix();//rotating Camera
+	////=========================Camera 1=======================//
+	//modelStack.PushMatrix(); //Rotating Camera;
+	//modelStack.Rotate(180, 0, 1, 0);
+	//modelStack.PushMatrix();//Moving Camera
+	//modelStack.Translate(CameraOBJ[0].getPosition().x, CameraOBJ[0].getPosition().y, CameraOBJ[0].getPosition().z);
+	//modelStack.Rotate(20, 1, 0, 0);
+	//modelStack.PushMatrix();//Fixing rotatin angle
+	//modelStack.Translate(0, 0, -0.2);
+	//modelStack.Rotate(CameraOBJ[0].getCameraRotation(), 0, 1, 0);
+	//modelStack.Translate(0, 0, +0.3);
+	//RenderMesh(CameraOBJ[0].getCamera(), B_Light);
+	//modelStack.PopMatrix();
+	//modelStack.PopMatrix(); //Moving camera
+	//modelStack.PopMatrix();//rotating Camera
 
-	//=========================Camera 2=======================//
-	modelStack.PushMatrix();//Moving Camera
-	modelStack.Translate(0, 18, 0);
-	modelStack.Rotate(20, 1, 0, 0);
-	modelStack.PushMatrix();//Fixing rotatin angle
-	modelStack.Translate(0, 0, -0.2);
-	modelStack.Rotate(CameraOBJ[1].getCameraRotation(), 0, 1, 0);
-	modelStack.Translate(0, 0, +0.3);
-	RenderMesh(CameraOBJ[1].getCamera(), B_Light);
-	modelStack.PopMatrix();
-	modelStack.PopMatrix(); //Moving camera
+	////=========================Camera 2=======================//
+	//modelStack.PushMatrix();//Moving Camera
+	//modelStack.Translate(0, 18, 0);
+	//modelStack.Rotate(20, 1, 0, 0);
+	//modelStack.PushMatrix();//Fixing rotatin angle
+	//modelStack.Translate(0, 0, -0.2);
+	//modelStack.Rotate(CameraOBJ[1].getCameraRotation(), 0, 1, 0);
+	//modelStack.Translate(0, 0, +0.3);
+	//RenderMesh(CameraOBJ[1].getCamera(), B_Light);
+	//modelStack.PopMatrix();
+	//modelStack.PopMatrix(); //Moving camera
 }
 
 void StudioProject::Render()

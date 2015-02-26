@@ -19,7 +19,7 @@
 #include "Player.h"
 #include "Customer.h"
 #include "Cashier.h"
-#include "Security.h"
+//#include "Security.h"
 
 using std::string;
 
@@ -294,7 +294,7 @@ private:
 
 	CCustomer Customer;
 
-	Security CameraOBJ[3];
+	//Security CameraOBJ[3];
 
 	//=========Items=========//
 	CItem sardineCan,
