@@ -13,7 +13,7 @@ public:
 	CInventory(void);
 	~CInventory(void);
 
-	void AddItem(CItem temp);
+	bool AddItem(CItem temp);
 	CItem getItem(int pos);
 	int getNoOfItems(void);
 	void DeleteAll(void);
@@ -21,7 +21,6 @@ public:
 	void removeItem(CItem temp);
 
 private:
-	vector<CItem> Container;
-	int NoOfItems;
+	vector<CItem> Inventory;
 };
 

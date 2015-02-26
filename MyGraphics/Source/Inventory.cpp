@@ -9,50 +9,54 @@ CInventory::~CInventory(void)
 {
 }
 
-void CInventory::AddItem(CItem temp)
+bool CInventory::AddItem(CItem temp)
 {
-	if(Container.size() < 10)
+	if(Inventory.size() < 10)
 	{
-		Container.push_back(temp);
+		Inventory.push_back(temp);
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 
 CItem CInventory::getItem(int pos)
 {
 	pos = pos - 1;
-	if(pos < Container.size())
+	if(pos < Inventory.size())
 	{
-		return Container[pos];
+		return Inventory[pos];
 	}
 }
 
 int CInventory::getNoOfItems(void)
 {
-	return Container.size();
+	return Inventory.size();
 }
 
 void CInventory::removeItem(int pos)
 {
-	if( pos <= NoOfItems)
+	pos = pos - 1;
+	if( pos <= Inventory.size())
 	{
-		Container.erase(Container.begin()+pos);
-		NoOfItems--;
+		Inventory.erase(Inventory.begin()+pos);
 	}
 }
 
 void CInventory::removeItem(CItem temp)
 {
-	for(int i = 0; i < Container.size(); ++i)
+	for(int i = 0; i < Inventory.size(); ++i)
 	{
-		if(Container[i].getobjType() == temp.getobjType())
+		if(Inventory[i].getobjType() == temp.getobjType())
 		{
-			Container.erase(Container.begin()+i);
-			NoOfItems--;
+			Inventory.erase(Inventory.begin()+i);
 		}
 	}
 }
 
 void CInventory::DeleteAll(void)
 {
-	Container.clear();
+	Inventory.clear();
 }

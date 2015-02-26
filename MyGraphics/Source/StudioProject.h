@@ -283,14 +283,15 @@ private:
 				boxContainer9,
 				boxContainer10,
 				boxContainer11,
-				boxContainer12;
+				boxContainer12,
+				CashierBox;
 
 	Camera3 camera;
 
 	MS modelStack, viewStack, projectionStack;
 
 	Light lights[7];
-
+	CInventory in;
 	void RenderMesh(Mesh *mesh, bool enableLight);
 
 	//Text

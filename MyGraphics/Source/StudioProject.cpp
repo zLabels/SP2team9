@@ -413,6 +413,24 @@ void StudioProject::InitVariables()
 	Framerate = "FPS: ";
 
 	Cash = "";
+	//=========Cashier box===============//
+	hitBox checkOut;
+	Vector3 cashierMax, cashierMin;
+	//First Cashier
+	cashierMax.Set(-19.2f,8.f,-11.6f);
+	cashierMin.Set(-26.f,4.f,-13.f);
+	checkOut.SetBox(cashierMax,cashierMin);
+	CashierBox.push_back(checkOut);
+	//Middle Cashier
+	cashierMax.Set(-19.2f,8.f,7.1f);
+	cashierMin.Set(-26.f,4.f,4.8f);
+	checkOut.SetBox(cashierMax,cashierMin);
+	CashierBox.push_back(checkOut);
+	//Last Cashier
+	cashierMax.Set(-19.2f,8.f,25.f);
+	cashierMin.Set(-26.f,4.f,22.2f);
+	checkOut.SetBox(cashierMax,cashierMin);
+	CashierBox.push_back(checkOut);
 
 	//===============Sardine Can Variables============//
 	Mesh* newMesh;
@@ -1592,9 +1610,11 @@ void StudioProject::Update(double dt)
 						(camera.target.y >= boxContainer[i].min.y) && 
 						(camera.target.z >= boxContainer[i].min.z))
 					{
-						player.getInventory().AddItem(Container[i]);
-						Container[i].setRender(false);
-						break;
+						if(player.getInventory().AddItem(Container[i]) == true)
+						{
+							Container[i].setRender(false);
+							break;
+						}
 					}
 				}
 			}
@@ -1612,9 +1632,11 @@ void StudioProject::Update(double dt)
 						(camera.target.y >= boxContainer2[i].min.y) && 
 						(camera.target.z >= boxContainer2[i].min.z))
 					{
-						player.getInventory().AddItem(Container2[i]);
-						Container2[i].setRender(false);
-						break;
+						if(player.getInventory().AddItem(Container2[i]) == true)
+						{
+							Container2[i].setRender(false);
+							break;
+						}
 					}
 				}
 			}
@@ -1632,9 +1654,11 @@ void StudioProject::Update(double dt)
 						(camera.target.y >= boxContainer3[i].min.y) && 
 						(camera.target.z >= boxContainer3[i].min.z))
 					{
-						player.getInventory().AddItem(Container3[i]);
-						Container3[i].setRender(false);
-						break;
+						if(player.getInventory().AddItem(Container3[i]) == true)
+						{
+							Container3[i].setRender(false);
+							break;
+						}
 					}
 				}
 			}
@@ -1652,9 +1676,11 @@ void StudioProject::Update(double dt)
 						(camera.target.y >= boxContainer4[i].min.y) && 
 						(camera.target.z >= boxContainer4[i].min.z))
 					{
-						player.getInventory().AddItem(Container4[i]);
-						Container4[i].setRender(false);
-						break;
+						if(player.getInventory().AddItem(Container4[i]) == true)
+						{
+							Container4[i].setRender(false);
+							break;
+						}
 					}
 				}
 			}
@@ -1672,9 +1698,11 @@ void StudioProject::Update(double dt)
 						(camera.target.y >= boxContainer5[i].min.y) && 
 						(camera.target.z >= boxContainer5[i].min.z))
 					{
-						player.getInventory().AddItem(Container5[i]);
-						Container5[i].setRender(false);
-						break;
+						if(player.getInventory().AddItem(Container5[i]) == true)
+						{
+							Container5[i].setRender(false);
+							break;
+						}
 					}
 				}
 			}
@@ -1692,9 +1720,11 @@ void StudioProject::Update(double dt)
 						(camera.target.y >= boxContainer6[i].min.y) && 
 						(camera.target.z >= boxContainer6[i].min.z))
 					{
-						player.getInventory().AddItem(Container6[i]);
-						Container6[i].setRender(false);
-						break;
+						if(player.getInventory().AddItem(Container6[i]) == true)
+						{
+							Container6[i].setRender(false);
+							break;
+						}
 					}
 				}
 			}
@@ -1712,9 +1742,11 @@ void StudioProject::Update(double dt)
 						(camera.target.y >= boxContainer7[i].min.y) && 
 						(camera.target.z >= boxContainer7[i].min.z))
 					{
-						player.getInventory().AddItem(Container7[i]);
-						Container7[i].setRender(false);
-						break;
+						if(player.getInventory().AddItem(Container7[i]) == true)
+						{
+							Container7[i].setRender(false);
+							break;
+						}
 					}
 				}
 			}
@@ -1732,9 +1764,11 @@ void StudioProject::Update(double dt)
 						(camera.target.y >= boxContainer8[i].min.y) && 
 						(camera.target.z >= boxContainer8[i].min.z))
 					{
-						player.getInventory().AddItem(Container8[i]);
-						Container8[i].setRender(false);
-						break;
+						if(player.getInventory().AddItem(Container8[i]) == true)
+						{
+							Container8[i].setRender(false);
+							break;
+						}
 					}
 				}
 			}
@@ -1751,9 +1785,11 @@ void StudioProject::Update(double dt)
 						(camera.target.y >= boxContainer9[i].min.y) && 
 						(camera.target.z >= boxContainer9[i].min.z))
 					{
-						player.getInventory().AddItem(Container9[i]);
-						Container9[i].setRender(false);
-						break;
+						if(player.getInventory().AddItem(Container9[i]) == true)
+						{
+							Container9[i].setRender(false);
+							break;
+						}
 					}
 				}
 			}
@@ -1770,9 +1806,11 @@ void StudioProject::Update(double dt)
 						(camera.target.y >= boxContainer10[i].min.y) && 
 						(camera.target.z >= boxContainer10[i].min.z))
 					{
-						player.getInventory().AddItem(Container10[i]);
-						Container10[i].setRender(false);
-						break;
+						if(player.getInventory().AddItem(Container10[i]) == true)
+						{
+							Container10[i].setRender(false);
+							break;
+						}
 					}
 				}
 			}
@@ -1790,9 +1828,11 @@ void StudioProject::Update(double dt)
 						(camera.target.y >= boxContainer11[i].min.y) && 
 						(camera.target.z >= boxContainer11[i].min.z))
 					{
-						player.getInventory().AddItem(Container11[i]);
-						Container11[i].setRender(false);
-						break;
+						if(player.getInventory().AddItem(Container11[i]) == true)
+						{
+							Container11[i].setRender(false);
+							break;
+						}
 					}
 				}
 			}
@@ -1809,15 +1849,50 @@ void StudioProject::Update(double dt)
 						(camera.target.y >= boxContainer12[i].min.y) && 
 						(camera.target.z >= boxContainer12[i].min.z))
 					{
-						player.getInventory().AddItem(Container12[i]);
-						Container12[i].setRender(false);
-						break;
+						if(player.getInventory().AddItem(Container12[i]) == true)
+						{
+							Container12[i].setRender(false);
+							break;
+						}
 					}
 				}
 			}
 			checking = false;
 		}
 	}
+	/*===============================================================
+								CHECKING OUT
+	==================================================================*/
+	if(Application::IsKeyPressed('E') && (player.getInventory().getNoOfItems() != 0))
+	{
+		for(int i = 0;i < CashierBox.size();i++)
+		{
+			if((camera.position.x <= CashierBox[i].max.x) && 
+				(camera.position.y <= CashierBox[i].max.y) && 
+				(camera.position.z <= CashierBox[i].max.z) &&
+				(camera.position.x >= CashierBox[i].min.x) && 
+				(camera.position.y >= CashierBox[i].min.y) && 
+				(camera.position.z >= CashierBox[i].min.z))
+			{
+				float cost = 0.f;
+				//Calculating Cost of items taken by player
+				for(int i = 1; i < (player.getInventory().getNoOfItems() + 1); i++)
+				{
+					cost += player.getInventory().getItem(i).getPrice();
+				}
+				//Only if cost is lesser or equal player will be successfully checked out and items removed from invent
+				if(cost < player.getMoney())
+				{
+					for(int i = 1; i < (player.getInventory().getNoOfItems() + 1); i++)
+					{
+						player.getInventory().removeItem(i);
+					}
+					player.setMoney(player.getMoney() - cost);
+				}
+			}
+		}
+	}
+
 	if(Application::IsKeyPressed('Q'))
 	{
 		for(int i = 0; i < boxContainer.size(); ++i)
