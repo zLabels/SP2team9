@@ -363,6 +363,9 @@ void StudioProject::InitMesh()
 	meshList[UI_PEPSI_CAN] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_PEPSI_CAN]->textureID = LoadTGA("UI sprites/UI-drink_can3.tga");
 
+	meshList[UI_COKE_ZERO_CAN] = MeshBuilder::GenerateQuad("Cokde Zero", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_COKE_ZERO_CAN]->textureID = LoadTGA("UI sprites/UI-drink_can2.tga");
+
 	meshList[UI_CEREALBOX1] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_CEREALBOX1]->textureID = LoadTGA("UI sprites/UI-Cereal-box1.tga");
 
@@ -424,6 +427,10 @@ void StudioProject::InitVariables()
 	Coke = false;;
 	Pepsi = false;;
 	Pizza = false;
+	for (int a = 0; a < 12; a++)
+	{
+		ItemsTaken[a] = false;
+	}
 	int a = 0;
 
 	//variable to animate model
@@ -2441,8 +2448,95 @@ void StudioProject::Update(double dt)
 
 	camera.Update(dt);
 
-	//cout  << player.getInventory().getItem(1).getobjType() << endl;
+	if (player.getInventory().getNoOfItems() == 1)
+	{
+		ItemsTaken[1] = true;
+	}
+	else if (player.getInventory().getNoOfItems() < 1)
+	{
+		ItemsTaken[1] = false;
+	}
 
+	if (player.getInventory().getNoOfItems() == 2)
+	{
+		ItemsTaken[2] = true;
+	}
+	else if (player.getInventory().getNoOfItems() < 2)
+	{
+		ItemsTaken[2] = false;
+	}
+
+	if (player.getInventory().getNoOfItems() == 3)
+	{
+		ItemsTaken[3] = true;
+	}
+	else if (player.getInventory().getNoOfItems() < 3)
+	{
+		ItemsTaken[3] = false;
+	}
+
+	if (player.getInventory().getNoOfItems() == 4)
+	{
+		ItemsTaken[4] = true;
+	}
+	else if (player.getInventory().getNoOfItems() < 4)
+	{
+		ItemsTaken[4] = false;
+	}
+
+	if (player.getInventory().getNoOfItems() == 5)
+	{
+		ItemsTaken[5] = true;
+	}
+	else if (player.getInventory().getNoOfItems() < 5)
+	{
+		ItemsTaken[5] = false;
+	}
+
+	if (player.getInventory().getNoOfItems() == 6)
+	{
+		ItemsTaken[6] = true;
+	}
+	else if (player.getInventory().getNoOfItems() < 6)
+	{
+		ItemsTaken[6] = false;
+	}
+
+	if (player.getInventory().getNoOfItems() == 7)
+	{
+		ItemsTaken[7] = true;
+	}
+	else if (player.getInventory().getNoOfItems() < 7)
+	{
+		ItemsTaken[7] = false;
+	}
+
+	if (player.getInventory().getNoOfItems() == 8)
+	{
+		ItemsTaken[8] = true;
+	}
+	else if (player.getInventory().getNoOfItems() < 8)
+	{
+		ItemsTaken[8] = false;
+	}
+
+	if (player.getInventory().getNoOfItems() == 9)
+	{
+		ItemsTaken[9] = true;
+	}
+	else if (player.getInventory().getNoOfItems() < 9)
+	{
+		ItemsTaken[9] = false;
+	}
+
+	if (player.getInventory().getNoOfItems() == 10)
+	{
+		ItemsTaken[10] = true;
+	}
+	else if (player.getInventory().getNoOfItems() < 10 )
+	{
+		ItemsTaken[10] = false;
+	}
 }
 
 //=========Rendering of Skybox to be done here=========//
@@ -3660,66 +3754,309 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, std::string text, Color colo
 	modelStack.Translate(-1.43656 + -0.065, -1.43656 + 0.15, 0);
 	RenderMesh(meshList[itemInventory], false);
 	modelStack.PopMatrix();
-	
-	modelStack.PushMatrix();
-	modelStack.Scale(0.1, 0.1, 0.1);
-	modelStack.Translate(-7.5, -7.48149, 0);
-	RenderMesh(meshList[UI_SARDINE_CAN], false);
-	modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
-	modelStack.Scale(0.1, 0.1, 0.1);
-	modelStack.Translate(-6.5, -7.48149, 0);
-	RenderMesh(meshList[UI_PEA_N_CARROTS], false);
-	modelStack.PopMatrix();
+	if (ItemsTaken[1] == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Scale(0.1, 0.1, 0.1);
+		modelStack.Translate(-9.5, -5.8, 0);
+		if (player.getInventory().getItem(1).getName() == "Sardine")
+			RenderMesh(meshList[UI_SARDINE_CAN], false);
+		if (player.getInventory().getItem(1).getName() == "PeasAndCarrots")
+			RenderMesh(meshList[UI_PEA_N_CARROTS], false);
+		if (player.getInventory().getItem(1).getName() == "BakedBeanCan")
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN], false);
+		if (player.getInventory().getItem(1).getName() == "PizzaBox")
+			RenderMesh(meshList[UI_PIZZABOX], false);
+		if (player.getInventory().getItem(1).getName() == "CerealBox1")
+			RenderMesh(meshList[UI_CEREALBOX1], false);
+		if (player.getInventory().getItem(1).getName() == "CerealBox2")
+			RenderMesh(meshList[UI_CEREALBOX2], false);
+		if (player.getInventory().getItem(1).getName() == "PotatoChips")
+			RenderMesh(meshList[UI_POTATOCHIPS], false);
+		if (player.getInventory().getItem(1).getName() == "CokeCan")
+			RenderMesh(meshList[UI_COKE_CAN], false);
+		if (player.getInventory().getItem(1).getName() == "CokeZeroCan")
+			RenderMesh(meshList[UI_COKE_ZERO_CAN], false);
+		if (player.getInventory().getItem(1).getName() == "PepsiCan")
+			RenderMesh(meshList[UI_PEPSI_CAN], false);
+		if (player.getInventory().getItem(1).getName() == "MiloCan")
+			RenderMesh(meshList[UI_MILOCAN], false);
+		modelStack.PopMatrix();
+	}
 
-	modelStack.PushMatrix();
-	modelStack.Scale(0.1, 0.1, 0.1);
-	modelStack.Translate(-5.5, -7.48149, 0);
-	RenderMesh(meshList[UI_BAKED_BEANS_CAN], false);
-	modelStack.PopMatrix();
+	if (ItemsTaken[2] == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Scale(0.1, 0.1, 0.1);
+		modelStack.Translate(-8.5, -5.8, 0);
+		if (player.getInventory().getItem(2).getName() == "Sardine")
+			RenderMesh(meshList[UI_SARDINE_CAN], false);
+		if (player.getInventory().getItem(2).getName() == "PeasAndCarrots")
+			RenderMesh(meshList[UI_PEA_N_CARROTS], false);
+		if (player.getInventory().getItem(2).getName() == "BakedBeanCan")
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN], false);
+		if (player.getInventory().getItem(2).getName() == "PizzaBox")
+			RenderMesh(meshList[UI_PIZZABOX], false);
+		if (player.getInventory().getItem(2).getName() == "CerealBox1")
+			RenderMesh(meshList[UI_CEREALBOX1], false);
+		if (player.getInventory().getItem(2).getName() == "CerealBox2")
+			RenderMesh(meshList[UI_CEREALBOX2], false);
+		if (player.getInventory().getItem(2).getName() == "CokeCan")
+			RenderMesh(meshList[UI_COKE_CAN], false);
+		if (player.getInventory().getItem(2).getName() == "CokeZeroCan")
+			RenderMesh(meshList[UI_COKE_ZERO_CAN], false);
+		if (player.getInventory().getItem(2).getName() == "PepsiCan")
+			RenderMesh(meshList[UI_PEPSI_CAN], false);
+		if (player.getInventory().getItem(2).getName() == "PotatoChips")
+			RenderMesh(meshList[UI_POTATOCHIPS], false);
+		if (player.getInventory().getItem(2).getName() == "MiloCan")
+			RenderMesh(meshList[UI_MILOCAN], false);
+		modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
-	modelStack.Scale(0.1, 0.1, 0.1);
-	modelStack.Translate(-8.5, -7.48149, 0);
-	RenderMesh(meshList[UI_PIZZABOX], false);
-	modelStack.PopMatrix();
+	}
+	if (ItemsTaken[3] == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Scale(0.1, 0.1, 0.1);
+		modelStack.Translate(-7.5, -5.8, 0);
+		if (player.getInventory().getItem(3).getName() == "Sardine")
+			RenderMesh(meshList[UI_SARDINE_CAN], false);
+		if (player.getInventory().getItem(3).getName() == "PeasAndCarrots")
+			RenderMesh(meshList[UI_PEA_N_CARROTS], false);
+		if (player.getInventory().getItem(3).getName() == "BakedBeanCan")
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN], false);
+		if (player.getInventory().getItem(3).getName() == "PizzaBox")
+			RenderMesh(meshList[UI_PIZZABOX], false);
+		if (player.getInventory().getItem(3).getName() == "CerealBox1")
+			RenderMesh(meshList[UI_CEREALBOX1], false);
+		if (player.getInventory().getItem(3).getName() == "CerealBox2")
+			RenderMesh(meshList[UI_CEREALBOX2], false);
+		if (player.getInventory().getItem(3).getName() == "CokeCan")
+			RenderMesh(meshList[UI_COKE_CAN], false);
+		if (player.getInventory().getItem(3).getName() == "CokeZeroCan")
+			RenderMesh(meshList[UI_COKE_ZERO_CAN], false);
+		if (player.getInventory().getItem(3).getName() == "PepsiCan")
+			RenderMesh(meshList[UI_PEPSI_CAN], false);
+		if (player.getInventory().getItem(3).getName() == "PotatoChips")
+			RenderMesh(meshList[UI_POTATOCHIPS], false);
+		if (player.getInventory().getItem(3).getName() == "MiloCan")
+			RenderMesh(meshList[UI_MILOCAN], false);
+		modelStack.PopMatrix();
+	}
 
-	modelStack.PushMatrix();
-	modelStack.Scale(0.1, 0.1, 0.1);
-	modelStack.Translate(-9.5, -7.48149, 0);
-	RenderMesh(meshList[UI_POTATOCHIPS], false);
-	modelStack.PopMatrix();
+	if (ItemsTaken[4] == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Scale(0.1, 0.1, 0.1);
+		modelStack.Translate(-6.5, -5.8, 0);
+		if (player.getInventory().getItem(4).getName() == "Sardine")
+			RenderMesh(meshList[UI_SARDINE_CAN], false);
+		if (player.getInventory().getItem(4).getName() == "PeasAndCarrots")
+			RenderMesh(meshList[UI_PEA_N_CARROTS], false);
+		if (player.getInventory().getItem(4).getName() == "BakedBeanCan")
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN], false);
+		if (player.getInventory().getItem(4).getName() == "PizzaBox")
+			RenderMesh(meshList[UI_PIZZABOX], false);
+		if (player.getInventory().getItem(4).getName() == "CerealBox1")
+			RenderMesh(meshList[UI_CEREALBOX1], false);
+		if (player.getInventory().getItem(4).getName() == "CerealBox2")
+			RenderMesh(meshList[UI_CEREALBOX2], false);
+		if (player.getInventory().getItem(4).getName() == "CokeCan")
+			RenderMesh(meshList[UI_COKE_CAN], false);
+		if (player.getInventory().getItem(4).getName() == "CokeZeroCan")
+			RenderMesh(meshList[UI_COKE_ZERO_CAN], false);
+		if (player.getInventory().getItem(4).getName() == "PepsiCan")
+			RenderMesh(meshList[UI_PEPSI_CAN], false);
+		if (player.getInventory().getItem(4).getName() == "PotatoChips")
+			RenderMesh(meshList[UI_POTATOCHIPS], false);
+		if (player.getInventory().getItem(4).getName() == "MiloCan")
+			RenderMesh(meshList[UI_MILOCAN], false);
+		modelStack.PopMatrix();
+	}
+	if (ItemsTaken[5] == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Scale(0.1, 0.1, 0.1);
+		modelStack.Translate(-5.5, -5.8, 0);
+		if (player.getInventory().getItem(5).getName() == "Sardine")
+			RenderMesh(meshList[UI_SARDINE_CAN], false);
+		if (player.getInventory().getItem(5).getName() == "PeasAndCarrots")
+			RenderMesh(meshList[UI_PEA_N_CARROTS], false);
+		if (player.getInventory().getItem(5).getName() == "BakedBeanCan")
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN], false);
+		if (player.getInventory().getItem(5).getName() == "PizzaBox")
+			RenderMesh(meshList[UI_PIZZABOX], false);
+		if (player.getInventory().getItem(5).getName() == "CerealBox1")
+			RenderMesh(meshList[UI_CEREALBOX1], false);
+		if (player.getInventory().getItem(5).getName() == "CerealBox2")
+			RenderMesh(meshList[UI_CEREALBOX2], false);
+		if (player.getInventory().getItem(5).getName() == "CokeCan")
+			RenderMesh(meshList[UI_COKE_CAN], false);
+		if (player.getInventory().getItem(5).getName() == "CokeZeroCan")
+			RenderMesh(meshList[UI_COKE_ZERO_CAN], false);
+		if (player.getInventory().getItem(5).getName() == "PepsiCan")
+			RenderMesh(meshList[UI_PEPSI_CAN], false);
+		if (player.getInventory().getItem(5).getName() == "PotatoChips")
+			RenderMesh(meshList[UI_POTATOCHIPS], false);
+		if (player.getInventory().getItem(5).getName() == "MiloCan")
+			RenderMesh(meshList[UI_MILOCAN], false);
+		modelStack.PopMatrix();
+	}
+	if (ItemsTaken[6] == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Scale(0.1, 0.1, 0.1);
+		modelStack.Translate(-9.5, -7.5, 0);
+		if (player.getInventory().getItem(6).getName() == "Sardine")
+			RenderMesh(meshList[UI_SARDINE_CAN], false);
+		if (player.getInventory().getItem(6).getName() == "PeasAndCarrots")
+			RenderMesh(meshList[UI_PEA_N_CARROTS], false);
+		if (player.getInventory().getItem(6).getName() == "BakedBeanCan")
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN], false);
+		if (player.getInventory().getItem(6).getName() == "PizzaBox")
+			RenderMesh(meshList[UI_PIZZABOX], false);
+		if (player.getInventory().getItem(6).getName() == "CerealBox1")
+			RenderMesh(meshList[UI_CEREALBOX1], false);
+		if (player.getInventory().getItem(6).getName() == "CerealBox2")
+			RenderMesh(meshList[UI_CEREALBOX2], false);
+		if (player.getInventory().getItem(6).getName() == "CokeCan")
+			RenderMesh(meshList[UI_COKE_CAN], false);
+		if (player.getInventory().getItem(6).getName() == "CokeZeroCan")
+			RenderMesh(meshList[UI_COKE_ZERO_CAN], false);
+		if (player.getInventory().getItem(6).getName() == "PepsiCan")
+			RenderMesh(meshList[UI_PEPSI_CAN], false);
+		if (player.getInventory().getItem(6).getName() == "PotatoChips")
+			RenderMesh(meshList[UI_POTATOCHIPS], false);
+		if (player.getInventory().getItem(6).getName() == "MiloCan")
+			RenderMesh(meshList[UI_MILOCAN], false);
+		modelStack.PopMatrix();
+	}
 
-	modelStack.PushMatrix();
-	modelStack.Scale(0.1, 0.1, 0.1);
-	modelStack.Translate(-9.5, -5.8, 0);
-	RenderMesh(meshList[UI_COKE_CAN], false);
-	modelStack.PopMatrix();
+	if (ItemsTaken[7] == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Scale(0.1, 0.1, 0.1);
+		modelStack.Translate(-8.5, -7.5, 0);
+		if (player.getInventory().getItem(7).getName() == "Sardine")
+			RenderMesh(meshList[UI_SARDINE_CAN], false);
+		if (player.getInventory().getItem(7).getName() == "PeasAndCarrots")
+			RenderMesh(meshList[UI_PEA_N_CARROTS], false);
+		if (player.getInventory().getItem(7).getName() == "BakedBeanCan")
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN], false);
+		if (player.getInventory().getItem(7).getName() == "PizzaBox")
+			RenderMesh(meshList[UI_PIZZABOX], false);
+		if (player.getInventory().getItem(7).getName() == "CerealBox1")
+			RenderMesh(meshList[UI_CEREALBOX1], false);
+		if (player.getInventory().getItem(7).getName() == "CerealBox2")
+			RenderMesh(meshList[UI_CEREALBOX2], false);
+		if (player.getInventory().getItem(7).getName() == "CokeCan")
+			RenderMesh(meshList[UI_COKE_CAN], false);
+		if (player.getInventory().getItem(7).getName() == "CokeZeroCan")
+			RenderMesh(meshList[UI_COKE_ZERO_CAN], false);
+		if (player.getInventory().getItem(7).getName() == "PepsiCan")
+			RenderMesh(meshList[UI_PEPSI_CAN], false);
+		if (player.getInventory().getItem(7).getName() == "PotatoChips")
+			RenderMesh(meshList[UI_POTATOCHIPS], false);
+		if (player.getInventory().getItem(7).getName() == "MiloCan")
+			RenderMesh(meshList[UI_MILOCAN], false);
+		modelStack.PopMatrix();
+	}
+	if (ItemsTaken[8] == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Scale(0.1, 0.1, 0.1);
+		modelStack.Translate(-7.5, -7.5, 0);
+		if (player.getInventory().getItem(8).getName() == "Sardine")
+			RenderMesh(meshList[UI_SARDINE_CAN], false);
+		if (player.getInventory().getItem(8).getName() == "PeasAndCarrots")
+			RenderMesh(meshList[UI_PEA_N_CARROTS], false);
+		if (player.getInventory().getItem(8).getName() == "BakedBeanCan")
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN], false);
+		if (player.getInventory().getItem(8).getName() == "PizzaBox")
+			RenderMesh(meshList[UI_PIZZABOX], false);
+		if (player.getInventory().getItem(8).getName() == "CerealBox1")
+			RenderMesh(meshList[UI_CEREALBOX1], false);
+		if (player.getInventory().getItem(8).getName() == "CerealBox2")
+			RenderMesh(meshList[UI_CEREALBOX2], false);
+		if (player.getInventory().getItem(8).getName() == "CokeCan")
+			RenderMesh(meshList[UI_COKE_CAN], false);
+		if (player.getInventory().getItem(8).getName() == "CokeZeroCan")
+			RenderMesh(meshList[UI_COKE_ZERO_CAN], false);
+		if (player.getInventory().getItem(8).getName() == "PepsiCan")
+			RenderMesh(meshList[UI_PEPSI_CAN], false);
+		if (player.getInventory().getItem(8).getName() == "PotatoChips")
+			RenderMesh(meshList[UI_POTATOCHIPS], false);
+		if (player.getInventory().getItem(8).getName() == "MiloCan")
+			RenderMesh(meshList[UI_MILOCAN], false);
+		modelStack.PopMatrix();
+	}
 
-	modelStack.PushMatrix();
-	modelStack.Scale(0.1, 0.1, 0.1);
-	modelStack.Translate(-8.5, -5.8, 0);
-	RenderMesh(meshList[UI_PEPSI_CAN], false);
-	modelStack.PopMatrix();
+	if (ItemsTaken[9] == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Scale(0.1, 0.1, 0.1);
+		modelStack.Translate(-6.5, -7.5, 0);
+		if (player.getInventory().getItem(9).getName() == "Sardine")
+			RenderMesh(meshList[UI_SARDINE_CAN], false);
+		if (player.getInventory().getItem(9).getName() == "PeasAndCarrots")
+			RenderMesh(meshList[UI_PEA_N_CARROTS], false);
+		if (player.getInventory().getItem(9).getName() == "BakedBeanCan")
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN], false);
+		if (player.getInventory().getItem(9).getName() == "PizzaBox")
+			RenderMesh(meshList[UI_PIZZABOX], false);
+		if (player.getInventory().getItem(9).getName() == "CerealBox1")
+			RenderMesh(meshList[UI_CEREALBOX1], false);
+		if (player.getInventory().getItem(9).getName() == "CerealBox2")
+			RenderMesh(meshList[UI_CEREALBOX2], false);
+		if (player.getInventory().getItem(9).getName() == "CokeCan")
+			RenderMesh(meshList[UI_COKE_CAN], false);
+		if (player.getInventory().getItem(9).getName() == "CokeZeroCan")
+			RenderMesh(meshList[UI_COKE_ZERO_CAN], false);
+		if (player.getInventory().getItem(9).getName() == "PepsiCan")
+			RenderMesh(meshList[UI_PEPSI_CAN], false);
+		if (player.getInventory().getItem(9).getName() == "PotatoChips")
+			RenderMesh(meshList[UI_POTATOCHIPS], false);
+		if (player.getInventory().getItem(9).getName() == "MiloCan")
+			RenderMesh(meshList[UI_MILOCAN], false);
+		modelStack.PopMatrix();
+	}
+	if (ItemsTaken[10] == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Scale(0.1, 0.1, 0.1);
+		modelStack.Translate(-5.5, -7.5, 0);
+		if (player.getInventory().getItem(10).getName() == "Sardine")
+			RenderMesh(meshList[UI_SARDINE_CAN], false);
+		if (player.getInventory().getItem(10).getName() == "PeasAndCarrots")
+			RenderMesh(meshList[UI_PEA_N_CARROTS], false);
+		if (player.getInventory().getItem(10).getName() == "BakedBeanCan")
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN], false);
+		if (player.getInventory().getItem(10).getName() == "PizzaBox")
+			RenderMesh(meshList[UI_PIZZABOX], false);
+		if (player.getInventory().getItem(10).getName() == "CerealBox1")
+			RenderMesh(meshList[UI_CEREALBOX1], false);
+		if (player.getInventory().getItem(10).getName() == "CerealBox2")
+			RenderMesh(meshList[UI_CEREALBOX2], false);
+		if (player.getInventory().getItem(10).getName() == "CokeCan")
+			RenderMesh(meshList[UI_COKE_CAN], false);
+		if (player.getInventory().getItem(10).getName() == "CokeZeroCan")
+			RenderMesh(meshList[UI_COKE_ZERO_CAN], false);
+		if (player.getInventory().getItem(10).getName() == "PepsiCan")
+			RenderMesh(meshList[UI_PEPSI_CAN], false);
+		if (player.getInventory().getItem(10).getName() == "PotatoChips")
+			RenderMesh(meshList[UI_POTATOCHIPS], false);
+		if (player.getInventory().getItem(10).getName() == "MiloCan")
+			RenderMesh(meshList[UI_MILOCAN], false);
+		modelStack.PopMatrix();
+	}
 
-	modelStack.PushMatrix();
-	modelStack.Scale(0.1, 0.1, 0.1);
-	modelStack.Translate(-7.5, -5.8, 0);
-	RenderMesh(meshList[UI_CEREALBOX1], false);
-	modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
-	modelStack.Scale(0.1, 0.1, 0.1);
-	modelStack.Translate(-6.5, -5.8, 0);
-	RenderMesh(meshList[UI_CEREALBOX2], false);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-	modelStack.Scale(0.1, 0.1, 0.1);
-	modelStack.Translate(-5.5, -5.8, 0);
-	RenderMesh(meshList[UI_MILOCAN], false);
-	modelStack.PopMatrix();
+	//modelStack.PushMatrix();
+	//modelStack.Scale(0.1, 0.1, 0.1);
+	//modelStack.Translate(-5.5, -5.8, 0);
+	//RenderMesh(meshList[UI_MILOCAN], false);
+	//modelStack.PopMatrix();
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glUniform1i(m_parameters[U_TEXT_ENABLED], 0);

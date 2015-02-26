@@ -220,7 +220,7 @@ private:
 		UI_PEA_N_CARROTS,
 		UI_BAKED_BEANS_CAN,
 		UI_COKE_CAN,
-		UI_DRINKCAN2,
+		UI_COKE_ZERO_CAN,
 		UI_PEPSI_CAN,
 		UI_MILOCAN,
 		UI_CEREALBOX1,
@@ -293,6 +293,7 @@ private:
 	bool Lays;
 	bool Coke;
 	bool Pepsi;
+	bool ItemsTaken[12];
 	string Cash;
 
 	CPlayer player;
