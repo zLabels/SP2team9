@@ -140,6 +140,13 @@ void StudioProject::InitMesh()
 	meshList[GEO_COKE_CAN]->material.kShininess = 8.f;
 	meshList[GEO_COKE_CAN] ->textureID = LoadTGA("Image//drink_can1.tga");*/
 
+	meshList[GEO_PEA_N_CARROTS] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//canned-food2.obj");
+	meshList[GEO_PEA_N_CARROTS]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_PEA_N_CARROTS]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_PEA_N_CARROTS]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_PEA_N_CARROTS]->material.kShininess = 8.f;
+	meshList[GEO_PEA_N_CARROTS] ->textureID = LoadTGA("Image//canned_food_2.tga");
+
 	meshList[GEO_DRINKCAN2] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//drink-can2.obj");
 	meshList[GEO_DRINKCAN2]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[GEO_DRINKCAN2]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
@@ -405,6 +412,18 @@ void StudioProject::InitVariables()
 	playerAngle = 0;
 	moving = 0;
 	showInventory = false;
+	//OBJ FOOD BOOLEANS
+	Pizza = false;
+	Peas = false;;
+	Milo = false;;
+	Cereal1 = false;;
+	Cereal2 = false;;
+	Sardine = false;;
+	Beans = false;;
+	Lays = false;;
+	Coke = false;;
+	Pepsi = false;;
+	Pizza = false;
 	int a = 0;
 
 	//variable to animate model
@@ -2033,14 +2052,59 @@ void StudioProject::Update(double dt)
 				{
 					cost += player.getInventory().getItem(i).getPrice();
 					cout << player.getInventory().getItem(i).getName() << endl;
+
+					if(player.getInventory().getItem(i).getobjType() == GEO_PEA_N_CARROTS)
+					{
+						Peas = true;
+					}
+					else if(player.getInventory().getItem(i).getobjType() == GEO_SARDINE_CAN)
+					{
+						Peas = true;
+					}
+					else if(player.getInventory().getItem(i).getobjType() == GEO_BAKED_BEANS_CAN)
+					{
+						Beans = true;
+					}
+					else if(player.getInventory().getItem(i).getobjType() == GEO_COKE_CAN)
+					{
+						Coke = true;
+					}
+
+					else if(player.getInventory().getItem(i).getobjType() == GEO_DRINKCAN2)
+					{
+						Peas = true;
+					}
+					else if(player.getInventory().getItem(i).getobjType() == GEO_PEPSI_CAN)
+					{
+						Pepsi = true;
+					}
+					else if(player.getInventory().getItem(i).getobjType() == GEO_MILOCAN)
+					{
+						Milo = true;
+					}
+					else if(player.getInventory().getItem(i).getobjType() == GEO_CEREALBOX1)
+					{
+						Cereal1 = true;
+					}
+					else if(player.getInventory().getItem(i).getobjType() == GEO_CEREALBOX2)
+					{
+						Cereal2 = true;
+					}
+					else if(player.getInventory().getItem(i).getobjType() == GEO_PIZZABOX)
+					{
+						Pizza = true;
+					}
+					else if(player.getInventory().getItem(i).getobjType() == GEO_POTATOCHIPS)
+					{
+						Lays = true;
+					}
+
 				}
 				//Only if cost is lesser or equal player will be successfully checked out and items removed from invent
 				if(cost < player.getMoney())
 				{
-					for(int i = 1; i < (player.getInventory().getNoOfItems() + 1); i++)
-					{
-						player.getInventory().removeItem(i);
-					}
+					player.getInventory().DeleteAll();
+					cout << player.getInventory().getNoOfItems() << endl;
 					player.setMoney(player.getMoney() - cost);
 				}
 			}
@@ -2299,7 +2363,7 @@ void StudioProject::Update(double dt)
 		collide = false;
 	}
 
-
+	
 	//if(player.getInventory().getNoOfItems() > 0)
 	//{
 	//	cout << player.getInventory().getItem(1).getName() << endl;
@@ -2376,6 +2440,9 @@ void StudioProject::Update(double dt)
 		moving -= (float) (10 * dt);
 
 	camera.Update(dt);
+
+	//cout  << player.getInventory().getItem(1).getobjType() << endl;
+
 }
 
 //=========Rendering of Skybox to be done here=========//
@@ -3248,7 +3315,7 @@ void StudioProject::Render()
 		glUniform3fv(m_parameters[U_LIGHT3_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
 	}
 	else
-	{
+	{ 
 		Position lightPosition_cameraspace = viewStack.Top() * lights[3].position;
 		glUniform3fv(m_parameters[U_LIGHT3_POSITION], 1, &lightPosition_cameraspace.x);
 	}
@@ -3469,7 +3536,14 @@ void StudioProject::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], "Arrow Keys to turn", Color(0, 0, 0), 2, 1, 28);
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press E to interact", Color(0,0,0), 2, 1, 27);
 	}
-	
+	//Used for rendering Objs on cashier table//
+	if (Pizza == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(0, 0, -8);
+		RenderMesh(meshList[GEO_PEA_N_CARROTS],B_Light);
+		modelStack.PopMatrix();
+	}
 
 
 

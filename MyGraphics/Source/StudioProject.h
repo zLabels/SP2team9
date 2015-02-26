@@ -282,6 +282,17 @@ private:
 	Vector3 charPosition;
 	float playerAngle;
 	float angle;
+	//========Booleans for objs ======//
+	bool Pizza;
+	bool Peas;
+	bool Milo;
+	bool Cereal1;
+	bool Cereal2;
+	bool Sardine;
+	bool Beans;
+	bool Lays;
+	bool Coke;
+	bool Pepsi;
 	string Cash;
 
 	CPlayer player;
