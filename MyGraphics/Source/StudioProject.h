@@ -19,6 +19,7 @@
 #include "Player.h"
 #include "Customer.h"
 #include "Cashier.h"
+#include "CItemInventory.h"
 //#include "Security.h"
 
 using std::string;
@@ -293,7 +294,6 @@ private:
 	bool Lays;
 	bool Coke;
 	bool Pepsi;
-	bool ItemsTaken[12];
 	string Cash;
 
 	CPlayer player;
@@ -307,6 +307,7 @@ private:
 	CCustomer Customer;
 
 	//Security CameraOBJ[3];
+	CItemInventory Page;
 
 	//=========Items=========//
 	CItem sardineCan,
