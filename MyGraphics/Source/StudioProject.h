@@ -19,6 +19,7 @@
 #include "Player.h"
 #include "Customer.h"
 #include "Cashier.h"
+#include "Security.h"
 
 using std::string;
 
@@ -213,6 +214,8 @@ private:
 		customerRightLeg,	//Customer Right Leg
 
 		itemInventory,		//Item Inventory page
+		cart,
+		SC,					//Security Camera
 		UI_SARDINE_CAN,
 		UI_PEA_N_CARROTS,
 		UI_BAKED_BEANS_CAN,
@@ -235,6 +238,7 @@ private:
 	void RenderCustomer();
 	void RenderItems();
 	void RenderPlayerInfo();
+	void RenderingSecurityCamera();
 
 public:
 	StudioProject();
@@ -248,6 +252,7 @@ public:
 	void InitVariables();
 	void InitShaders();
 	void InitCharacters();
+	void InitSecurity();
 
 private:
 	unsigned m_vertexArrayID;
@@ -288,6 +293,8 @@ private:
 	CCashier Cashier3;
 
 	CCustomer Customer;
+
+	Security CameraOBJ[3];
 
 	//=========Items=========//
 	CItem sardineCan,
@@ -336,6 +343,7 @@ private:
 	Light lights[7];
 	CInventory in;
 	void RenderMesh(Mesh *mesh, bool enableLight);
+
 
 	//Text
 	void RenderText(Mesh* mesh, std::string text, Color color);

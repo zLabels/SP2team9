@@ -452,7 +452,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(10,6.2,-8+i + a);
-		sardineCan.SetData("sardine", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS);
+		sardineCan.SetData("Sardine", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS);
 		Container.push_back(sardineCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12] + 0.59, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
@@ -471,7 +471,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(12,6.2,-8+i + a);
-		sardineCan.SetData("sardine", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS);
+		sardineCan.SetData("Sardine", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS);
 		Container2.push_back(sardineCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12] + 0.59, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
@@ -498,7 +498,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(10,4.3,-8+i + a);
-		PnCCan.SetData("Peas and Carrot Cans", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS);
+		PnCCan.SetData("PeasAndCarrots", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS);
 		Container.push_back(PnCCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
@@ -516,7 +516,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(12,4.3,-8+i + a);
-		PnCCan.SetData("Peas and Carrot Cans", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS);
+		PnCCan.SetData("PeasAndCarrots", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS);
 		Container2.push_back(PnCCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
@@ -542,7 +542,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(10,2.3,-8+i + a);
-		BBCan.SetData("Baked Beans Cans", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS);
+		BBCan.SetData("BakedBeanCan", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS);
 		Container.push_back(BBCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
@@ -560,7 +560,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(12,2.3,-8+i + a);
-		BBCan.SetData("Baked Beans Cans", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS);
+		BBCan.SetData("BakedBeanCan", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS);
 		Container2.push_back(BBCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
@@ -586,7 +586,7 @@ void StudioProject::InitVariables()
 			a += 4;
 		}
 		newTRS.SetToTranslation(51.3, 4.7,-74+i + a);
-		CokeCan.SetData("Coke Cans", 3.5f, true, newMesh, GEO_COKE_CAN,newTRS);
+		CokeCan.SetData("CokeCan", 3.5f, true, newMesh, GEO_COKE_CAN,newTRS);
 		Container3.push_back(CokeCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.5);
@@ -612,7 +612,7 @@ void StudioProject::InitVariables()
 			a += 2;
 		}
 		newTRS.SetToTranslation(51.3, 2.7,-75+i + a);
-		PizzaBox.SetData("Pizza Box", 3.5f, true, newMesh, GEO_PIZZABOX,newTRS);
+		PizzaBox.SetData("PizzaBox", 3.5f, true, newMesh, GEO_PIZZABOX,newTRS);
 		Container3.push_back(PizzaBox);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12],newTRS.a[13]+0.8,newTRS.a[14]+1);
@@ -638,7 +638,7 @@ void StudioProject::InitVariables()
 			a += 4;
 		}
 		newTRS.SetToTranslation(-33 +i + a, 4.7,-90);
-		CokeZeroCan.SetData("Coke Zero Cans", 3.5f, true, newMesh, GEO_DRINKCAN2,newTRS);
+		CokeZeroCan.SetData("CokeZeroCan", 3.5f, true, newMesh, GEO_DRINKCAN2,newTRS);
 		Container4.push_back(CokeZeroCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
@@ -663,7 +663,7 @@ void StudioProject::InitVariables()
 			a += 4;
 		}
 		newTRS.SetToTranslation(-33 +i + a, 2.9,-90);
-		PepsiCan.SetData("Pepsi Can", 3.5f, true, newMesh, GEO_PEPSI_CAN,newTRS);
+		PepsiCan.SetData("PepsiCan", 3.5f, true, newMesh, GEO_PEPSI_CAN,newTRS);
 		Container4.push_back(PepsiCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
@@ -689,7 +689,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 4.3,-56.7);
-		cerealBox1.SetData("Cereal Box 1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
+		cerealBox1.SetData("CerealBox1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
 		Container5.push_back(cerealBox1);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59, newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -707,7 +707,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 4.3,-59.5);
-		cerealBox1.SetData("Cereal Box 1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
+		cerealBox1.SetData("CerealBox1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
 		Container6.push_back(cerealBox1);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -725,7 +725,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 4.3,56.5);
-		cerealBox1.SetData("Cereal Box 1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
+		cerealBox1.SetData("CerealBox1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
 		Container7.push_back(cerealBox1);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -743,7 +743,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 4.3,59.5);
-		cerealBox1.SetData("Cereal Box 1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
+		cerealBox1.SetData("CerealBox1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
 		Container8.push_back(cerealBox1);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -769,7 +769,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 2.3,-56.7);
-		cerealBox2.SetData("Cereal Box 2", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS);
+		cerealBox2.SetData("CerealBox2", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS);
 		Container5.push_back(cerealBox2);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -789,7 +789,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 2.3,-59.5);
-		cerealBox2.SetData("Cereal Box 2", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS);
+		cerealBox2.SetData("CerealBox2", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS);
 		Container6.push_back(cerealBox2);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -807,7 +807,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 2.3,59.5);
-		cerealBox2.SetData("Cereal Box 2", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS);
+		cerealBox2.SetData("CerealBox2", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS);
 		Container8.push_back(cerealBox2);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -825,7 +825,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 2.3,56.5);
-		cerealBox2.SetData("Cereal Box 2", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS);
+		cerealBox2.SetData("CerealBox2", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS);
 		Container7.push_back(cerealBox2);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
@@ -851,7 +851,7 @@ void StudioProject::InitVariables()
 			a += 2;
 		}
 		newTRS.SetToTranslation(-28.5 +i + a, 5,-35);
-		PotatoChip.SetData("Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
+		PotatoChip.SetData("PotatoChips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
 		Container9.push_back(PotatoChip);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -868,7 +868,7 @@ void StudioProject::InitVariables()
 			a += 2;
 		}
 		newTRS.SetToTranslation(-28.5 +i + a, 2.,-35);
-		PotatoChip.SetData("Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
+		PotatoChip.SetData("PotatoChips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
 		Container9.push_back(PotatoChip);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -886,7 +886,7 @@ void StudioProject::InitVariables()
 			a += 2;
 		}
 		newTRS.SetToTranslation(-28.5 +i + a, 5,33);
-		PotatoChip.SetData("Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
+		PotatoChip.SetData("PotatoChips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
 		Container10.push_back(PotatoChip);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -904,7 +904,7 @@ void StudioProject::InitVariables()
 			a += 2;
 		}
 		newTRS.SetToTranslation(-28.5 +i + a, 2,33);
-		PotatoChip.SetData("Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
+		PotatoChip.SetData("PotatoChips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
 		Container10.push_back(PotatoChip);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -1413,6 +1413,37 @@ void StudioProject::InitCharacters()
 	//meshList[guardRightLeg]->material.kShininess = 8.f;
 	//meshList[guardRightLeg]->textureID = LoadTGA("Image//guardLeg.tga");
 }
+
+void StudioProject::InitSecurity()
+{
+	Mesh* CameraObj;
+	Vector3 newPosition1;
+	newPosition1.Set(53.3, 18, -92.5);
+
+	/*newRLeg = MeshBuilder::GenerateOBJ("guard Right Leg", "OBJ//cashierLeg.obj");
+	newRLeg->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newRLeg->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newRLeg->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newRLeg->material.kShininess = 8.f;
+	newRLeg->textureID = LoadTGA("Image//guardLeg.tga");*/
+	/*
+	meshList[SC] = MeshBuilder::GenerateOBJ("SC" , "OBJ//SC.obj");
+	meshList[SC]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[SC]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[SC]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[SC]->material.kShininess = 8.f;
+	meshList[SC]->textureID = LoadTGA("Image//SC.tga");*/
+
+	CameraObj = MeshBuilder::GenerateOBJ("Security Camera", "OBJ//SC.obj");
+	CameraObj->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	CameraObj->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	CameraObj->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	CameraObj->material.kShininess = 8.f;
+	CameraObj->textureID = LoadTGA("Image//SC.tga");
+
+	CameraOBJ[0].setCharacter(CameraObj, newPosition1);
+	CameraOBJ[1].setCharacter(CameraObj, newPosition1);
+}
 void StudioProject::Init()
 {
 	// Set background color to black
@@ -1441,6 +1472,8 @@ void StudioProject::Init()
 	InitVariables();
 
 	InitCharacters();
+
+	InitSecurity();
 
 	InitShaders();
 
@@ -1474,6 +1507,10 @@ bool checking = false;
 
 void StudioProject::Update(double dt)
 {
+	for (int a = 0; a < 3; a++)
+	{
+		CameraOBJ[a].PassinDt(dt);
+	}
 	float LSPEED = 10.f;
 
 	if(Application::IsKeyPressed('1')) //enable back face culling
@@ -1995,6 +2032,7 @@ void StudioProject::Update(double dt)
 				for(int i = 1; i < (player.getInventory().getNoOfItems() + 1); i++)
 				{
 					cost += player.getInventory().getItem(i).getPrice();
+					cout << player.getInventory().getItem(i).getName() << endl;
 				}
 				//Only if cost is lesser or equal player will be successfully checked out and items removed from invent
 				if(cost < player.getMoney())
@@ -2333,14 +2371,11 @@ void StudioProject::Update(double dt)
 	//================Testing =================//
 	//cout << Container.size() << endl;
 	if (Application::IsKeyPressed('M'))
-		moving += (float) (5 * dt);
+		moving += (float) (10 * dt);
 	if (Application::IsKeyPressed('N'))
-		moving -= (float) (5 * dt);
-
-	//cout << moving << endl;
+		moving -= (float) (10 * dt);
 
 	camera.Update(dt);
-
 }
 
 //=========Rendering of Skybox to be done here=========//
@@ -3096,6 +3131,36 @@ void StudioProject::RenderPlayerInfo()
 	RenderTextOnScreen(meshList[GEO_TEXT],"Money: " + Cash, Color(0, 0, 1), 3, 1, 18);
 }
 
+void StudioProject::RenderingSecurityCamera()
+{
+	//=========================Camera 1=======================//
+	modelStack.PushMatrix(); //Rotating Camera;
+	modelStack.Rotate(180, 0, 1, 0);
+	modelStack.PushMatrix();//Moving Camera
+	modelStack.Translate(CameraOBJ[0].getPosition().x, CameraOBJ[0].getPosition().y, CameraOBJ[0].getPosition().z);
+	modelStack.Rotate(20, 1, 0, 0);
+	modelStack.PushMatrix();//Fixing rotatin angle
+	modelStack.Translate(0, 0, -0.2);
+	modelStack.Rotate(CameraOBJ[0].getCameraRotation(), 0, 1, 0);
+	modelStack.Translate(0, 0, +0.3);
+	RenderMesh(CameraOBJ[0].getCamera(), B_Light);
+	modelStack.PopMatrix();
+	modelStack.PopMatrix(); //Moving camera
+	modelStack.PopMatrix();//rotating Camera
+
+	//=========================Camera 2=======================//
+	modelStack.PushMatrix();//Moving Camera
+	modelStack.Translate(0, 18, 0);
+	modelStack.Rotate(20, 1, 0, 0);
+	modelStack.PushMatrix();//Fixing rotatin angle
+	modelStack.Translate(0, 0, -0.2);
+	modelStack.Rotate(CameraOBJ[1].getCameraRotation(), 0, 1, 0);
+	modelStack.Translate(0, 0, +0.3);
+	RenderMesh(CameraOBJ[1].getCamera(), B_Light);
+	modelStack.PopMatrix();
+	modelStack.PopMatrix(); //Moving camera
+}
+
 void StudioProject::Render()
 {
 	//clear depth and color buffer
@@ -3301,7 +3366,7 @@ void StudioProject::Render()
 	//Rendering of CharacterModel
 	modelStack.PushMatrix();
 	//modelStack.Scale(1.2, 1.2, 1.2);
-	RenderModel();
+	//RenderModel();
 	modelStack.PopMatrix();
 
 	//Rendering of CashierModel
@@ -3384,6 +3449,7 @@ void StudioProject::Render()
 	RenderPlayerInfo();
 	
 
+	RenderingSecurityCamera();
 	//============DEBUGGING PURPOSES====================//
 	RenderTextOnScreen(meshList[GEO_TEXT], Framerate + result, Color(0, 1, 0), 3, 1, 2);
 	RenderTextOnScreen(meshList[GEO_TEXT],"x: " + camerax, Color(0, 1, 0), 3, 1, 3);
