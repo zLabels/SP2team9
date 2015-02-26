@@ -586,7 +586,7 @@ void Camera3::Update(double dt)
 	/*=======================================================================================
 										CROUCHING
 	======================================================================================*/
-	if(Application::IsKeyPressed(VK_LCONTROL) && isCrouching == false && Crouching == false)
+	if(Application::IsKeyPressed(VK_LCONTROL) && isCrouching == false && Crouching == false && isJumping == false && isFalling == false)
 	{
 		Crouching = true;
 	}
@@ -597,7 +597,7 @@ void Camera3::Update(double dt)
 	if(Crouching == true)
 	{
 		isCrouching = true;
-		if(position.y >= 2.5)
+		if(position.y >= 3)
 		{
 			position.y -= (float)(CAMERA_SPEED * dt);
 			target.y  -= (float)(CAMERA_SPEED * dt);
