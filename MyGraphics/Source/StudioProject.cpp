@@ -1781,6 +1781,10 @@ void StudioProject::Update(double dt)
 		}
 	}
 //==============================END OF DOOR ==========================//
+
+	/*======================================================================
+							TAKING ITEMS FROM SHELF
+	=========================================================================*/
 	if(checking == false)
 	{
 		if(Application::IsKeyPressed('E'))
@@ -2127,6 +2131,9 @@ void StudioProject::Update(double dt)
 		}
 	}
 
+	/*===================================================================
+						PUTTING ITEMS BACK TO SHELF
+	======================================================================*/
 	if(Application::IsKeyPressed('Q'))
 	{
 		for(int i = 0; i < boxContainer.size(); ++i)
@@ -3331,6 +3338,445 @@ void StudioProject::RenderingSecurityCamera()
 	//modelStack.PopMatrix();
 	//modelStack.PopMatrix(); //Moving camera
 }
+void StudioProject::RenderItemsInfo()
+{
+	/*=====================================================
+						CONTAINER 1
+	========================================================*/
+	for(int i = 0; i < boxContainer.size(); ++i) //Container 1
+	{
+		if(Container[i].getRender() == true)
+		{
+			if((camera.target.x <= boxContainer[i].max.x) &&
+				(camera.target.y <= boxContainer[i].max.y) && 
+				(camera.target.z <= boxContainer[i].max.z) &&
+				(camera.target.x >= boxContainer[i].min.x) && 
+				(camera.target.y >= boxContainer[i].min.y) && 
+				(camera.target.z >= boxContainer[i].min.z))
+			{
+				std::ostringstream ssPrice;
+				ssPrice <<  Container[i].getPrice();
+				string price = ssPrice.str();
+
+				RenderTextOnScreen(meshList[GEO_TEXT],"Name:" + Container[i].getName(), Color(1, 1, 1), 2, 13.55, 14);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Price:" + price, Color(1, 1, 1), 2, 13.55, 13);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Take", Color(1, 1, 1), 2, 13.55, 12);
+			}
+		}
+		if(Container[i].getRender() == false)
+		{
+			if((camera.target.x <= boxContainer[i].max.x) &&
+				(camera.target.y <= boxContainer[i].max.y) && 
+				(camera.target.z <= boxContainer[i].max.z) &&
+				(camera.target.x >= boxContainer[i].min.x) && 
+				(camera.target.y >= boxContainer[i].min.y) && 
+				(camera.target.z >= boxContainer[i].min.z))
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'Q' to Return", Color(1, 1, 1), 2, 13.55, 14);
+			}
+		}
+	}
+	/*=====================================================
+						CONTAINER 2
+	========================================================*/
+	for(int i = 0; i < boxContainer2.size(); ++i) //Container 2
+	{
+		if(Container2[i].getRender() == true)
+		{
+			if((camera.target.x <= boxContainer2[i].max.x) &&
+				(camera.target.y <= boxContainer2[i].max.y) && 
+				(camera.target.z <= boxContainer2[i].max.z) &&
+				(camera.target.x >= boxContainer2[i].min.x) && 
+				(camera.target.y >= boxContainer2[i].min.y) && 
+				(camera.target.z >= boxContainer2[i].min.z))
+			{
+				std::ostringstream ssPrice;
+				ssPrice <<  Container2[i].getPrice();
+				string price = ssPrice.str();
+
+				RenderTextOnScreen(meshList[GEO_TEXT],"Name:" + Container2[i].getName(), Color(1, 1, 1), 2, 13.55, 14);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Price:" + price, Color(1, 1, 1), 2, 13.55, 13);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Take", Color(1, 1, 1), 2, 13.55, 12);
+			}
+		}
+		if(Container2[i].getRender() == false)
+		{
+			if((camera.target.x <= boxContainer2[i].max.x) &&
+				(camera.target.y <= boxContainer2[i].max.y) && 
+				(camera.target.z <= boxContainer2[i].max.z) &&
+				(camera.target.x >= boxContainer2[i].min.x) && 
+				(camera.target.y >= boxContainer2[i].min.y) && 
+				(camera.target.z >= boxContainer2[i].min.z))
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'Q' to Return", Color(1, 1, 1), 2, 13.55, 14);
+			}
+		}
+	}
+
+	/*=====================================================
+						CONTAINER 3
+	========================================================*/
+	for(int i = 0; i < boxContainer3.size(); ++i) //Container 3
+	{
+		if(Container3[i].getRender() == true)
+		{
+			if((camera.target.x <= boxContainer3[i].max.x) &&
+				(camera.target.y <= boxContainer3[i].max.y) && 
+				(camera.target.z <= boxContainer3[i].max.z) &&
+				(camera.target.x >= boxContainer3[i].min.x) && 
+				(camera.target.y >= boxContainer3[i].min.y) && 
+				(camera.target.z >= boxContainer3[i].min.z))
+			{
+				std::ostringstream ssPrice;
+				ssPrice <<  Container3[i].getPrice();
+				string price = ssPrice.str();
+
+				RenderTextOnScreen(meshList[GEO_TEXT],"Name:" + Container3[i].getName(), Color(1, 1, 1), 2, 13.55, 14);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Price:" + price, Color(1, 1, 1), 2, 13.55, 13);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Take", Color(1, 1, 1), 2, 13.55, 12);
+			}
+		}
+		if(Container3[i].getRender() == false)
+		{
+			if((camera.target.x <= boxContainer3[i].max.x) &&
+				(camera.target.y <= boxContainer3[i].max.y) && 
+				(camera.target.z <= boxContainer3[i].max.z) &&
+				(camera.target.x >= boxContainer3[i].min.x) && 
+				(camera.target.y >= boxContainer3[i].min.y) && 
+				(camera.target.z >= boxContainer3[i].min.z))
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'Q' to Return", Color(1, 1, 1), 2, 13.55, 14);
+			}
+		}
+	}
+	/*=====================================================
+						CONTAINER 4
+	========================================================*/
+	for(int i = 0; i < boxContainer4.size(); ++i) //Container 4
+	{
+		if(Container4[i].getRender() == true)
+		{
+			if((camera.target.x <= boxContainer4[i].max.x) &&
+				(camera.target.y <= boxContainer4[i].max.y) && 
+				(camera.target.z <= boxContainer4[i].max.z) &&
+				(camera.target.x >= boxContainer4[i].min.x) && 
+				(camera.target.y >= boxContainer4[i].min.y) && 
+				(camera.target.z >= boxContainer4[i].min.z))
+			{
+				std::ostringstream ssPrice;
+				ssPrice <<  Container4[i].getPrice();
+				string price = ssPrice.str();
+
+				RenderTextOnScreen(meshList[GEO_TEXT],"Name:" + Container4[i].getName(), Color(1, 1, 1), 2, 13.55, 14);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Price:" + price, Color(1, 1, 1), 2, 13.55, 13);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Take", Color(1, 1, 1), 2, 13.55, 12);
+			}
+		}
+		if(Container4[i].getRender() == false)
+		{
+			if((camera.target.x <= boxContainer4[i].max.x) &&
+				(camera.target.y <= boxContainer4[i].max.y) && 
+				(camera.target.z <= boxContainer4[i].max.z) &&
+				(camera.target.x >= boxContainer4[i].min.x) && 
+				(camera.target.y >= boxContainer4[i].min.y) && 
+				(camera.target.z >= boxContainer4[i].min.z))
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'Q' to Return", Color(1, 1, 1), 2, 13.55, 14);
+			}
+		}
+	}
+	/*=====================================================
+						CONTAINER 5
+	========================================================*/
+	for(int i = 0; i < boxContainer5.size(); ++i) //Container 5
+	{
+		if(Container5[i].getRender() == true)
+		{
+			if((camera.target.x <= boxContainer5[i].max.x) &&
+				(camera.target.y <= boxContainer5[i].max.y) && 
+				(camera.target.z <= boxContainer5[i].max.z) &&
+				(camera.target.x >= boxContainer5[i].min.x) && 
+				(camera.target.y >= boxContainer5[i].min.y) && 
+				(camera.target.z >= boxContainer5[i].min.z))
+			{
+				std::ostringstream ssPrice;
+				ssPrice <<  Container5[i].getPrice();
+				string price = ssPrice.str();
+
+				RenderTextOnScreen(meshList[GEO_TEXT],"Name:" + Container5[i].getName(), Color(1, 1, 1), 2, 13.55, 14);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Price:" + price, Color(1, 1, 1), 2, 13.55, 13);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Take", Color(1, 1, 1), 2, 13.55, 12);
+			}
+		}
+		if(Container5[i].getRender() == false)
+		{
+			if((camera.target.x <= boxContainer5[i].max.x) &&
+				(camera.target.y <= boxContainer5[i].max.y) && 
+				(camera.target.z <= boxContainer5[i].max.z) &&
+				(camera.target.x >= boxContainer5[i].min.x) && 
+				(camera.target.y >= boxContainer5[i].min.y) && 
+				(camera.target.z >= boxContainer5[i].min.z))
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'Q' to Return", Color(1, 1, 1), 2, 13.55, 14);
+			}
+		}
+	}
+	/*=====================================================
+						CONTAINER 6
+	========================================================*/
+	for(int i = 0; i < boxContainer6.size(); ++i) //Container 6
+	{
+		if(Container6[i].getRender() == true)
+		{
+			if((camera.target.x <= boxContainer6[i].max.x) &&
+				(camera.target.y <= boxContainer6[i].max.y) && 
+				(camera.target.z <= boxContainer6[i].max.z) &&
+				(camera.target.x >= boxContainer6[i].min.x) && 
+				(camera.target.y >= boxContainer6[i].min.y) && 
+				(camera.target.z >= boxContainer6[i].min.z))
+			{
+				std::ostringstream ssPrice;
+				ssPrice <<  Container6[i].getPrice();
+				string price = ssPrice.str();
+
+				RenderTextOnScreen(meshList[GEO_TEXT],"Name:" + Container6[i].getName(), Color(1, 1, 1), 2, 13.55, 14);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Price:" + price, Color(1, 1, 1), 2, 13.55, 13);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Take", Color(1, 1, 1), 2, 13.55, 12);
+			}
+		}
+		if(Container6[i].getRender() == false)
+		{
+			if((camera.target.x <= boxContainer6[i].max.x) &&
+				(camera.target.y <= boxContainer6[i].max.y) && 
+				(camera.target.z <= boxContainer6[i].max.z) &&
+				(camera.target.x >= boxContainer6[i].min.x) && 
+				(camera.target.y >= boxContainer6[i].min.y) && 
+				(camera.target.z >= boxContainer6[i].min.z))
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'Q' to Return", Color(1, 1, 1), 2, 13.55, 14);
+			}
+		}
+	}
+
+	/*=====================================================
+						CONTAINER 7
+	========================================================*/
+	for(int i = 0; i < boxContainer7.size(); ++i) //Container 7
+	{
+		if(Container7[i].getRender() == true)
+		{
+			if((camera.target.x <= boxContainer7[i].max.x) &&
+				(camera.target.y <= boxContainer7[i].max.y) && 
+				(camera.target.z <= boxContainer7[i].max.z) &&
+				(camera.target.x >= boxContainer7[i].min.x) && 
+				(camera.target.y >= boxContainer7[i].min.y) && 
+				(camera.target.z >= boxContainer7[i].min.z))
+			{
+				std::ostringstream ssPrice;
+				ssPrice <<  Container7[i].getPrice();
+				string price = ssPrice.str();
+
+				RenderTextOnScreen(meshList[GEO_TEXT],"Name:" + Container7[i].getName(), Color(1, 1, 1), 2, 13.55, 14);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Price:" + price, Color(1, 1, 1), 2, 13.55, 13);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Take", Color(1, 1, 1), 2, 13.55, 12);
+			}
+		}
+		if(Container7[i].getRender() == false)
+		{
+			if((camera.target.x <= boxContainer7[i].max.x) &&
+				(camera.target.y <= boxContainer7[i].max.y) && 
+				(camera.target.z <= boxContainer7[i].max.z) &&
+				(camera.target.x >= boxContainer7[i].min.x) && 
+				(camera.target.y >= boxContainer7[i].min.y) && 
+				(camera.target.z >= boxContainer7[i].min.z))
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'Q' to Return", Color(1, 1, 1), 2, 13.55, 14);
+			}
+		}
+	}
+	/*=====================================================
+						CONTAINER 8
+	========================================================*/
+	for(int i = 0; i < boxContainer8.size(); ++i) //Container 8
+	{
+		if(Container8[i].getRender() == true)
+		{
+			if((camera.target.x <= boxContainer8[i].max.x) &&
+				(camera.target.y <= boxContainer8[i].max.y) && 
+				(camera.target.z <= boxContainer8[i].max.z) &&
+				(camera.target.x >= boxContainer8[i].min.x) && 
+				(camera.target.y >= boxContainer8[i].min.y) && 
+				(camera.target.z >= boxContainer8[i].min.z))
+			{
+				std::ostringstream ssPrice;
+				ssPrice <<  Container8[i].getPrice();
+				string price = ssPrice.str();
+
+				RenderTextOnScreen(meshList[GEO_TEXT],"Name:" + Container8[i].getName(), Color(1, 1, 1), 2, 13.55, 14);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Price:" + price, Color(1, 1, 1), 2, 13.55, 13);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Take", Color(1, 1, 1), 2, 13.55, 12);
+			}
+		}
+		if(Container8[i].getRender() == false)
+		{
+			if((camera.target.x <= boxContainer8[i].max.x) &&
+				(camera.target.y <= boxContainer8[i].max.y) && 
+				(camera.target.z <= boxContainer8[i].max.z) &&
+				(camera.target.x >= boxContainer8[i].min.x) && 
+				(camera.target.y >= boxContainer8[i].min.y) && 
+				(camera.target.z >= boxContainer8[i].min.z))
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'Q' to Return", Color(1, 1, 1), 2, 13.55, 14);
+			}
+		}
+	}
+	/*=====================================================
+						CONTAINER 9
+	========================================================*/
+	for(int i = 0; i < boxContainer9.size(); ++i) //Container 9
+	{
+		if(Container9[i].getRender() == true)
+		{
+			if((camera.target.x <= boxContainer9[i].max.x) &&
+				(camera.target.y <= boxContainer9[i].max.y) && 
+				(camera.target.z <= boxContainer9[i].max.z) &&
+				(camera.target.x >= boxContainer9[i].min.x) && 
+				(camera.target.y >= boxContainer9[i].min.y) && 
+				(camera.target.z >= boxContainer9[i].min.z))
+			{
+				std::ostringstream ssPrice;
+				ssPrice <<  Container9[i].getPrice();
+				string price = ssPrice.str();
+
+				RenderTextOnScreen(meshList[GEO_TEXT],"Name:" + Container9[i].getName(), Color(1, 1, 1), 2, 13.55, 14);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Price:" + price, Color(1, 1, 1), 2, 13.55, 13);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Take", Color(1, 1, 1), 2, 13.55, 12);
+			}
+		}
+		if(Container9[i].getRender() == false)
+		{
+			if((camera.target.x <= boxContainer9[i].max.x) &&
+				(camera.target.y <= boxContainer9[i].max.y) && 
+				(camera.target.z <= boxContainer9[i].max.z) &&
+				(camera.target.x >= boxContainer9[i].min.x) && 
+				(camera.target.y >= boxContainer9[i].min.y) && 
+				(camera.target.z >= boxContainer9[i].min.z))
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'Q' to Return", Color(1, 1, 1), 2, 13.55, 14);
+			}
+		}
+	}
+
+	/*=====================================================
+						CONTAINER 10
+	========================================================*/
+	for(int i = 0; i < boxContainer10.size(); ++i) //Container 10
+	{
+		if(Container10[i].getRender() == true)
+		{
+			if((camera.target.x <= boxContainer10[i].max.x) &&
+				(camera.target.y <= boxContainer10[i].max.y) && 
+				(camera.target.z <= boxContainer10[i].max.z) &&
+				(camera.target.x >= boxContainer10[i].min.x) && 
+				(camera.target.y >= boxContainer10[i].min.y) && 
+				(camera.target.z >= boxContainer10[i].min.z))
+			{
+				std::ostringstream ssPrice;
+				ssPrice <<  Container10[i].getPrice();
+				string price = ssPrice.str();
+
+				RenderTextOnScreen(meshList[GEO_TEXT],"Name:" + Container10[i].getName(), Color(1, 1, 1), 2, 13.55, 14);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Price:" + price, Color(1, 1, 1), 2, 13.55, 13);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Take", Color(1, 1, 1), 2, 13.55, 12);
+			}
+		}
+		if(Container10[i].getRender() == false)
+		{
+			if((camera.target.x <= boxContainer10[i].max.x) &&
+				(camera.target.y <= boxContainer10[i].max.y) && 
+				(camera.target.z <= boxContainer10[i].max.z) &&
+				(camera.target.x >= boxContainer10[i].min.x) && 
+				(camera.target.y >= boxContainer10[i].min.y) && 
+				(camera.target.z >= boxContainer10[i].min.z))
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'Q' to Return", Color(1, 1, 1), 2, 13.55, 14);
+			}
+		}
+	}
+
+	/*=====================================================
+						CONTAINER 11
+	========================================================*/
+	for(int i = 0; i < boxContainer11.size(); ++i) //Container 11
+	{
+		if(Container11[i].getRender() == true)
+		{
+			if((camera.target.x <= boxContainer11[i].max.x) &&
+				(camera.target.y <= boxContainer11[i].max.y) && 
+				(camera.target.z <= boxContainer11[i].max.z) &&
+				(camera.target.x >= boxContainer11[i].min.x) && 
+				(camera.target.y >= boxContainer11[i].min.y) && 
+				(camera.target.z >= boxContainer11[i].min.z))
+			{
+				std::ostringstream ssPrice;
+				ssPrice <<  Container11[i].getPrice();
+				string price = ssPrice.str();
+
+				RenderTextOnScreen(meshList[GEO_TEXT],"Name:" + Container11[i].getName(), Color(1, 1, 1), 2, 13.55, 14);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Price:" + price, Color(1, 1, 1), 2, 13.55, 13);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Take", Color(1, 1, 1), 2, 13.55, 12);
+			}
+		}
+		if(Container11[i].getRender() == false)
+		{
+			if((camera.target.x <= boxContainer11[i].max.x) &&
+				(camera.target.y <= boxContainer11[i].max.y) && 
+				(camera.target.z <= boxContainer11[i].max.z) &&
+				(camera.target.x >= boxContainer11[i].min.x) && 
+				(camera.target.y >= boxContainer11[i].min.y) && 
+				(camera.target.z >= boxContainer11[i].min.z))
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'Q' to Return", Color(1, 1, 1), 2, 13.55, 14);
+			}
+		}
+	}
+	/*=====================================================
+						CONTAINER 12
+	========================================================*/
+	for(int i = 0; i < boxContainer12.size(); ++i) //Container 12
+	{
+		if(Container12[i].getRender() == true)
+		{
+			if((camera.target.x <= boxContainer12[i].max.x) &&
+				(camera.target.y <= boxContainer12[i].max.y) && 
+				(camera.target.z <= boxContainer12[i].max.z) &&
+				(camera.target.x >= boxContainer12[i].min.x) && 
+				(camera.target.y >= boxContainer12[i].min.y) && 
+				(camera.target.z >= boxContainer12[i].min.z))
+			{
+				std::ostringstream ssPrice;
+				ssPrice <<  Container12[i].getPrice();
+				string price = ssPrice.str();
+
+				RenderTextOnScreen(meshList[GEO_TEXT],"Name:" + Container12[i].getName(), Color(1, 1, 1), 2, 13.55, 14);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Price:" + price, Color(1, 1, 1), 2, 13.55, 13);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Take", Color(1, 1, 1), 2, 13.55, 12);
+			}
+		}
+		if(Container12[i].getRender() == false)
+		{
+			if((camera.target.x <= boxContainer12[i].max.x) &&
+				(camera.target.y <= boxContainer12[i].max.y) && 
+				(camera.target.z <= boxContainer12[i].max.z) &&
+				(camera.target.x >= boxContainer12[i].min.x) && 
+				(camera.target.y >= boxContainer12[i].min.y) && 
+				(camera.target.z >= boxContainer12[i].min.z))
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'Q' to Return", Color(1, 1, 1), 2, 13.55, 14);
+			}
+		}
+	}
+}
 
 void StudioProject::Render()
 {
@@ -3618,7 +4064,7 @@ void StudioProject::Render()
 	}
 
 	RenderPlayerInfo();
-	
+	RenderItemsInfo();
 
 	RenderingSecurityCamera();
 	//============DEBUGGING PURPOSES====================//

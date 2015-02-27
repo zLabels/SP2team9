@@ -240,6 +240,7 @@ private:
 	void RenderItems();
 	void RenderPlayerInfo();
 	void RenderingSecurityCamera();
+	void RenderItemsInfo();
 
 public:
 	StudioProject();
