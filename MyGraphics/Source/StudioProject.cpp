@@ -36,25 +36,28 @@ void StudioProject::InitMesh()
 	========================Sky Box=====================================
 	========================Sky Box=====================================
 	*/
-	meshList[GEO_FRONTSKY] = MeshBuilder::GenerateQuad("Back", Color(1, 1, 1), 1.f , 1.f);
-	meshList[GEO_FRONTSKY]->textureID = LoadTGA("Image//stormydays_ft.tga");
+	meshList[GEO_FRONTSKY] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1), 1.f , 1.f);
+	meshList[GEO_FRONTSKY]->textureID = LoadTGA("Skybox//pr_ft.tga");
 
-	meshList[GEO_BACKSKY] = MeshBuilder::GenerateQuad("Front", Color(1, 1, 1), 1.f , 1.f);
-	meshList[GEO_BACKSKY]->textureID = LoadTGA("Image//stormydays_bk.tga");
+	meshList[GEO_BACKSKY] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f , 1.f);
+	meshList[GEO_BACKSKY]->textureID = LoadTGA("Skybox//pr_bk.tga");
 
 	meshList[GEO_SKY] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_SKY]->textureID = LoadTGA("Image//stormydays_up.tga");
+	meshList[GEO_SKY]->textureID = LoadTGA("Skybox//pr_up.tga");
 
 	meshList[GEO_LEFTSKY] = MeshBuilder::GenerateQuad("left", Color(1, 1, 1), 1.f,1.f);
-	meshList[GEO_LEFTSKY]->textureID = LoadTGA("Image//stormydays_rt.tga");
+	meshList[GEO_LEFTSKY]->textureID = LoadTGA("Skybox//pr_rt.tga");
 
 	meshList[GEO_RIGHTSKY] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_RIGHTSKY]->textureID = LoadTGA("Image//stormydays_lf.tga");
+	meshList[GEO_RIGHTSKY]->textureID = LoadTGA("Skybox//pr_lf.tga");
 
 	meshList[GEO_BOTTOMSKY] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_BOTTOMSKY]->textureID = LoadTGA("Image//stormydays_dn.tga");
+	meshList[GEO_BOTTOMSKY]->textureID = LoadTGA("Skybox//pr_dn.tga");
 
 	//===============SUPERMARKET RELATED OBJs==========================//
+
+	meshList[GEO_ROAD] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
+	meshList[GEO_ROAD]->textureID = LoadTGA("Image//floor test.tga");
 
 	meshList[GEO_MARKET] = MeshBuilder::GenerateOBJ("Market", "OBJ//market2.obj");
 	meshList[GEO_MARKET]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -2632,6 +2635,14 @@ void StudioProject::RenderSupermarket()
 	/*===============================================================
 	Level 1 Of Supermarket
 	================================================================*/
+
+	modelStack.PushMatrix();
+	modelStack.Translate(-65, -4, 0);
+	modelStack.Rotate(90, 1, 0, 0);
+	modelStack.Scale(250,250,250);
+	RenderMesh(meshList[GEO_ROAD],false);
+	modelStack.PopMatrix();
+
 	modelStack.PushMatrix();
 	//modelStack.Rotate(180, 0, 1, 0);
 	modelStack.Scale(5,5,5);
@@ -3917,6 +3928,7 @@ void StudioProject::Render()
 	//Rendering skybox
 	modelStack.PushMatrix();
 	modelStack.Translate(camera.position.x, camera.position.y, camera.position.z);
+	modelStack.Rotate(180, 0, 1, 0);
 	RenderSkybox();
 	modelStack.PopMatrix();
 

@@ -167,6 +167,9 @@ private:
 		GEO_BACKSKY,	//Back skybox
 		GEO_SKY,        //Top of skybox
 		GEO_BOTTOMSKY,  //bottom of skybox
+
+		GEO_ROAD,
+
 		GEO_MARKET,
 		GEO_CASHIER,
 		GEO_CASHREG,
