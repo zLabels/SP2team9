@@ -305,8 +305,24 @@ private:
 	bool Beans;
 	bool Lays;
 	bool Coke;
+	bool CokeZero;
 	bool Pepsi;
 	string Cash;
+	float moveItem;
+	bool checkoutCount[12];
+
+	int peaCount;
+	int PizzaCount;
+	int MiloCount;
+	int Cereal1Count;
+	int Cereal2Count;
+	int SardineCount;
+	int BeansCount;
+	int LaysCount;
+	int CokeCount;
+	int CokeZeroCount;
+	int PepsiCount;
+	vector<CItem> tempCheckOut;
 
 	CPlayer player;
 	CGuard Guard1;
