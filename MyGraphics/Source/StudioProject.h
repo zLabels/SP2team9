@@ -241,6 +241,9 @@ private:
 	void RenderPlayerInfo();
 	void RenderingSecurityCamera();
 	void RenderItemsInfo();
+	void updateTakingItem();
+	void updatePuttingBackItem();
+	void updateCheckingOut();
 
 public:
 	StudioProject();

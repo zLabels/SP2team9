@@ -38,6 +38,9 @@ public:
 	bool isFalling;
 	bool walk;
 	float tempJumpY;
+	float tempJumpTargY;
+	float tempCrouchY;
+	float tempCrouchTargY;
 	int temp;
 	float CAMERA_SPEED;
 	float JUMP_SPEED;

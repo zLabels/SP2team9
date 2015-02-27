@@ -1540,248 +1540,8 @@ int rotatingLeftLeg = 1;
 bool collide = false;
 bool checking = false;
 
-void StudioProject::Update(double dt)
+void StudioProject::updateTakingItem()
 {
-	/*for (int a = 0; a < 3; a++)
-	{
-		CameraOBJ[a].PassinDt(dt);
-	}*/
-	float LSPEED = 10.f;
-
-	if(Application::IsKeyPressed('1')) //enable back face culling
-		glEnable(GL_CULL_FACE);
-	if(Application::IsKeyPressed('2')) //disable back face culling
-		glDisable(GL_CULL_FACE);
-	if(Application::IsKeyPressed('3'))
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); //default fill mode
-	if(Application::IsKeyPressed('4'))
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //wireframe mode
-
-	if(Application::IsKeyPressed('5'))
-	{
-		B_Light = true;
-	}
-	if(Application::IsKeyPressed('6'))
-	{
-		B_Light = false;
-	}
-
-	//===Controls===//
-
-	if(Application::IsKeyPressed('I'))
-	{
-		isShown = true;
-	}
-
-	if(Application::IsKeyPressed('O'))
-	{
-		isShown = false;
-	}
-
-	//===Character Control===//
-	static float ROTATE_SPEED = 50.f;
-	static int count = 0;
-
-	if (Application::IsKeyPressed('8') || Application::IsKeyPressed('9')) //currently i set it to press 9 to animate character
-	{
-		movingModel = true;
-	}
-	else
-	{
-		movingModel = false;
-	}
-
-	if (movingModel == true)
-	{
-		rotateRightArms += (float)(rotatingRightArm * dt * ROTATE_SPEED);
-		rotateLeftLeg += (float)(rotatingLeftLeg * dt * ROTATE_SPEED);
-		rotateRightLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
-
-		if (rotateRightArms >= 405)//rotating right arm
-		{
-			rotatingRightArm = -1;
-			count++;
-		}
-		if(rotateRightArms <= 330)
-		{
-			rotatingRightArm = 1;
-		}
-
-		if (rotateLeftArms >= 405)//rotatin left arm
-		{
-			rotatingLeftArm = -1;
-		}
-		if(rotateLeftArms <= 330)
-		{
-			rotatingLeftArm = 1;
-		}
-
-		if (rotateLeftLeg >= 405)//rotatin left leg
-		{
-			rotatingLeftLeg = -1;
-		}
-		if(rotateLeftLeg <= 315)
-		{
-			rotatingLeftLeg = 1;
-		}
-
-		if (rotateRightLeg >= 405)//rotatin right leg
-		{
-			rotatingRightLeg = 1;
-		}
-		if(rotateRightLeg <= 315)
-		{
-			rotatingRightLeg = -1;
-		}
-
-		if (count >= 1)
-		{
-			rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
-		}
-	}
-
-	else if (movingModel == false)
-	{
-		count = 0;
-		rotatingRightArm = 1;
-		rotatingLeftArm = 1;
-		rotatingRightLeg = 1;
-		rotatingLeftLeg = 1;
-		if (rotateRightArms > 360)//moving back right arm
-		{
-			rotateRightArms -= (float)(rotatingRightArm * dt * ROTATE_SPEED);
-			if (rotateRightArms <= 360)
-			{
-				rotateRightArms = 360;
-			}
-		}
-		else if (rotateRightArms < 360)
-		{
-			rotateRightArms += (float)(rotatingRightArm * dt * ROTATE_SPEED);
-			if (rotateRightArms >= 360)
-			{
-				rotateRightArms = 360;
-			}
-		}
-
-		if (rotateLeftArms > 360)//moving back left arm
-		{
-			rotateLeftArms -= (float)(rotatingLeftArm * dt * ROTATE_SPEED);
-			if (rotateLeftArms <= 360)
-			{
-				rotateLeftArms = 360;
-			}
-		}
-		else if (rotateLeftArms < 360)
-		{
-			rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
-			if (rotateLeftArms >= 360)
-			{
-				rotateLeftArms = 360;
-			}
-		}
-
-		if (rotateRightLeg > 360)//moving back right leg
-		{
-			rotateRightLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
-			if (rotateRightLeg <= 360)
-			{
-				rotateRightLeg = 360;
-			}
-		}
-		else if (rotateRightLeg < 360)
-		{
-			rotateRightLeg += (float)(rotatingRightLeg * dt * ROTATE_SPEED);
-			if (rotateRightLeg >= 360)
-			{
-				rotateRightLeg = 360;
-			}
-		}
-
-		if (rotateLeftLeg > 360)//moving back left arm
-		{
-			rotateLeftLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
-			if (rotateLeftLeg <= 360)
-			{
-				rotateLeftLeg = 360;
-			}
-		}
-		else if (rotateLeftLeg < 360)
-		{
-			rotateLeftLeg += (float)(rotatingLeftLeg * dt * ROTATE_SPEED);
-			if (rotateLeftLeg >= 360)
-			{
-				rotateLeftLeg = 360;
-			}
-		}
-	}
-
-	/*if (Application::IsKeyPressed('8'))
-	{
-		charPosition.z += cos(Math::DegreeToRadian(angle)) * 10 * dt;
-		charPosition.x += sin(Math::DegreeToRadian(angle)) * 10 * dt;
-	}
-	if (Application::IsKeyPressed('9'))
-	{
-		charPosition.z -= cos(Math::DegreeToRadian(angle)) * 10 * dt;
-		charPosition.x -= sin(Math::DegreeToRadian(angle)) * 10 * dt;
-	}*/
-	if (Application::IsKeyPressed('I'))
-	{
-		angle += 100 * dt;
-	}
-	if (Application::IsKeyPressed('O'))
-	{
-		angle -= 100 * dt;
-	}
-
-	/*========================================================
-							Player
-	=========================================================*/
-	player.setPosition(camera.position.x,camera.position.y,camera.position.z);
-
-	/*=======================================================
-						Interactions
-	==========================================================*/
-	//============================DOOR===========================//
-
-	//This part is code for door opening
-	if (camera.position.z <20.1 && camera.position.z >=-19.7 && camera.position.y >=5 && camera.position.y <= 10 && camera.position.x <=-41.5 && camera.position.x >= -76.3)
-	{
-		if(Opened == false &&  Closed == true && doorStop == true)
-		{
-			Closed = false;
-			doorMoving = true;
-		}
-
-		if(Closed == false && doorMoving == true)
-		{
-			doorTranslate -=(float)(35*dt);
-			if(doorTranslate < -20)
-			{
-				doorMoving = false;
-				Opened = true;
-				doorStop = true;
-			}	
-
-		}
-	}
-	//This part is for closing of the door
-	else
-	{
-		Opened = false;
-		if(Opened == false && Closed == false )
-		{
-			doorTranslate +=(float)(35*dt);
-			if(doorTranslate > 0)
-			{
-				Closed = true;
-			}
-
-		}
-	}
-//==============================END OF DOOR ==========================//
-
 	/*======================================================================
 							TAKING ITEMS FROM SHELF
 	=========================================================================*/
@@ -2052,85 +1812,9 @@ void StudioProject::Update(double dt)
 			checking = false;
 		}
 	}
-	/*===============================================================
-								CHECKING OUT
-	==================================================================*/
-	if(Application::IsKeyPressed('E') && (player.getInventory().getNoOfItems() != 0))
-	{
-		for(int i = 0;i < CashierBox.size();i++)
-		{
-			if((camera.position.x <= CashierBox[i].max.x) && 
-				(camera.position.y <= CashierBox[i].max.y) && 
-				(camera.position.z <= CashierBox[i].max.z) &&
-				(camera.position.x >= CashierBox[i].min.x) && 
-				(camera.position.y >= CashierBox[i].min.y) && 
-				(camera.position.z >= CashierBox[i].min.z))
-			{
-				float cost = 0.f;
-				//Calculating Cost of items taken by player
-				for(int i = 1; i < (player.getInventory().getNoOfItems() + 1); i++)
-				{
-					cost += player.getInventory().getItem(i).getPrice();
-					cout << player.getInventory().getItem(i).getName() << endl;
-
-					if(player.getInventory().getItem(i).getobjType() == GEO_PEA_N_CARROTS)
-					{
-						Peas = true;
-					}
-					else if(player.getInventory().getItem(i).getobjType() == GEO_SARDINE_CAN)
-					{
-						Peas = true;
-					}
-					else if(player.getInventory().getItem(i).getobjType() == GEO_BAKED_BEANS_CAN)
-					{
-						Beans = true;
-					}
-					else if(player.getInventory().getItem(i).getobjType() == GEO_COKE_CAN)
-					{
-						Coke = true;
-					}
-
-					else if(player.getInventory().getItem(i).getobjType() == GEO_DRINKCAN2)
-					{
-						Peas = true;
-					}
-					else if(player.getInventory().getItem(i).getobjType() == GEO_PEPSI_CAN)
-					{
-						Pepsi = true;
-					}
-					else if(player.getInventory().getItem(i).getobjType() == GEO_MILOCAN)
-					{
-						Milo = true;
-					}
-					else if(player.getInventory().getItem(i).getobjType() == GEO_CEREALBOX1)
-					{
-						Cereal1 = true;
-					}
-					else if(player.getInventory().getItem(i).getobjType() == GEO_CEREALBOX2)
-					{
-						Cereal2 = true;
-					}
-					else if(player.getInventory().getItem(i).getobjType() == GEO_PIZZABOX)
-					{
-						Pizza = true;
-					}
-					else if(player.getInventory().getItem(i).getobjType() == GEO_POTATOCHIPS)
-					{
-						Lays = true;
-					}
-
-				}
-				//Only if cost is lesser or equal player will be successfully checked out and items removed from invent
-				if(cost < player.getMoney())
-				{
-					player.getInventory().DeleteAll();
-					cout << player.getInventory().getNoOfItems() << endl;
-					player.setMoney(player.getMoney() - cost);
-				}
-			}
-		}
-	}
-
+}
+void StudioProject::updatePuttingBackItem()
+{
 	/*===================================================================
 						PUTTING ITEMS BACK TO SHELF
 	======================================================================*/
@@ -2371,26 +2055,292 @@ void StudioProject::Update(double dt)
 			}
 		}
 	}
-
-	if((camera.target.x <= boxContainer[0].max.x) && 
-		(camera.target.y <= boxContainer[0].max.y) && 
-		(camera.target.z <= boxContainer[0].max.z) &&
-		(camera.target.x >= boxContainer[0].min.x) &&
-		(camera.target.y >= boxContainer[0].min.y) &&
-		(camera.target.z >= boxContainer[0].min.z))
+}
+void StudioProject::updateCheckingOut()
+{
+	/*===============================================================
+								CHECKING OUT
+	==================================================================*/
+	if(Application::IsKeyPressed('E') && (player.getInventory().getNoOfItems() != 0))
 	{
-		collide = true;
+		for(int i = 0;i < CashierBox.size();i++)
+		{
+			if((camera.position.x <= CashierBox[i].max.x) && 
+				(camera.position.y <= CashierBox[i].max.y) && 
+				(camera.position.z <= CashierBox[i].max.z) &&
+				(camera.position.x >= CashierBox[i].min.x) && 
+				(camera.position.y >= CashierBox[i].min.y) && 
+				(camera.position.z >= CashierBox[i].min.z))
+			{
+				float cost = 0.f;
+				//Calculating Cost of items taken by player
+				for(int i = 1; i < (player.getInventory().getNoOfItems() + 1); i++)
+				{
+					cost += player.getInventory().getItem(i).getPrice();
+					cout << player.getInventory().getItem(i).getName() << endl;
+				}
+				//Only if cost is lesser or equal player will be successfully checked out and items removed from invent
+				if(cost < player.getMoney())
+				{
+					player.getInventory().DeleteAll();
+					cout << player.getInventory().getNoOfItems() << endl;
+					player.setMoney(player.getMoney() - cost);
+				}
+			}
+		}
+	}
+}
+
+void StudioProject::Update(double dt)
+{
+	/*for (int a = 0; a < 3; a++)
+	{
+		CameraOBJ[a].PassinDt(dt);
+	}*/
+	float LSPEED = 10.f;
+
+	if(Application::IsKeyPressed('1')) //enable back face culling
+		glEnable(GL_CULL_FACE);
+	if(Application::IsKeyPressed('2')) //disable back face culling
+		glDisable(GL_CULL_FACE);
+	if(Application::IsKeyPressed('3'))
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); //default fill mode
+	if(Application::IsKeyPressed('4'))
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //wireframe mode
+
+	if(Application::IsKeyPressed('5'))
+	{
+		B_Light = true;
+	}
+	if(Application::IsKeyPressed('6'))
+	{
+		B_Light = false;
+	}
+
+	//===Controls===//
+
+	if(Application::IsKeyPressed('I'))
+	{
+		isShown = true;
+	}
+
+	if(Application::IsKeyPressed('O'))
+	{
+		isShown = false;
+	}
+
+	//===Character Control===//
+	static float ROTATE_SPEED = 50.f;
+	static int count = 0;
+
+	if (Application::IsKeyPressed('8') || Application::IsKeyPressed('9')) //currently i set it to press 9 to animate character
+	{
+		movingModel = true;
 	}
 	else
 	{
-		collide = false;
+		movingModel = false;
 	}
 
+	if (movingModel == true)
+	{
+		rotateRightArms += (float)(rotatingRightArm * dt * ROTATE_SPEED);
+		rotateLeftLeg += (float)(rotatingLeftLeg * dt * ROTATE_SPEED);
+		rotateRightLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+
+		if (rotateRightArms >= 405)//rotating right arm
+		{
+			rotatingRightArm = -1;
+			count++;
+		}
+		if(rotateRightArms <= 330)
+		{
+			rotatingRightArm = 1;
+		}
+
+		if (rotateLeftArms >= 405)//rotatin left arm
+		{
+			rotatingLeftArm = -1;
+		}
+		if(rotateLeftArms <= 330)
+		{
+			rotatingLeftArm = 1;
+		}
+
+		if (rotateLeftLeg >= 405)//rotatin left leg
+		{
+			rotatingLeftLeg = -1;
+		}
+		if(rotateLeftLeg <= 315)
+		{
+			rotatingLeftLeg = 1;
+		}
+
+		if (rotateRightLeg >= 405)//rotatin right leg
+		{
+			rotatingRightLeg = 1;
+		}
+		if(rotateRightLeg <= 315)
+		{
+			rotatingRightLeg = -1;
+		}
+
+		if (count >= 1)
+		{
+			rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
+		}
+	}
+
+	else if (movingModel == false)
+	{
+		count = 0;
+		rotatingRightArm = 1;
+		rotatingLeftArm = 1;
+		rotatingRightLeg = 1;
+		rotatingLeftLeg = 1;
+		if (rotateRightArms > 360)//moving back right arm
+		{
+			rotateRightArms -= (float)(rotatingRightArm * dt * ROTATE_SPEED);
+			if (rotateRightArms <= 360)
+			{
+				rotateRightArms = 360;
+			}
+		}
+		else if (rotateRightArms < 360)
+		{
+			rotateRightArms += (float)(rotatingRightArm * dt * ROTATE_SPEED);
+			if (rotateRightArms >= 360)
+			{
+				rotateRightArms = 360;
+			}
+		}
+
+		if (rotateLeftArms > 360)//moving back left arm
+		{
+			rotateLeftArms -= (float)(rotatingLeftArm * dt * ROTATE_SPEED);
+			if (rotateLeftArms <= 360)
+			{
+				rotateLeftArms = 360;
+			}
+		}
+		else if (rotateLeftArms < 360)
+		{
+			rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
+			if (rotateLeftArms >= 360)
+			{
+				rotateLeftArms = 360;
+			}
+		}
+
+		if (rotateRightLeg > 360)//moving back right leg
+		{
+			rotateRightLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+			if (rotateRightLeg <= 360)
+			{
+				rotateRightLeg = 360;
+			}
+		}
+		else if (rotateRightLeg < 360)
+		{
+			rotateRightLeg += (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+			if (rotateRightLeg >= 360)
+			{
+				rotateRightLeg = 360;
+			}
+		}
+
+		if (rotateLeftLeg > 360)//moving back left arm
+		{
+			rotateLeftLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+			if (rotateLeftLeg <= 360)
+			{
+				rotateLeftLeg = 360;
+			}
+		}
+		else if (rotateLeftLeg < 360)
+		{
+			rotateLeftLeg += (float)(rotatingLeftLeg * dt * ROTATE_SPEED);
+			if (rotateLeftLeg >= 360)
+			{
+				rotateLeftLeg = 360;
+			}
+		}
+	}
+
+	/*if (Application::IsKeyPressed('8'))
+	{
+		charPosition.z += cos(Math::DegreeToRadian(angle)) * 10 * dt;
+		charPosition.x += sin(Math::DegreeToRadian(angle)) * 10 * dt;
+	}
+	if (Application::IsKeyPressed('9'))
+	{
+		charPosition.z -= cos(Math::DegreeToRadian(angle)) * 10 * dt;
+		charPosition.x -= sin(Math::DegreeToRadian(angle)) * 10 * dt;
+	}*/
+	if (Application::IsKeyPressed('I'))
+	{
+		angle += 100 * dt;
+	}
+	if (Application::IsKeyPressed('O'))
+	{
+		angle -= 100 * dt;
+	}
+
+	/*========================================================
+							Player
+	=========================================================*/
+	player.setPosition(camera.position.x,camera.position.y,camera.position.z);
+
+	//============================DOOR===========================//
+
+	//This part is code for door opening
+	if (camera.position.z <20.1 && camera.position.z >=-19.7 && camera.position.y >=5 && camera.position.y <= 10 && camera.position.x <=-41.5 && camera.position.x >= -76.3)
+	{
+		if(Opened == false &&  Closed == true && doorStop == true)
+		{
+			Closed = false;
+			doorMoving = true;
+		}
+
+		if(Closed == false && doorMoving == true)
+		{
+			doorTranslate -=(float)(35*dt);
+			if(doorTranslate < -20)
+			{
+				doorMoving = false;
+				Opened = true;
+				doorStop = true;
+			}	
+
+		}
+	}
+	//This part is for closing of the door
+	else
+	{
+		Opened = false;
+		if(Opened == false && Closed == false )
+		{
+			doorTranslate +=(float)(35*dt);
+			if(doorTranslate > 0)
+			{
+				Closed = true;
+			}
+
+		}
+	}
+	//==============================END OF DOOR ==========================//
+
+	/*=======================================================
+						Interactions
+	==========================================================*/
+	updateTakingItem();
 	
-	//if(player.getInventory().getNoOfItems() > 0)
-	//{
-	//	cout << player.getInventory().getItem(1).getName() << endl;
-	//}
+	updateCheckingOut();
+
+	updatePuttingBackItem();
+	/*==============================================================
+							DEBUGGING PURPOSES
+	=================================================================*/
 
 	//====Camera coordinates===//
 	std::ostringstream ss;
@@ -2593,47 +2543,6 @@ void StudioProject::RenderSkybox()
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
-	//modelStack.PushMatrix();
-	//modelStack.Translate(0.f, 0.f, (worldsize/2) - 1);
-	//modelStack.Rotate(180, 0, 1, 0);
-	//modelStack.Scale(worldsize, worldsize, worldsize);
-	//RenderMesh(meshList[GEO_BACK], false);
-	//modelStack.PopMatrix();
-
-	////Front
-	//modelStack.PushMatrix();
-	//modelStack.Translate(0.f, 0.f, (-worldsize/2) + 1);
-	//modelStack.Rotate(180, 0, 1, 0);
-	//modelStack.PushMatrix();
-	//modelStack.Rotate(-180, 1, 0, 0);
-	//modelStack.PushMatrix();
-	//modelStack.Rotate(-180, 0, 0, 1);
-	//modelStack.Scale(worldsize, worldsize, worldsize);
-	//RenderMesh(meshList[GEO_FRONT], false);
-	//modelStack.PopMatrix();
-	//modelStack.PopMatrix();
-	//modelStack.PopMatrix();
-
-	////Top
-	//modelStack.PushMatrix();
-	//modelStack.Translate(0.f, (worldsize/2) - 1, 0.f);
-	//modelStack.Rotate(90, 1, 0, 0);
-	//modelStack.PushMatrix();
-	//modelStack.Rotate(270, 0, 0, 1);
-	//modelStack.Scale(worldsize, worldsize, worldsize);
-	//RenderMesh(meshList[GEO_TOP], false);
-	//modelStack.PopMatrix();
-	//modelStack.PopMatrix();
-
-
-	//Bottom
-	//modelStack.PushMatrix();
-	//modelStack.Translate(0.f, (-worldsize/2) + 1, 0.f);
-	//modelStack.Rotate(90,1,0,0);
-	//modelStack.Scale(worldsize, worldsize, worldsize);
-	//RenderMesh(meshList[GEO_BOTTOM], false);
-	//modelStack.PopMatrix();
-
 	modelStack.PushMatrix();
 	modelStack.Translate(0.f, (-worldsize/2) + 1, 0.f);
 	modelStack.Rotate(90,1,0,0);
@@ -2668,28 +2577,6 @@ void StudioProject::RenderSkybox()
 	modelStack.PopMatrix();
 	RenderMesh(meshList[GEO_FLOOR], false);
 	modelStack.PopMatrix();
-
-	//RIGHT
-	//modelStack.PushMatrix();
-	//modelStack.Translate((worldsize/2) - 1, 0.f, 0.f);
-	//modelStack.Rotate(90, 0, 1, 0);
-	//modelStack.PushMatrix();
-	//modelStack.Rotate(-180, 0, 1, 0);
-	//modelStack.Scale(worldsize, worldsize, worldsize);
-	//RenderMesh(meshList[GEO_RIGHT], false);
-	//modelStack.PopMatrix();
-	//modelStack.PopMatrix();
-
-	////LEFT
-	//modelStack.PushMatrix();
-	//modelStack.Translate((-worldsize/2) + 1, 0.f, 0.f);
-	//modelStack.Rotate(-90, 0, 1, 0);
-	//modelStack.PushMatrix();
-	//modelStack.Rotate(180, 0, 1, 0);
-	//modelStack.Scale(worldsize, worldsize, worldsize);
-	//RenderMesh(meshList[GEO_LEFT], false);
-	//modelStack.PopMatrix();
-	//modelStack.PopMatrix();
 }
 
 void StudioProject::RenderSupermarket()
@@ -2989,67 +2876,13 @@ void StudioProject::RenderItems()
 			modelStack.PopMatrix(); //pop back to origin
 		}
 	}
-	modelStack.PushMatrix();
+	//Camera target
+	/*modelStack.PushMatrix();
 	modelStack.Translate(camera.target.x,camera.target.y, camera.target.z);
 	modelStack.Rotate(90,0,1,0);
 	modelStack.Scale(0.5,0.5,0.5);
 	RenderMesh(meshList[GEO_AXES],false);
-	modelStack.PopMatrix();
-	
-	/*modelStack.PushMatrix();
-	modelStack.Translate(4, 0, 0);
-	RenderMesh(meshList[GEO_CANFOOD2],B_Light);
 	modelStack.PopMatrix();*/
-
-	/*modelStack.PushMatrix();
-	modelStack.Translate(6, 0, 0);
-	modelStack.Scale(0.5, 0.5, 0.5);
-	RenderMesh(meshList[GEO_CANFOOD3],B_Light);
-	modelStack.PopMatrix();*/
-
-	//modelStack.PushMatrix();
-	//modelStack.Translate(0, 0, 6);
-	//modelStack.Scale(2, 2, 2);
-	//RenderMesh(meshList[GEO_COKE_CAN],B_Light);// Coke
-	//modelStack.PopMatrix();
-
-	//modelStack.PushMatrix();
-	//modelStack.Translate(0, 0, 5);
-	//RenderMesh(meshList[GEO_DRINKCAN2],B_Light); 
-	//modelStack.PopMatrix();
-
-	//modelStack.PushMatrix();
-	////modelStack.Translate(8, 0, 0);
-	//modelStack.Translate(0, 0, 6);
-	//modelStack.Scale(2, 2, 2);
-	//RenderMesh(meshList[GEO_PEPSI_CAN],B_Light); // Pepsi
-	//modelStack.PopMatrix();
-
-	//modelStack.PushMatrix();
-	//modelStack.Translate(0, 0, 4);
-	//modelStack.Rotate(90,0,1,0);
-	//modelStack.Scale(2, 2, 2);
-	//RenderMesh(meshList[GEO_CEREALBOX1],B_Light);
-	//modelStack.PopMatrix();
-
-	//modelStack.PushMatrix();
-	//modelStack.Translate(0, 0, 10);
-	//modelStack.Rotate(-90,0,1,0);
-	//modelStack.Scale(1.2, 1.2, 1.2);
-	//RenderMesh(meshList[GEO_CEREALBOX2],B_Light);
-	//modelStack.PopMatrix();
-
-	//modelStack.PushMatrix();
-	//modelStack.Translate(0, 0, -2);
-	//modelStack.Rotate(-90,0,1,0);
-	//RenderMesh(meshList[GEO_PIZZABOX],B_Light);
-	//modelStack.PopMatrix();
-
-	//modelStack.PushMatrix();
-	//modelStack.Translate(0, 0, -4);
-	//modelStack.Rotate(-90,0,1,0);
-	//RenderMesh(meshList[GEO_POTATOCHIPS],B_Light);
-	//modelStack.PopMatrix();
 
 }
 
@@ -3776,6 +3609,21 @@ void StudioProject::RenderItemsInfo()
 			}
 		}
 	}
+	/*==============================================================
+							CHECKING OUT
+	=================================================================*/
+	for(int i = 0;i < CashierBox.size();i++)
+	{
+		if((camera.position.x <= CashierBox[i].max.x) && 
+			(camera.position.y <= CashierBox[i].max.y) && 
+			(camera.position.z <= CashierBox[i].max.z) &&
+			(camera.position.x >= CashierBox[i].min.x) && 
+			(camera.position.y >= CashierBox[i].min.y) && 
+			(camera.position.z >= CashierBox[i].min.z))
+		{
+			RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Check Out", Color(1, 1, 1), 2, 13.55, 14);
+		}
+	}
 }
 
 void StudioProject::Render()
@@ -4094,9 +3942,6 @@ void StudioProject::Render()
 		RenderMesh(meshList[GEO_PEA_N_CARROTS],B_Light);
 		modelStack.PopMatrix();
 	}
-
-
-
 }
 
 void StudioProject::RenderMesh(Mesh *mesh, bool enableLight)

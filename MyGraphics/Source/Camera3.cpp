@@ -28,6 +28,9 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	isJumping = false;
 	isFalling = false;
 	tempJumpY = 0.f;
+	tempJumpTargY = 0.f;
+	tempCrouchY = position.y;
+	tempCrouchTargY = target.y;
 	CAMERA_SPEED = 15.f;
 	JUMP_SPEED = 12.f;
 	//=======Collision=========//
@@ -549,6 +552,7 @@ void Camera3::Update(double dt)
 	{
 		Jumping = true;
 		tempJumpY = position.y;
+		tempJumpTargY = target.y;
 	}
 
 	if(Jumping == true)
@@ -579,6 +583,8 @@ void Camera3::Update(double dt)
 		if(position.y <= tempJumpY)
 		{
 			isFalling = false;
+			position.y = tempJumpY;
+			target.y = tempJumpTargY;
 			JUMP_SPEED = 12.f;
 		}
 	}
@@ -589,15 +595,18 @@ void Camera3::Update(double dt)
 	if(Application::IsKeyPressed(VK_LCONTROL) && isCrouching == false && Crouching == false && isJumping == false && isFalling == false)
 	{
 		Crouching = true;
+		tempCrouchY = position.y;
+		tempCrouchTargY = target.y;
 	}
 	else if(Application::IsKeyPressed(VK_LCONTROL) && isCrouching == false && Crouching == true)
 	{
 		Crouching = false;
+		isCrouching = true;
 	}
 	if(Crouching == true)
 	{
 		isCrouching = true;
-		if(position.y >= 3)
+		if(position.y >= (tempCrouchY-2))
 		{
 			position.y -= (float)(CAMERA_SPEED * dt);
 			target.y  -= (float)(CAMERA_SPEED * dt);
@@ -607,16 +616,17 @@ void Camera3::Update(double dt)
 			isCrouching = false;
 		}
 	}
-	else if(Crouching == false)
+	else if(Crouching == false && isCrouching == true)
 	{
-		isCrouching = true;
-		if(position.y < 5)
+		if(position.y < tempCrouchY)
 		{
 			position.y += (float)(CAMERA_SPEED * dt);
 			target.y  += (float)(CAMERA_SPEED * dt);
 		}
-		else
+		if(position.y >= tempCrouchY)
 		{
+			 position.y = tempCrouchY; 
+			target.y = tempCrouchTargY;
 			isCrouching = false;
 		}
 	}
