@@ -189,6 +189,8 @@ private:
 		GEO_PIZZABOX,
 		GEO_POTATOCHIPS,
 
+		GEO_MONEY,
+
 		modelHead,			//Model Head
 		modelTorso,			//Model Torso
 		modelRightHand,		//Model Right Hand
@@ -278,6 +280,9 @@ private:
 	float roomheight;
 	float moving;
 	bool showInventory;
+	bool throwMoney;
+	float translateMoneyZ;
+	float translateMoneyY;
 	StopWatch Timer;
 
 	//=========Character=========//

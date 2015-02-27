@@ -182,6 +182,13 @@ void StudioProject::InitMesh()
 	meshList[GEO_PIZZABOX]->material.kShininess = 8.f;
 	meshList[GEO_PIZZABOX] ->textureID = LoadTGA("Image//frozen_pizza.tga");
 
+	meshList[GEO_MONEY] = MeshBuilder::GenerateOBJ("Market Door Right", "OBJ/dollarbill.obj");
+	meshList[GEO_MONEY]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_MONEY]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_MONEY]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_MONEY]->material.kShininess = 8.f;
+	meshList[GEO_MONEY]->textureID = LoadTGA("Image//dollarbill.tga");
+
 	meshList[GEO_POTATOCHIPS] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//potato-chips.obj");
 	meshList[GEO_POTATOCHIPS]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[GEO_POTATOCHIPS]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
@@ -1040,6 +1047,9 @@ void StudioProject::InitVariables()
 	rotateRightArms = rotateLeftArms = rotateRightLeg = rotateLeftLeg = 360;
 	movingModel = false;
 	movingCharacterX = movingCharacterZ = 0;
+	//===money related variables===//
+	translateMoneyZ = 0;
+	translateMoneyY = 0;
 
 	Framerate = "FPS: ";
 }
@@ -2404,6 +2414,42 @@ void StudioProject::Update(double dt)
 		elapsedTime2 -= 0.15;
 	}
 	//std::cout << elapsedTime2 << endl;
+	
+	if(Application::IsKeyPressed('B'))
+	{
+		
+
+			if (translateMoneyZ > -8.5 && translateMoneyY > -2.54)
+			{
+				translateMoneyZ -= (float) (10 * dt);
+				translateMoneyY -= (float) (3 * dt);
+				throwMoney = true;
+			}
+			if (translateMoneyZ <= -8.5 && translateMoneyY <= -2.54)
+			{
+				throwMoney = false;
+			}
+
+			//if (translateMoneyY > -2.54)
+			//{
+			//	translateMoneyY -= (float) (3 * dt);
+			//}
+		
+		//else if( translateMoneyZ <=-8.5 && translateMoneyY <=-2.54)
+		//{
+		//	throwMoney = false;
+		//}
+
+	
+		//if (translateMoneyY == 0)
+		//{
+		//	translateMoneyY = 0;
+		//	translateMoneyZ = 0;
+		//modelStack.Scale(0.3, 0.3, 0.3);
+		//RenderMesh(meshList[GEO_MONEY],B_Light);
+		//}
+	}
+
 
 	//================Testing =================//
 	//cout << Container.size() << endl;
@@ -2411,6 +2457,8 @@ void StudioProject::Update(double dt)
 		moving += (float) (10 * dt);
 	if (Application::IsKeyPressed('N'))
 		moving -= (float) (10 * dt);
+	    //moving -= (float) (5 * dt);
+	cout<<moving<<endl;
 
 	camera.Update(dt);
 
@@ -2883,6 +2931,57 @@ void StudioProject::RenderItems()
 	modelStack.Scale(0.5,0.5,0.5);
 	RenderMesh(meshList[GEO_AXES],false);
 	modelStack.PopMatrix();*/
+
+	//modelStack.PushMatrix();
+	//modelStack.Translate(0, 0, 6);
+	//modelStack.Scale(2, 2, 2);
+	//RenderMesh(meshList[GEO_COKE_CAN],B_Light);// Coke
+	//modelStack.PopMatrix();
+
+	//modelStack.PushMatrix();
+	//modelStack.Translate(0, 0, 5);
+	//RenderMesh(meshList[GEO_DRINKCAN2],B_Light); 
+	//modelStack.PopMatrix();
+
+	//modelStack.PushMatrix();
+	////modelStack.Translate(8, 0, 0);
+	//modelStack.Translate(0, 0, 6);
+	//modelStack.Scale(2, 2, 2);
+	//RenderMesh(meshList[GEO_PEPSI_CAN],B_Light); // Pepsi
+	//modelStack.PopMatrix();
+
+	//modelStack.PushMatrix();
+	//modelStack.Translate(0, 0, 4);
+	//modelStack.Rotate(90,0,1,0);
+	//modelStack.Scale(2, 2, 2);
+	//RenderMesh(meshList[GEO_CEREALBOX1],B_Light);
+	//modelStack.PopMatrix();
+
+	//modelStack.PushMatrix();
+	//modelStack.Translate(0, 0, 10);
+	//modelStack.Rotate(-90,0,1,0);
+	//modelStack.Scale(1.2, 1.2, 1.2);
+	//RenderMesh(meshList[GEO_CEREALBOX2],B_Light);
+	//modelStack.PopMatrix();
+
+	//modelStack.PushMatrix();
+	//modelStack.Translate(0, 0, -2);
+	//modelStack.Rotate(-90,0,1,0);
+	//RenderMesh(meshList[GEO_PIZZABOX],B_Light);
+	//modelStack.PopMatrix();
+
+	//modelStack.PushMatrix();
+	//modelStack.Translate(0, 0, -4);
+	//modelStack.Rotate(-90,0,1,0);
+	//RenderMesh(meshList[GEO_POTATOCHIPS],B_Light);
+	//modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(camera.target.x + 0.67, camera.target.y+ translateMoneyY, camera.target.z + translateMoneyZ);
+	modelStack.Rotate(45, 1, 0, 0);
+	modelStack.Scale(0.3, 0.3, 0.3);
+	RenderMesh(meshList[GEO_MONEY],B_Light);
+	modelStack.PopMatrix();
 
 }
 
