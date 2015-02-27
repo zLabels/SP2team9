@@ -548,89 +548,173 @@ void Camera3::Update(double dt)
 	/*====================================================================================
 										JUMPING
 	=======================================================================================*/
- 	if(Application::IsKeyPressed(VK_SPACE) && isJumping == false && isFalling == false && Crouching == false && isCrouching == false)
+
+	//==============LEVEL 1==============//
+	if(position.y < 15)
 	{
-		Jumping = true;
-		tempJumpY = position.y;
-		tempJumpTargY = target.y;
+		if(Application::IsKeyPressed(VK_SPACE) && isJumping == false && isFalling == false && Crouching == false && isCrouching == false)
+		{
+			Jumping = true;
+			tempJumpY = position.y;
+		}
+
+		if(Jumping == true)
+		{
+			isJumping = true;
+
+			if(position.y <= 8)
+			{
+				position.y += (float)(JUMP_SPEED * dt);
+				target.y += (float)(JUMP_SPEED * dt);
+				JUMP_SPEED -= (float)(20 * dt);
+			}
+			else
+			{
+				isJumping = false;
+				Jumping = false;
+				isFalling = true;
+			}
+		}
+		if(isFalling == true)
+		{
+			if(position.y >= 5)
+			{
+				position.y -= (float)(JUMP_SPEED * dt);
+				target.y -= (float)(JUMP_SPEED * dt);
+				JUMP_SPEED += (float)(40 * dt);
+			}
+			if(position.y <= 5)
+			{
+				isFalling = false;
+				JUMP_SPEED = 12.f;
+			}
+		}
 	}
 
-	if(Jumping == true)
+	//==================LEVEL 2==================//
+	if(position.y > 20)
 	{
-		isJumping = true;
-		
-		if(position.y <= (tempJumpY + 3))
+		if(Application::IsKeyPressed(VK_SPACE) && isJumping == false && isFalling == false && Crouching == false && isCrouching == false)
 		{
-			position.y += (float)(JUMP_SPEED * dt);
-			target.y += (float)(JUMP_SPEED * dt);
-			JUMP_SPEED -= (float)(20 * dt);
+			Jumping = true;
+			tempJumpY = position.y;
 		}
-		else
-		{
-			isJumping = false;
-			Jumping = false;
-			isFalling = true;
-		}
-	}
-	if(isFalling == true)
-	{
-		if(position.y >= tempJumpY)
-		{
-			position.y -= (float)(JUMP_SPEED * dt);
-			target.y -= (float)(JUMP_SPEED * dt);
-			JUMP_SPEED += (float)(40 * dt);
-		}
-		if(position.y <= tempJumpY)
-		{
-			isFalling = false;
-			position.y = tempJumpY;
-			target.y = tempJumpTargY;
-			JUMP_SPEED = 12.f;
-		}
-	}
 
+		if(Jumping == true)
+		{
+			isJumping = true;
+
+			if(position.y <= 28.5)
+			{
+				position.y += (float)(JUMP_SPEED * dt);
+				target.y += (float)(JUMP_SPEED * dt);
+				JUMP_SPEED -= (float)(20 * dt);
+			}
+			else
+			{
+				isJumping = false;
+				Jumping = false;
+				isFalling = true;
+			}
+		}
+		if(isFalling == true)
+		{
+			if(position.y >= 25.5)
+			{
+				position.y -= (float)(JUMP_SPEED * dt);
+				target.y -= (float)(JUMP_SPEED * dt);
+				JUMP_SPEED += (float)(40 * dt);
+			}
+			if(position.y <= 25.5)
+			{
+				isFalling = false;
+				JUMP_SPEED = 12.f;
+			}
+		}
+	}
 	/*=======================================================================================
 										CROUCHING
 	======================================================================================*/
-	if(Application::IsKeyPressed(VK_LCONTROL) && isCrouching == false && Crouching == false && isJumping == false && isFalling == false)
+	//==========LEVEL 1=============//
+	if(position.y < 15)
 	{
-		Crouching = true;
-		tempCrouchY = position.y;
-		tempCrouchTargY = target.y;
+		if(Application::IsKeyPressed(VK_LCONTROL) && isCrouching == false && Crouching == false && isJumping == false && isFalling == false)
+		{
+			Crouching = true;
+			tempCrouchY = position.y;
+			tempCrouchTargY = target.y;
+		}
+		else if(Application::IsKeyPressed(VK_LCONTROL) && isCrouching == false && Crouching == true)
+		{
+			Crouching = false;
+			isCrouching = true;
+		}
+		if(Crouching == true)
+		{
+			isCrouching = true;
+			if(position.y >= 3)
+			{
+				position.y -= (float)(CAMERA_SPEED * dt);
+				target.y  -= (float)(CAMERA_SPEED * dt);
+			}
+			else
+			{
+				isCrouching = false;
+			}
+		}
+		else if(Crouching == false && isCrouching == true)
+		{
+			if(position.y < 5)
+			{
+				position.y += (float)(CAMERA_SPEED * dt);
+				target.y  += (float)(CAMERA_SPEED * dt);
+			}
+			if(position.y >= 5)
+			{
+				isCrouching = false;
+			}
+		}
 	}
-	else if(Application::IsKeyPressed(VK_LCONTROL) && isCrouching == false && Crouching == true)
+	//=============LEVEL 2=================//
+	if(position.y > 20)
 	{
-		Crouching = false;
-		isCrouching = true;
+		if(Application::IsKeyPressed(VK_LCONTROL) && isCrouching == false && Crouching == false && isJumping == false && isFalling == false)
+		{
+			Crouching = true;
+			tempCrouchY = position.y;
+			tempCrouchTargY = target.y;
+		}
+		else if(Application::IsKeyPressed(VK_LCONTROL) && isCrouching == false && Crouching == true)
+		{
+			Crouching = false;
+			isCrouching = true;
+		}
+		if(Crouching == true)
+		{
+			isCrouching = true;
+			if(position.y >= 23.5)
+			{
+				position.y -= (float)(CAMERA_SPEED * dt);
+				target.y  -= (float)(CAMERA_SPEED * dt);
+			}
+			else
+			{
+				isCrouching = false;
+			}
+		}
+		else if(Crouching == false && isCrouching == true)
+		{
+			if(position.y < 25.5)
+			{
+				position.y += (float)(CAMERA_SPEED * dt);
+				target.y  += (float)(CAMERA_SPEED * dt);
+			}
+			if(position.y >= 25.5)
+			{
+				isCrouching = false;
+			}
+		}
 	}
-	if(Crouching == true)
-	{
-		isCrouching = true;
-		if(position.y >= (tempCrouchY-2))
-		{
-			position.y -= (float)(CAMERA_SPEED * dt);
-			target.y  -= (float)(CAMERA_SPEED * dt);
-		}
-		else
-		{
-			isCrouching = false;
-		}
-	}
-	else if(Crouching == false && isCrouching == true)
-	{
-		if(position.y < tempCrouchY)
-		{
-			position.y += (float)(CAMERA_SPEED * dt);
-			target.y  += (float)(CAMERA_SPEED * dt);
-		}
-		if(position.y >= tempCrouchY)
-		{
-			 position.y = tempCrouchY; 
-			target.y = tempCrouchTargY;
-			isCrouching = false;
-		}
-	}
-
 	if(Application::IsKeyPressed('R'))
 	{
 		Reset();
