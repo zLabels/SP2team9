@@ -236,6 +236,7 @@ private:
 		NUM_GEOMETRY,
 	};
 
+	//Render
 	void RenderSkybox();
 	void RenderSupermarket();
 	void RenderModel();
@@ -246,9 +247,14 @@ private:
 	void RenderPlayerInfo();
 	void RenderingSecurityCamera();
 	void RenderItemsInfo();
+	void RenderLevel1Lights();
+	void RenderCheckOutItems();
+
+	//Updates
 	void updateTakingItem();
 	void updatePuttingBackItem();
 	void updateCheckingOut();
+	void updateTimeAttack();
 
 public:
 	StudioProject();
@@ -287,6 +293,9 @@ private:
 	float translateMoneyZ;
 	float translateMoneyY;
 	StopWatch Timer;
+
+	//========MiniGame============//
+	bool TimeAttack;
 
 	//=========Character=========//
 	bool movingModel;
