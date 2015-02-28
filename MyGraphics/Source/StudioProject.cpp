@@ -441,6 +441,7 @@ void StudioProject::InitVariables()
 	Beans = false;
 	Lays = false;
 	Coke = false;
+	CokeZero = false;
 	Pepsi = false;
 	Pizza = false;
 	moveItem = 0;
@@ -2102,7 +2103,6 @@ void StudioProject::updateCheckingOut()
 				if(cost < player.getMoney())
 				{
 					player.getInventory().DeleteAll();
-					cout << player.getInventory().getNoOfItems() << endl;
 					player.setMoney(player.getMoney() - cost);
 				}
 			}
@@ -4160,212 +4160,635 @@ void StudioProject::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press E to interact", Color(0,0,0), 2, 1, 27);
 	}
 	//Used for rendering Objs on cashier table//
-	if(Peas == true) // Peas and Cans
+	//Extreme left cashier
+	if(camera.position.z >= -13 && camera.position.z <= -11 && camera.position.y >=4 && camera.position.y <= 10 && camera.position.x >= -26.85 && camera.position.x <= -19.47) //Extreme left cashier
 	{
-		modelStack.PushMatrix();
-		modelStack.Translate(-20+moveItem,2.8,-15);
-		RenderMesh(meshList[GEO_PEA_N_CARROTS], false);
-		modelStack.PopMatrix();
-
-		if(moveItem <= -4.5 && peaCount != 0)
+		if(Peas == true ) // Peas and Cans
 		{
-			moveItem = 0;
-			peaCount --;
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,-15);
+			RenderMesh(meshList[GEO_PEA_N_CARROTS], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5 && peaCount != 0)
+			{
+				moveItem = 0;
+				peaCount --;
+
+			}
+			else if (peaCount == 0 )
+			{
+				Peas = false;
+			}
 
 		}
-		if (peaCount == 0)
+		if(Sardine == true && Peas == false) //GEO_SARDINE_CAN
 		{
-			Peas = false;
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,-15);
+			RenderMesh(meshList[GEO_SARDINE_CAN], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5 && SardineCount != 0)
+			{
+				moveItem = 0;
+				SardineCount --;
+			}
+			if (SardineCount == 0)
+			{
+				Sardine = false;
+			}
+
+		}
+		if(Beans == true && Sardine == false && Peas == false) //GEO_BAKED_BEANS_CAN,
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,-15);
+			RenderMesh(meshList[GEO_BAKED_BEANS_CAN], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5 && BeansCount != 0)
+			{
+				moveItem = 0;
+				BeansCount --;
+			}
+			if (BeansCount == 0)
+			{
+				Beans = false;
+			}
+
+		}
+		if(Coke == true && Beans == false && Sardine == false && Peas == false) //GEO_COKE_CAN,
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,-15);
+			RenderMesh(meshList[GEO_COKE_CAN], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5 && CokeCount != 0)
+			{
+				moveItem = 0;
+				CokeCount --;
+			}
+			if (CokeCount == 0)
+			{
+				Coke = false;
+			}
+
+		}
+
+		if(CokeZero == true && Coke == false && Beans == false && Sardine == false && Peas == false) //Coke zero (Can2)
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,-15);
+			RenderMesh(meshList[GEO_DRINKCAN2], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && CokeZeroCount != 0)
+			{
+				moveItem = 0;
+				CokeZeroCount --;
+			}
+			if (CokeZeroCount == 0)
+			{
+				CokeZero = false;
+			}
+		}
+
+		if(Pepsi == true && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Coke zero (Can2)
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,-15);
+			RenderMesh(meshList[GEO_PEPSI_CAN], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && PepsiCount != 0)
+			{
+				moveItem = 0;
+				PepsiCount --;
+			}
+			if (PepsiCount == 0)
+			{
+				Pepsi = false;
+			}
+		}
+
+
+
+		if(Milo == true && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Milo
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,-15);
+			RenderMesh(meshList[GEO_MILOCAN], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && MiloCount != 0)
+			{
+				moveItem = 0;
+				MiloCount --;
+			}
+			if (MiloCount == 0)
+			{
+				Milo = false;
+			}
+
+		}
+		if(Cereal1 == true && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Cereal 1
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,-15);
+			RenderMesh(meshList[GEO_CEREALBOX1], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && Cereal1Count != 0)
+			{
+				moveItem = 0;
+				Cereal1Count --;
+			}
+			if (Cereal1Count == 0)
+			{
+				Cereal1 = false;
+			}
+
+		}
+
+		if(Cereal2 == true && Cereal1 == false && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Cereal2
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,-15);
+			RenderMesh(meshList[GEO_CEREALBOX2], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && Cereal2Count != 0)
+			{
+				moveItem = 0;
+				Cereal2Count --;
+			}
+			if (Cereal2Count == 0)
+			{
+				Cereal2 = false;
+			}
+
+		}
+
+		if(Pizza == true && Cereal2 == false && Cereal1 == false && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Cereal2
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,-15);
+			RenderMesh(meshList[GEO_PIZZABOX], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && PizzaCount != 0)
+			{
+				moveItem = 0;
+				PizzaCount --;
+			}
+			if (PizzaCount == 0)
+			{
+				Pizza = false;
+			}
+
+		}
+		if(Lays == true && Pizza == false && Cereal2 == false && Cereal1 == false && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Lays
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,-15);
+			RenderMesh(meshList[GEO_POTATOCHIPS], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && LaysCount != 0)
+			{
+				moveItem = 0;
+				LaysCount --;
+			}
+			if (LaysCount == 0)
+			{
+				Lays = false;
+			}
 		}
 
 	}
-	if(Sardine == true && Peas == false) //GEO_SARDINE_CAN
+	// =============MIddle cashier===================//
+	if(camera.position.z >= 4.5 && camera.position.z <= 6.9 && camera.position.y >=4 && camera.position.y <= 10 && camera.position.x >= -26 && camera.position.x <= -22) 
 	{
-		modelStack.PushMatrix();
-		modelStack.Translate(-20+moveItem,2.8,-15);
-		RenderMesh(meshList[GEO_SARDINE_CAN], false);
-		modelStack.PopMatrix();
+		if(Peas == true ) // Peas and Cans
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,2.8);
+			RenderMesh(meshList[GEO_PEA_N_CARROTS], false);
+			modelStack.PopMatrix();
 
-		if(moveItem <= -4.5 && SardineCount != 0)
-		{
-			moveItem = 0;
-			SardineCount --;
+			if(moveItem <= -4.5 && peaCount != 0)
+			{
+				moveItem = 0;
+				peaCount --;
+
+			}
+			else if (peaCount == 0 )
+			{
+				Peas = false;
+			}
+
 		}
-		if (SardineCount == 0)
+		if(Sardine == true && Peas == false) //GEO_SARDINE_CAN
 		{
-			Sardine = false;
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,2.8);
+			RenderMesh(meshList[GEO_SARDINE_CAN], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5 && SardineCount != 0)
+			{
+				moveItem = 0;
+				SardineCount --;
+			}
+			if (SardineCount == 0)
+			{
+				Sardine = false;
+			}
+
+		}
+		if(Beans == true && Sardine == false && Peas == false) //GEO_BAKED_BEANS_CAN,
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,2.8);
+			RenderMesh(meshList[GEO_BAKED_BEANS_CAN], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5 && BeansCount != 0)
+			{
+				moveItem = 0;
+				BeansCount --;
+			}
+			if (BeansCount == 0)
+			{
+				Beans = false;
+			}
+
+		}
+		if(Coke == true && Beans == false && Sardine == false && Peas == false) //GEO_COKE_CAN,
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,2.8);
+			RenderMesh(meshList[GEO_COKE_CAN], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5 && CokeCount != 0)
+			{
+				moveItem = 0;
+				CokeCount --;
+			}
+			if (CokeCount == 0)
+			{
+				Coke = false;
+			}
+
+		}
+
+		if(CokeZero == true && Coke == false && Beans == false && Sardine == false && Peas == false) //Coke zero (Can2)
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,2.8);
+			RenderMesh(meshList[GEO_DRINKCAN2], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && CokeZeroCount != 0)
+			{
+				moveItem = 0;
+				CokeZeroCount --;
+			}
+			if (CokeZeroCount == 0)
+			{
+				CokeZero = false;
+			}
+		}
+
+		if(Pepsi == true && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Coke zero (Can2)
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,2.8);
+			RenderMesh(meshList[GEO_PEPSI_CAN], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && PepsiCount != 0)
+			{
+				moveItem = 0;
+				PepsiCount --;
+			}
+			if (PepsiCount == 0)
+			{
+				Pepsi = false;
+			}
+		}
+
+		if(Milo == true && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Milo
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,2.8);
+			RenderMesh(meshList[GEO_MILOCAN], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && MiloCount != 0)
+			{
+				moveItem = 0;
+				MiloCount --;
+			}
+			if (MiloCount == 0)
+			{
+				Milo = false;
+			}
+
+		}
+		if(Cereal1 == true && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Cereal 1
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,2.8);
+			RenderMesh(meshList[GEO_CEREALBOX1], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && Cereal1Count != 0)
+			{
+				moveItem = 0;
+				Cereal1Count --;
+			}
+			if (Cereal1Count == 0)
+			{
+				Cereal1 = false;
+			}
+
+		}
+
+		if(Cereal2 == true && Cereal1 == false && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Cereal2
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,2.8);
+			RenderMesh(meshList[GEO_CEREALBOX2], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && Cereal2Count != 0)
+			{
+				moveItem = 0;
+				Cereal2Count --;
+			}
+			if (Cereal2Count == 0)
+			{
+				Cereal2 = false;
+			}
+
+		}
+
+		if(Pizza == true && Cereal2 == false && Cereal1 == false && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Cereal2
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,2.8);
+			RenderMesh(meshList[GEO_PIZZABOX], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && PizzaCount != 0)
+			{
+				moveItem = 0;
+				PizzaCount --;
+			}
+			if (PizzaCount == 0)
+			{
+				Pizza = false;
+			}
+
+		}
+		if(Lays == true && Pizza == false && Cereal2 == false && Cereal1 == false && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Lays
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,2.8);
+			RenderMesh(meshList[GEO_POTATOCHIPS], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && LaysCount != 0)
+			{
+				moveItem = 0;
+				LaysCount --;
+			}
+			if (LaysCount == 0)
+			{
+				Lays = false;
+			}
 		}
 
 	}
-	if(Beans == true && Sardine == false && Peas == false) //GEO_BAKED_BEANS_CAN,
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(-20+moveItem,2.8,-15);
-		RenderMesh(meshList[GEO_BAKED_BEANS_CAN], false);
-		modelStack.PopMatrix();
 
-		if(moveItem <= -4.5 && BeansCount != 0)
+	//Extreme right cashier
+	if(camera.position.z >= 22.2 && camera.position.z <= 24.8 && camera.position.y >=4 && camera.position.y <= 10 && camera.position.x >= -25.75 && camera.position.x <= -19.63)
+	{
+		if(Peas == true ) // Peas and Cans
 		{
-			moveItem = 0;
-			BeansCount --;
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,19.9);
+			RenderMesh(meshList[GEO_PEA_N_CARROTS], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5 && peaCount != 0)
+			{
+				moveItem = 0;
+				peaCount --;
+
+			}
+			else if (peaCount == 0 )
+			{
+				Peas = false;
+			}
+
 		}
-		if (BeansCount == 0)
+		if(Sardine == true && Peas == false) //GEO_SARDINE_CAN
 		{
-			Beans = false;
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,19.9);
+			RenderMesh(meshList[GEO_SARDINE_CAN], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5 && SardineCount != 0)
+			{
+				moveItem = 0;
+				SardineCount --;
+			}
+			if (SardineCount == 0)
+			{
+				Sardine = false;
+			}
+
 		}
-		cout << BeansCount << endl;
+		if(Beans == true && Sardine == false && Peas == false) //GEO_BAKED_BEANS_CAN,
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,19.9);
+			RenderMesh(meshList[GEO_BAKED_BEANS_CAN], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5 && BeansCount != 0)
+			{
+				moveItem = 0;
+				BeansCount --;
+			}
+			if (BeansCount == 0)
+			{
+				Beans = false;
+			}
+
+		}
+		if(Coke == true && Beans == false && Sardine == false && Peas == false) //GEO_COKE_CAN,
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,19.9);
+			RenderMesh(meshList[GEO_COKE_CAN], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5 && CokeCount != 0)
+			{
+				moveItem = 0;
+				CokeCount --;
+			}
+			if (CokeCount == 0)
+			{
+				Coke = false;
+			}
+
+		}
+
+		if(CokeZero == true && Coke == false && Beans == false && Sardine == false && Peas == false) //Coke zero (Can2)
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,19.9);
+			RenderMesh(meshList[GEO_DRINKCAN2], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && CokeZeroCount != 0)
+			{
+				moveItem = 0;
+				CokeZeroCount --;
+			}
+			if (CokeZeroCount == 0)
+			{
+				CokeZero = false;
+			}
+		}
+		//Pepsi
+		if(Pepsi == true && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Coke zero (Can2)
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,19.9);
+			RenderMesh(meshList[GEO_PEPSI_CAN], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && PepsiCount != 0)
+			{
+				moveItem = 0;
+				PepsiCount --;
+			}
+			if (PepsiCount == 0)
+			{
+				Pepsi = false;
+			}
+		}
+
+
+		//Milo
+		if(Milo == true && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Milo
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,19.9);
+			RenderMesh(meshList[GEO_MILOCAN], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && MiloCount != 0)
+			{
+				moveItem = 0;
+				MiloCount --;
+			}
+			if (MiloCount == 0)
+			{
+				Milo = false;
+			}
+
+		}
+		//Cereal 1
+		if(Cereal1 == true && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Cereal 1
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,19.9);
+			RenderMesh(meshList[GEO_CEREALBOX1], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && Cereal1Count != 0)
+			{
+				moveItem = 0;
+				Cereal1Count --;
+			}
+			if (Cereal1Count == 0)
+			{
+				Cereal1 = false;
+			}
+
+		}
+		//Cereal 2
+		if(Cereal2 == true && Cereal1 == false && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Cereal2
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,19.9);
+			RenderMesh(meshList[GEO_CEREALBOX2], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && Cereal2Count != 0)
+			{
+				moveItem = 0;
+				Cereal2Count --;
+			}
+			if (Cereal2Count == 0)
+			{
+				Cereal2 = false;
+			}
+
+		}
+		//Pizza
+		if(Pizza == true && Cereal2 == false && Cereal1 == false && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Cereal2
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,19.9);
+			RenderMesh(meshList[GEO_PIZZABOX], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && PizzaCount != 0)
+			{
+				moveItem = 0;
+				PizzaCount --;
+			}
+			if (PizzaCount == 0)
+			{
+				Pizza = false;
+			}
+
+		}
+		//Lays
+		if(Lays == true && Pizza == false && Cereal2 == false && Cereal1 == false && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Lays
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(-20+moveItem,2.8,19.9);
+			RenderMesh(meshList[GEO_POTATOCHIPS], false);
+			modelStack.PopMatrix();
+
+			if(moveItem <= -4.5  && LaysCount != 0)
+			{
+				moveItem = 0;
+				LaysCount --;
+			}
+			if (LaysCount == 0)
+			{
+				Lays = false;
+			}
+		}
 
 	}
-	if(Coke == true && Beans == false && Sardine == false && Peas == false) //GEO_COKE_CAN,
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(-20+moveItem,2.8,-15);
-		RenderMesh(meshList[GEO_COKE_CAN], false);
-		modelStack.PopMatrix();
 
-		if(moveItem <= -4.5 && CokeCount != 0)
-		{
-			moveItem = 0;
-			CokeCount --;
-		}
-		if (CokeCount == 0)
-		{
-			Coke = false;
-		}
 
-	}
-
-	if(CokeZero == true && Coke == false && Beans == false && Sardine == false && Peas == false) //Coke zero (Can2)
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(-20+moveItem,2.8,-15);
-		RenderMesh(meshList[GEO_DRINKCAN2], false);
-		modelStack.PopMatrix();
-
-		if(moveItem <= -4.5  && CokeZeroCount != 0)
-		{
-			moveItem = 0;
-			CokeZeroCount --;
-		}
-		if (CokeZeroCount == 0)
-		{
-			CokeZero = false;
-		}
-	}
-
-	if(Pepsi == true && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false ) //Pepsi
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(-20+moveItem,2.8,-15);
-		RenderMesh(meshList[GEO_PEPSI_CAN], false);
-		modelStack.PopMatrix();
-
-		if(moveItem <= -4.5  && PepsiCount != 0)
-		{
-			moveItem = 0;
-			PepsiCount --;
-		}
-		if (PepsiCount == 0)
-		{
-			Pepsi = false;
-		}
-
-	}
-
-	if(Milo == true && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Milo
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(-20+moveItem,2.8,-15);
-		RenderMesh(meshList[GEO_MILOCAN], false);
-		modelStack.PopMatrix();
-
-		if(moveItem <= -4.5  && MiloCount != 0)
-		{
-			moveItem = 0;
-			MiloCount --;
-		}
-		if (MiloCount == 0)
-		{
-			Milo = false;
-		}
-
-	}
-
-	if(Cereal1 == true && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Cereal 1
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(-20+moveItem,2.8,-15);
-		RenderMesh(meshList[GEO_CEREALBOX1], false);
-		modelStack.PopMatrix();
-
-		if(moveItem <= -4.5  && Cereal1Count != 0)
-		{
-			moveItem = 0;
-			Cereal1Count --;
-		}
-		if (Cereal1Count == 0)
-		{
-			Cereal1 = false;
-		}
-
-	}
-
-	if(Cereal2 == true && Cereal1 == false && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Cereal2
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(-20+moveItem,2.8,-15);
-		RenderMesh(meshList[GEO_CEREALBOX2], false);
-		modelStack.PopMatrix();
-
-		if(moveItem <= -4.5  && Cereal2Count != 0)
-		{
-			moveItem = 0;
-			Cereal2Count --;
-		}
-		if (Cereal2Count == 0)
-		{
-			Cereal2 = false;
-		}
-
-	}
-
-	if(Pizza == true && Cereal2 == false && Cereal1 == false && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Cereal2
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(-20+moveItem,2.8,-15);
-		RenderMesh(meshList[GEO_PIZZABOX], false);
-		modelStack.PopMatrix();
-
-		if(moveItem <= -4.5  && PizzaCount != 0)
-		{
-			moveItem = 0;
-			PizzaCount --;
-		}
-		if (PizzaCount == 0)
-		{
-			Pizza = false;
-		}
-
-	}
-	if(Lays == true && Pizza == false && Cereal2 == false && Cereal1 == false && Milo == false && Pepsi == false && CokeZero == false && Coke == false && Beans == false && Sardine == false && Peas == false) //Lays
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(-20+moveItem,2.8,-15);
-		RenderMesh(meshList[GEO_POTATOCHIPS], false);
-		modelStack.PopMatrix();
-
-		if(moveItem <= -4.5  && LaysCount != 0)
-		{
-			moveItem = 0;
-			LaysCount --;
-		}
-		if (LaysCount == 0)
-		{
-			Lays = false;
-		}
-	}
-	
 }
+
 
 void StudioProject::RenderMesh(Mesh *mesh, bool enableLight)
 {
