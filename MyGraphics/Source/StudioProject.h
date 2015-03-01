@@ -238,39 +238,39 @@ private:
 	};
 
 	//Render
-	void RenderSkybox();
-	void RenderSupermarket();
-	void RenderModel();
-	void RenderCashier();
-	void RenderGuard();
-	void RenderCustomer();
-	void RenderItems();
-	void RenderPlayerInfo();
-	void RenderingSecurityCamera();
-	void RenderItemsInfo();
-	void RenderLevel1Lights();
-	void RenderCheckOutItems();
-	void RenderTimeAttack();
+	void RenderSkybox();	//Renders Skybox 
+	void RenderSupermarket();	//Renders Supermarket Layout
+	void RenderModel();	//Renders Character Model
+	void RenderCashier();	//Renders Cashier Model
+	void RenderGuard();	//Renders Guard Model
+	void RenderCustomer();	//Renders Customer Model
+	void RenderItems();	//Renders Items in Supermarket
+	void RenderPlayerInfo();	//Renders player's information on screen
+	void RenderingSecurityCamera();	//?????????
+	void RenderItemsInfo();	//Renders item's information on screen
+	void RenderLevel1Lights();	//Renders lights in level1 of supermarket
+	void RenderCheckOutItems(); //Renders Checkout Items
+	void RenderTimeAttack(); //Renders everything related to Time Attack mini game
 
 	//Updates
-	void updateTakingItem();
-	void updatePuttingBackItem();
-	void updateCheckingOut();
-	void updateTimeAttack();
+	void updateTakingItem(); //Updates taking of items from shelf
+	void updatePuttingBackItem();	//Updates putting back of items from shelf
+	void updateCheckingOut();	//Updates checking out of items
+	void updateTimeAttack();	//Updates everything related to Time Attack mini game
 
 public:
-	StudioProject();
-	~StudioProject();
+	StudioProject();	//default constructor
+	~StudioProject();	//default destructor
 
-	virtual void Init();
-	virtual void Update(double dt);
-	virtual void Render();
-	virtual void Exit();
-	void InitMesh();
-	void InitVariables();
-	void InitShaders();
-	void InitCharacters();
-	void InitSecurity();
+	virtual void Init();	//Initializes Scene
+	virtual void Update(double dt);	//Updates Scene
+	virtual void Render();	//Render Scene
+	virtual void Exit();	//Cleaning up
+	void InitMesh();	//Initializes Meshes to be used in scene
+	void InitVariables();	//Initializes Variables to be used in scene
+	void InitShaders();	//Initializes Shaders to be used in scene
+	void InitCharacters();	//Initializes Characters to be used in scene
+	void InitSecurity();	//????????
 
 private:
 	unsigned m_vertexArrayID;
@@ -404,9 +404,9 @@ private:
 
 
 	//Text
-	void RenderText(Mesh* mesh, std::string text, Color color);
-	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
-	void RenderImageOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
+	void RenderText(Mesh* mesh, std::string text, Color color);	//Function to render text in world space
+	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);	//Function to render Text on screen
+	void RenderImageOnScreen(Mesh* mesh, Color color, float size, float x, float y);	//Function to render Image on screen
 
 };
 

@@ -14,13 +14,30 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+/******************************************************************************/
+/*!
+\brief
+Default constructor for class
+*/
+/******************************************************************************/
 StudioProject::StudioProject()
 {
 }
-
+/******************************************************************************/
+/*!
+\brief
+Default destructor for class
+*/
+/******************************************************************************/
 StudioProject::~StudioProject()
 {
 }
+/******************************************************************************/
+/*!
+\brief
+Initializes the Meshes for the scene
+*/
+/******************************************************************************/
 void StudioProject::InitMesh()
 {
 	//Initialize all meshes to NULL
@@ -421,6 +438,12 @@ void StudioProject::InitMesh()
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//CourierNew.tga");
 
 }
+/******************************************************************************/
+/*!
+\brief
+Initializes the Variables to be used in the scene
+*/
+/******************************************************************************/
 void StudioProject::InitVariables()
 {
 	//variable to rotate geometry
@@ -1069,6 +1092,12 @@ void StudioProject::InitVariables()
 
 	Framerate = "FPS: ";
 }
+/******************************************************************************/
+/*!
+\brief
+Initializes the Shaders for the scene
+*/
+/******************************************************************************/
 void StudioProject::InitShaders()
 {
 	m_programID = LoadShaders( "Shader//Texture.vertexshader", "Shader//MultiLight.fragmentshader");
@@ -1325,6 +1354,12 @@ void StudioProject::InitShaders()
 
 
 }
+/******************************************************************************/
+/*!
+\brief
+Initializes the Characters for the scene
+*/
+/******************************************************************************/
 void StudioProject::InitCharacters()
 {
 	Mesh* newHead;
@@ -1505,6 +1540,12 @@ void StudioProject::InitSecurity()
 	/*CameraOBJ[0].setCharacter(CameraObj, newPosition1);
 	CameraOBJ[1].setCharacter(CameraObj, newPosition1);*/
 }
+/******************************************************************************/
+/*!
+\brief
+Initializes the required data for the scene
+*/
+/******************************************************************************/
 void StudioProject::Init()
 {
 	// Set background color to black
@@ -1566,6 +1607,13 @@ int rotatingLeftLeg = 1;
 bool collide = false;
 bool checking = false;
 
+/******************************************************************************/
+/*!
+\brief
+Updates the Taking of items in the scene
+
+*/
+/******************************************************************************/
 void StudioProject::updateTakingItem()
 {
 	/*======================================================================
@@ -1839,6 +1887,13 @@ void StudioProject::updateTakingItem()
 		}
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Updates the Putting Back of items in the scene
+
+*/
+/******************************************************************************/
 void StudioProject::updatePuttingBackItem()
 {
 	/*===================================================================
@@ -2082,6 +2137,13 @@ void StudioProject::updatePuttingBackItem()
 		}
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Updates the Checking Out of items in the scene
+
+*/
+/******************************************************************************/
 void StudioProject::updateCheckingOut()
 {
 	/*===============================================================
@@ -2189,6 +2251,13 @@ void StudioProject::updateCheckingOut()
 	}
 
 }
+/******************************************************************************/
+/*!
+\brief
+Updates the Time Attack mini game in the scene
+
+*/
+/******************************************************************************/
 void StudioProject::updateTimeAttack()
 {
 	if(camera.position.x <= -145 && camera.position.y <= 10 && camera.position.z <= -0.5 &&
@@ -2263,6 +2332,14 @@ void StudioProject::updateTimeAttack()
 		generateList = false;
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Updates the scene based on delta time
+
+\param	dt - delta time
+*/
+/******************************************************************************/
 void StudioProject::Update(double dt)
 {
 	/*for (int a = 0; a < 3; a++)
@@ -2763,7 +2840,12 @@ void StudioProject::Update(double dt)
 	}*/
 }
 
-//=========Rendering of Skybox to be done here=========//
+/******************************************************************************/
+/*!
+\brief
+Renders the Skybox in the scene
+*/
+/******************************************************************************/
 void StudioProject::RenderSkybox()
 {
 	//Back
@@ -2837,7 +2919,12 @@ void StudioProject::RenderSkybox()
 	//RenderMesh(meshList[GEO_FLOOR], false);
 	modelStack.PopMatrix();
 }
-
+/******************************************************************************/
+/*!
+\brief
+Renders the Supermarket layout in the scene
+*/
+/******************************************************************************/
 void StudioProject::RenderSupermarket()
 {
 	/*===============================================================
@@ -2982,7 +3069,12 @@ void StudioProject::RenderSupermarket()
 
 
 }
-
+/******************************************************************************/
+/*!
+\brief
+Render the Items in the Supermarket in the scene
+*/
+/******************************************************************************/
 void StudioProject::RenderItems()
 {
 	for(int i = 0; i < Container.size(); ++i) //Container 1
@@ -3203,7 +3295,12 @@ void StudioProject::RenderItems()
 	modelStack.PopMatrix();
 
 }
-
+/******************************************************************************/
+/*!
+\brief
+Renders the Character model in the scene
+*/
+/******************************************************************************/
 void StudioProject::RenderModel()
 {
 	modelStack.PushMatrix();
@@ -3274,7 +3371,12 @@ void StudioProject::RenderModel()
 
 	//modelStack.PopMatrix();
 }
-
+/******************************************************************************/
+/*!
+\brief
+Renders the Cashier model in the scene
+*/
+/******************************************************************************/
 void StudioProject::RenderCashier()
 {
 	modelStack.PushMatrix();
@@ -3334,7 +3436,12 @@ void StudioProject::RenderCashier()
 
 	modelStack.PopMatrix();
 }
-
+/******************************************************************************/
+/*!
+\brief
+Renders the Guard model in the scene
+*/
+/******************************************************************************/
 void StudioProject::RenderGuard()
 {
 	modelStack.PushMatrix();
@@ -3395,7 +3502,12 @@ void StudioProject::RenderGuard()
 
 	modelStack.PopMatrix();
 }
-
+/******************************************************************************/
+/*!
+\brief
+Renders the Customer model in the scene
+*/
+/******************************************************************************/
 void StudioProject::RenderCustomer()
 {
 	modelStack.PushMatrix();
@@ -3455,7 +3567,12 @@ void StudioProject::RenderCustomer()
 
 	modelStack.PopMatrix();
 }
-
+/******************************************************************************/
+/*!
+\brief
+Renders the Player Information on the screen
+*/
+/******************************************************************************/
 void StudioProject::RenderPlayerInfo()
 {
 	RenderTextOnScreen(meshList[GEO_TEXT],"Money: " + Cash, Color(0, 0, 1), 3, 1, 18);
@@ -3490,6 +3607,12 @@ void StudioProject::RenderingSecurityCamera()
 	//modelStack.PopMatrix();
 	//modelStack.PopMatrix(); //Moving camera
 }
+/******************************************************************************/
+/*!
+\brief
+Renders the Lights in Level 1 of the Supermarket in the scene
+*/
+/******************************************************************************/
 void StudioProject::RenderLevel1Lights()
 {
 	//=====Lights for first floor====//
@@ -3536,6 +3659,12 @@ void StudioProject::RenderLevel1Lights()
 	RenderMesh(meshList[GEO_LIGHTBALL6], false);
 	modelStack.PopMatrix();
 }
+/******************************************************************************/
+/*!
+\brief
+Renders the Item Information on the screen
+*/
+/******************************************************************************/
 void StudioProject::RenderItemsInfo()
 {
 	/*=====================================================
@@ -3990,6 +4119,12 @@ void StudioProject::RenderItemsInfo()
 		}
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Renders the Items being Checked Out in the scene
+*/
+/******************************************************************************/
 void StudioProject::RenderCheckOutItems()
 {
 	//Used for rendering Objs on cashier table//
@@ -4914,6 +5049,12 @@ void StudioProject::RenderCheckOutItems()
 
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Renders the Information related to Time Attack in the scene
+*/
+/******************************************************************************/
 void StudioProject::RenderTimeAttack()
 {
 	//If list is generated
@@ -4989,7 +5130,12 @@ void StudioProject::RenderTimeAttack()
 		RenderTextOnScreen(meshList[GEO_TEXT],"Congratulations", Color(1, 1, 1), 3, 10, 10);
 	}
 }
-
+/******************************************************************************/
+/*!
+\brief
+Renders everything in the scene
+*/
+/******************************************************************************/
 void StudioProject::Render()
 {
 	//clear depth and color buffer
@@ -5227,7 +5373,7 @@ void StudioProject::Render()
 	//Rendering of itempage
 	if (showInventory == true)
 	{
-		RenderImageOnScreen(meshList[itemInventory], "Item Inventory", Color(1, 1, 1), 100, 1, 1);
+		RenderImageOnScreen(meshList[itemInventory], Color(1, 1, 1), 100, 1, 1);
 	}
 
 	modelStack.PushMatrix();
@@ -5266,7 +5412,15 @@ void StudioProject::Render()
 	RenderTimeAttack();
 }
 
+/******************************************************************************/
+/*!
+\brief
+Renders the different kind of meshes and light
 
+\param	mesh - address for different meshes
+\param	enableLight - boolean for light
+*/
+/******************************************************************************/
 void StudioProject::RenderMesh(Mesh *mesh, bool enableLight)
 {
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
@@ -5310,7 +5464,16 @@ void StudioProject::RenderMesh(Mesh *mesh, bool enableLight)
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Renders Text in World Space
 
+\param	mesh - address for different meshes
+\param	text - text to be rendered
+\param	color - color of text
+*/
+/******************************************************************************/
 void StudioProject::RenderText(Mesh* mesh, std::string text, Color color)
 {
 	if(!mesh || mesh->textureID <= 0) //Proper error check
@@ -5337,8 +5500,19 @@ void StudioProject::RenderText(Mesh* mesh, std::string text, Color color)
 	glUniform1i(m_parameters[U_TEXT_ENABLED], 0);
 	glEnable(GL_DEPTH_TEST);
 }
+/******************************************************************************/
+/*!
+\brief
+Renders Images on screen
 
-void StudioProject::RenderImageOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y)
+\param	mesh - address for different meshes
+\param	color - color of image
+\param	size - size of image
+\param	x - x coordinate of image on screen
+\param	y - y coordinate of image on screen
+*/
+/******************************************************************************/
+void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, float x, float y)
 {
 	if(!mesh || mesh->textureID <= 0) //Proper error check
 		return;
@@ -5905,7 +6079,19 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, std::string text, Color colo
 	modelStack.PopMatrix();
 	glEnable(GL_DEPTH_TEST);
 }
+/******************************************************************************/
+/*!
+\brief
+Renders Text on screen
 
+\param	mesh - address for different meshes
+\param	text - text to be rendered
+\param	color - color of text
+\param	size - size of text
+\param	x - x coordinate of image on screen
+\param	y - y coordinate of image on screen
+*/
+/******************************************************************************/
 void StudioProject::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y)
 {
 	if(!mesh || mesh->textureID <= 0) //Proper error check
@@ -5948,7 +6134,12 @@ void StudioProject::RenderTextOnScreen(Mesh* mesh, std::string text, Color color
 	modelStack.PopMatrix();
 	glEnable(GL_DEPTH_TEST);
 }
-
+/******************************************************************************/
+/*!
+\brief
+Cleans up the necessary variables
+*/
+/******************************************************************************/
 void StudioProject::Exit()
 {
 	// Cleanup here
