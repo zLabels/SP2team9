@@ -11,6 +11,7 @@
 #include <string>
 #include <sstream>
 #include "timer.h"
+#include  <ctime>
 
 #include "Item.h"
 #include "Inventory.h"
@@ -249,6 +250,7 @@ private:
 	void RenderItemsInfo();
 	void RenderLevel1Lights();
 	void RenderCheckOutItems();
+	void RenderTimeAttack();
 
 	//Updates
 	void updateTakingItem();
@@ -296,6 +298,10 @@ private:
 
 	//========MiniGame============//
 	bool TimeAttack;
+	bool generateList;
+	vector<int> TAlist;
+	int TAmatchedItems;
+	bool isTAwon;
 
 	//=========Character=========//
 	bool movingModel;
@@ -320,6 +326,7 @@ private:
 	float moveItem;
 	bool checkoutCount[12];
 
+	//===Used for Check out===//
 	int peaCount;
 	int PizzaCount;
 	int MiloCount;
@@ -332,6 +339,7 @@ private:
 	int CokeZeroCount;
 	int PepsiCount;
 	vector<CItem> tempCheckOut;
+	vector<CItem> paidItems;
 
 	CPlayer player;
 	CGuard Guard1;

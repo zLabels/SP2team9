@@ -119,7 +119,7 @@ void StudioProject::InitMesh()
 	meshList[GEO_SARDINE_CAN]->material.kShininess = 8.f;
 	meshList[GEO_SARDINE_CAN] ->textureID = LoadTGA("Image//canned_food_1.tga");
 
-	
+
 	meshList[GEO_BAKED_BEANS_CAN] = MeshBuilder::GenerateOBJ("Baked Beans" , "OBJ//canned-food3.obj");
 	meshList[GEO_BAKED_BEANS_CAN]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[GEO_BAKED_BEANS_CAN]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
@@ -353,47 +353,47 @@ void StudioProject::InitMesh()
 
 	meshList[UI_SARDINE_CAN] = MeshBuilder::GenerateQuad("sardine can", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_SARDINE_CAN]->textureID = LoadTGA("UI sprites//UI-canned_food_1.tga");
-	Page.SetSardine("Sardine", UI_SARDINE_CAN);
+	Page.SetSardine("Sardine Can", UI_SARDINE_CAN);
 
 	meshList[UI_PEA_N_CARROTS] = MeshBuilder::GenerateQuad("peas n carrots can", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_PEA_N_CARROTS]->textureID = LoadTGA("UI sprites//UI-canned_food_2.tga");
-	Page.SetPnc("PeasAndCarrots", UI_PEA_N_CARROTS);
+	Page.SetPnc("Peas And Carrots Can", UI_PEA_N_CARROTS);
 
 	meshList[UI_BAKED_BEANS_CAN] = MeshBuilder::GenerateQuad("bakes beans can", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_BAKED_BEANS_CAN]->textureID = LoadTGA("UI sprites/UI-canned_food_3.tga");
-	Page.setBakedBean("BakedBeanCan", UI_BAKED_BEANS_CAN);
+	Page.setBakedBean("Baked Beans Can", UI_BAKED_BEANS_CAN);
 
 	meshList[UI_PIZZABOX] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_PIZZABOX]->textureID = LoadTGA("UI sprites/UI-frozen_pizza.tga");
-	Page.setPizzabox("PizzaBox", UI_PIZZABOX);
+	Page.setPizzabox("Frozen Pizza", UI_PIZZABOX);
 
 	meshList[UI_POTATOCHIPS] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_POTATOCHIPS]->textureID = LoadTGA("UI sprites/UI-potato_chips.tga");
-	Page.setPotatoChip("PotatoChips", UI_POTATOCHIPS);
+	Page.setPotatoChip("Lays Potato Chips", UI_POTATOCHIPS);
 
 	meshList[UI_COKE_CAN] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_COKE_CAN]->textureID = LoadTGA("UI sprites/UI-drink_can1.tga");
-	Page.setCoke("CokeCan", UI_COKE_CAN);
+	Page.setCoke("Coke", UI_COKE_CAN);
 
 	meshList[UI_PEPSI_CAN] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_PEPSI_CAN]->textureID = LoadTGA("UI sprites/UI-drink_can3.tga");
-	Page.setPepsi("PepsiCan", UI_PEPSI_CAN);
+	Page.setPepsi("Pepsi", UI_PEPSI_CAN);
 
 	meshList[UI_COKE_ZERO_CAN] = MeshBuilder::GenerateQuad("Cokde Zero", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_COKE_ZERO_CAN]->textureID = LoadTGA("UI sprites/UI-drink_can2.tga");
-	Page.setCokeZero("CokeZeroCan",UI_COKE_ZERO_CAN); 
+	Page.setCokeZero("Coke Zero",UI_COKE_ZERO_CAN); 
 
 	meshList[UI_CEREALBOX1] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_CEREALBOX1]->textureID = LoadTGA("UI sprites/UI-Cereal-box1.tga");
-	Page.setCerealbox1("CerealBox1", UI_CEREALBOX1);
+	Page.setCerealbox1("Bran Buds Cereal", UI_CEREALBOX1);
 
 	meshList[UI_CEREALBOX2] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_CEREALBOX2]->textureID = LoadTGA("UI sprites/UI-cereal_box2.tga");
-	Page.setCerealbox2("CerealBox2", UI_CEREALBOX2);
+	Page.setCerealbox2("Morning Chips Cereal", UI_CEREALBOX2);
 
 	meshList[UI_MILOCAN] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_MILOCAN]->textureID = LoadTGA("UI sprites/UI-milocan.tga");
-	Page.setMilo("MiloCan", UI_MILOCAN);
+	Page.setMilo("Milo Can", UI_MILOCAN);
 
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
@@ -457,6 +457,11 @@ void StudioProject::InitVariables()
 	CokeCount = 0;
 	CokeZeroCount = 0;
 	PepsiCount = 0;
+	//==Time Attack==//
+	TimeAttack = false;
+	generateList = false;
+	TAmatchedItems = 0;
+	isTAwon = false;
 
 	int a = 0;
 
@@ -505,7 +510,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(10,6.2,-8+i + a);
-		sardineCan.SetData("Sardine", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS);
+		sardineCan.SetData("Sardine Can", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS, false);
 		Container.push_back(sardineCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12] + 0.59, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
@@ -524,7 +529,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(12,6.2,-8+i + a);
-		sardineCan.SetData("Sardine", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS);
+		sardineCan.SetData("Sardine Can", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS,false);
 		Container2.push_back(sardineCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12] + 0.59, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
@@ -551,7 +556,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(10,4.3,-8+i + a);
-		PnCCan.SetData("PeasAndCarrots", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS);
+		PnCCan.SetData("Peas And Carrots Can", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS,false);
 		Container.push_back(PnCCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
@@ -569,7 +574,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(12,4.3,-8+i + a);
-		PnCCan.SetData("PeasAndCarrots", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS);
+		PnCCan.SetData("Peas And Carrots Can", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS,false);
 		Container2.push_back(PnCCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
@@ -595,7 +600,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(10,2.3,-8+i + a);
-		BBCan.SetData("BakedBeanCan", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS);
+		BBCan.SetData("Baked Beans Can", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS,false);
 		Container.push_back(BBCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
@@ -613,7 +618,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(12,2.3,-8+i + a);
-		BBCan.SetData("BakedBeanCan", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS);
+		BBCan.SetData("Baked Beans Can", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS,false);
 		Container2.push_back(BBCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
@@ -622,7 +627,7 @@ void StudioProject::InitVariables()
 		boxContainer2.push_back(BB);
 	}
 	a = 0;
-	
+
 	//===============Coke Can Variables============//
 	newMesh = MeshBuilder::GenerateOBJ("Coke" , "OBJ//drink-can1.obj");
 	newMesh->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -639,7 +644,7 @@ void StudioProject::InitVariables()
 			a += 4;
 		}
 		newTRS.SetToTranslation(51.3, 4.7,-74+i + a);
-		CokeCan.SetData("CokeCan", 3.5f, true, newMesh, GEO_COKE_CAN,newTRS);
+		CokeCan.SetData("Coke", 3.5f, true, newMesh, GEO_COKE_CAN,newTRS,false);
 		Container3.push_back(CokeCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.5);
@@ -665,7 +670,7 @@ void StudioProject::InitVariables()
 			a += 2;
 		}
 		newTRS.SetToTranslation(51.3, 2.7,-75+i + a);
-		PizzaBox.SetData("PizzaBox", 3.5f, true, newMesh, GEO_PIZZABOX,newTRS);
+		PizzaBox.SetData("Frozen Pizza", 3.5f, true, newMesh, GEO_PIZZABOX,newTRS,false);
 		Container3.push_back(PizzaBox);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12],newTRS.a[13]+0.8,newTRS.a[14]+1);
@@ -691,7 +696,7 @@ void StudioProject::InitVariables()
 			a += 4;
 		}
 		newTRS.SetToTranslation(-33 +i + a, 4.7,-90);
-		CokeZeroCan.SetData("CokeZeroCan", 3.5f, true, newMesh, GEO_DRINKCAN2,newTRS);
+		CokeZeroCan.SetData("Coke Zero", 3.5f, true, newMesh, GEO_DRINKCAN2,newTRS,false);
 		Container4.push_back(CokeZeroCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
@@ -716,7 +721,7 @@ void StudioProject::InitVariables()
 			a += 4;
 		}
 		newTRS.SetToTranslation(-33 +i + a, 2.9,-90);
-		PepsiCan.SetData("PepsiCan", 3.5f, true, newMesh, GEO_PEPSI_CAN,newTRS);
+		PepsiCan.SetData("Pepsi", 3.5f, true, newMesh, GEO_PEPSI_CAN,newTRS,false);
 		Container4.push_back(PepsiCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
@@ -742,7 +747,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 4.3,-56.7);
-		cerealBox1.SetData("CerealBox1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
+		cerealBox1.SetData("Bran Buds Cereal", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS,false);
 		Container5.push_back(cerealBox1);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59, newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -760,7 +765,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 4.3,-59.5);
-		cerealBox1.SetData("CerealBox1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
+		cerealBox1.SetData("Bran Buds Cereal", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS,false);
 		Container6.push_back(cerealBox1);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -778,7 +783,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 4.3,56.5);
-		cerealBox1.SetData("CerealBox1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
+		cerealBox1.SetData("Bran Buds Cereal", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS,false);
 		Container7.push_back(cerealBox1);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -796,7 +801,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 4.3,59.5);
-		cerealBox1.SetData("CerealBox1", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS);
+		cerealBox1.SetData("Bran Buds Cereal", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS,false);
 		Container8.push_back(cerealBox1);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -822,7 +827,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 2.3,-56.7);
-		cerealBox2.SetData("CerealBox2", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS);
+		cerealBox2.SetData("Morning Chips Cereal", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS,false);
 		Container5.push_back(cerealBox2);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -842,7 +847,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 2.3,-59.5);
-		cerealBox2.SetData("CerealBox2", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS);
+		cerealBox2.SetData("Morning Chips Cereal", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS,false);
 		Container6.push_back(cerealBox2);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -860,7 +865,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 2.3,59.5);
-		cerealBox2.SetData("CerealBox2", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS);
+		cerealBox2.SetData("Morning Chips Cereal", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS,false);
 		Container8.push_back(cerealBox2);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -878,7 +883,7 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 2.3,56.5);
-		cerealBox2.SetData("CerealBox2", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS);
+		cerealBox2.SetData("Morning Chips Cereal", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS,false);
 		Container7.push_back(cerealBox2);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
@@ -904,7 +909,7 @@ void StudioProject::InitVariables()
 			a += 2;
 		}
 		newTRS.SetToTranslation(-28.5 +i + a, 5,-35);
-		PotatoChip.SetData("PotatoChips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
+		PotatoChip.SetData("Lays Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS,false);
 		Container9.push_back(PotatoChip);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -921,7 +926,7 @@ void StudioProject::InitVariables()
 			a += 2;
 		}
 		newTRS.SetToTranslation(-28.5 +i + a, 2.,-35);
-		PotatoChip.SetData("PotatoChips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
+		PotatoChip.SetData("Lays Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS,false);
 		Container9.push_back(PotatoChip);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -939,7 +944,7 @@ void StudioProject::InitVariables()
 			a += 2;
 		}
 		newTRS.SetToTranslation(-28.5 +i + a, 5,33);
-		PotatoChip.SetData("PotatoChips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
+		PotatoChip.SetData("Lays Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS,false);
 		Container10.push_back(PotatoChip);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -957,7 +962,7 @@ void StudioProject::InitVariables()
 			a += 2;
 		}
 		newTRS.SetToTranslation(-28.5 +i + a, 2,33);
-		PotatoChip.SetData("PotatoChips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS);
+		PotatoChip.SetData("Lays Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS,false);
 		Container10.push_back(PotatoChip);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -983,7 +988,7 @@ void StudioProject::InitVariables()
 			a += 0.5;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 6.3,-57);
-		MiloCan.SetData("MiloCan", 3.5f, true, newMesh, GEO_MILOCAN,newTRS);
+		MiloCan.SetData("Milo Can", 3.5f, true, newMesh, GEO_MILOCAN,newTRS,false);
 		Container11.push_back(MiloCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -1001,7 +1006,7 @@ void StudioProject::InitVariables()
 			a += 0.5;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 6.3, 59);
-		MiloCan.SetData("MiloCan", 3.5f, true, newMesh, GEO_MILOCAN,newTRS);
+		MiloCan.SetData("Milo Can", 3.5f, true, newMesh, GEO_MILOCAN,newTRS,false);
 		Container11.push_back(MiloCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -1019,7 +1024,7 @@ void StudioProject::InitVariables()
 			a += 0.5;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 6.3,-59.3);
-		MiloCan.SetData("MiloCan", 3.5f, true, newMesh, GEO_MILOCAN,newTRS);
+		MiloCan.SetData("Milo Can", 3.5f, true, newMesh, GEO_MILOCAN,newTRS,false);
 		Container12.push_back(MiloCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -1037,7 +1042,7 @@ void StudioProject::InitVariables()
 			a += 0.5;
 		}
 		newTRS.SetToTranslation(-32 +i + a, 6.3,57);
-		MiloCan.SetData("MiloCan", 3.5f, true, newMesh, GEO_MILOCAN,newTRS);
+		MiloCan.SetData("Milo Can", 3.5f, true, newMesh, GEO_MILOCAN,newTRS,false);
 		Container12.push_back(MiloCan);
 		Vector3 Min, Max;
 		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
@@ -1222,7 +1227,7 @@ void StudioProject::InitShaders()
 	lights[3].exponent = 3.f;
 	lights[3].spotDirection.Set(1.f, 1.f, 0.f);
 
-	
+
 	//Lights5 (BOTTOM RIGHT FRONT LIGHT)
 	lights[4].type = Light::LIGHT_POINT;
 	lights[4].position.Set(-25,19.5,45);
@@ -1332,7 +1337,7 @@ void StudioProject::InitCharacters()
 	newPosition.Set(-152.0f,0.0f,-2.0f);
 
 	/*========================================================================
-									PLAYER
+	PLAYER
 	===========================================================================*/
 
 	newHead = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelHead.obj");
@@ -1355,7 +1360,7 @@ void StudioProject::InitCharacters()
 	newLHand->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	newLHand->material.kShininess = 8.f;
 	newLHand->textureID = LoadTGA("Image//modelHand.tga");
-	
+
 	newRHand = MeshBuilder::GenerateOBJ("Character Right Hand ", "OBJ//modelArm.obj");
 	newRHand->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	newRHand->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
@@ -1380,7 +1385,7 @@ void StudioProject::InitCharacters()
 	player.setCharacter(newHead,newTorso,newLHand,newRHand,newLLeg,newRLeg,newPosition);
 
 	/*========================================================================
-									Guard
+	Guard
 	===========================================================================*/
 
 	newHead = MeshBuilder::GenerateOBJ("Guard Head", "OBJ//cashierHead.obj");
@@ -1403,7 +1408,7 @@ void StudioProject::InitCharacters()
 	newLHand->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
 	newLHand->material.kShininess = 8.f;
 	newLHand->textureID = LoadTGA("Image//guardHand.tga");
-	
+
 	newRHand = MeshBuilder::GenerateOBJ("guard Right Hand ", "OBJ//cashierHand.obj");
 	newRHand->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	newRHand->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
@@ -1564,7 +1569,7 @@ bool checking = false;
 void StudioProject::updateTakingItem()
 {
 	/*======================================================================
-							TAKING ITEMS FROM SHELF
+	TAKING ITEMS FROM SHELF
 	=========================================================================*/
 	if(checking == false)
 	{
@@ -1837,13 +1842,13 @@ void StudioProject::updateTakingItem()
 void StudioProject::updatePuttingBackItem()
 {
 	/*===================================================================
-						PUTTING ITEMS BACK TO SHELF
+	PUTTING ITEMS BACK TO SHELF
 	======================================================================*/
 	if(Application::IsKeyPressed('Q'))
 	{
 		for(int i = 0; i < boxContainer.size(); ++i)
 		{
-		//==========Putting items back to shelf=============//
+			//==========Putting items back to shelf=============//
 			if(Container[i].getRender() == false)//Container 1
 			{
 				if((camera.target.x <= boxContainer[i].max.x) && 
@@ -1903,7 +1908,7 @@ void StudioProject::updatePuttingBackItem()
 
 		for(int i = 0; i < boxContainer4.size(); ++i)
 		{
-		//==========Putting items back to shelf=============//
+			//==========Putting items back to shelf=============//
 			if(Container4[i].getRender() == false)//Container 4
 			{
 				if((camera.target.x <= boxContainer4[i].max.x) && 
@@ -2080,7 +2085,7 @@ void StudioProject::updatePuttingBackItem()
 void StudioProject::updateCheckingOut()
 {
 	/*===============================================================
-								CHECKING OUT
+	CHECKING OUT
 	==================================================================*/
 	if(Application::IsKeyPressed('E') && (player.getInventory().getNoOfItems() != 0))
 	{
@@ -2094,16 +2099,27 @@ void StudioProject::updateCheckingOut()
 				(camera.position.z >= CashierBox[i].min.z))
 			{
 				float cost = 0.f;
+				vector<CItem> toDelete;
 				//Calculating Cost of items taken by player
 				for(int i = 1; i < (player.getInventory().getNoOfItems() + 1); i++)
 				{
-					cost += player.getInventory().getItem(i).getPrice();
-					tempCheckOut.push_back(player.getInventory().getItem(i));
+					if(player.getInventory().getItem(i).getPaid() == false)
+					{
+						cost += player.getInventory().getItem(i).getPrice();
+						tempCheckOut.push_back(player.getInventory().getItem(i));
+						paidItems.push_back(player.getInventory().getItem(i));
+						toDelete.push_back(player.getInventory().getItem(i));
+					}
 				}
 				//Only if cost is lesser or equal player will be successfully checked out and items removed from invent
-				if(cost < player.getMoney())
+				//If there are items that are not paid
+				if((cost < player.getMoney()) && toDelete.size() > 0)
 				{
-					player.getInventory().DeleteAll();
+					//Removes not paid items
+					for(int i = 0; i < toDelete.size(); ++i)
+					{
+						player.getInventory().removeItem(toDelete[i]);
+					}
 					player.setMoney(player.getMoney() - cost);
 				}
 			}
@@ -2178,25 +2194,80 @@ void StudioProject::updateTimeAttack()
 	if(camera.position.x <= -145 && camera.position.y <= 10 && camera.position.z <= -0.5 &&
 		camera.position.x >= -150 && camera.position.y >= 2 && camera.position.z >= -2)
 	{
+		//Start Time Attack Mini game
 		if(Application::IsKeyPressed('E') && TimeAttack == false)
 		{
 			TimeAttack = true;
+			isTAwon = false;
+		}
+		//End Time Attack Mini game
+		if(Application::IsKeyPressed('Q') && TimeAttack == true)
+		{
+			TAmatchedItems = 0;
+			//Loop to go through each item in player's inventory
+			for(int i = 1; i < player.getInventory().getNoOfItems() + 1;++i)
+			{
+				//Loop to check each item in player's inventory with list of items required to obtain
+				for(int x = 0; x < TAlist.size(); x++)
+				{
+					//If item is checked out
+					if(player.getInventory().getItem(i).getobjType() == TAlist[x] && player.getInventory().getItem(i).getPaid() == true)
+					{
+						TAlist.erase(TAlist.begin() + x);
+						TAmatchedItems++;
+					}
+				}
+			}
+			//All Items have been bought
+			if(TAmatchedItems == 6)
+			{
+				isTAwon = true;
+				TimeAttack = false;
+				TAlist.clear();
+			}
+			if(TAmatchedItems != 6)
+			{
+				isTAwon = false;
+				TimeAttack = false;
+				TAlist.clear();
+			}
 		}
 	}
 	if(TimeAttack == true)
 	{
-		generateList = true
+		//Checks if List is empty
+		if(TAlist.size() < 1)
+		{
+			generateList = true;
+		}
 	}
+	//Generates a List of random numbers that are associated with items for players to obtain
 	if(generateList == true)
 	{
-
+		//Initializes random seed, to produce a different set of random numbers each run
+		srand(time(NULL));
+		int temp = 0;
+		temp = rand() % 11 + 34; // First
+		TAlist.push_back(temp);
+		temp = rand() % 11 + 34; // Second
+		TAlist.push_back(temp);
+		temp = rand() % 11 + 34; // Third
+		TAlist.push_back(temp);
+		temp = rand() % 11 + 34; // Fourth
+		TAlist.push_back(temp);
+		temp = rand() % 11 + 34; // Fifth
+		TAlist.push_back(temp);
+		temp = rand() % 11 + 34; // Sixth
+		TAlist.push_back(temp);
+		//TAlist now holds 6 random integers
+		generateList = false;
 	}
 }
 void StudioProject::Update(double dt)
 {
 	/*for (int a = 0; a < 3; a++)
 	{
-		CameraOBJ[a].PassinDt(dt);
+	CameraOBJ[a].PassinDt(dt);
 	}*/
 	float LSPEED = 10.f;
 
@@ -2415,13 +2486,13 @@ void StudioProject::Update(double dt)
 
 	/*if (Application::IsKeyPressed('8'))
 	{
-		charPosition.z += cos(Math::DegreeToRadian(angle)) * 10 * dt;
-		charPosition.x += sin(Math::DegreeToRadian(angle)) * 10 * dt;
+	charPosition.z += cos(Math::DegreeToRadian(angle)) * 10 * dt;
+	charPosition.x += sin(Math::DegreeToRadian(angle)) * 10 * dt;
 	}
 	if (Application::IsKeyPressed('9'))
 	{
-		charPosition.z -= cos(Math::DegreeToRadian(angle)) * 10 * dt;
-		charPosition.x -= sin(Math::DegreeToRadian(angle)) * 10 * dt;
+	charPosition.z -= cos(Math::DegreeToRadian(angle)) * 10 * dt;
+	charPosition.x -= sin(Math::DegreeToRadian(angle)) * 10 * dt;
 	}*/
 	if (Application::IsKeyPressed('I'))
 	{
@@ -2433,7 +2504,7 @@ void StudioProject::Update(double dt)
 	}
 
 	/*========================================================
-							Player
+	Player
 	=========================================================*/
 	//player.setPosition(camera.position.x,camera.position.y,camera.position.z);
 
@@ -2477,17 +2548,17 @@ void StudioProject::Update(double dt)
 	//==============================END OF DOOR ==========================//
 
 	/*=======================================================
-						Interactions
+	Interactions
 	==========================================================*/
 	updateTakingItem();
-	
+
 	updateCheckingOut();
 
 	updatePuttingBackItem();
 
 	updateTimeAttack();
 	/*==============================================================
-							DEBUGGING PURPOSES
+	DEBUGGING PURPOSES
 	=================================================================*/
 
 	//====Camera coordinates===//
@@ -2552,33 +2623,33 @@ void StudioProject::Update(double dt)
 		elapsedTime2 -= 0.15;
 	}
 	//std::cout << elapsedTime2 << endl;
-	
+
 	if(Application::IsKeyPressed('B'))
 	{
-		
 
-			if (translateMoneyZ > -8.5 && translateMoneyY > -2.54)
-			{
-				translateMoneyZ -= (float) (10 * dt);
-				translateMoneyY -= (float) (3 * dt);
-				throwMoney = true;
-			}
-			if (translateMoneyZ <= -8.5 && translateMoneyY <= -2.54)
-			{
-				throwMoney = false;
-			}
 
-			//if (translateMoneyY > -2.54)
-			//{
-			//	translateMoneyY -= (float) (3 * dt);
-			//}
-		
+		if (translateMoneyZ > -8.5 && translateMoneyY > -2.54)
+		{
+			translateMoneyZ -= (float) (10 * dt);
+			translateMoneyY -= (float) (3 * dt);
+			throwMoney = true;
+		}
+		if (translateMoneyZ <= -8.5 && translateMoneyY <= -2.54)
+		{
+			throwMoney = false;
+		}
+
+		//if (translateMoneyY > -2.54)
+		//{
+		//	translateMoneyY -= (float) (3 * dt);
+		//}
+
 		//else if( translateMoneyZ <=-8.5 && translateMoneyY <=-2.54)
 		//{
 		//	throwMoney = false;
 		//}
 
-	
+
 		//if (translateMoneyY == 0)
 		//{
 		//	translateMoneyY = 0;
@@ -2595,7 +2666,7 @@ void StudioProject::Update(double dt)
 		moving += (float) (10 * dt);
 	if (Application::IsKeyPressed('N'))
 		moving -= (float) (10 * dt);
-	    //moving -= (float) (5 * dt);
+	//moving -= (float) (5 * dt);
 	//cout<<moving<<endl;
 
 	camera.Update(dt);
@@ -2603,92 +2674,92 @@ void StudioProject::Update(double dt)
 	Page.setCPlayer(player);
 	/*if (player.getInventory().getNoOfItems() == 1)
 	{
-		ItemsTaken[1] = true;
+	ItemsTaken[1] = true;
 	}
 	else if (player.getInventory().getNoOfItems() < 1)
 	{
-		ItemsTaken[1] = false;
+	ItemsTaken[1] = false;
 	}
 
 	if (player.getInventory().getNoOfItems() == 2)
 	{
-		ItemsTaken[2] = true;
+	ItemsTaken[2] = true;
 	}
 	else if (player.getInventory().getNoOfItems() < 2)
 	{
-		ItemsTaken[2] = false;
+	ItemsTaken[2] = false;
 	}
 
 	if (player.getInventory().getNoOfItems() == 3)
 	{
-		ItemsTaken[3] = true;
+	ItemsTaken[3] = true;
 	}
 	else if (player.getInventory().getNoOfItems() < 3)
 	{
-		ItemsTaken[3] = false;
+	ItemsTaken[3] = false;
 	}
 
 	if (player.getInventory().getNoOfItems() == 4)
 	{
-		ItemsTaken[4] = true;
+	ItemsTaken[4] = true;
 	}
 	else if (player.getInventory().getNoOfItems() < 4)
 	{
-		ItemsTaken[4] = false;
+	ItemsTaken[4] = false;
 	}
 
 	if (player.getInventory().getNoOfItems() == 5)
 	{
-		ItemsTaken[5] = true;
+	ItemsTaken[5] = true;
 	}
 	else if (player.getInventory().getNoOfItems() < 5)
 	{
-		ItemsTaken[5] = false;
+	ItemsTaken[5] = false;
 	}
 
 	if (player.getInventory().getNoOfItems() == 6)
 	{
-		ItemsTaken[6] = true;
+	ItemsTaken[6] = true;
 	}
 	else if (player.getInventory().getNoOfItems() < 6)
 	{
-		ItemsTaken[6] = false;
+	ItemsTaken[6] = false;
 	}
 
 	if (player.getInventory().getNoOfItems() == 7)
 	{
-		ItemsTaken[7] = true;
+	ItemsTaken[7] = true;
 	}
 	else if (player.getInventory().getNoOfItems() < 7)
 	{
-		ItemsTaken[7] = false;
+	ItemsTaken[7] = false;
 	}
 
 	if (player.getInventory().getNoOfItems() == 8)
 	{
-		ItemsTaken[8] = true;
+	ItemsTaken[8] = true;
 	}
 	else if (player.getInventory().getNoOfItems() < 8)
 	{
-		ItemsTaken[8] = false;
+	ItemsTaken[8] = false;
 	}
 
 	if (player.getInventory().getNoOfItems() == 9)
 	{
-		ItemsTaken[9] = true;
+	ItemsTaken[9] = true;
 	}
 	else if (player.getInventory().getNoOfItems() < 9)
 	{
-		ItemsTaken[9] = false;
+	ItemsTaken[9] = false;
 	}
 
 	if (player.getInventory().getNoOfItems() == 10)
 	{
-		ItemsTaken[10] = true;
+	ItemsTaken[10] = true;
 	}
 	else if (player.getInventory().getNoOfItems() < 10 )
 	{
-		ItemsTaken[10] = false;
+	ItemsTaken[10] = false;
 	}*/
 }
 
@@ -2909,7 +2980,7 @@ void StudioProject::RenderSupermarket()
 	RenderMesh(meshList[GEO_RAIL],B_Light);
 	modelStack.PopMatrix();
 
-	
+
 }
 
 void StudioProject::RenderItems()
@@ -3468,7 +3539,7 @@ void StudioProject::RenderLevel1Lights()
 void StudioProject::RenderItemsInfo()
 {
 	/*=====================================================
-						CONTAINER 1
+	CONTAINER 1
 	========================================================*/
 	for(int i = 0; i < boxContainer.size(); ++i) //Container 1
 	{
@@ -3504,7 +3575,7 @@ void StudioProject::RenderItemsInfo()
 		}
 	}
 	/*=====================================================
-						CONTAINER 2
+	CONTAINER 2
 	========================================================*/
 	for(int i = 0; i < boxContainer2.size(); ++i) //Container 2
 	{
@@ -3541,7 +3612,7 @@ void StudioProject::RenderItemsInfo()
 	}
 
 	/*=====================================================
-						CONTAINER 3
+	CONTAINER 3
 	========================================================*/
 	for(int i = 0; i < boxContainer3.size(); ++i) //Container 3
 	{
@@ -3577,7 +3648,7 @@ void StudioProject::RenderItemsInfo()
 		}
 	}
 	/*=====================================================
-						CONTAINER 4
+	CONTAINER 4
 	========================================================*/
 	for(int i = 0; i < boxContainer4.size(); ++i) //Container 4
 	{
@@ -3613,7 +3684,7 @@ void StudioProject::RenderItemsInfo()
 		}
 	}
 	/*=====================================================
-						CONTAINER 5
+	CONTAINER 5
 	========================================================*/
 	for(int i = 0; i < boxContainer5.size(); ++i) //Container 5
 	{
@@ -3649,7 +3720,7 @@ void StudioProject::RenderItemsInfo()
 		}
 	}
 	/*=====================================================
-						CONTAINER 6
+	CONTAINER 6
 	========================================================*/
 	for(int i = 0; i < boxContainer6.size(); ++i) //Container 6
 	{
@@ -3686,7 +3757,7 @@ void StudioProject::RenderItemsInfo()
 	}
 
 	/*=====================================================
-						CONTAINER 7
+	CONTAINER 7
 	========================================================*/
 	for(int i = 0; i < boxContainer7.size(); ++i) //Container 7
 	{
@@ -3722,7 +3793,7 @@ void StudioProject::RenderItemsInfo()
 		}
 	}
 	/*=====================================================
-						CONTAINER 8
+	CONTAINER 8
 	========================================================*/
 	for(int i = 0; i < boxContainer8.size(); ++i) //Container 8
 	{
@@ -3758,7 +3829,7 @@ void StudioProject::RenderItemsInfo()
 		}
 	}
 	/*=====================================================
-						CONTAINER 9
+	CONTAINER 9
 	========================================================*/
 	for(int i = 0; i < boxContainer9.size(); ++i) //Container 9
 	{
@@ -3795,7 +3866,7 @@ void StudioProject::RenderItemsInfo()
 	}
 
 	/*=====================================================
-						CONTAINER 10
+	CONTAINER 10
 	========================================================*/
 	for(int i = 0; i < boxContainer10.size(); ++i) //Container 10
 	{
@@ -3832,7 +3903,7 @@ void StudioProject::RenderItemsInfo()
 	}
 
 	/*=====================================================
-						CONTAINER 11
+	CONTAINER 11
 	========================================================*/
 	for(int i = 0; i < boxContainer11.size(); ++i) //Container 11
 	{
@@ -3868,7 +3939,7 @@ void StudioProject::RenderItemsInfo()
 		}
 	}
 	/*=====================================================
-						CONTAINER 12
+	CONTAINER 12
 	========================================================*/
 	for(int i = 0; i < boxContainer12.size(); ++i) //Container 12
 	{
@@ -3904,7 +3975,7 @@ void StudioProject::RenderItemsInfo()
 		}
 	}
 	/*==============================================================
-							CHECKING OUT
+	CHECKING OUT
 	=================================================================*/
 	for(int i = 0;i < CashierBox.size();i++)
 	{
@@ -3921,7 +3992,7 @@ void StudioProject::RenderItemsInfo()
 }
 void StudioProject::RenderCheckOutItems()
 {
-		//Used for rendering Objs on cashier table//
+	//Used for rendering Objs on cashier table//
 	//Extreme left cashier
 	if(camera.position.z >= -13 && camera.position.z <= -11 && camera.position.y >=4 && camera.position.y <= 10 && camera.position.x >= -26.85 && camera.position.x <= -19.47) //Extreme left cashier
 	{
@@ -3936,7 +4007,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				peaCount --;
-
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_PEA_N_CARROTS)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			else if (peaCount == 0 )
 			{
@@ -3955,6 +4034,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				SardineCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_SARDINE_CAN)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (SardineCount == 0)
 			{
@@ -3973,6 +4061,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				BeansCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_BAKED_BEANS_CAN)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (BeansCount == 0)
 			{
@@ -3991,6 +4088,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				CokeCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_COKE_CAN)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (CokeCount == 0)
 			{
@@ -4010,6 +4116,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				CokeZeroCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_DRINKCAN2)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (CokeZeroCount == 0)
 			{
@@ -4028,6 +4143,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				PepsiCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_PEPSI_CAN)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (PepsiCount == 0)
 			{
@@ -4048,6 +4172,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				MiloCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_MILOCAN)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (MiloCount == 0)
 			{
@@ -4066,6 +4199,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				Cereal1Count --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_CEREALBOX1)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (Cereal1Count == 0)
 			{
@@ -4085,6 +4227,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				Cereal2Count --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_CEREALBOX2)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (Cereal2Count == 0)
 			{
@@ -4104,6 +4255,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				PizzaCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_PIZZABOX)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (PizzaCount == 0)
 			{
@@ -4122,6 +4282,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				LaysCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_POTATOCHIPS)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (LaysCount == 0)
 			{
@@ -4144,7 +4313,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				peaCount --;
-
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_PEA_N_CARROTS)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			else if (peaCount == 0 )
 			{
@@ -4163,6 +4340,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				SardineCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_SARDINE_CAN)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (SardineCount == 0)
 			{
@@ -4181,6 +4367,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				BeansCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_BAKED_BEANS_CAN)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (BeansCount == 0)
 			{
@@ -4199,6 +4394,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				CokeCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_COKE_CAN)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (CokeCount == 0)
 			{
@@ -4218,6 +4422,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				CokeZeroCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_DRINKCAN2)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (CokeZeroCount == 0)
 			{
@@ -4236,6 +4449,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				PepsiCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_PEPSI_CAN)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (PepsiCount == 0)
 			{
@@ -4254,6 +4476,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				MiloCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_MILOCAN)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (MiloCount == 0)
 			{
@@ -4272,6 +4503,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				Cereal1Count --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_CEREALBOX1)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (Cereal1Count == 0)
 			{
@@ -4291,6 +4531,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				Cereal2Count --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_CEREALBOX2)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (Cereal2Count == 0)
 			{
@@ -4310,6 +4559,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				PizzaCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_PIZZABOX)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (PizzaCount == 0)
 			{
@@ -4328,6 +4586,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				LaysCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_POTATOCHIPS)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (LaysCount == 0)
 			{
@@ -4351,6 +4618,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				peaCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_PEA_N_CARROTS)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 
 			}
 			else if (peaCount == 0 )
@@ -4370,6 +4646,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				SardineCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_SARDINE_CAN)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (SardineCount == 0)
 			{
@@ -4388,6 +4673,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				BeansCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_BAKED_BEANS_CAN)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (BeansCount == 0)
 			{
@@ -4406,6 +4700,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				CokeCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_COKE_CAN)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (CokeCount == 0)
 			{
@@ -4425,6 +4728,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				CokeZeroCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_DRINKCAN2)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (CokeZeroCount == 0)
 			{
@@ -4443,6 +4755,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				PepsiCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_PEPSI_CAN)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (PepsiCount == 0)
 			{
@@ -4463,6 +4784,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				MiloCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_MILOCAN)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (MiloCount == 0)
 			{
@@ -4482,6 +4812,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				Cereal1Count --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_CEREALBOX1)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (Cereal1Count == 0)
 			{
@@ -4501,6 +4840,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				Cereal2Count --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_CEREALBOX2)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (Cereal2Count == 0)
 			{
@@ -4520,6 +4868,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				PizzaCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_PIZZABOX)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (PizzaCount == 0)
 			{
@@ -4539,6 +4896,15 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				LaysCount --;
+				for(int i = 0;i < paidItems.size();++i)
+				{
+					if(paidItems[i].getobjType() == GEO_POTATOCHIPS)
+					{
+						paidItems[i].setPaid(true);
+						player.getInventory().AddItem(paidItems[i]);
+						break;
+					}
+				}
 			}
 			if (LaysCount == 0)
 			{
@@ -4546,6 +4912,81 @@ void StudioProject::RenderCheckOutItems()
 			}
 		}
 
+	}
+}
+void StudioProject::RenderTimeAttack()
+{
+	//If list is generated
+	if(generateList == false && TAlist.size() > 1)
+	{
+		/*==========================================================================================
+		RENDERING OF LIST OF ITEMS
+		============================================================================================*/
+		int i = 0;
+		int ListHeight = 28;
+		int ListX = 24;
+		int size = 2;
+		int ListNo = 1;
+		string ListNum;
+
+		//Renders list of items based on the numbers contained in TAlist
+		RenderTextOnScreen(meshList[GEO_TEXT],"List Of Items:", Color(1, 1,1 ), size, ListX, 29);
+		for(int i = 0;i < TAlist.size(); i++)
+		{
+			std::ostringstream ListPos;
+			ListPos << ListNo;
+			ListNum = ListPos.str();
+			if(TAlist[i] == GEO_SARDINE_CAN)
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT], ListNum + ". Sardine Can", Color(1, 1, 1), size, ListX, ListHeight);
+			}
+			else if(TAlist[i] == GEO_PEA_N_CARROTS)
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Peas & Carrot", Color(1, 1, 1), size, ListX, ListHeight);
+			}
+			else if(TAlist[i] == GEO_BAKED_BEANS_CAN)
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Baked Beans", Color(1, 1, 1), size, ListX, ListHeight);
+			}
+			else if(TAlist[i] == GEO_COKE_CAN)
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Can of Coke", Color(1, 1, 1), size, ListX, ListHeight);
+			}
+			else if(TAlist[i] == GEO_DRINKCAN2)
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Coke Zero", Color(1, 1, 1), size, ListX, ListHeight);
+			}
+			else if(TAlist[i] == GEO_PEPSI_CAN)
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Can of Pepsi", Color(1, 1, 1), size, ListX, ListHeight);
+			}
+			else if(TAlist[i] == GEO_MILOCAN)
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Can of Milo", Color(1, 1, 1), size, ListX, ListHeight);
+			}
+			else if(TAlist[i] == GEO_CEREALBOX1)
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Bran Buds", Color(1, 1, 1), size, ListX, ListHeight);
+			}
+			else if(TAlist[i] == GEO_CEREALBOX2)
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Morning Chips", Color(1, 1, 1), size, ListX, ListHeight);
+			}
+			else if(TAlist[i] == GEO_PIZZABOX)
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Frozen Pizza", Color(1, 1, 1), size, ListX, ListHeight);
+			}
+			else if(TAlist[i] == GEO_POTATOCHIPS)
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Lays Chips", Color(1, 1, 1), size, ListX, ListHeight);
+			}
+			ListHeight--;
+			ListNo++;
+		}
+	}
+	if(isTAwon == true)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT],"Congratulations", Color(1, 1, 1), 3, 10, 10);
 	}
 }
 
@@ -4774,7 +5215,7 @@ void StudioProject::Render()
 	modelStack.Scale(5,5,5);
 	RenderMesh(meshList[GEO_DOORLEFT],B_Light);
 	modelStack.PopMatrix();
-	
+
 
 	//RIGHTDOOR
 	modelStack.PushMatrix();
@@ -4819,10 +5260,10 @@ void StudioProject::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], "Arrow Keys to turn", Color(0, 0, 0), 2, 1, 28);
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press E to interact", Color(0,0,0), 2, 1, 27);
 	}
-	
+
 	RenderCheckOutItems();
 
-
+	RenderTimeAttack();
 }
 
 
@@ -5248,7 +5689,7 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, std::string text, Color colo
 		}
 		modelStack.PopMatrix();
 	}
-	
+
 	if (Page.getItemsTaken7() == true)
 	{
 		modelStack.PushMatrix();
@@ -5300,7 +5741,7 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, std::string text, Color colo
 		}
 		modelStack.PopMatrix();
 	}
-	
+
 	if (Page.getItemsTaken8() == true)
 	{
 		modelStack.PushMatrix();
@@ -5352,7 +5793,7 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, std::string text, Color colo
 		}
 		modelStack.PopMatrix();
 	}
-		
+
 	if (Page.getItemsTaken9() == true)
 	{
 		modelStack.PushMatrix();

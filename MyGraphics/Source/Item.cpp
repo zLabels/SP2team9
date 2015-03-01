@@ -9,13 +9,14 @@ CItem::CItem(void)
 	meshPtr = (NULL);
 	objType = 0;
 	TRS.SetToIdentity();
+	isPaid = false;
 }
 
 CItem::~CItem(void)
 {
 }
 
-void CItem::SetData(string a, float b, bool d, Mesh* e,int f,Mtx44 g)
+void CItem::SetData(string a, float b, bool d, Mesh* e,int f,Mtx44 g,bool h)
 {
 	name = a;
 	
@@ -28,6 +29,12 @@ void CItem::SetData(string a, float b, bool d, Mesh* e,int f,Mtx44 g)
 	objType = f;
 
 	TRS = g;
+	
+	isPaid = h;
+}
+void CItem::setPaid(bool b)
+{
+	isPaid = b;
 }
 
 string CItem::getName(void)
@@ -63,4 +70,8 @@ void CItem::setRender(bool a)
 Mtx44 CItem::getTRS(void)
 {
 	return TRS;
+}
+bool CItem::getPaid(void)
+{
+	return isPaid;
 }
