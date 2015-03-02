@@ -129,6 +129,13 @@ void StudioProject::InitMesh()
 	meshList[GEO_RAIL]->material.kShininess = 8.f;
 	meshList[GEO_RAIL] ->textureID = LoadTGA("Image//Railing.tga");
 
+	meshList[GEO_DUSTBIN] = MeshBuilder::GenerateOBJ("Dustbin" , "OBJ//dustbin.obj");
+	meshList[GEO_DUSTBIN]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	meshList[GEO_DUSTBIN]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	meshList[GEO_DUSTBIN]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_DUSTBIN]->material.kShininess = 8.f;
+	meshList[GEO_DUSTBIN] ->textureID = LoadTGA("Image//dustbin.tga");
+
 	meshList[GEO_SARDINE_CAN] = MeshBuilder::GenerateOBJ("Railing" , "OBJ//canned-food1.obj");
 	meshList[GEO_SARDINE_CAN]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[GEO_SARDINE_CAN]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
@@ -377,7 +384,7 @@ void StudioProject::InitMesh()
 	Page.setBakedBean("Baked Beans Can", UI_BAKED_BEANS_CAN);
 
 	meshList[UI_PIZZABOX] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
-	meshList[UI_PIZZABOX]->textureID = LoadTGA("UI sprites/UI-frozen_pizza.tga");
+	meshList[UI_PIZZABOX]->textureID = LoadTGA("UI sprites/UI-pizza.tga");
 	Page.setPizzabox("Frozen Pizza", UI_PIZZABOX);
 
 	meshList[UI_POTATOCHIPS] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
@@ -3060,6 +3067,11 @@ void StudioProject::RenderSupermarket()
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
+	modelStack.PushMatrix();
+	modelStack.Translate(-62, 0, -21.4);
+	RenderMesh(meshList[GEO_DUSTBIN],B_Light);
+	modelStack.PopMatrix();
+	//x=-66 y= 4.8 z= -21.4
 	//Extreme left cold food shelf
 	for(int i = -2; i < 3; ++i)
 	{

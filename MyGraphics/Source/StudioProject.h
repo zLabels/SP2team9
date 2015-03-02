@@ -210,6 +210,7 @@ private:
 		GEO_RAIL,
 		GEO_DOORLEFT,
 		GEO_DOORRIGHT,
+		GEO_DUSTBIN,
 
 		GEO_SARDINE_CAN, //food items
 		GEO_PEA_N_CARROTS,
