@@ -175,7 +175,6 @@ void Ai::update(float dt, Vector3 camera)
 			}
 		}
 	}
-	//std::cout << PasserbyDifference.Length() << std::endl;
 }
 
 void Ai::FindPlayerDistanceDifference(Vector3 cameraPosition)

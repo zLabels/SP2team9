@@ -179,6 +179,8 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
 
+	//==========================Collision for 2nd floor============================//
+
 	//Escalator Right Handle (Top facing escalator)
 	maxPos.Set(28.4,30,64.6);
 	minPos.Set(25.6,23,63);
@@ -188,6 +190,90 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	//Escalator Left Handle (Top facing escalator)
 	maxPos.Set(29,30,93);
 	minPos.Set(27,23,89.6);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Escalator middle Handle (Top facing escalator)
+	maxPos.Set(28.7,30,78.4);
+	minPos.Set(26.2,23,76);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Escalator (prevents going down on wrong escalator)
+	maxPos.Set(27.4,30,76);
+	minPos.Set(26.2,23,64.7);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Railing collision (length)
+	maxPos.Set(28.8,30,63.6);
+	minPos.Set(-27.8,23,60.9);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Railing collision (opposite of railing)
+	maxPos.Set(-26.3,30,95);
+	minPos.Set(-27.36,23,60.9);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Metal shelf (front right)
+	maxPos.Set(25.2,30,45.4);
+	minPos.Set(20.6,23,14.5);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//wooden shelf (front Middle)
+	maxPos.Set(6.9,30,42.8);
+	minPos.Set(2,23,17.6);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Metal shelf (front Left)
+	maxPos.Set(-12,30,45.2);
+	minPos.Set(-16.8,23,14.6);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Metal shelf (Middle right)
+	maxPos.Set(25.3,30,-2.6);
+	minPos.Set(20.6,23,-21.4);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//wooden shelf (Middle Middle)
+	maxPos.Set(6.9,30,-5.5);
+	minPos.Set(2,23,-18.4);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Metal shelf (Middle Left)
+	maxPos.Set(-12,30,-2.5);
+	minPos.Set(-16.8,23,-21.5);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Metal shelf (Back right)
+	maxPos.Set(25.3,30,-38.5);
+	minPos.Set(20.6,23,-69.5);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//wooden shelf (Back Middle)
+	maxPos.Set(6.9,30,-41.4);
+	minPos.Set(2,23,-66.3);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//Metal shelf (Back Left)
+	maxPos.Set(-12,30,-38.33);
+	minPos.Set(-16.8,23,-69.55);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//COLD FOOD SHELF
+	maxPos.Set(-49.1,30,50.2);
+	minPos.Set(-54.6,23,-77.2);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
 
