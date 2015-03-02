@@ -3067,7 +3067,139 @@ void StudioProject::RenderSupermarket()
 	RenderMesh(meshList[GEO_RAIL],B_Light);
 	modelStack.PopMatrix();
 
+	//=========Rendering of second level ==================//
 
+	//Railings near the escalator 
+	for(int x = -2; x < 3; x ++ )
+	{
+	modelStack.PushMatrix();
+	modelStack.Translate(x*9.5,20,61.5);
+	RenderMesh(meshList[GEO_RAIL],B_Light);
+	modelStack.PopMatrix();
+	}
+
+	modelStack.PushMatrix();
+	modelStack.Translate(27,20,61.5);
+	modelStack.Scale(0.85,1,1);
+	RenderMesh(meshList[GEO_RAIL],B_Light);
+	modelStack.PopMatrix();
+
+	//Railings across the elevator (2nd floor)
+	modelStack.PushMatrix();
+	modelStack.Translate(-26.8,20,62.9);
+	modelStack.Rotate(90,0,1,0);
+	RenderMesh(meshList[GEO_RAIL],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(-26.8,20,71.9);
+	modelStack.Rotate(90,0,1,0);
+	RenderMesh(meshList[GEO_RAIL],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(-26.8,20,80.9);
+	modelStack.Rotate(90,0,1,0);
+	RenderMesh(meshList[GEO_RAIL],B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(-26.8,20,89.5);
+	modelStack.Rotate(90,0,1,0);
+	modelStack.Scale(0.5,1,1);
+	RenderMesh(meshList[GEO_RAIL],B_Light);
+	modelStack.PopMatrix();
+	
+	//=============2nd Floor left row shelf===============//
+	for(int x = 2; x < 4; x++)
+	{
+	//Wooden shelf
+	modelStack.PushMatrix();
+	modelStack.Translate(5,19.8,x*12);
+	modelStack.Rotate(90,0,1,0);
+	RenderMesh(meshList[GEO_SHELF],B_Light);
+	modelStack.PopMatrix();
+	}
+
+	for(int x = 3; x < 8; x++)
+	{
+	//Metal shelf
+	modelStack.PushMatrix();
+	modelStack.Translate(-14.5,20,x*6);
+	RenderMesh(meshList[GEO_SHELF2],B_Light);
+	modelStack.PopMatrix();
+	}
+
+	for(int x = 3; x < 8; x++)
+	{
+	//Metal shelf
+	modelStack.PushMatrix();
+	modelStack.Translate(23,20,x*6);
+	RenderMesh(meshList[GEO_SHELF2],B_Light);
+	modelStack.PopMatrix();
+	}
+
+	// =========2nd Floor middle row shelf ======== //
+	
+	//Wooden shelf
+	modelStack.PushMatrix();
+	modelStack.Translate(5,19.8,-12);
+	modelStack.Rotate(90,0,1,0);
+	RenderMesh(meshList[GEO_SHELF],B_Light);
+	modelStack.PopMatrix();
+	
+	for(int x = -3; x < 0; x++)
+	{
+	//Metal shelf
+	modelStack.PushMatrix();
+	modelStack.Translate(-14.5,20,x*6);
+	RenderMesh(meshList[GEO_SHELF2],B_Light);
+	modelStack.PopMatrix();
+	}
+
+	for(int x = -3; x < 0; x++)
+	{
+	modelStack.PushMatrix();
+	modelStack.Translate(23,20,x*6);
+	RenderMesh(meshList[GEO_SHELF2],B_Light);
+	modelStack.PopMatrix();
+	}
+
+	//===============2nd Floor Extreme right row shelf==================//
+	for(int x = -5.5; x < -3.5; x++)
+	{
+	//Wooden shelf
+	modelStack.PushMatrix();
+	modelStack.Translate(5,19.8,x*12);
+	modelStack.Rotate(90,0,1,0);
+	RenderMesh(meshList[GEO_SHELF],B_Light);
+	modelStack.PopMatrix();
+	}
+
+	for(int x = -11; x < -6; x++)
+	{
+	modelStack.PushMatrix();
+	modelStack.Translate(-14.5,20,x*6);
+	RenderMesh(meshList[GEO_SHELF2],B_Light);
+	modelStack.PopMatrix();
+	}
+
+	for(int x = -11; x < -6; x++)
+	{
+	modelStack.PushMatrix();
+	modelStack.Translate(23,20,x*6);
+	RenderMesh(meshList[GEO_SHELF2],B_Light);
+	modelStack.PopMatrix();
+	}
+
+	//=======================2nd floor Frozen food shelf====================//
+	for(int x = -5; x < 4 ; x++)
+	{
+	modelStack.PushMatrix();
+	modelStack.Translate(-52,20,x*14);
+	RenderMesh(meshList[GEO_COLDFOODSHELF],B_Light);
+	modelStack.PopMatrix();
+	}
 }
 /******************************************************************************/
 /*!

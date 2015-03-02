@@ -528,7 +528,7 @@ void Camera3::Update(double dt)
 		escal = true;
 	
 	}
-	if(position.x <=29.9 && position.y >= 20 && position.y <=30 && position.z >= 80 && position.z <=90) //Area to trigger going down.
+	if(position.x <=29.9  && position.x >= 14 && position.y >= 20 && position.y <=30 && position.z >= 80 && position.z <=90) //Area to trigger going down.
 	{
 		escal = false;
 		escaldown = true;
