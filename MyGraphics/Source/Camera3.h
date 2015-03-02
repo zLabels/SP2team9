@@ -44,6 +44,7 @@ public:
 	int temp;
 	float CAMERA_SPEED;
 	float JUMP_SPEED;
+	bool CollisionWithAi;
 };
 
 #endif

@@ -22,6 +22,7 @@
 #include "Cashier.h"
 #include "CItemInventory.h"
 //#include "Security.h"
+#include "Ai.h"
 
 using std::string;
 
@@ -353,6 +354,9 @@ private:
 
 	//Security CameraOBJ[3];
 	CItemInventory Page;
+
+	Ai Guard;
+	Ai Passerby[2];
 
 	//=========Items=========//
 	CItem sardineCan,

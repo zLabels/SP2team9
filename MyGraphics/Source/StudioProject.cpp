@@ -1566,6 +1566,12 @@ void StudioProject::Init()
 
 	//Initialize camera settings
 	camera.Init(Vector3(0, 5, 15), Vector3(0, 5, 13), Vector3(0, 1, 0));
+	Guard.passInPositionAndTarget(Vector3(0, 0, 0), Vector3(5, 0, 0));
+
+	for (int a = 0; a < 2; a++)
+	{
+		Passerby[a].SetPasserby(Vector3(0, 0, 3));
+	}
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 10000.f);
@@ -2838,6 +2844,21 @@ void StudioProject::Update(double dt)
 	{
 	ItemsTaken[10] = false;
 	}*/
+
+	Guard.update(dt, camera.position);
+	Guard.FindPlayerDistanceDifference(camera.position);
+
+	Passerby[0].update(dt, camera.position);
+	Passerby[0].FindPlayerDistanceDifferencePasserby(camera.position);
+	
+	if ((camera.position - Passerby[0].getPasserbyPosition()).Length() < 6)
+	{
+		camera.CollisionWithAi = true;
+	}
+	else if ((camera.position - Passerby[0].getPasserbyPosition()).Length() > 6)
+	{
+		camera.CollisionWithAi = false;
+	}
 }
 
 /******************************************************************************/
@@ -3577,8 +3598,8 @@ Renders the Guard model in the scene
 void StudioProject::RenderGuard()
 {
 	modelStack.PushMatrix();
-	modelStack.Translate(charPosition.x, 0, charPosition.z);
-	modelStack.Rotate(angle, 0, angle, 1);
+	modelStack.Translate(Guard.getGuardPosition().x, 0, Guard.getGuardPosition().z);
+	modelStack.Rotate(Guard.getDerivedAngle(), 0, 1, 0);
 
 
 	modelStack.PushMatrix();
@@ -5465,23 +5486,17 @@ void StudioProject::Render()
 	modelStack.PopMatrix();
 
 	//Rendering of GuardModel
-	modelStack.PushMatrix(); //Moving of guard
-	modelStack.Translate(0, 0, 5);
-
 	modelStack.PushMatrix();
 	modelStack.Scale(1.2, 1.2, 1.2);
-	modelStack.Rotate(90, 0, 90, 0);
 	RenderGuard();
-	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 	//Rendering of CustomerModel
 	modelStack.PushMatrix(); //Moving of customer
-	modelStack.Translate(0, 0, 10);
-
+	modelStack.Translate(Passerby[0].getPasserbyPosition().x, 0, Passerby[0].getPasserbyPosition().z);
 	modelStack.PushMatrix();
 	modelStack.Scale(1.2, 1.2, 1.2);
-	modelStack.Rotate(90, 0, 90, 0);
+	modelStack.Rotate(Passerby[0].getPasserbyAngle(), 0, 1, 0);
 	RenderCustomer();
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
@@ -5491,6 +5506,7 @@ void StudioProject::Render()
 	modelStack.PushMatrix();
 	modelStack.Translate(-55.75,0.15,doorTranslate);
 	modelStack.Scale(5,5,5);
+
 	RenderMesh(meshList[GEO_DOORLEFT],B_Light);
 	modelStack.PopMatrix();
 

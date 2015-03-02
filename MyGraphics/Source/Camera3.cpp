@@ -33,6 +33,7 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	tempCrouchTargY = target.y;
 	CAMERA_SPEED = 15.f;
 	JUMP_SPEED = 12.f;
+	CollisionWithAi = false;
 	//=======Collision=========//
 	//Middle shelf
 	maxPos.Set(13.4, 10, 15.2);
@@ -384,7 +385,7 @@ void Camera3::Update(double dt)
 
 	//===============MOVE FORWARD==========//
 	//Sprint
-	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('W') && escal == false && escaldown == false)
+	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('W') && escal == false && escaldown == false && CollisionWithAi == false)
 	{
 		if(CAMERA_SPEED <= 30)
 		{
@@ -406,7 +407,7 @@ void Camera3::Update(double dt)
 		}
 	}
 	//Walk
-	else if(Application::IsKeyPressed('W') && escal == false && escaldown == false)
+	else if(Application::IsKeyPressed('W') && escal == false && escaldown == false && CollisionWithAi == false)
 	{
 		if(CAMERA_SPEED >15.f)
 		{
