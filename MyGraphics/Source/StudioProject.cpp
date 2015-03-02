@@ -468,7 +468,7 @@ void StudioProject::InitVariables()
 	CokeZero = false;
 	Pepsi = false;
 	Pizza = false;
-	moveItem = 0;
+	moveItem = 0; // SPEED
 	peaCount = 0;
 	PizzaCount = 0;
 	MiloCount = 0;
@@ -2361,43 +2361,43 @@ void StudioProject::Update(double dt)
 	{
 		moveItem -=(float)(5*dt);
 	}
-	if(moveItem >= -4.5 && Beans == true)
+	else if(moveItem >= -4.5 && Beans == true)
 	{
 		moveItem -=(float)(5*dt);
 	}
-	if(moveItem >= -4.5 && Pizza == true)
+	else if(moveItem >= -4.5 && Pizza == true)
 	{
 		moveItem -=(float)(5*dt);
 	}
-	if(moveItem >= -4.5 && Milo == true)
+	else if(moveItem >= -4.5 && Milo == true)
 	{
 		moveItem -=(float)(5*dt);
 	}
-	if(moveItem >= -4.5 && Cereal1 == true)
+	else if(moveItem >= -4.5 && Cereal1 == true)
 	{
 		moveItem -=(float)(5*dt);
 	}
-	if(moveItem >= -4.5 && Cereal2 == true)
+	else if(moveItem >= -4.5 && Cereal2 == true)
 	{
 		moveItem -=(float)(5*dt);
 	}
-	if(moveItem >= -4.5 && Sardine == true)
+	else if(moveItem >= -4.5 && Sardine == true)
 	{
 		moveItem -=(float)(5*dt);
 	}
-	if(moveItem >= -4.5 && Lays == true)
+	else if(moveItem >= -4.5 && Lays == true)
 	{
 		moveItem -=(float)(5*dt);
 	}
-	if(moveItem >= -4.5 && Coke == true)
+	else if(moveItem >= -4.5 && Coke == true)
 	{
 		moveItem -=(float)(5*dt);
 	}
-	if(moveItem >= -4.5 && CokeZero == true)
+	else if(moveItem >= -4.5 && CokeZero == true)
 	{
 		moveItem -=(float)(5*dt);
 	}
-	if(moveItem >= -4.5 && Pepsi == true)
+	else if(moveItem >= -4.5 && Pepsi == true)
 	{
 		moveItem -=(float)(5*dt);
 	}
