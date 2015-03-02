@@ -286,6 +286,7 @@ private:
 	void updatePuttingBackItem();	//Updates putting back of items from shelf
 	void updateCheckingOut();	//Updates checking out of items
 	void updateTimeAttack();	//Updates everything related to Time Attack mini game
+	void updateDustBin(); //Updates throwing of item
 
 public:
 	StudioProject();	//default constructor

@@ -1607,7 +1607,7 @@ void StudioProject::Init()
 	glBindVertexArray(m_vertexArrayID);
 
 	//Initialize camera settings
-	camera.Init(Vector3(0, 5, 15), Vector3(0, 5, 13), Vector3(0, 1, 0));
+	camera.Init(Vector3(-45, 5, 0), Vector3(0, 5, 13), Vector3(0, 1, 0));
 	Guard.passInPositionAndTarget(Vector3(0, 0, 0), Vector3(5, 0, 0));
 
 	for (int a = 0; a < 2; a++)
@@ -1628,6 +1628,7 @@ void StudioProject::Init()
 	InitMesh();
 
 }
+
 
 //========Variables for use in update====//
 bool Closed = true;
@@ -2307,7 +2308,7 @@ Updates the Time Attack mini game in the scene
 void StudioProject::updateTimeAttack()
 {
 	if(camera.position.x <= -145 && camera.position.y <= 10 && camera.position.z <= -0.5 &&
-		camera.position.x >= -150 && camera.position.y >= 2 && camera.position.z >= -2)
+		camera.position.x >= -150 && camera.position.y >= 2 && camera.position.z >= -3)
 	{
 		//Start Time Attack Mini game
 		if(Application::IsKeyPressed('E') && TimeAttack == false)
@@ -2374,6 +2375,7 @@ void StudioProject::updateTimeAttack()
 		//Initializes random seed, to produce a different set of random numbers each run
 		srand(time(NULL));
 		int temp = 0;
+		//GEO_SARDINE_CAN is the first item on the list
 		temp = rand() % 11 + GEO_SARDINE_CAN; // First
 		TAlist.push_back(temp);
 		temp = rand() % 11 + GEO_SARDINE_CAN; // Second
@@ -2390,6 +2392,25 @@ void StudioProject::updateTimeAttack()
 		generateList = false;
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Updates the clearing of inventory
+
+*/
+/******************************************************************************/
+void StudioProject::updateDustBin()
+{
+	if(camera.target.x <= -60 && camera.target.y <= 8 && camera.target.z <= -19
+		&& camera.target.x >= -63.5 && camera.target.y >= 0 && camera.target.z >= -23)
+	{
+		if(Application::IsKeyPressed('E'))
+		{
+			player.getInventory().DeleteAll();
+		}
+	}
+}
+
 /******************************************************************************/
 /*!
 \brief
@@ -2703,6 +2724,8 @@ void StudioProject::Update(double dt)
 	updatePuttingBackItem();
 
 	updateTimeAttack();
+
+	updateDustBin();
 	/*==============================================================
 	DEBUGGING PURPOSES
 	=================================================================*/
@@ -3798,7 +3821,6 @@ void StudioProject::RenderPlayerInfo()
 {
 	RenderTextOnScreen(meshList[GEO_TEXT],"Money: " + Cash, Color(0, 0, 1), 3, 1, 18);
 }
-
 /******************************************************************************/
 /*!
 \brief
@@ -4323,6 +4345,14 @@ void StudioProject::RenderItemsInfo()
 		{
 			RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Check Out", Color(1, 1, 1), 2, 13.55, 14);
 		}
+	}
+	/*===========================================================================
+	DUST BIN
+	==============================================================================*/
+	if(camera.target.x <= -60 && camera.target.y <= 8 && camera.target.z <= -19
+		&& camera.target.x >= -63.5 && camera.target.y >= 0 && camera.target.z >= -23)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Clear Inventory", Color(1, 1, 1), 2, 10, 14);
 	}
 }
 /******************************************************************************/
@@ -5344,6 +5374,7 @@ void StudioProject::RenderTimeAttack()
 		RenderTextOnScreen(meshList[GEO_TEXT],"You Lose", Color(1, 1, 1), 3, 10, 10);
 	}
 }
+
 /******************************************************************************/
 /*!
 \brief

@@ -277,6 +277,11 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
 
+	//Dust bin
+	maxPos.Set(-60,8,-19);
+	minPos.Set(-63.5,0,-23);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
 }
 
 void Camera3::BoundsCheck()
