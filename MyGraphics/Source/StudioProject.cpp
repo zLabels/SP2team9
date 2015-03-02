@@ -2367,17 +2367,17 @@ void StudioProject::updateTimeAttack()
 		//Initializes random seed, to produce a different set of random numbers each run
 		srand(time(NULL));
 		int temp = 0;
-		temp = rand() % 11 + 34; // First
+		temp = rand() % 11 + GEO_SARDINE_CAN; // First
 		TAlist.push_back(temp);
-		temp = rand() % 11 + 34; // Second
+		temp = rand() % 11 + GEO_SARDINE_CAN; // Second
 		TAlist.push_back(temp);
-		temp = rand() % 11 + 34; // Third
+		temp = rand() % 11 + GEO_SARDINE_CAN; // Third
 		TAlist.push_back(temp);
-		temp = rand() % 11 + 34; // Fourth
+		temp = rand() % 11 + GEO_SARDINE_CAN; // Fourth
 		TAlist.push_back(temp);
-		temp = rand() % 11 + 34; // Fifth
+		temp = rand() % 11 + GEO_SARDINE_CAN; // Fifth
 		TAlist.push_back(temp);
-		temp = rand() % 11 + 34; // Sixth
+		temp = rand() % 11 + GEO_SARDINE_CAN; // Sixth
 		TAlist.push_back(temp);
 		//TAlist now holds 6 random integers
 		generateList = false;
@@ -5251,18 +5251,12 @@ Renders the Information related to Time Attack in the scene
 /******************************************************************************/
 void StudioProject::RenderTimeAttack()
 {
-	//===Rendering of Timer===//
-	if(TimeAttack == true)
-	{
-		RenderTextOnScreen(meshList[GEO_TEXT],timeTA, Color(1, 1,1 ), 2, 15, 29);
-	}
 	//If list is generated
 	if(generateList == false && TAlist.size() > 1)
 	{
 		/*==========================================================================================
-		RENDERING OF LIST OF ITEMS
+										RENDERING OF LIST OF ITEMS
 		============================================================================================*/
-		int i = 0;
 		int ListHeight = 28;
 		int ListX = 24;
 		int size = 2;
@@ -5276,53 +5270,58 @@ void StudioProject::RenderTimeAttack()
 			std::ostringstream ListPos;
 			ListPos << ListNo;
 			ListNum = ListPos.str();
-			if(TAlist[i] == GEO_SARDINE_CAN)
+			if(TAlist.at(i) == GEO_SARDINE_CAN)
 			{
 				RenderTextOnScreen(meshList[GEO_TEXT], ListNum + ". Sardine Can", Color(1, 1, 1), size, ListX, ListHeight);
 			}
-			else if(TAlist[i] == GEO_PEA_N_CARROTS)
+			else if(TAlist.at(i) == GEO_PEA_N_CARROTS)
 			{
 				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Peas & Carrot", Color(1, 1, 1), size, ListX, ListHeight);
 			}
-			else if(TAlist[i] == GEO_BAKED_BEANS_CAN)
+			else if(TAlist.at(i) == GEO_BAKED_BEANS_CAN)
 			{
 				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Baked Beans", Color(1, 1, 1), size, ListX, ListHeight);
 			}
-			else if(TAlist[i] == GEO_COKE_CAN)
+			else if(TAlist.at(i) == GEO_COKE_CAN)
 			{
 				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Can of Coke", Color(1, 1, 1), size, ListX, ListHeight);
 			}
-			else if(TAlist[i] == GEO_DRINKCAN2)
+			else if(TAlist.at(i) == GEO_DRINKCAN2)
 			{
 				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Coke Zero", Color(1, 1, 1), size, ListX, ListHeight);
 			}
-			else if(TAlist[i] == GEO_PEPSI_CAN)
+			else if(TAlist.at(i) == GEO_PEPSI_CAN)
 			{
 				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Can of Pepsi", Color(1, 1, 1), size, ListX, ListHeight);
 			}
-			else if(TAlist[i] == GEO_MILOCAN)
+			else if(TAlist.at(i) == GEO_MILOCAN)
 			{
 				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Can of Milo", Color(1, 1, 1), size, ListX, ListHeight);
 			}
-			else if(TAlist[i] == GEO_CEREALBOX1)
+			else if(TAlist.at(i) == GEO_CEREALBOX1)
 			{
 				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Bran Buds", Color(1, 1, 1), size, ListX, ListHeight);
 			}
-			else if(TAlist[i] == GEO_CEREALBOX2)
+			else if(TAlist.at(i) == GEO_CEREALBOX2)
 			{
 				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Morning Chips", Color(1, 1, 1), size, ListX, ListHeight);
 			}
-			else if(TAlist[i] == GEO_PIZZABOX)
+			else if(TAlist.at(i) == GEO_PIZZABOX)
 			{
 				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Frozen Pizza", Color(1, 1, 1), size, ListX, ListHeight);
 			}
-			else if(TAlist[i] == GEO_POTATOCHIPS)
+			else if(TAlist.at(i) == GEO_POTATOCHIPS)
 			{
 				RenderTextOnScreen(meshList[GEO_TEXT],ListNum + ". Lays Chips", Color(1, 1, 1), size, ListX, ListHeight);
 			}
 			ListHeight--;
 			ListNo++;
 		}
+	}
+	//===Rendering of Timer===//
+	if(TimeAttack == true)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT],timeTA, Color(1, 1,1 ), 2, 15, 29);
 	}
 	if(isTAwon == true)
 	{
