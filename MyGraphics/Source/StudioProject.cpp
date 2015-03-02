@@ -136,7 +136,6 @@ void StudioProject::InitMesh()
 	meshList[GEO_SARDINE_CAN]->material.kShininess = 8.f;
 	meshList[GEO_SARDINE_CAN] ->textureID = LoadTGA("Image//canned_food_1.tga");
 
-
 	meshList[GEO_BAKED_BEANS_CAN] = MeshBuilder::GenerateOBJ("Baked Beans" , "OBJ//canned-food3.obj");
 	meshList[GEO_BAKED_BEANS_CAN]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[GEO_BAKED_BEANS_CAN]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
@@ -228,11 +227,8 @@ void StudioProject::InitMesh()
 	meshList[GEO_DOORRIGHT]->material.kShininess = 8.f;
 	meshList[GEO_DOORRIGHT]->textureID = LoadTGA("Image//MarketDoor.tga");
 
-
-
 	//meshList[GEO_CANTEST] = MeshBuilder::GenerateQuad("CANTEST", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_CANTEST] ->textureID = LoadTGA("UI sprites//UI-canned_food_1.tga");
-
 
 	//===============MODEL OBJs==========================//
 	meshList[modelHead] = MeshBuilder::GenerateOBJ("Character Head", "OBJ//modelHead.obj");
@@ -480,11 +476,15 @@ void StudioProject::InitVariables()
 	CokeCount = 0;
 	CokeZeroCount = 0;
 	PepsiCount = 0;
+
 	//==Time Attack==//
 	TimeAttack = false;
 	generateList = false;
 	TAmatchedItems = 0;
 	isTAwon = false;
+	TAtime = 0.f;
+	timeTA = "";
+	TAstartedOnce = 0;
 
 	int a = 0;
 
@@ -561,7 +561,6 @@ void StudioProject::InitVariables()
 		boxContainer2.push_back(sardineBox);
 	}
 	a = 0;
-
 
 	//===============Pea and Carrots Variables============//
 	newMesh = MeshBuilder::GenerateOBJ("Peas and Carrots can" , "OBJ//canned-food2.obj");
@@ -1510,36 +1509,6 @@ void StudioProject::InitCharacters()
 	//meshList[guardRightLeg]->textureID = LoadTGA("Image//guardLeg.tga");
 }
 
-void StudioProject::InitSecurity()
-{
-	Mesh* CameraObj;
-	Vector3 newPosition1;
-	newPosition1.Set(53.3, 18, -92.5);
-
-	/*newRLeg = MeshBuilder::GenerateOBJ("guard Right Leg", "OBJ//cashierLeg.obj");
-	newRLeg->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	newRLeg->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	newRLeg->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	newRLeg->material.kShininess = 8.f;
-	newRLeg->textureID = LoadTGA("Image//guardLeg.tga");*/
-	/*
-	meshList[SC] = MeshBuilder::GenerateOBJ("SC" , "OBJ//SC.obj");
-	meshList[SC]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	meshList[SC]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	meshList[SC]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	meshList[SC]->material.kShininess = 8.f;
-	meshList[SC]->textureID = LoadTGA("Image//SC.tga");*/
-
-	//CameraObj = MeshBuilder::GenerateOBJ("Security Camera", "OBJ//SC.obj");
-	//CameraObj->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	//CameraObj->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	//CameraObj->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	//CameraObj->material.kShininess = 8.f;
-	//CameraObj->textureID = LoadTGA("Image//SC.tga");
-
-	/*CameraOBJ[0].setCharacter(CameraObj, newPosition1);
-	CameraOBJ[1].setCharacter(CameraObj, newPosition1);*/
-}
 /******************************************************************************/
 /*!
 \brief
@@ -1580,8 +1549,6 @@ void StudioProject::Init()
 	InitVariables();
 
 	InitCharacters();
-
-	InitSecurity();
 
 	InitShaders();
 
@@ -2274,9 +2241,11 @@ void StudioProject::updateTimeAttack()
 		{
 			TimeAttack = true;
 			isTAwon = false;
+			TAtime = 0;
+			TAstartedOnce = 0;
 		}
 		//End Time Attack Mini game
-		if(Application::IsKeyPressed('Q') && TimeAttack == true)
+		if(Application::IsKeyPressed('Q') && TimeAttack == true && TAtime < 60)
 		{
 			TAmatchedItems = 0;
 			//Loop to go through each item in player's inventory
@@ -2294,19 +2263,29 @@ void StudioProject::updateTimeAttack()
 				}
 			}
 			//All Items have been bought
+			//Resets variables when win
 			if(TAmatchedItems == 6)
 			{
 				isTAwon = true;
 				TimeAttack = false;
 				TAlist.clear();
 			}
+			//Resets variables when lose
 			if(TAmatchedItems != 6)
 			{
 				isTAwon = false;
+				TAstartedOnce++;
 				TimeAttack = false;
 				TAlist.clear();
 			}
 		}
+	}
+	if(TAtime > 60)
+	{
+		isTAwon = false;
+		TAstartedOnce++;
+		TimeAttack = false;
+		TAlist.clear();
 	}
 	if(TimeAttack == true)
 	{
@@ -2363,6 +2342,7 @@ void StudioProject::Update(double dt)
 	if(Application::IsKeyPressed('4'))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //wireframe mode
 
+	//Speed of by which Item is translated on Checkout
 	if(moveItem >= -4.5 && Peas == true)
 	{
 		moveItem -=(float)(5*dt);
@@ -2407,7 +2387,17 @@ void StudioProject::Update(double dt)
 	{
 		moveItem -=(float)(5*dt);
 	}
-
+	//TIME ATTACK TIMER
+	if(TimeAttack == true)
+	{
+		TAtime += (float)(dt);
+	}
+	std::ostringstream ssTAtime;
+	ssTAtime.precision(4);
+	ssTAtime << TAtime;
+	timeTA = ssTAtime.str();
+	
+	//Controls whether objects are affected by light or not
 	if(Application::IsKeyPressed('5'))
 	{
 		B_Light = true;
@@ -3731,35 +3721,6 @@ void StudioProject::RenderPlayerInfo()
 	RenderTextOnScreen(meshList[GEO_TEXT],"Money: " + Cash, Color(0, 0, 1), 3, 1, 18);
 }
 
-void StudioProject::RenderingSecurityCamera()
-{
-	////=========================Camera 1=======================//
-	//modelStack.PushMatrix(); //Rotating Camera;
-	//modelStack.Rotate(180, 0, 1, 0);
-	//modelStack.PushMatrix();//Moving Camera
-	//modelStack.Translate(CameraOBJ[0].getPosition().x, CameraOBJ[0].getPosition().y, CameraOBJ[0].getPosition().z);
-	//modelStack.Rotate(20, 1, 0, 0);
-	//modelStack.PushMatrix();//Fixing rotatin angle
-	//modelStack.Translate(0, 0, -0.2);
-	//modelStack.Rotate(CameraOBJ[0].getCameraRotation(), 0, 1, 0);
-	//modelStack.Translate(0, 0, +0.3);
-	//RenderMesh(CameraOBJ[0].getCamera(), B_Light);
-	//modelStack.PopMatrix();
-	//modelStack.PopMatrix(); //Moving camera
-	//modelStack.PopMatrix();//rotating Camera
-
-	////=========================Camera 2=======================//
-	//modelStack.PushMatrix();//Moving Camera
-	//modelStack.Translate(0, 18, 0);
-	//modelStack.Rotate(20, 1, 0, 0);
-	//modelStack.PushMatrix();//Fixing rotatin angle
-	//modelStack.Translate(0, 0, -0.2);
-	//modelStack.Rotate(CameraOBJ[1].getCameraRotation(), 0, 1, 0);
-	//modelStack.Translate(0, 0, +0.3);
-	//RenderMesh(CameraOBJ[1].getCamera(), B_Light);
-	//modelStack.PopMatrix();
-	//modelStack.PopMatrix(); //Moving camera
-}
 /******************************************************************************/
 /*!
 \brief
@@ -5210,6 +5171,11 @@ Renders the Information related to Time Attack in the scene
 /******************************************************************************/
 void StudioProject::RenderTimeAttack()
 {
+	//===Rendering of Timer===//
+	if(TimeAttack == true)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT],timeTA, Color(1, 1,1 ), 2, 15, 29);
+	}
 	//If list is generated
 	if(generateList == false && TAlist.size() > 1)
 	{
@@ -5281,6 +5247,10 @@ void StudioProject::RenderTimeAttack()
 	if(isTAwon == true)
 	{
 		RenderTextOnScreen(meshList[GEO_TEXT],"Congratulations", Color(1, 1, 1), 3, 10, 10);
+	}
+	if(isTAwon == false && TAstartedOnce > 0)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT],"You Lose", Color(1, 1, 1), 3, 10, 10);
 	}
 }
 /******************************************************************************/
@@ -5534,16 +5504,7 @@ void StudioProject::Render()
 	RenderPlayerInfo();
 	RenderItemsInfo();
 
-	RenderingSecurityCamera();
 	//============DEBUGGING PURPOSES====================//
-	RenderTextOnScreen(meshList[GEO_TEXT], Framerate + result, Color(0, 1, 0), 3, 1, 2);
-	RenderTextOnScreen(meshList[GEO_TEXT],"x: " + camerax, Color(0, 1, 0), 3, 1, 3);
-	RenderTextOnScreen(meshList[GEO_TEXT],"y: " + cameray, Color(0, 1, 0), 3, 1, 4);
-	RenderTextOnScreen(meshList[GEO_TEXT],"z: " + cameraz, Color(0, 1, 0), 3, 1, 5);
-
-	RenderTextOnScreen(meshList[GEO_TEXT],"targetX: " + viewx, Color(0, 1, 0), 3, 10, 3);
-	RenderTextOnScreen(meshList[GEO_TEXT],"targetY: " + viewy, Color(0, 1, 0), 3, 10, 4);
-	RenderTextOnScreen(meshList[GEO_TEXT],"targetZ: " + viewz, Color(0, 1, 0), 3, 10, 5);
 
 	RenderTextOnScreen(meshList[GEO_TEXT],"+", Color(1, 0, 0), 3, 13.55, 10);
 
@@ -5553,6 +5514,15 @@ void StudioProject::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], "WASD to Move", Color(0, 0 ,0), 2, 1, 29);
 		RenderTextOnScreen(meshList[GEO_TEXT], "Arrow Keys to turn", Color(0, 0, 0), 2, 1, 28);
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press E to interact", Color(0,0,0), 2, 1, 27);
+			//============DEBUGGING PURPOSES====================//
+		RenderTextOnScreen(meshList[GEO_TEXT], Framerate + result, Color(0, 1, 0), 3, 1, 2);
+		RenderTextOnScreen(meshList[GEO_TEXT],"x: " + camerax, Color(0, 1, 0), 3, 1, 3);
+		RenderTextOnScreen(meshList[GEO_TEXT],"y: " + cameray, Color(0, 1, 0), 3, 1, 4);
+		RenderTextOnScreen(meshList[GEO_TEXT],"z: " + cameraz, Color(0, 1, 0), 3, 1, 5);
+
+		RenderTextOnScreen(meshList[GEO_TEXT],"targetX: " + viewx, Color(0, 1, 0), 3, 10, 3);
+		RenderTextOnScreen(meshList[GEO_TEXT],"targetY: " + viewy, Color(0, 1, 0), 3, 10, 4);
+		RenderTextOnScreen(meshList[GEO_TEXT],"targetZ: " + viewz, Color(0, 1, 0), 3, 10, 5);
 	}
 
 	RenderCheckOutItems();

@@ -12,6 +12,8 @@
 #include <sstream>
 #include "timer.h"
 #include  <ctime>
+#include <iomanip>
+#include <math.h>
 
 #include "Item.h"
 #include "Inventory.h"
@@ -21,7 +23,6 @@
 #include "Customer.h"
 #include "Cashier.h"
 #include "CItemInventory.h"
-//#include "Security.h"
 #include "Ai.h"
 
 using std::string;
@@ -223,7 +224,6 @@ private:
 
 		itemInventory,		//Item Inventory page
 		cart,
-		SC,					//Security Camera
 		UI_SARDINE_CAN,
 		UI_PEA_N_CARROTS,
 		UI_BAKED_BEANS_CAN,
@@ -247,7 +247,6 @@ private:
 	void RenderCustomer();	//Renders Customer Model
 	void RenderItems();	//Renders Items in Supermarket
 	void RenderPlayerInfo();	//Renders player's information on screen
-	void RenderingSecurityCamera();	//?????????
 	void RenderItemsInfo();	//Renders item's information on screen
 	void RenderLevel1Lights();	//Renders lights in level1 of supermarket
 	void RenderCheckOutItems(); //Renders Checkout Items
@@ -271,7 +270,6 @@ public:
 	void InitVariables();	//Initializes Variables to be used in scene
 	void InitShaders();	//Initializes Shaders to be used in scene
 	void InitCharacters();	//Initializes Characters to be used in scene
-	void InitSecurity();	//????????
 
 private:
 	unsigned m_vertexArrayID;
@@ -302,7 +300,10 @@ private:
 	bool generateList;
 	vector<int> TAlist;
 	int TAmatchedItems;
+	int TAstartedOnce;
 	bool isTAwon;
+	float TAtime;
+	string timeTA;
 
 	//=========Character=========//
 	bool movingModel;
