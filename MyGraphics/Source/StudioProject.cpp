@@ -2713,7 +2713,6 @@ void StudioProject::updateCheckingOut()
 				(camera.position.y >= CashierBox[i].min.y) && 
 				(camera.position.z >= CashierBox[i].min.z))
 			{
-				paidItems.clear();
 				float cost = 0.f;
 				vector<CItem> toDelete;
 				//Calculating Cost of items taken by player
@@ -2991,11 +2990,6 @@ void StudioProject::Update(double dt)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); //default fill mode
 	if(Application::IsKeyPressed('4'))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //wireframe mode
-
-	if(Application::IsKeyPressed('W'))
-	{
-		ISound* music = engine->play2D("Sound\\bell.wav");
-	}
 
 	//Speed of by which Item is translated on Checkout
 	if(moveItem >= -4.5 && Peas == true)
@@ -4880,12 +4874,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				peaCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_PEA_N_CARROTS)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -4907,12 +4903,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				SardineCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_SARDINE_CAN)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -4934,12 +4932,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				BeansCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_BAKED_BEANS_CAN)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -4961,12 +4961,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				CokeCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_COKE_CAN)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -4989,12 +4991,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				CokeZeroCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_DRINKCAN2)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5016,12 +5020,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				PepsiCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_PEPSI_CAN)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5045,12 +5051,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				MiloCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_MILOCAN)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5072,12 +5080,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				Cereal1Count --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_CEREALBOX1)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5100,12 +5110,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				Cereal2Count --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_CEREALBOX2)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5128,12 +5140,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				PizzaCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_PIZZABOX)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5155,12 +5169,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				LaysCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_POTATOCHIPS)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5185,12 +5201,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				peaCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_PEA_N_CARROTS)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5212,12 +5230,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				SardineCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_SARDINE_CAN)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5239,12 +5259,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				BeansCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_BAKED_BEANS_CAN)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5266,12 +5288,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				CokeCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_COKE_CAN)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5294,12 +5318,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				CokeZeroCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_DRINKCAN2)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5321,12 +5347,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				PepsiCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_PEPSI_CAN)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5348,12 +5376,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				MiloCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_MILOCAN)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5375,12 +5405,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				Cereal1Count --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_CEREALBOX1)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5403,12 +5435,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				Cereal2Count --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_CEREALBOX2)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5431,12 +5465,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				PizzaCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_PIZZABOX)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5458,12 +5494,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				LaysCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_POTATOCHIPS)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5489,12 +5527,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				peaCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_PEA_N_CARROTS)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5517,12 +5557,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				SardineCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_SARDINE_CAN)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5544,12 +5586,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				BeansCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_BAKED_BEANS_CAN)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5571,12 +5615,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				CokeCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_COKE_CAN)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5599,12 +5645,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				CokeZeroCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_DRINKCAN2)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5626,12 +5674,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				PepsiCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_PEPSI_CAN)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5655,12 +5705,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				MiloCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_MILOCAN)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5683,12 +5735,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				Cereal1Count --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_CEREALBOX1)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5711,12 +5765,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				Cereal2Count --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_CEREALBOX2)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5739,12 +5795,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				PizzaCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_PIZZABOX)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}
@@ -5767,12 +5825,14 @@ void StudioProject::RenderCheckOutItems()
 			{
 				moveItem = 0;
 				LaysCount --;
+				Sound = engine->play2D("Sound\\CheckoutBeep.wav");
 				for(int i = 0;i < paidItems.size();++i)
 				{
 					if(paidItems[i].getobjType() == GEO_POTATOCHIPS)
 					{
 						paidItems[i].setPaid(true);
 						player.getInventory().AddItem(paidItems[i]);
+						paidItems.erase(paidItems.begin()+i); //Erases item once added into invent
 						break;
 					}
 				}

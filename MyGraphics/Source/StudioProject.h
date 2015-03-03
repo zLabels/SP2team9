@@ -341,7 +341,7 @@ private:
 	StopWatch Timer;
 	//==SoundEngine==//
 	ISoundEngine* engine;
-
+	ISound* Sound;
 	//========MiniGame============//
 	//==TimeAttack==//
 	bool TimeAttack;
