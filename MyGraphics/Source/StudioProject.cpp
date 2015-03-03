@@ -1608,12 +1608,11 @@ void StudioProject::Init()
 
 	//Initialize camera settings
 	camera.Init(Vector3(-45, 5, 15), Vector3(-45, 5, 13), Vector3(0, 1, 0));
-	Guard.passInPositionAndTarget(Vector3(0, 0, 0), Vector3(5, 0, 0));
+	Guard.passInPositionAndTarget(Vector3(-50, 0, -21.5),Vector3(-1, 0, 0));
 
-	for (int a = 0; a < 2; a++)
-	{
-		Passerby[a].SetPasserby(Vector3(0, 0, 3));
-	}
+	Passerby[0].SetPasserby(Vector3(0, 0, 3));
+	Passerby[1].SetPasserby(Vector3(0, 0, -3));
+	Passerby[2].SetPasserby(Vector3(0, 0, 31));
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 10000.f);
@@ -2936,12 +2935,21 @@ void StudioProject::Update(double dt)
 
 	Passerby[0].update(dt, camera.position);
 	Passerby[0].FindPlayerDistanceDifferencePasserby(camera.position);
+	Passerby[1].update(dt, camera.position);
+	Passerby[1].FindPlayerDistanceDifferencePasserby(camera.position);
+	Passerby[2].update(dt, camera.position);
+	Passerby[2].FindPlayerDistanceDifferencePasserby(camera.position);
 	
-	if ((camera.position - Passerby[0].getPasserbyPosition()).Length() < 6)
+	if ((camera.position - Passerby[0].getPasserbyPosition()).Length() < 6 ||
+		(camera.position - Passerby[1].getPasserby2Position()).Length() < 6 ||
+		(camera.position - Passerby[2].getPasserby2Position()).Length() < 6)
 	{
 		camera.CollisionWithAi = true;
 	}
-	else if ((camera.position - Passerby[0].getPasserbyPosition()).Length() > 6)
+
+	else if ((camera.position - Passerby[0].getPasserbyPosition()).Length() > 6 ||
+			(camera.position - Passerby[1].getPasserby2Position()).Length() > 6 ||
+			(camera.position - Passerby[2].getPasserby2Position()).Length() > 6)
 	{
 		camera.CollisionWithAi = false;
 	}
@@ -3690,7 +3698,14 @@ void StudioProject::RenderGuard()
 {
 	modelStack.PushMatrix();
 	modelStack.Translate(Guard.getGuardPosition().x, 0, Guard.getGuardPosition().z);
-	modelStack.Rotate(Guard.getDerivedAngle(), 0, 1, 0);
+	if (Guard.getAlertState() == true)
+	{
+		modelStack.Rotate(Guard.getDerivedAngle(), 0, 1, 0);
+	}
+	else
+	{
+		modelStack.Rotate(90, 0, 1, 0);
+	}
 
 
 	modelStack.PushMatrix();
@@ -5624,12 +5639,32 @@ void StudioProject::Render()
 	RenderGuard();
 	modelStack.PopMatrix();
 
-	//Rendering of CustomerModel
+	//Rendering of CustomerModel1
 	modelStack.PushMatrix(); //Moving of customer
 	modelStack.Translate(Passerby[0].getPasserbyPosition().x, 0, Passerby[0].getPasserbyPosition().z);
 	modelStack.PushMatrix();
 	modelStack.Scale(1.2, 1.2, 1.2);
 	modelStack.Rotate(Passerby[0].getPasserbyAngle(), 0, 1, 0);
+	RenderCustomer();
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	//Rendering of CustomerModel2
+	modelStack.PushMatrix(); //Moving of customer
+	modelStack.Translate(Passerby[1].getPasserby2Position().x, 0, Passerby[1].getPasserby2Position().z);
+	modelStack.PushMatrix();
+	modelStack.Scale(1.2, 1.2, 1.2);
+	modelStack.Rotate(Passerby[1].getPasserbyAngle2(), 0, 1, 0);
+	RenderCustomer();
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	//Rendering of CustomerModel3
+	modelStack.PushMatrix(); //Moving of customer
+	modelStack.Translate(Passerby[2].getPasserby3Position().x, Passerby[2].getPasserby3Position().y, Passerby[2].getPasserby3Position().z);
+	modelStack.PushMatrix();
+	modelStack.Scale(1.2, 1.2, 1.2);
+	modelStack.Rotate(Passerby[2].getPasserbyAngle3(), 0, 1, 0);
 	RenderCustomer();
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();

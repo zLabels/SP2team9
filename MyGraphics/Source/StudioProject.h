@@ -387,7 +387,7 @@ private:
 	CItemInventory Page;
 
 	Ai Guard;
-	Ai Passerby[2];
+	Ai Passerby[4];
 
 	//=========Items=========//
 	CItem sardineCan,

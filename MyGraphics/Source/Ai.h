@@ -22,8 +22,13 @@ public:
 
 	float getDerivedAngle();
 	float getPasserbyAngle();
+	float getPasserbyAngle2();
+	float getPasserbyAngle3();
 	Vector3 getGuardPosition();
 	Vector3 getPasserbyPosition();
+	Vector3 getPasserby2Position();
+	Vector3 getPasserby3Position();
+	bool getAlertState();
 
 private:
 	Vector3 guardPos;
@@ -32,10 +37,14 @@ private:
 	Vector3 guardDifference;
 
 	Vector3 PasserbyPos;
+	Vector3 PasserbyPos2;
+	Vector3 PasserbyPos3;
 	Vector3 PasserbyDifference;
 
 	float derivedAngle;
 	float PasserbyAngle;
+	float PasserbyAngle2;
+	float PasserbyAngle3;
 	bool guardAlertState;
 
 	bool Passerby1Phase1, Passerby1Phase2, Passerby1Phase3, Passerby1Phase4;
