@@ -606,6 +606,102 @@ void StudioProject::InitVariables()
 	}
 	a = 0;
 
+	//===========================SECOND FLOOR BACK================//
+	for(int i = 0; i < 65;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0) //When i mod 5 == 0, it will create a spacing 
+		{
+			a += 1;
+		}
+		if (i % 25 == 0 && i == 25 ||
+			i % 40 == 0 && i == 40)
+		{
+			a += 18;
+		}
+		newTRS.SetToTranslation(24.5,27.2,-68+i + a);
+		sardineCan.SetData("Sardine Can", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS,false);
+		Container2.push_back(sardineCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12] + 0.59, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
+		Min.Set(-0.59 + newTRS.a[12], -0.7+newTRS.a[13], -0.35+newTRS.a[14]);
+		sardineBox.SetBox(Max, Min);
+		boxContainer2.push_back(sardineBox);
+	}
+	a = 0;
+
+	//===========================SECOND FLOOR FRONT================//
+	for(int i = 0; i < 65;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0) //When i mod 5 == 0, it will create a spacing 
+		{
+			a += 1;
+		}
+		if (i % 25 == 0 && i == 25 ||
+			i % 40 == 0 && i == 40)
+		{
+			a += 18;
+		}
+		newTRS.SetToTranslation(21.5,27.2,-68+i + a);
+		sardineCan.SetData("Sardine Can", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS, false);
+		Container.push_back(sardineCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12] + 0.59, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
+		Min.Set(-0.59 + newTRS.a[12], -0.7+newTRS.a[13], -0.35+newTRS.a[14]);
+		sardineBox.SetBox(Max, Min);
+		boxContainer.push_back(sardineBox);
+	}
+	a = 0; //reset a t 0
+
+	//===========================SECOND FLOOR FRONT 1ST ROW================//
+	for(int i = 0; i < 65;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0) //When i mod 5 == 0, it will create a spacing 
+		{
+			a += 1;
+		}
+		if (i % 25 == 0 && i == 25 ||
+			i % 40 == 0 && i == 40)
+		{
+			a += 18;
+		}
+		newTRS.SetToTranslation(-16,27.2,-68+i + a);
+		sardineCan.SetData("Sardine Can", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS, false);
+		Container.push_back(sardineCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12] + 0.59, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
+		Min.Set(-0.59 + newTRS.a[12], -0.7+newTRS.a[13], -0.35+newTRS.a[14]);
+		sardineBox.SetBox(Max, Min);
+		boxContainer.push_back(sardineBox);
+	}
+	a = 0; //reset a t 0
+
+	//===========================SECOND FLOOR BACK 1ST ROW================//
+	for(int i = 0; i < 65;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0) //When i mod 5 == 0, it will create a spacing 
+		{
+			a += 1;
+		}
+		if (i % 25 == 0 && i == 25 ||
+			i % 40 == 0 && i == 40)
+		{
+			a += 18;
+		}
+		newTRS.SetToTranslation(-13,27.2,-68+i + a);
+		sardineCan.SetData("Sardine Can", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS, false);
+		Container.push_back(sardineCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12] + 0.59, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
+		Min.Set(-0.59 + newTRS.a[12], -0.7+newTRS.a[13], -0.35+newTRS.a[14]);
+		sardineBox.SetBox(Max, Min);
+		boxContainer.push_back(sardineBox);
+	}
+	a = 0; //reset a t 0
+
 	//===============Pea and Carrots Variables============//
 	newMesh = MeshBuilder::GenerateOBJ("Peas and Carrots can" , "OBJ//canned-food2.obj");
 	newMesh->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -650,6 +746,102 @@ void StudioProject::InitVariables()
 	}
 	a = 0;
 
+	//==========================SECOND FLOOR BACK=================//
+	for(int i = 0; i < 65;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0) //When i mod 5 == 0, it will create a spacing 
+		{
+			a += 1;
+		}
+		if (i % 25 == 0 && i == 25 ||
+			i % 40 == 0 && i == 40)
+		{
+			a += 18;
+		}
+		newTRS.SetToTranslation(24.5,25.2,-68+i + a);
+		PnCCan.SetData("Peas And Carrots Can", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS,false);
+		Container2.push_back(PnCCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		PnC.SetBox(Max, Min);
+		boxContainer2.push_back(PnC);
+	}
+	a = 0;
+
+	//==========================SECOND FLOOR FRONT=================//
+	for(int i = 0; i < 65;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0)
+		{
+			a += 1;
+		}
+		if (i % 25 == 0 && i == 25 ||
+			i % 40 == 0 && i == 40)
+		{
+			a += 18;
+		}
+		newTRS.SetToTranslation(21.5,25.2,-68+i + a);
+		PnCCan.SetData("Peas And Carrots Can", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS,false);
+		Container.push_back(PnCCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-0.1+newTRS.a[13],-0.35+newTRS.a[14]);
+		PnC.SetBox(Max, Min);
+		boxContainer.push_back(PnC);
+	}
+	a = 0;
+
+	//==========================SECOND FLOOR FRONT 1ST ROW=================//
+	for(int i = 0; i < 65;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0) //When i mod 5 == 0, it will create a spacing 
+		{
+			a += 1;
+		}
+		if (i % 25 == 0 && i == 25 ||
+			i % 40 == 0 && i == 40)
+		{
+			a += 18;
+		}
+		newTRS.SetToTranslation(-16,25.2,-68+i + a);
+		PnCCan.SetData("Peas And Carrots Can", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS,false);
+		Container.push_back(PnCCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-0.1+newTRS.a[13],-0.35+newTRS.a[14]);
+		PnC.SetBox(Max, Min);
+		boxContainer.push_back(PnC);
+	}
+	a = 0;
+
+	//==========================SECOND FLOOR FRONT 1ST ROW=================//
+	for(int i = 0; i < 65;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0) //When i mod 5 == 0, it will create a spacing 
+		{
+			a += 1;
+		}
+		if (i % 25 == 0 && i == 25 ||
+			i % 40 == 0 && i == 40)
+		{
+			a += 18;
+		}
+		newTRS.SetToTranslation(-13,25.2,-68+i + a);
+		PnCCan.SetData("Peas And Carrots Can", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS,false);
+		Container.push_back(PnCCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-0.1+newTRS.a[13],-0.35+newTRS.a[14]);
+		PnC.SetBox(Max, Min);
+		boxContainer.push_back(PnC);
+	}
+	a = 0;
+
 	//===============Baked Beans Variables============//
 	newMesh = MeshBuilder::GenerateOBJ("Baked Beans Can" , "OBJ//canned-food3.obj");
 	newMesh->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -684,6 +876,102 @@ void StudioProject::InitVariables()
 			a += 1;
 		}
 		newTRS.SetToTranslation(12,2.3,-8+i + a);
+		BBCan.SetData("Baked Beans Can", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS,false);
+		Container2.push_back(BBCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		BB.SetBox(Max, Min);
+		boxContainer2.push_back(BB);
+	}
+	a = 0;
+
+	//============== SECOND FLOOR BACK================//
+	for(int i = 0; i < 65;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0) //When i mod 5 == 0, it will create a spacing 
+		{
+			a += 1;
+		}
+		if (i % 25 == 0 && i == 25 ||
+			i % 40 == 0 && i == 40)
+		{
+			a += 18;
+		}
+		newTRS.SetToTranslation(24.5,23.3,-68+i + a);
+		BBCan.SetData("Baked Beans Can", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS,false);
+		Container2.push_back(BBCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		BB.SetBox(Max, Min);
+		boxContainer2.push_back(BB);
+	}
+	a = 0;
+
+	//============== SECOND FLOOR FRONT================//
+	for(int i = 0; i < 65;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0)
+		{
+			a += 1;
+		}
+		if (i % 25 == 0 && i == 25 ||
+			i % 40 == 0 && i == 40)
+		{
+			a += 18;
+		}
+		newTRS.SetToTranslation(21.5,23.3,-68+i + a);
+		BBCan.SetData("Baked Beans Can", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS,false);
+		Container.push_back(BBCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		BB.SetBox(Max, Min);
+		boxContainer.push_back(BB);
+	}
+	a = 0;
+
+	//============== SECOND FLOOR FRONT 1ST ROW================//
+	for(int i = 0; i < 65;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0) //When i mod 5 == 0, it will create a spacing 
+		{
+			a += 1;
+		}
+		if (i % 25 == 0 && i == 25 ||
+			i % 40 == 0 && i == 40)
+		{
+			a += 18;
+		}
+		newTRS.SetToTranslation(-16,23.3,-68+i + a);
+		BBCan.SetData("Baked Beans Can", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS,false);
+		Container.push_back(BBCan);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		BB.SetBox(Max, Min);
+		boxContainer.push_back(BB);
+	}
+	a = 0;
+
+	//============== SECOND FLOOR BACK 1ST ROW================//
+	for(int i = 0; i < 65;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 5 == 0 && i > 0) //When i mod 5 == 0, it will create a spacing 
+		{
+			a += 1;
+		}
+		if (i % 25 == 0 && i == 25 ||
+			i % 40 == 0 && i == 40)
+		{
+			a += 18;
+		}
+		newTRS.SetToTranslation(-13,23.3,-68+i + a);
 		BBCan.SetData("Baked Beans Can", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS,false);
 		Container2.push_back(BBCan);
 		Vector3 Min, Max;
@@ -735,7 +1023,7 @@ void StudioProject::InitVariables()
 		{
 			a += 2;
 		}
-		newTRS.SetToTranslation(51.3, 2.7,-75+i + a);
+		newTRS.SetToTranslation(51.2, 2.7,-75+i + a);
 		PizzaBox.SetData("Frozen Pizza", 3.5f, true, newMesh, GEO_PIZZABOX,newTRS,false);
 		Container3.push_back(PizzaBox);
 		Vector3 Min, Max;
@@ -745,6 +1033,44 @@ void StudioProject::InitVariables()
 		boxContainer3.push_back(Pizza);
 	}
 	a = 0;
+
+	//===========================SECOND FLOOR FRONT MIDDLE ROW BACK================//
+	for(int i = 0; i < 108; i += 3)
+	{
+		Mtx44 newTRS;
+		if(i % 12 == 0 && i > 0)
+		{
+			a += 2;
+		}
+		newTRS.SetToTranslation(-51.8,23.8,-74.5+i + a);
+		PizzaBox.SetData("Frozen Pizza", 3.5f, true, newMesh, GEO_PIZZABOX,newTRS,false);
+		Container13.push_back(PizzaBox);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12],newTRS.a[13]+0.8,newTRS.a[14]+1);
+		Min.Set(-3+newTRS.a[12],-0.5+newTRS.a[13],-2+newTRS.a[14]);
+		Pizza.SetBox(Max, Min);
+		boxContainer13.push_back(Pizza);
+	}
+	a = 0; //reset a t 0
+
+	//===========================SECOND FLOOR FRONT MIDDLE ROW BACK================//
+	for(int i = 0; i < 108; i += 3)
+	{
+		Mtx44 newTRS;
+		if(i % 12 == 0 && i > 0)
+		{
+			a += 2;
+		}
+		newTRS.SetToTranslation(-51.8,25.5,-74.5+i + a);
+		PizzaBox.SetData("Frozen Pizza", 3.5f, true, newMesh, GEO_PIZZABOX,newTRS,false);
+		Container13.push_back(PizzaBox);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12],newTRS.a[13]+0.8,newTRS.a[14]+1);
+		Min.Set(-3+newTRS.a[12],-0.5+newTRS.a[13],-2+newTRS.a[14]);
+		Pizza.SetBox(Max, Min);
+		boxContainer13.push_back(Pizza);
+	}
+	a = 0; //reset a t 0
 
 	//===============Coke Zero Can Variables============//
 	newMesh = MeshBuilder::GenerateOBJ("Coke" , "OBJ//drink-can2.obj");
@@ -984,6 +1310,7 @@ void StudioProject::InitVariables()
 		boxContainer9.push_back(PC);
 	}
 	a = 0;
+
 	for(int i = 0; i < 40;i++)
 	{
 		Mtx44 newTRS;
@@ -1037,6 +1364,102 @@ void StudioProject::InitVariables()
 		boxContainer10.push_back(PC);
 	}
 	a = 0;
+
+	//===========================SECOND FLOOR FRONT MIDDLE ROW================//
+	for(int i = 0; i < 50;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 10 == 0 && i > 0 && i != 20 && i != 30) //When i mod 5 == 0, it will create a spacing 
+		{
+			a += 2;
+		}
+		if (i % 20 == 0 && i == 20 ||
+			i % 30 == 0 && i == 30)
+		{
+			a += 26;
+		}
+		newTRS.SetToTranslation(3.2,25.8,-64.8+i + a);
+		PotatoChip.SetData("Lays Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS,false);
+		Container13.push_back(PotatoChip);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
+		PC.SetBox(Max, Min);
+		boxContainer13.push_back(PC);
+	}
+	a = 0; //reset a t 0
+
+	//===========================SECOND FLOOR FRONT MIDDLE ROW================//
+	for(int i = 0; i < 50;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 10 == 0 && i > 0 && i != 20 && i != 30) //When i mod 5 == 0, it will create a spacing 
+		{
+			a += 2;
+		}
+		if (i % 20 == 0 && i == 20 ||
+			i % 30 == 0 && i == 30)
+		{
+			a += 26;
+		}
+		newTRS.SetToTranslation(3.2,23,-64.8+i + a);
+		PotatoChip.SetData("Lays Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS,false);
+		Container13.push_back(PotatoChip);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
+		PC.SetBox(Max, Min);
+		boxContainer13.push_back(PC);
+	}
+	a = 0; //reset a t 0
+
+	//===========================SECOND FLOOR FRONT MIDDLE ROW BACK================//
+	for(int i = 0; i < 50;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 10 == 0 && i > 0 && i != 20 && i != 30) //When i mod 5 == 0, it will create a spacing 
+		{
+			a += 2;
+		}
+		if (i % 20 == 0 && i == 20 ||
+			i % 30 == 0 && i == 30)
+		{
+			a += 26;
+		}
+		newTRS.SetToTranslation(5.5,25.8,-64.8+i + a);
+		PotatoChip.SetData("Lays Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS,false);
+		Container13.push_back(PotatoChip);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
+		PC.SetBox(Max, Min);
+		boxContainer13.push_back(PC);
+	}
+	a = 0; //reset a t 0
+
+	//===========================SECOND FLOOR FRONT MIDDLE ROW BACK================//
+	for(int i = 0; i < 50;i++)
+	{
+		Mtx44 newTRS;
+		if(i % 10 == 0 && i > 0 && i != 20 && i != 30) //When i mod 5 == 0, it will create a spacing 
+		{
+			a += 2;
+		}
+		if (i % 20 == 0 && i == 20 ||
+			i % 30 == 0 && i == 30)
+		{
+			a += 26;
+		}
+		newTRS.SetToTranslation(5.5,23,-64.8+i + a);
+		PotatoChip.SetData("Lays Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS,false);
+		Container13.push_back(PotatoChip);
+		Vector3 Min, Max;
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
+		PC.SetBox(Max, Min);
+		boxContainer13.push_back(PC);
+	}
+	a = 0; //reset a t 0
 
 	//===============Milo Cam Variables============//
 	newMesh = MeshBuilder::GenerateOBJ("Milo Can" , "OBJ//milocan.obj");
@@ -1643,8 +2066,8 @@ void StudioProject::Init()
 
 	//Initialize camera settings
 	camera.Init(Vector3(-45, 5, 15), Vector3(-45, 5, 13), Vector3(0, 1, 0));
-	Guard.passInPositionAndTarget(Vector3(-70, 0, -21.5),Vector3(-70, 0, -22.5));
 
+	Guard.passInPositionAndTarget(Vector3(-70, 0, -21.5),Vector3(-70, 0, -22.5));
 	Passerby[0].SetPasserby(Vector3(0, 0, 3));
 	Passerby[1].SetPasserby(Vector3(0, 0, -3));
 	Passerby[2].SetPasserby(Vector3(0, 0, 31));
@@ -1964,6 +2387,28 @@ void StudioProject::updateTakingItem()
 					}
 				}
 			}
+
+			for(int i = 0; i < boxContainer13.size(); ++i) //Container 12
+			{
+				checking = true;
+				//==========Taking Items from shelf=============//
+				if(Container13[i].getRender() == true)
+				{
+					if((camera.target.x <= boxContainer13[i].max.x) && 
+						(camera.target.y <= boxContainer13[i].max.y) && 
+						(camera.target.z <= boxContainer13[i].max.z) && 
+						(camera.target.x >= boxContainer13[i].min.x) && 
+						(camera.target.y >= boxContainer13[i].min.y) && 
+						(camera.target.z >= boxContainer13[i].min.z))
+					{
+						if(player.getInventory().AddItem(Container13[i]) == true)
+						{
+							Container13[i].setRender(false);
+							break;
+						}
+					}
+				}
+			}
 			checking = false;
 		}
 	}
@@ -2211,6 +2656,26 @@ void StudioProject::updatePuttingBackItem()
 					if(player.getInventory().removeItem(Container12[i]) == true)
 					{
 						Container12[i].setRender(true);
+						break;
+					}
+				}
+			}
+		}
+
+		for(int i = 0; i < boxContainer13.size(); ++i)//Container 13
+		{
+			if(Container13[i].getRender() == false)
+			{
+				if((camera.target.x <= boxContainer13[i].max.x) && 
+					(camera.target.y <= boxContainer13[i].max.y) && 
+					(camera.target.z <= boxContainer13[i].max.z) &&
+					(camera.target.x >= boxContainer13[i].min.x) && 
+					(camera.target.y >= boxContainer13[i].min.y) &&
+					(camera.target.z >= boxContainer13[i].min.z))
+				{
+					if(player.getInventory().removeItem(Container13[i]) == true)
+					{
+						Container13[i].setRender(true);
 						break;
 					}
 				}
@@ -3449,6 +3914,19 @@ void StudioProject::RenderItems()
 			modelStack.PopMatrix(); //pop back to origin
 		}
 	}
+
+	for(int i = 0; i < Container13.size(); ++i) //Container 13
+	{
+		if(Container13[i].getRender() == true)
+		{
+			//========MIDDLE ROW BACK=========//
+			modelStack.PushMatrix();
+			modelStack.LoadMatrix(Container13[i].getTRS());
+			modelStack.Rotate(90,0,1,0);
+			RenderMesh(Container13[i].getMesh(),B_Light);
+			modelStack.PopMatrix(); //pop back to origin
+		}
+	}
 	//Camera target
 	/*modelStack.PushMatrix();
 	modelStack.Translate(camera.target.x,camera.target.y, camera.target.z);
@@ -4299,6 +4777,42 @@ void StudioProject::RenderItemsInfo()
 				(camera.target.x >= boxContainer12[i].min.x) && 
 				(camera.target.y >= boxContainer12[i].min.y) && 
 				(camera.target.z >= boxContainer12[i].min.z))
+			{
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'Q' to Return", Color(1, 1, 1), 2, 13.55, 14);
+			}
+		}
+	}
+	/*=====================================================
+	CONTAINER 13
+	========================================================*/
+	for(int i = 0; i < boxContainer13.size(); ++i) //Container 12
+	{
+		if(Container13[i].getRender() == true)
+		{
+			if((camera.target.x <= boxContainer13[i].max.x) &&
+				(camera.target.y <= boxContainer13[i].max.y) && 
+				(camera.target.z <= boxContainer13[i].max.z) &&
+				(camera.target.x >= boxContainer13[i].min.x) && 
+				(camera.target.y >= boxContainer13[i].min.y) && 
+				(camera.target.z >= boxContainer13[i].min.z))
+			{
+				std::ostringstream ssPrice;
+				ssPrice <<  Container13[i].getPrice();
+				string price = ssPrice.str();
+
+				RenderTextOnScreen(meshList[GEO_TEXT],"Name:" + Container13[i].getName(), Color(1, 1, 1), 2, 13.55, 14);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Price:" + price, Color(1, 1, 1), 2, 13.55, 13);
+				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'E' to Take", Color(1, 1, 1), 2, 13.55, 12);
+			}
+		}
+		if(Container13[i].getRender() == false)
+		{
+			if((camera.target.x <= boxContainer13[i].max.x) &&
+				(camera.target.y <= boxContainer13[i].max.y) && 
+				(camera.target.z <= boxContainer13[i].max.z) &&
+				(camera.target.x >= boxContainer13[i].min.x) && 
+				(camera.target.y >= boxContainer13[i].min.y) && 
+				(camera.target.z >= boxContainer13[i].min.z))
 			{
 				RenderTextOnScreen(meshList[GEO_TEXT],"Press 'Q' to Return", Color(1, 1, 1), 2, 13.55, 14);
 			}

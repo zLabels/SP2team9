@@ -426,7 +426,8 @@ private:
 				Container9,
 				Container10,
 				Container11,
-				Container12;
+				Container12,
+				Container13;
 
 	vector<hitBox> boxContainer, 
 				boxContainer2,
@@ -440,6 +441,7 @@ private:
 				boxContainer10,
 				boxContainer11,
 				boxContainer12,
+				boxContainer13,
 				CashierBox;
 
 	Camera3 camera;
