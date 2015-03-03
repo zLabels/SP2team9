@@ -64,39 +64,37 @@ void Ai::update(float dt, Vector3 camera)
 	{
 		if (Application::IsKeyPressed('8'))
 		{
-			/*if (guardPos.x > guardDifference.x)
-			{
-				guardPos.x -= sin(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
-			}
-			else if (guardPos.x <= guardDifference.x)
-			{
-				guardPos.x += sin(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
-			}
+			std::cout << guardPos << std::endl;
+			std::cout << camera << std::endl;
+			/*guardPos.z -= cos(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
+			guardPos.x -= sin(Math::DegreeToRadian(derivedAngle)) * 10 * dt;*/
 
-			if (guardPos.z > guardDifference.z)
+			if (guardDifference.Normalized().x > 0)
 			{
-				guardPos.z += cos(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
-			}
-			else if (guardPos.z <= guardDifference.z)
-			{
-				guardPos.z -= cos(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
-			}*/
-			/*if (guardDifference.Normalized().x > 0)
-			{
-				guardPos.x += sin(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
+				guardPos.x += 2 * dt;
 			}
 			else if (guardDifference.Normalized().x < 0)
 			{
-				guardPos.x -= sin(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
+				guardPos.x -= 2 * dt;
 			}
+			else
+			{
+				guardPos.x += 0;
+			}
+
 			if (guardDifference.Normalized().z > 0)
 			{
-				guardPos.z += cos(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
+				guardPos.z += 2 * dt;
 			}
 			else if (guardDifference.Normalized().z < 0)
 			{
-				guardPos.z -= cos(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
-			}*/
+				guardPos.z -= 2 * dt;
+			}
+			else
+			{
+				guardPos.z += 0;
+			}
+
 		}
 	}
 
@@ -161,6 +159,7 @@ void Ai::update(float dt, Vector3 camera)
 			else if (guardPos.z <= guardDifference.z)
 			{
 				guardPos.z -= cos(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
+
 			}*/
 
 	//========================PASSERBY 1==========================//
