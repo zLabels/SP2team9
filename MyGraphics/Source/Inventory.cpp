@@ -49,7 +49,7 @@ bool CInventory::removeItem(CItem temp)
 {
 	for(int i = 0; i < Inventory.size(); ++i)
 	{
-		if(Inventory[i].getobjType() == temp.getobjType())
+		if(Inventory[i].getobjType() == temp.getobjType() && Inventory[i].getPaid() == temp.getPaid())
 		{
 			Inventory.erase(Inventory.begin()+i);
 			return true;

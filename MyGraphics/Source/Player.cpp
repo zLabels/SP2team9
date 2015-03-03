@@ -2,7 +2,7 @@
 
 CPlayer::CPlayer(void)
 {
-	Money = 0.f;
+	Money = 50.f;
 }
 
 CPlayer::~CPlayer(void)

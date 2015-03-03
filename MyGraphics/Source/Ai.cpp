@@ -35,7 +35,7 @@ void Ai::update(float dt, Vector3 camera)
 	{
 		derivedAngle *= -1;
 	}
-	std::cout << derivedAngle << std::endl;
+	//std::cout << derivedAngle << std::endl;
 	
 	static float elapsedTime1 = 0, elapsedTime2 = 0;
 	elapsedTime1 = fmod(Timer.getElapsedTime(), 1);
@@ -65,105 +65,10 @@ void Ai::update(float dt, Vector3 camera)
 	{
 		if (Application::IsKeyPressed('8'))
 		{
-			/*std::cout << guardPos << std::endl;
-			std::cout << camera << std::endl;*/
-			//Vector3 DirectionVector = camera - guardPos;
-				guardPos += (guardDifference.Normalized()) * 10 * dt;
-			/*guardPos.z -= cos(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
-			guardPos.x -= sin(Math::DegreeToRadian(derivedAngle)) * 10 * dt;*/
-
-			/*if (guardDifference.Normalized().x > 0)
-			{
-				guardPos.x += 2 * dt;
-			}
-			else if (guardDifference.Normalized().x < 0)
-			{
-				guardPos.x -= 2 * dt;
-			}
-			else
-			{
-				guardPos.x += 0;
-			}
-
-			if (guardDifference.Normalized().z > 0)
-			{
-				guardPos.z += 2 * dt;
-			}
-			else if (guardDifference.Normalized().z < 0)
-			{
-				guardPos.z -= 2 * dt;
-			}
-			else
-			{
-				guardPos.z += 0;
-			}*/
-
+			guardPos += (guardDifference.Normalized()) * 10 * dt;
 		}
 	}
 
-	/*
-	derivedAngle = Math::RadianToDegree(acos(guardView.Dot(camera) / guardView.Length() * guardDifference.Length()));
-	//derivedAngle = Math::RadianToDegree(acos(Vector3(1,0,0).Dot(camera) / (Vector3(1,0,0).Length() * guardDifference.Length())));
-	if (camera.z <= 0)
-	{
-		derivedAngle  = derivedAngle + 270;
-	}
-	else
-	{
-		derivedAngle = -(derivedAngle + 90);
-	}
-	/*
-	if (Vector3(0,0,-1).Cross(camera).y > 1)
-		derivedAngle *= 1 ;
-	else
-		derivedAngle *=-1 ;
-	
-	/*static float elapsedTime1 = 0, elapsedTime2 = 0;
-	elapsedTime1 = fmod(Timer.getElapsedTime(), 1);
-	if (elapsedTime2 <= 1)
-	{
-		elapsedTime2 += elapsedTime1;
-	}
-	else
-	{
-		elapsedTime2 += 0;
-	}
-
-	if (Application::IsKeyPressed('0') && elapsedTime2 >= 1)
-	{
-		if (guardAlertState == false)
-		{
-			guardAlertState = true;
-		}
-		else if (guardAlertState == true)
-		{
-			guardAlertState = false;
-		}
-		elapsedTime2 -= 1;
-	}
-
-	if (guardAlertState == true)
-	{
-		if (Application::IsKeyPressed('8'))
-		{
-			if (guardPos.x > guardDifference.x)
-			{
-				guardPos.x -= sin(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
-			}
-			else if (guardPos.x <= guardDifference.x)
-			{
-				guardPos.x += sin(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
-			}
-
-			if (guardPos.z > guardDifference.z)
-			{
-				guardPos.z += cos(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
-			}
-			else if (guardPos.z <= guardDifference.z)
-			{
-				guardPos.z -= cos(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
-
-			}*/
 
 	//========================PASSERBY 1==========================//
 	if (PasserbyDifference.Length() > 6)

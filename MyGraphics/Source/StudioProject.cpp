@@ -2208,6 +2208,7 @@ void StudioProject::updateCheckingOut()
 				(camera.position.y >= CashierBox[i].min.y) && 
 				(camera.position.z >= CashierBox[i].min.z))
 			{
+				paidItems.clear();
 				float cost = 0.f;
 				vector<CItem> toDelete;
 				//Calculating Cost of items taken by player
@@ -2231,6 +2232,7 @@ void StudioProject::updateCheckingOut()
 						player.getInventory().removeItem(toDelete[i]);
 					}
 					player.setMoney(player.getMoney() - cost);
+					toDelete.clear();
 				}
 			}
 		}
@@ -2850,7 +2852,7 @@ void StudioProject::Update(double dt)
 	if (Application::IsKeyPressed('N'))
 		moving -= (float) (10 * dt);
 	//moving -= (float) (5 * dt);
-	cout<<moving<<endl;
+	//cout<<moving<<endl;
 
 	camera.Update(dt);
 
@@ -4606,7 +4608,6 @@ void StudioProject::RenderCheckOutItems()
 				Lays = false;
 			}
 		}
-
 	}
 	// =============MIddle cashier===================//
 	if(camera.position.z >= 4.5 && camera.position.z <= 6.9 && camera.position.y >=4 && camera.position.y <= 10 && camera.position.x >= -26 && camera.position.x <= -22) 
@@ -4910,7 +4911,6 @@ void StudioProject::RenderCheckOutItems()
 				Lays = false;
 			}
 		}
-
 	}
 
 	//Extreme right cashier
@@ -5220,7 +5220,6 @@ void StudioProject::RenderCheckOutItems()
 				Lays = false;
 			}
 		}
-
 	}
 }
 /******************************************************************************/
