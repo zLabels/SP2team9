@@ -63,6 +63,7 @@ void Ai::update(float dt, Vector3 camera)
 
 	if (guardAlertState == true)
 	{
+		//moves guard to player
 		if (Application::IsKeyPressed('8'))
 		{
 			guardPos += (guardDifference.Normalized()) * 10 * dt;
