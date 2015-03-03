@@ -108,6 +108,7 @@ void StudioProject::InitMesh()
 	meshList[GEO_COLDFOODSHELF]->material.kShininess = 8.f;
 	meshList[GEO_COLDFOODSHELF] ->textureID = LoadTGA("Image//Shelf_Texture.tga");
 
+
 	meshList[GEO_SHELF] = MeshBuilder::GenerateOBJ("Market" , "OBJ//shelf1.obj");
 	meshList[GEO_SHELF]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[GEO_SHELF]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
@@ -368,7 +369,7 @@ void StudioProject::InitMesh()
 
 	//=======================Item Inventory Page================//
 	meshList[itemInventory] = MeshBuilder::GenerateQuad("item Inventory", Color(1, 1, 1), 1.f , 1.f);
-	meshList[itemInventory]->textureID = LoadTGA("Image//Item.tga");
+	meshList[itemInventory]->textureID = LoadTGA("UI sprites//UI-inventory.tga");
 	Page.SetBackground("Item Inventory background", itemInventory);
 
 	meshList[UI_SARDINE_CAN] = MeshBuilder::GenerateQuad("sardine can", Color(1, 1, 1), 1.f , 1.f);
@@ -2849,7 +2850,7 @@ void StudioProject::Update(double dt)
 	if (Application::IsKeyPressed('N'))
 		moving -= (float) (10 * dt);
 	//moving -= (float) (5 * dt);
-	//cout<<moving<<endl;
+	cout<<moving<<endl;
 
 	camera.Update(dt);
 
@@ -3028,6 +3029,7 @@ void StudioProject::RenderSupermarket()
 	RenderMesh(meshList[GEO_DUSTBIN],B_Light);
 	modelStack.PopMatrix();
 	//x=-66 y= 4.8 z= -21.4
+
 	//Extreme left cold food shelf
 	for(int i = -2; i < 3; ++i)
 	{
@@ -5786,17 +5788,19 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 	//	mesh->Render((unsigned)text[i] * 6, 6);
 	//}
 	modelStack.PushMatrix();
-	modelStack.Scale(0.5, 0.5, 0.5);
-	modelStack.Translate(-1.43656 + -0.065, -1.43656 + 0.15, 0);
+	modelStack.Translate(-0.6, -0.6,0);
+	modelStack.Scale(0.8, 0.8, 0.8);
+	/*modelStack.Translate(-1.43656 + -0.065, -1.43656 + 0.15, 0);*/
 	RenderMesh(meshList[itemInventory], false);
 	modelStack.PopMatrix();
 
 	if (Page.getItemsTaken1() == true)
 	{
 		modelStack.PushMatrix();
-		modelStack.Scale(0.1, 0.1, 0.1);
-		modelStack.Translate(-9.5, -5.8, 0);
-		if (player.getInventory().getItem(1).getName() == Page.getSardineName())
+		modelStack.Translate(-0.91, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
+		if (player.getInventory().getItem(1).getName() == Page.getSardineName() 
+			&& player.getInventory().getItem(1).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
 		}
@@ -5846,8 +5850,8 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 	if (Page.getItemsTaken2() == true)
 	{
 		modelStack.PushMatrix();
-		modelStack.Scale(0.1, 0.1, 0.1);
-		modelStack.Translate(-8.5, -5.8, 0);
+		modelStack.Translate(-0.84, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
 		if (player.getInventory().getItem(2).getName() == Page.getSardineName())
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
@@ -5898,8 +5902,8 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 	if (Page.getItemsTaken3() == true)
 	{
 		modelStack.PushMatrix();
-		modelStack.Scale(0.1, 0.1, 0.1);
-		modelStack.Translate(-7.5, -5.8, 0);
+		modelStack.Translate(-0.77, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
 		if (player.getInventory().getItem(3).getName() == Page.getSardineName())
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
@@ -5949,8 +5953,8 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 	if (Page.getItemsTaken4() == true)
 	{
 		modelStack.PushMatrix();
-		modelStack.Scale(0.1, 0.1, 0.1);
-		modelStack.Translate(-6.5, -5.8, 0);
+		modelStack.Translate(-0.70, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
 		if (player.getInventory().getItem(4).getName() == Page.getSardineName())
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
@@ -6001,8 +6005,8 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 	if (Page.getItemsTaken5() == true)
 	{
 		modelStack.PushMatrix();
-		modelStack.Scale(0.1, 0.1, 0.1);
-		modelStack.Translate(-5.5, -5.8, 0);
+		modelStack.Translate(-0.63, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
 		if (player.getInventory().getItem(5).getName() == Page.getSardineName())
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
@@ -6053,8 +6057,8 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 	if (Page.getItemsTaken6() == true)
 	{
 		modelStack.PushMatrix();
-		modelStack.Scale(0.1, 0.1, 0.1);
-		modelStack.Translate(-9.5, -7.5, 0);
+		modelStack.Translate(-0.56, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
 		if (player.getInventory().getItem(6).getName() == Page.getSardineName())
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
@@ -6105,8 +6109,8 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 	if (Page.getItemsTaken7() == true)
 	{
 		modelStack.PushMatrix();
-		modelStack.Scale(0.1, 0.1, 0.1);
-		modelStack.Translate(-8.5, -7.5, 0);
+		modelStack.Translate(-0.495, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
 		if (player.getInventory().getItem(7).getName() == Page.getSardineName())
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
@@ -6157,8 +6161,8 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 	if (Page.getItemsTaken8() == true)
 	{
 		modelStack.PushMatrix();
-		modelStack.Scale(0.1, 0.1, 0.1);
-		modelStack.Translate(-7.5, -7.5, 0);
+		modelStack.Translate(-0.425, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
 		if (player.getInventory().getItem(8).getName() == Page.getSardineName())
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
@@ -6209,8 +6213,8 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 	if (Page.getItemsTaken9() == true)
 	{
 		modelStack.PushMatrix();
-		modelStack.Scale(0.1, 0.1, 0.1);
-		modelStack.Translate(-6.5, -7.5, 0);
+		modelStack.Translate(-0.36, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
 		if (player.getInventory().getItem(9).getName() == Page.getSardineName())
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
@@ -6261,8 +6265,8 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 	if (Page.getItemsTaken10() == true)
 	{
 		modelStack.PushMatrix();
-		modelStack.Scale(0.1, 0.1, 0.1);
-		modelStack.Translate(-5.5, -7.5, 0);
+		modelStack.Translate(-0.29, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
 		if (player.getInventory().getItem(10).getName() == Page.getSardineName())
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
