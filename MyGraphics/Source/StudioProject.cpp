@@ -108,7 +108,6 @@ void StudioProject::InitMesh()
 	meshList[GEO_COLDFOODSHELF]->material.kShininess = 8.f;
 	meshList[GEO_COLDFOODSHELF] ->textureID = LoadTGA("Image//Shelf_Texture.tga");
 
-
 	meshList[GEO_SHELF] = MeshBuilder::GenerateOBJ("Market" , "OBJ//shelf1.obj");
 	meshList[GEO_SHELF]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
 	meshList[GEO_SHELF]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
@@ -415,6 +414,40 @@ void StudioProject::InitMesh()
 	meshList[UI_MILOCAN] = MeshBuilder::GenerateQuad("pizza box", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_MILOCAN]->textureID = LoadTGA("UI sprites/UI-milocan.tga");
 	Page.setMilo("Milo Can", UI_MILOCAN);
+
+	meshList[UI_SARDINE_CAN_PAID] = MeshBuilder::GenerateQuad("paid sardine can", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_SARDINE_CAN_PAID]->textureID = LoadTGA("UI sprites/UI-canned_food_1_paid.tga");
+
+	meshList[UI_PEA_N_CARROTS_PAID] = MeshBuilder::GenerateQuad("paid sardine can", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_PEA_N_CARROTS_PAID]->textureID = LoadTGA("UI sprites/UI-canned_food_2_paid.tga");
+
+	meshList[UI_BAKED_BEANS_CAN_PAID] = MeshBuilder::GenerateQuad("paid sardine can", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_BAKED_BEANS_CAN_PAID]->textureID = LoadTGA("UI sprites/UI-canned_food_3_paid.tga");
+
+	meshList[UI_PIZZABOX_PAID] = MeshBuilder::GenerateQuad("paid sardine can", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_PIZZABOX_PAID]->textureID = LoadTGA("UI sprites/UI-pizza_paid.tga");
+
+	meshList[UI_POTATOCHIPS_PAID] = MeshBuilder::GenerateQuad("paid sardine can", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_POTATOCHIPS_PAID]->textureID = LoadTGA("UI sprites/UI-potato_chips_paid.tga");
+
+	meshList[UI_COKE_CAN_PAID] = MeshBuilder::GenerateQuad("paid sardine can", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_COKE_CAN_PAID]->textureID = LoadTGA("UI sprites/UI-drink_can1_paid.tga");
+
+	meshList[UI_PEPSI_CAN_PAID] = MeshBuilder::GenerateQuad("paid sardine can", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_PEPSI_CAN_PAID]->textureID = LoadTGA("UI sprites/UI-drink_can3_paid.tga");
+
+	meshList[UI_COKE_ZERO_CAN_PAID] = MeshBuilder::GenerateQuad("paid sardine can", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_COKE_ZERO_CAN_PAID]->textureID = LoadTGA("UI sprites/UI-drink_can2_paid.tga");
+
+	meshList[UI_CEREALBOX1_PAID] = MeshBuilder::GenerateQuad("paid sardine can", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_CEREALBOX1_PAID]->textureID = LoadTGA("UI sprites/UI-Cereal-box1_paid.tga");
+
+	meshList[UI_CEREALBOX2_PAID] = MeshBuilder::GenerateQuad("paid sardine can", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_CEREALBOX2_PAID]->textureID = LoadTGA("UI sprites/UI-cereal_box2_paid.tga");
+
+	meshList[UI_MILOCAN_PAID] = MeshBuilder::GenerateQuad("paid sardine can", Color(1, 1, 1), 1.f , 1.f);
+	meshList[UI_MILOCAN_PAID]->textureID = LoadTGA("UI sprites/UI-milocan_paid.tga");
+	
 
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
@@ -5803,43 +5836,53 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
 		}
-		if (player.getInventory().getItem(1).getName() == Page.getPncName())
+		if (player.getInventory().getItem(1).getName() == Page.getPncName() 
+			&& player.getInventory().getItem(1).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPncMesh()], false);
 		}
-		if (player.getInventory().getItem(1).getName() == Page.getBakedBeanName())
+		if (player.getInventory().getItem(1).getName() == Page.getBakedBeanName() 
+			&& player.getInventory().getItem(1).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getBakedBeanMesh()], false);
 		}
-		if (player.getInventory().getItem(1).getName() == Page.getPizzaboxName())
+		if (player.getInventory().getItem(1).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(1).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPizzaboxMesh()], false);
 		}
-		if (player.getInventory().getItem(1).getName() == Page.getCerealbox1Name())
+		if (player.getInventory().getItem(1).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(1).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox1Mesh()], false);
 		}
-		if (player.getInventory().getItem(1).getName() == Page.getCerealbox2Name())
+		if (player.getInventory().getItem(1).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(1).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox2Mesh()], false);
 		}
-		if (player.getInventory().getItem(1).getName() == Page.getPotatoChipName())
+		if (player.getInventory().getItem(1).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(1).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPotatoChipMesh()], false);
 		}
-		if (player.getInventory().getItem(1).getName() == Page.getCokeName())
+		if (player.getInventory().getItem(1).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(1).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeMesh()], false);
 		}
-		if (player.getInventory().getItem(1).getName() == Page.getCokeZeroName())
+		if (player.getInventory().getItem(1).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(1).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeZeroMesh()], false);
 		}
-		if (player.getInventory().getItem(1).getName() == Page.getPepsiName())
+		if (player.getInventory().getItem(1).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(1).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPepsiMesh()], false);
 		}
-		if (player.getInventory().getItem(1).getName() == Page.getMiloName())
+		if (player.getInventory().getItem(1).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(1).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getMiloMesh()], false);
 		}
@@ -5851,47 +5894,58 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 		modelStack.PushMatrix();
 		modelStack.Translate(-0.84, -0.95, 0);
 		modelStack.Scale(0.07, 0.07, 0.07);
-		if (player.getInventory().getItem(2).getName() == Page.getSardineName())
+		if (player.getInventory().getItem(2).getName() == Page.getSardineName() 
+			&& player.getInventory().getItem(2).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
 		}
-		if (player.getInventory().getItem(2).getName() == Page.getPncName())
+		if (player.getInventory().getItem(2).getName() == Page.getPncName()
+			&& player.getInventory().getItem(2).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPncMesh()], false);
 		}
-		if (player.getInventory().getItem(2).getName() == Page.getBakedBeanName())
+		if (player.getInventory().getItem(2).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(2).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getBakedBeanMesh()], false);
 		}
-		if (player.getInventory().getItem(2).getName() == Page.getPizzaboxName())
+		if (player.getInventory().getItem(2).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(2).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPizzaboxMesh()], false);
 		}
-		if (player.getInventory().getItem(2).getName() == Page.getCerealbox1Name())
+		if (player.getInventory().getItem(2).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(2).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox1Mesh()], false);
 		}
-		if (player.getInventory().getItem(2).getName() == Page.getCerealbox2Name())
+		if (player.getInventory().getItem(2).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(2).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox2Mesh()], false);
 		}
-		if (player.getInventory().getItem(2).getName() == Page.getPotatoChipName())
+		if (player.getInventory().getItem(2).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(2).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPotatoChipMesh()], false);
 		}
-		if (player.getInventory().getItem(2).getName() == Page.getCokeName())
+		if (player.getInventory().getItem(2).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(2).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeMesh()], false);
 		}
-		if (player.getInventory().getItem(2).getName() == Page.getCokeZeroName())
+		if (player.getInventory().getItem(2).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(2).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeZeroMesh()], false);
 		}
-		if (player.getInventory().getItem(2).getName() == Page.getPepsiName())
+		if (player.getInventory().getItem(2).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(2).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPepsiMesh()], false);
 		}
-		if (player.getInventory().getItem(2).getName() == Page.getMiloName())
+		if (player.getInventory().getItem(2).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(2).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getMiloMesh()], false);
 		}
@@ -5903,47 +5957,58 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 		modelStack.PushMatrix();
 		modelStack.Translate(-0.77, -0.95, 0);
 		modelStack.Scale(0.07, 0.07, 0.07);
-		if (player.getInventory().getItem(3).getName() == Page.getSardineName())
+		if (player.getInventory().getItem(3).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(3).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
 		}
-		if (player.getInventory().getItem(3).getName() == Page.getPncName())
+		if (player.getInventory().getItem(3).getName() == Page.getPncName()
+			&& player.getInventory().getItem(3).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPncMesh()], false);
 		}
-		if (player.getInventory().getItem(3).getName() == Page.getBakedBeanName())
+		if (player.getInventory().getItem(3).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(3).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getBakedBeanMesh()], false);
 		}
-		if (player.getInventory().getItem(3).getName() == Page.getPizzaboxName())
+		if (player.getInventory().getItem(3).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(3).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPizzaboxMesh()], false);
 		}
-		if (player.getInventory().getItem(3).getName() == Page.getCerealbox1Name())
+		if (player.getInventory().getItem(3).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(3).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox1Mesh()], false);
 		}
-		if (player.getInventory().getItem(3).getName() == Page.getCerealbox2Name())
+		if (player.getInventory().getItem(3).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(3).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox2Mesh()], false);
 		}
-		if (player.getInventory().getItem(3).getName() == Page.getPotatoChipName())
+		if (player.getInventory().getItem(3).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(3).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPotatoChipMesh()], false);
 		}
-		if (player.getInventory().getItem(3).getName() == Page.getCokeName())
+		if (player.getInventory().getItem(3).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(3).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeMesh()], false);
 		}
-		if (player.getInventory().getItem(3).getName() == Page.getCokeZeroName())
+		if (player.getInventory().getItem(3).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(3).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeZeroMesh()], false);
 		}
-		if (player.getInventory().getItem(3).getName() == Page.getPepsiName())
+		if (player.getInventory().getItem(3).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(3).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPepsiMesh()], false);
 		}
-		if (player.getInventory().getItem(3).getName() == Page.getMiloName())
+		if (player.getInventory().getItem(3).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(3).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getMiloMesh()], false);
 		}
@@ -5954,47 +6019,58 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 		modelStack.PushMatrix();
 		modelStack.Translate(-0.70, -0.95, 0);
 		modelStack.Scale(0.07, 0.07, 0.07);
-		if (player.getInventory().getItem(4).getName() == Page.getSardineName())
+		if (player.getInventory().getItem(4).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(4).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
 		}
-		if (player.getInventory().getItem(4).getName() == Page.getPncName())
+		if (player.getInventory().getItem(4).getName() == Page.getPncName()
+			&& player.getInventory().getItem(4).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPncMesh()], false);
 		}
-		if (player.getInventory().getItem(4).getName() == Page.getBakedBeanName())
+		if (player.getInventory().getItem(4).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(4).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getBakedBeanMesh()], false);
 		}
-		if (player.getInventory().getItem(4).getName() == Page.getPizzaboxName())
+		if (player.getInventory().getItem(4).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(4).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPizzaboxMesh()], false);
 		}
-		if (player.getInventory().getItem(4).getName() == Page.getCerealbox1Name())
+		if (player.getInventory().getItem(4).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(4).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox1Mesh()], false);
 		}
-		if (player.getInventory().getItem(4).getName() == Page.getCerealbox2Name())
+		if (player.getInventory().getItem(4).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(4).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox2Mesh()], false);
 		}
-		if (player.getInventory().getItem(4).getName() == Page.getPotatoChipName())
+		if (player.getInventory().getItem(4).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(4).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPotatoChipMesh()], false);
 		}
-		if (player.getInventory().getItem(4).getName() == Page.getCokeName())
+		if (player.getInventory().getItem(4).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(4).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeMesh()], false);
 		}
-		if (player.getInventory().getItem(4).getName() == Page.getCokeZeroName())
+		if (player.getInventory().getItem(4).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(4).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeZeroMesh()], false);
 		}
-		if (player.getInventory().getItem(4).getName() == Page.getPepsiName())
+		if (player.getInventory().getItem(4).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(4).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPepsiMesh()], false);
 		}
-		if (player.getInventory().getItem(4).getName() == Page.getMiloName())
+		if (player.getInventory().getItem(4).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(4).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getMiloMesh()], false);
 		}
@@ -6006,47 +6082,58 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 		modelStack.PushMatrix();
 		modelStack.Translate(-0.63, -0.95, 0);
 		modelStack.Scale(0.07, 0.07, 0.07);
-		if (player.getInventory().getItem(5).getName() == Page.getSardineName())
+		if (player.getInventory().getItem(5).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(5).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
 		}
-		if (player.getInventory().getItem(5).getName() == Page.getPncName())
+		if (player.getInventory().getItem(5).getName() == Page.getPncName()
+			&& player.getInventory().getItem(5).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPncMesh()], false);
 		}
-		if (player.getInventory().getItem(5).getName() == Page.getBakedBeanName())
+		if (player.getInventory().getItem(5).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(5).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getBakedBeanMesh()], false);
 		}
-		if (player.getInventory().getItem(5).getName() == Page.getPizzaboxName())
+		if (player.getInventory().getItem(5).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(5).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPizzaboxMesh()], false);
 		}
-		if (player.getInventory().getItem(5).getName() == Page.getCerealbox1Name())
+		if (player.getInventory().getItem(5).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(5).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox1Mesh()], false);
 		}
-		if (player.getInventory().getItem(5).getName() == Page.getCerealbox2Name())
+		if (player.getInventory().getItem(5).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(5).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox2Mesh()], false);
 		}
-		if (player.getInventory().getItem(5).getName() == Page.getPotatoChipName())
+		if (player.getInventory().getItem(5).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(5).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPotatoChipMesh()], false);
 		}
-		if (player.getInventory().getItem(5).getName() == Page.getCokeName())
+		if (player.getInventory().getItem(5).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(5).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeMesh()], false);
 		}
-		if (player.getInventory().getItem(5).getName() == Page.getCokeZeroName())
+		if (player.getInventory().getItem(5).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(5).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeZeroMesh()], false);
 		}
-		if (player.getInventory().getItem(5).getName() == Page.getPepsiName())
+		if (player.getInventory().getItem(5).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(5).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPepsiMesh()], false);
 		}
-		if (player.getInventory().getItem(5).getName() == Page.getMiloName())
+		if (player.getInventory().getItem(5).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(5).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getMiloMesh()], false);
 		}
@@ -6058,47 +6145,58 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 		modelStack.PushMatrix();
 		modelStack.Translate(-0.56, -0.95, 0);
 		modelStack.Scale(0.07, 0.07, 0.07);
-		if (player.getInventory().getItem(6).getName() == Page.getSardineName())
+		if (player.getInventory().getItem(6).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(6).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
 		}
-		if (player.getInventory().getItem(6).getName() == Page.getPncName())
+		if (player.getInventory().getItem(6).getName() == Page.getPncName()
+			&& player.getInventory().getItem(6).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPncMesh()], false);
 		}
-		if (player.getInventory().getItem(6).getName() == Page.getBakedBeanName())
+		if (player.getInventory().getItem(6).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(6).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getBakedBeanMesh()], false);
 		}
-		if (player.getInventory().getItem(6).getName() == Page.getPizzaboxName())
+		if (player.getInventory().getItem(6).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(6).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPizzaboxMesh()], false);
 		}
-		if (player.getInventory().getItem(6).getName() == Page.getCerealbox1Name())
+		if (player.getInventory().getItem(6).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(6).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox1Mesh()], false);
 		}
-		if (player.getInventory().getItem(6).getName() == Page.getCerealbox2Name())
+		if (player.getInventory().getItem(6).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(6).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox2Mesh()], false);
 		}
-		if (player.getInventory().getItem(6).getName() == Page.getPotatoChipName())
+		if (player.getInventory().getItem(6).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(6).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPotatoChipMesh()], false);
 		}
-		if (player.getInventory().getItem(6).getName() == Page.getCokeName())
+		if (player.getInventory().getItem(6).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(6).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeMesh()], false);
 		}
-		if (player.getInventory().getItem(6).getName() == Page.getCokeZeroName())
+		if (player.getInventory().getItem(6).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(6).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeZeroMesh()], false);
 		}
-		if (player.getInventory().getItem(6).getName() == Page.getPepsiName())
+		if (player.getInventory().getItem(6).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(6).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPepsiMesh()], false);
 		}
-		if (player.getInventory().getItem(6).getName() == Page.getMiloName())
+		if (player.getInventory().getItem(6).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(6).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getMiloMesh()], false);
 		}
@@ -6110,47 +6208,58 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 		modelStack.PushMatrix();
 		modelStack.Translate(-0.495, -0.95, 0);
 		modelStack.Scale(0.07, 0.07, 0.07);
-		if (player.getInventory().getItem(7).getName() == Page.getSardineName())
+		if (player.getInventory().getItem(7).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(7).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
 		}
-		if (player.getInventory().getItem(7).getName() == Page.getPncName())
+		if (player.getInventory().getItem(7).getName() == Page.getPncName()
+			&& player.getInventory().getItem(7).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPncMesh()], false);
 		}
-		if (player.getInventory().getItem(7).getName() == Page.getBakedBeanName())
+		if (player.getInventory().getItem(7).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(7).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getBakedBeanMesh()], false);
 		}
-		if (player.getInventory().getItem(7).getName() == Page.getPizzaboxName())
+		if (player.getInventory().getItem(7).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(7).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPizzaboxMesh()], false);
 		}
-		if (player.getInventory().getItem(7).getName() == Page.getCerealbox1Name())
+		if (player.getInventory().getItem(7).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(7).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox1Mesh()], false);
 		}
-		if (player.getInventory().getItem(7).getName() == Page.getCerealbox2Name())
+		if (player.getInventory().getItem(7).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(7).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox2Mesh()], false);
 		}
-		if (player.getInventory().getItem(7).getName() == Page.getPotatoChipName())
+		if (player.getInventory().getItem(7).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(7).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPotatoChipMesh()], false);
 		}
-		if (player.getInventory().getItem(7).getName() == Page.getCokeName())
+		if (player.getInventory().getItem(7).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(7).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeMesh()], false);
 		}
-		if (player.getInventory().getItem(7).getName() == Page.getCokeZeroName())
+		if (player.getInventory().getItem(7).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(7).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeZeroMesh()], false);
 		}
-		if (player.getInventory().getItem(7).getName() == Page.getPepsiName())
+		if (player.getInventory().getItem(7).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(7).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPepsiMesh()], false);
 		}
-		if (player.getInventory().getItem(7).getName() == Page.getMiloName())
+		if (player.getInventory().getItem(7).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(7).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getMiloMesh()], false);
 		}
@@ -6162,47 +6271,58 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 		modelStack.PushMatrix();
 		modelStack.Translate(-0.425, -0.95, 0);
 		modelStack.Scale(0.07, 0.07, 0.07);
-		if (player.getInventory().getItem(8).getName() == Page.getSardineName())
+		if (player.getInventory().getItem(8).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(8).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
 		}
-		if (player.getInventory().getItem(8).getName() == Page.getPncName())
+		if (player.getInventory().getItem(8).getName() == Page.getPncName()
+			&& player.getInventory().getItem(8).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPncMesh()], false);
 		}
-		if (player.getInventory().getItem(8).getName() == Page.getBakedBeanName())
+		if (player.getInventory().getItem(8).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(8).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getBakedBeanMesh()], false);
 		}
-		if (player.getInventory().getItem(8).getName() == Page.getPizzaboxName())
+		if (player.getInventory().getItem(8).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(8).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPizzaboxMesh()], false);
 		}
-		if (player.getInventory().getItem(8).getName() == Page.getCerealbox1Name())
+		if (player.getInventory().getItem(8).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(8).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox1Mesh()], false);
 		}
-		if (player.getInventory().getItem(8).getName() == Page.getCerealbox2Name())
+		if (player.getInventory().getItem(8).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(8).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox2Mesh()], false);
 		}
-		if (player.getInventory().getItem(8).getName() == Page.getPotatoChipName())
+		if (player.getInventory().getItem(8).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(8).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPotatoChipMesh()], false);
 		}
-		if (player.getInventory().getItem(8).getName() == Page.getCokeName())
+		if (player.getInventory().getItem(8).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(8).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeMesh()], false);
 		}
-		if (player.getInventory().getItem(8).getName() == Page.getCokeZeroName())
+		if (player.getInventory().getItem(8).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(8).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeZeroMesh()], false);
 		}
-		if (player.getInventory().getItem(8).getName() == Page.getPepsiName())
+		if (player.getInventory().getItem(8).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(8).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPepsiMesh()], false);
 		}
-		if (player.getInventory().getItem(8).getName() == Page.getMiloName())
+		if (player.getInventory().getItem(8).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(8).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getMiloMesh()], false);
 		}
@@ -6214,47 +6334,58 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 		modelStack.PushMatrix();
 		modelStack.Translate(-0.36, -0.95, 0);
 		modelStack.Scale(0.07, 0.07, 0.07);
-		if (player.getInventory().getItem(9).getName() == Page.getSardineName())
+		if (player.getInventory().getItem(9).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(9).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
 		}
-		if (player.getInventory().getItem(9).getName() == Page.getPncName())
+		if (player.getInventory().getItem(9).getName() == Page.getPncName()
+			&& player.getInventory().getItem(9).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPncMesh()], false);
 		}
-		if (player.getInventory().getItem(9).getName() == Page.getBakedBeanName())
+		if (player.getInventory().getItem(9).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(9).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getBakedBeanMesh()], false);
 		}
-		if (player.getInventory().getItem(9).getName() == Page.getPizzaboxName())
+		if (player.getInventory().getItem(9).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(9).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPizzaboxMesh()], false);
 		}
-		if (player.getInventory().getItem(9).getName() == Page.getCerealbox1Name())
+		if (player.getInventory().getItem(9).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(9).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox1Mesh()], false);
 		}
-		if (player.getInventory().getItem(9).getName() == Page.getCerealbox2Name())
+		if (player.getInventory().getItem(9).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(9).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox2Mesh()], false);
 		}
-		if (player.getInventory().getItem(9).getName() == Page.getPotatoChipName())
+		if (player.getInventory().getItem(9).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(9).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPotatoChipMesh()], false);
 		}
-		if (player.getInventory().getItem(9).getName() == Page.getCokeName())
+		if (player.getInventory().getItem(9).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(9).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeMesh()], false);
 		}
-		if (player.getInventory().getItem(9).getName() == Page.getCokeZeroName())
+		if (player.getInventory().getItem(9).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(9).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeZeroMesh()], false);
 		}
-		if (player.getInventory().getItem(9).getName() == Page.getPepsiName())
+		if (player.getInventory().getItem(9).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(9).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPepsiMesh()], false);
 		}
-		if (player.getInventory().getItem(9).getName() == Page.getMiloName())
+		if (player.getInventory().getItem(9).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(9).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getMiloMesh()], false);
 		}
@@ -6266,49 +6397,692 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 		modelStack.PushMatrix();
 		modelStack.Translate(-0.29, -0.95, 0);
 		modelStack.Scale(0.07, 0.07, 0.07);
-		if (player.getInventory().getItem(10).getName() == Page.getSardineName())
+		if (player.getInventory().getItem(10).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(10).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getSardineMesh()], false);
 		}
-		if (player.getInventory().getItem(10).getName() == Page.getPncName())
+		if (player.getInventory().getItem(10).getName() == Page.getPncName()
+			&& player.getInventory().getItem(10).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPncMesh()], false);
 		}
-		if (player.getInventory().getItem(10).getName() == Page.getBakedBeanName())
+		if (player.getInventory().getItem(10).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(10).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getBakedBeanMesh()], false);
 		}
-		if (player.getInventory().getItem(10).getName() == Page.getPizzaboxName())
+		if (player.getInventory().getItem(10).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(10).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPizzaboxMesh()], false);
 		}
-		if (player.getInventory().getItem(10).getName() == Page.getCerealbox1Name())
+		if (player.getInventory().getItem(10).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(10).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox1Mesh()], false);
 		}
-		if (player.getInventory().getItem(10).getName() == Page.getCerealbox2Name())
+		if (player.getInventory().getItem(10).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(10).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCerealbox2Mesh()], false);
 		}
-		if (player.getInventory().getItem(10).getName() == Page.getPotatoChipName())
+		if (player.getInventory().getItem(10).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(10).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPotatoChipMesh()], false);
 		}
-		if (player.getInventory().getItem(10).getName() == Page.getCokeName())
+		if (player.getInventory().getItem(10).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(10).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeMesh()], false);
 		}
-		if (player.getInventory().getItem(10).getName() == Page.getCokeZeroName())
+		if (player.getInventory().getItem(10).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(10).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getCokeZeroMesh()], false);
 		}
-		if (player.getInventory().getItem(10).getName() == Page.getPepsiName())
+		if (player.getInventory().getItem(10).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(10).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getPepsiMesh()], false);
 		}
-		if (player.getInventory().getItem(10).getName() == Page.getMiloName())
+		if (player.getInventory().getItem(10).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(10).getPaid() == false)
 		{
 			RenderMesh(meshList[Page.getMiloMesh()], false);
+		}
+		modelStack.PopMatrix();
+	}
+
+
+	//=======Rendering paid sprites=======//
+	if (Page.getItemsTaken1() == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(-0.91, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
+		if (player.getInventory().getItem(1).getName() == Page.getSardineName() 
+			&& player.getInventory().getItem(1).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_SARDINE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(1).getName() == Page.getPncName() 
+			&& player.getInventory().getItem(1).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEA_N_CARROTS_PAID], false);
+		}
+		if (player.getInventory().getItem(1).getName() == Page.getBakedBeanName() 
+			&& player.getInventory().getItem(1).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(1).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(1).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PIZZABOX_PAID], false);
+		}
+		if (player.getInventory().getItem(1).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(1).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX1_PAID], false);
+		}
+		if (player.getInventory().getItem(1).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(1).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX2_PAID], false);
+		}
+		if (player.getInventory().getItem(1).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(1).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_POTATOCHIPS_PAID], false);
+		}
+		if (player.getInventory().getItem(1).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(1).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(1).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(1).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_ZERO_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(1).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(1).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEPSI_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(1).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(1).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_MILOCAN_PAID], false);
+		}
+		modelStack.PopMatrix();
+	}
+
+	if (Page.getItemsTaken2() == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(-0.84, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
+		if (player.getInventory().getItem(2).getName() == Page.getSardineName() 
+			&& player.getInventory().getItem(2).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_SARDINE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(2).getName() == Page.getPncName()
+			&& player.getInventory().getItem(2).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEA_N_CARROTS_PAID], false);
+		}
+		if (player.getInventory().getItem(2).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(2).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(2).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(2).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PIZZABOX_PAID], false);
+		}
+		if (player.getInventory().getItem(2).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(2).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX1_PAID], false);
+		}
+		if (player.getInventory().getItem(2).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(2).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX2_PAID], false);
+		}
+		if (player.getInventory().getItem(2).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(2).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_POTATOCHIPS_PAID], false);
+		}
+		if (player.getInventory().getItem(2).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(2).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(2).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(2).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_ZERO_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(2).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(2).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEPSI_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(2).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(2).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_MILOCAN_PAID], false);
+		}
+		modelStack.PopMatrix();
+	}
+
+	if (Page.getItemsTaken3() == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(-0.77, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
+		if (player.getInventory().getItem(3).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(3).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_SARDINE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(3).getName() == Page.getPncName()
+			&& player.getInventory().getItem(3).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEA_N_CARROTS_PAID], false);
+		}
+		if (player.getInventory().getItem(3).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(3).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(3).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(3).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PIZZABOX_PAID], false);
+		}
+		if (player.getInventory().getItem(3).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(3).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX1_PAID], false);
+		}
+		if (player.getInventory().getItem(3).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(3).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX2_PAID], false);
+		}
+		if (player.getInventory().getItem(3).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(3).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_POTATOCHIPS_PAID], false);
+		}
+		if (player.getInventory().getItem(3).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(3).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(3).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(3).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_ZERO_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(3).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(3).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEPSI_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(3).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(3).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_MILOCAN_PAID], false);
+		}
+		modelStack.PopMatrix();
+	}
+	if (Page.getItemsTaken4() == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(-0.70, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
+		if (player.getInventory().getItem(4).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(4).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_SARDINE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(4).getName() == Page.getPncName()
+			&& player.getInventory().getItem(4).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEA_N_CARROTS_PAID], false);
+		}
+		if (player.getInventory().getItem(4).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(4).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(4).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(4).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PIZZABOX_PAID], false);
+		}
+		if (player.getInventory().getItem(4).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(4).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX1_PAID], false);
+		}
+		if (player.getInventory().getItem(4).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(4).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX2_PAID], false);
+		}
+		if (player.getInventory().getItem(4).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(4).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_POTATOCHIPS_PAID], false);
+		}
+		if (player.getInventory().getItem(4).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(4).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(4).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(4).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_ZERO_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(4).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(4).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEPSI_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(4).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(4).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_MILOCAN_PAID], false);
+		}
+		modelStack.PopMatrix();
+	}
+
+	if (Page.getItemsTaken5() == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(-0.63, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
+		if (player.getInventory().getItem(5).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(5).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_SARDINE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(5).getName() == Page.getPncName()
+			&& player.getInventory().getItem(5).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEA_N_CARROTS_PAID], false);
+		}
+		if (player.getInventory().getItem(5).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(5).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(5).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(5).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PIZZABOX_PAID], false);
+		}
+		if (player.getInventory().getItem(5).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(5).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX1_PAID], false);
+		}
+		if (player.getInventory().getItem(5).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(5).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX2_PAID], false);
+		}
+		if (player.getInventory().getItem(5).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(5).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_POTATOCHIPS_PAID], false);
+		}
+		if (player.getInventory().getItem(5).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(5).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(5).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(5).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_ZERO_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(5).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(5).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEPSI_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(5).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(5).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_MILOCAN_PAID], false);
+		}
+		modelStack.PopMatrix();
+	}
+
+	if (Page.getItemsTaken6() == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(-0.56, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
+		if (player.getInventory().getItem(6).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(6).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_SARDINE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(6).getName() == Page.getPncName()
+			&& player.getInventory().getItem(6).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEA_N_CARROTS_PAID], false);
+		}
+		if (player.getInventory().getItem(6).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(6).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(6).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(6).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PIZZABOX_PAID], false);
+		}
+		if (player.getInventory().getItem(6).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(6).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX1_PAID], false);
+		}
+		if (player.getInventory().getItem(6).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(6).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX2_PAID], false);
+		}
+		if (player.getInventory().getItem(6).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(6).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_POTATOCHIPS_PAID], false);
+		}
+		if (player.getInventory().getItem(6).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(6).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(6).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(6).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_ZERO_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(6).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(6).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEPSI_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(6).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(6).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_MILOCAN_PAID], false);
+		}
+		modelStack.PopMatrix();
+	}
+
+	if (Page.getItemsTaken7() == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(-0.495, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
+		if (player.getInventory().getItem(7).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(7).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_SARDINE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(7).getName() == Page.getPncName()
+			&& player.getInventory().getItem(7).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEA_N_CARROTS_PAID], false);
+		}
+		if (player.getInventory().getItem(7).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(7).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(7).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(7).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PIZZABOX_PAID], false);
+		}
+		if (player.getInventory().getItem(7).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(7).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX1_PAID], false);
+		}
+		if (player.getInventory().getItem(7).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(7).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX2_PAID], false);
+		}
+		if (player.getInventory().getItem(7).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(7).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_POTATOCHIPS_PAID], false);
+		}
+		if (player.getInventory().getItem(7).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(7).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(7).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(7).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_ZERO_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(7).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(7).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEPSI_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(7).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(7).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_MILOCAN_PAID], false);
+		}
+		modelStack.PopMatrix();
+	}
+
+	if (Page.getItemsTaken8() == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(-0.425, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
+		if (player.getInventory().getItem(8).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(8).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_SARDINE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(8).getName() == Page.getPncName()
+			&& player.getInventory().getItem(8).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEA_N_CARROTS_PAID], false);
+		}
+		if (player.getInventory().getItem(8).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(8).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(8).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(8).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PIZZABOX_PAID], false);
+		}
+		if (player.getInventory().getItem(8).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(8).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX1_PAID], false);
+		}
+		if (player.getInventory().getItem(8).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(8).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX2_PAID], false);
+		}
+		if (player.getInventory().getItem(8).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(8).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_POTATOCHIPS_PAID], false);
+		}
+		if (player.getInventory().getItem(8).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(8).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_CAN_PAID], false);
+
+		}
+		if (player.getInventory().getItem(8).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(8).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_ZERO_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(8).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(8).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEPSI_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(8).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(8).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_MILOCAN_PAID], false);
+		}
+		modelStack.PopMatrix();
+	}
+
+	if (Page.getItemsTaken9() == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(-0.36, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
+		if (player.getInventory().getItem(9).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(9).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_SARDINE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(9).getName() == Page.getPncName()
+			&& player.getInventory().getItem(9).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEA_N_CARROTS_PAID], false);
+		}
+		if (player.getInventory().getItem(9).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(9).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(9).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(9).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PIZZABOX_PAID], false);
+		}
+		if (player.getInventory().getItem(9).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(9).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX1_PAID], false);
+		}
+		if (player.getInventory().getItem(9).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(9).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX2_PAID], false);
+		}
+		if (player.getInventory().getItem(9).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(9).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_POTATOCHIPS_PAID], false);
+		}
+		if (player.getInventory().getItem(9).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(9).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(9).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(9).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_ZERO_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(9).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(9).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEPSI_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(9).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(9).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_MILOCAN_PAID], false);
+		}
+		modelStack.PopMatrix();
+	}
+
+	if (Page.getItemsTaken10() == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(-0.29, -0.95, 0);
+		modelStack.Scale(0.07, 0.07, 0.07);
+		if (player.getInventory().getItem(10).getName() == Page.getSardineName()
+			&& player.getInventory().getItem(10).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_SARDINE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(10).getName() == Page.getPncName()
+			&& player.getInventory().getItem(10).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEA_N_CARROTS_PAID], false);
+		}
+		if (player.getInventory().getItem(10).getName() == Page.getBakedBeanName()
+			&& player.getInventory().getItem(10).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_BAKED_BEANS_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(10).getName() == Page.getPizzaboxName()
+			&& player.getInventory().getItem(10).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PIZZABOX_PAID], false);
+		}
+		if (player.getInventory().getItem(10).getName() == Page.getCerealbox1Name()
+			&& player.getInventory().getItem(10).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX1_PAID], false);
+		}
+		if (player.getInventory().getItem(10).getName() == Page.getCerealbox2Name()
+			&& player.getInventory().getItem(10).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_CEREALBOX2_PAID], false);
+		}
+		if (player.getInventory().getItem(10).getName() == Page.getPotatoChipName()
+			&& player.getInventory().getItem(10).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_POTATOCHIPS_PAID], false);
+		}
+		if (player.getInventory().getItem(10).getName() == Page.getCokeName()
+			&& player.getInventory().getItem(10).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(10).getName() == Page.getCokeZeroName()
+			&& player.getInventory().getItem(10).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_COKE_ZERO_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(10).getName() == Page.getPepsiName()
+			&& player.getInventory().getItem(10).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_PEPSI_CAN_PAID], false);
+		}
+		if (player.getInventory().getItem(10).getName() == Page.getMiloName()
+			&& player.getInventory().getItem(10).getPaid() == true)
+		{
+			RenderMesh(meshList[UI_MILOCAN_PAID], false);
 		}
 		modelStack.PopMatrix();
 	}
