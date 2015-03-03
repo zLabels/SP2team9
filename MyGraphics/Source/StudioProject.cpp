@@ -1607,7 +1607,7 @@ void StudioProject::Init()
 	glBindVertexArray(m_vertexArrayID);
 
 	//Initialize camera settings
-	camera.Init(Vector3(-45, 5, 0), Vector3(0, 5, 13), Vector3(0, 1, 0));
+	camera.Init(Vector3(-45, 5, 15), Vector3(-45, 5, 13), Vector3(0, 1, 0));
 	Guard.passInPositionAndTarget(Vector3(0, 0, 0), Vector3(5, 0, 0));
 
 	for (int a = 0; a < 2; a++)
