@@ -24,7 +24,10 @@
 #include "Cashier.h"
 #include "CItemInventory.h"
 #include "Ai.h"
+//Sound Engine
+#include <irrKlang.h>
 
+using namespace irrklang;
 using std::string;
 
 struct hitBox
@@ -298,6 +301,7 @@ private:
 	void updateCheckingOut();	//Updates checking out of items
 	void updateTimeAttack();	//Updates everything related to Time Attack mini game
 	void updateDustBin(); //Updates throwing of item
+	void updateDoor(double dt); //Updates opening / closing of door
 
 public:
 	StudioProject();	//default constructor
@@ -335,6 +339,8 @@ private:
 	float translateMoneyZ;
 	float translateMoneyY;
 	StopWatch Timer;
+	//==SoundEngine==//
+	ISoundEngine* engine;
 
 	//========MiniGame============//
 	//==TimeAttack==//

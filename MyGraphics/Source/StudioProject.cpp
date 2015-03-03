@@ -485,6 +485,12 @@ Initializes the Variables to be used in the scene
 /******************************************************************************/
 void StudioProject::InitVariables()
 {
+	//Sound Engine
+	engine = createIrrKlangDevice();
+	if (!engine)
+	{
+		printf("Could not startup engine\n");
+	}
 	//variable to rotate geometry
 	worldsize = 1000.0f;
 	roomsize = 250.0f;
@@ -525,7 +531,7 @@ void StudioProject::InitVariables()
 	generateList = false;
 	TAmatchedItems = 0;
 	isTAwon = false;
-	TAtime = 0.f;
+	TAtime = 60.f;
 	timeTA = "";
 	TAstartedOnce = 0;
 	messageTime = 0.f;
@@ -2688,8 +2694,9 @@ void StudioProject::updatePuttingBackItem()
 \brief
 Updates the Checking Out of items in the scene
 
+//DISABLE MOVEMENT WHILE CHECKING OUT  // TO DO
 */
-/******************************************************************************/
+/******************************************************************************/ 
 void StudioProject::updateCheckingOut()
 {
 	/*===============================================================
@@ -2816,13 +2823,13 @@ void StudioProject::updateTimeAttack()
 		{
 			TimeAttack = true;
 			isTAwon = false;
-			TAtime = 0;
+			TAtime = 60.f;
 			TAstartedOnce = 0;
 			player.setMoney(100.f);
 			messageTime = 0.f;
 		}
 		//End Time Attack Mini game
-		if(Application::IsKeyPressed('Q') && TimeAttack == true && TAtime < 60)
+		if(Application::IsKeyPressed('Q') && TimeAttack == true && TAtime > 0)
 		{
 			TAmatchedItems = 0;
 			//Loop to go through each item in player's inventory
@@ -2846,7 +2853,7 @@ void StudioProject::updateTimeAttack()
 				isTAwon = true;
 				TimeAttack = false;
 				TAlist.clear();
-				player.setMoney(0.f);
+				player.setMoney(50.f);
 			}
 			//Resets variables when lose
 			if(TAmatchedItems != 6)
@@ -2855,17 +2862,17 @@ void StudioProject::updateTimeAttack()
 				TAstartedOnce++;
 				TimeAttack = false;
 				TAlist.clear();
-				player.setMoney(0.f);
+				player.setMoney(50.f);
 			}
 		}
 	}
-	if(TAtime > 60)
+	if(TAtime <= 0)
 	{
 		isTAwon = false;
 		TAstartedOnce++;
 		TimeAttack = false;
 		TAlist.clear();
-		player.setMoney(0.f);
+		player.setMoney(50.f);
 	}
 	if(TimeAttack == true)
 	{
@@ -2916,6 +2923,53 @@ void StudioProject::updateDustBin()
 		}
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Updates the opening and closing of the supermarket door
+
+*/
+/******************************************************************************/
+void StudioProject::updateDoor(double dt)
+{
+	//============================DOOR===========================//
+
+	if (camera.position.z <= 20.1 && camera.position.z >= -19.7 && camera.position.y >= 2 && camera.position.y <= 10 && camera.position.x <=-41.5 && camera.position.x >= -76.3)
+	{
+		if(Opened == false &&  Closed == true && doorStop == true)
+		{
+			Closed = false;
+			doorMoving = true;
+		}
+
+		if(Closed == false && doorMoving == true)
+		{
+			doorTranslate -=(float)(35*dt);
+			if(doorTranslate < -20)
+			{
+				doorMoving = false;
+				Opened = true;
+				doorStop = true;
+			}	
+
+		}
+	}
+	//This part is for closing of the door
+	else
+	{
+		Opened = false;
+		if(Opened == false && Closed == false )
+		{
+			doorTranslate +=(float)(35*dt);
+			if(doorTranslate > 0)
+			{
+				Closed = true;
+			}
+
+		}
+	}
+	//==============================END OF DOOR ==========================//
+}
 
 /******************************************************************************/
 /*!
@@ -2927,10 +2981,6 @@ Updates the scene based on delta time
 /******************************************************************************/
 void StudioProject::Update(double dt)
 {
-	/*for (int a = 0; a < 3; a++)
-	{
-	CameraOBJ[a].PassinDt(dt);
-	}*/
 	float LSPEED = 10.f;
 
 	if(Application::IsKeyPressed('1')) //enable back face culling
@@ -2941,6 +2991,11 @@ void StudioProject::Update(double dt)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); //default fill mode
 	if(Application::IsKeyPressed('4'))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //wireframe mode
+
+	if(Application::IsKeyPressed('W'))
+	{
+		ISound* music = engine->play2D("Sound\\bell.wav");
+	}
 
 	//Speed of by which Item is translated on Checkout
 	if(moveItem >= -4.5 && Peas == true)
@@ -2990,7 +3045,7 @@ void StudioProject::Update(double dt)
 	//TIME ATTACK TIMER
 	if(TimeAttack == true)
 	{
-		TAtime += (float)(dt);
+		TAtime -= (float)(dt);
 	}
 	if(isTAwon == true)
 	{
@@ -3183,50 +3238,10 @@ void StudioProject::Update(double dt)
 	{
 		angle -= 100 * dt;
 	}
-
 	/*========================================================
-	Player
-	=========================================================*/
-	//player.setPosition(camera.position.x,camera.position.y,camera.position.z);
-
-	//============================DOOR===========================//
-
-	//This part is code for door opening
-	if (camera.position.z <= 20.1 && camera.position.z >= -19.7 && camera.position.y >= 2 && camera.position.y <= 10 && camera.position.x <=-41.5 && camera.position.x >= -76.3)
-	{
-		if(Opened == false &&  Closed == true && doorStop == true)
-		{
-			Closed = false;
-			doorMoving = true;
-		}
-
-		if(Closed == false && doorMoving == true)
-		{
-			doorTranslate -=(float)(35*dt);
-			if(doorTranslate < -20)
-			{
-				doorMoving = false;
-				Opened = true;
-				doorStop = true;
-			}	
-
-		}
-	}
-	//This part is for closing of the door
-	else
-	{
-		Opened = false;
-		if(Opened == false && Closed == false )
-		{
-			doorTranslate +=(float)(35*dt);
-			if(doorTranslate > 0)
-			{
-				Closed = true;
-			}
-
-		}
-	}
-	//==============================END OF DOOR ==========================//
+	Animation
+	===========================================================*/
+	updateDoor(dt);
 
 	/*=======================================================
 	Interactions
@@ -3293,7 +3308,7 @@ void StudioProject::Update(double dt)
 		elapsedTime2 += 0;
 	}
 
-	if (Application::IsKeyPressed(VK_TAB) && elapsedTime2 >= 0.15)
+	if(Application::IsKeyPressed(VK_TAB) && elapsedTime2 >= 0.15)
 	{
 		if (showInventory == false)
 		{
@@ -6042,12 +6057,6 @@ void StudioProject::Render()
 	//===Rendering Level 1 Lights
 	RenderLevel1Lights();
 
-	//What is this for? 
-	modelStack.PushMatrix();
-	modelStack.Translate(-20.f, 0.f, -20.f);
-	modelStack.Scale(10.f, 10.f, 10.f);
-	modelStack.PopMatrix();
-
 	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
 	glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
 	RenderMesh(meshList[GEO_AXES], false);
@@ -6168,7 +6177,9 @@ void StudioProject::Render()
 	RenderMesh(meshList[itemInventory], false);
 	modelStack.PopMatrix();
 
-
+	/*=====================================================
+	Rendering of Information for player
+	=======================================================*/
 	RenderPlayerInfo();
 	RenderItemsInfo();
 
@@ -7671,6 +7682,7 @@ Cleans up the necessary variables
 /******************************************************************************/
 void StudioProject::Exit()
 {
+	engine->drop();
 	// Cleanup here
 	for(int i = 0; i < NUM_GEOMETRY; ++i)
 	{
