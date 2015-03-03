@@ -27,14 +27,15 @@ void Ai::update(float dt, Vector3 camera)
 {
 	//==================================GUARD=====================//
 	derivedAngle = Math::RadianToDegree(acos(guardView.Dot(guardDifference) / (guardView.Length() * guardDifference.Length())));
-	if (camera.z <= -26)
+	if(guardView.Cross(guardDifference).y > 1)
 	{
-		derivedAngle  = derivedAngle + 270;
+		derivedAngle *= 1;
 	}
 	else
 	{
-		derivedAngle = -(derivedAngle + 90);
+		derivedAngle *= -1;
 	}
+	std::cout << derivedAngle << std::endl;
 	
 	static float elapsedTime1 = 0, elapsedTime2 = 0;
 	elapsedTime1 = fmod(Timer.getElapsedTime(), 1);
@@ -64,12 +65,14 @@ void Ai::update(float dt, Vector3 camera)
 	{
 		if (Application::IsKeyPressed('8'))
 		{
-			std::cout << guardPos << std::endl;
-			std::cout << camera << std::endl;
+			/*std::cout << guardPos << std::endl;
+			std::cout << camera << std::endl;*/
+			//Vector3 DirectionVector = camera - guardPos;
+				guardPos += (guardDifference.Normalized()) * 10 * dt;
 			/*guardPos.z -= cos(Math::DegreeToRadian(derivedAngle)) * 10 * dt;
 			guardPos.x -= sin(Math::DegreeToRadian(derivedAngle)) * 10 * dt;*/
 
-			if (guardDifference.Normalized().x > 0)
+			/*if (guardDifference.Normalized().x > 0)
 			{
 				guardPos.x += 2 * dt;
 			}
@@ -93,7 +96,7 @@ void Ai::update(float dt, Vector3 camera)
 			else
 			{
 				guardPos.z += 0;
-			}
+			}*/
 
 		}
 	}
@@ -600,7 +603,6 @@ void Ai::update(float dt, Vector3 camera)
 void Ai::FindPlayerDistanceDifference(Vector3 cameraPosition)
 {
 	guardDifference = cameraPosition - guardPos;
-	
 }
 
 void Ai::FindPlayerDistanceDifferencePasserby(Vector3 cameraPosition)

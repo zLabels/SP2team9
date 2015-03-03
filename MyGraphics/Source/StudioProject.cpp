@@ -494,6 +494,7 @@ void StudioProject::InitVariables()
 	TAtime = 0.f;
 	timeTA = "";
 	TAstartedOnce = 0;
+	messageTime = 0.f;
 
 	int a = 0;
 
@@ -1608,7 +1609,7 @@ void StudioProject::Init()
 
 	//Initialize camera settings
 	camera.Init(Vector3(-45, 5, 15), Vector3(-45, 5, 13), Vector3(0, 1, 0));
-	Guard.passInPositionAndTarget(Vector3(-50, 0, -21.5),Vector3(-1, 0, 0));
+	Guard.passInPositionAndTarget(Vector3(-70, 0, -21.5),Vector3(-70, 0, -22.5));
 
 	Passerby[0].SetPasserby(Vector3(0, 0, 3));
 	Passerby[1].SetPasserby(Vector3(0, 0, -3));
@@ -2316,6 +2317,8 @@ void StudioProject::updateTimeAttack()
 			isTAwon = false;
 			TAtime = 0;
 			TAstartedOnce = 0;
+			player.setMoney(100.f);
+			messageTime = 0.f;
 		}
 		//End Time Attack Mini game
 		if(Application::IsKeyPressed('Q') && TimeAttack == true && TAtime < 60)
@@ -2342,6 +2345,7 @@ void StudioProject::updateTimeAttack()
 				isTAwon = true;
 				TimeAttack = false;
 				TAlist.clear();
+				player.setMoney(0.f);
 			}
 			//Resets variables when lose
 			if(TAmatchedItems != 6)
@@ -2350,6 +2354,7 @@ void StudioProject::updateTimeAttack()
 				TAstartedOnce++;
 				TimeAttack = false;
 				TAlist.clear();
+				player.setMoney(0.f);
 			}
 		}
 	}
@@ -2359,6 +2364,7 @@ void StudioProject::updateTimeAttack()
 		TAstartedOnce++;
 		TimeAttack = false;
 		TAlist.clear();
+		player.setMoney(0.f);
 	}
 	if(TimeAttack == true)
 	{
@@ -2484,6 +2490,14 @@ void StudioProject::Update(double dt)
 	if(TimeAttack == true)
 	{
 		TAtime += (float)(dt);
+	}
+	if(isTAwon == true)
+	{
+		messageTime +=(float)(dt);
+	}
+	if(isTAwon == false && TAstartedOnce > 0)
+	{
+		messageTime +=(float)(dt);
 	}
 	std::ostringstream ssTAtime;
 	ssTAtime.precision(4);
@@ -2840,98 +2854,9 @@ void StudioProject::Update(double dt)
 	camera.Update(dt);
 
 	Page.setCPlayer(player);
-	/*if (player.getInventory().getNoOfItems() == 1)
-	{
-	ItemsTaken[1] = true;
-	}
-	else if (player.getInventory().getNoOfItems() < 1)
-	{
-	ItemsTaken[1] = false;
-	}
 
-	if (player.getInventory().getNoOfItems() == 2)
-	{
-	ItemsTaken[2] = true;
-	}
-	else if (player.getInventory().getNoOfItems() < 2)
-	{
-	ItemsTaken[2] = false;
-	}
-
-	if (player.getInventory().getNoOfItems() == 3)
-	{
-	ItemsTaken[3] = true;
-	}
-	else if (player.getInventory().getNoOfItems() < 3)
-	{
-	ItemsTaken[3] = false;
-	}
-
-	if (player.getInventory().getNoOfItems() == 4)
-	{
-	ItemsTaken[4] = true;
-	}
-	else if (player.getInventory().getNoOfItems() < 4)
-	{
-	ItemsTaken[4] = false;
-	}
-
-	if (player.getInventory().getNoOfItems() == 5)
-	{
-	ItemsTaken[5] = true;
-	}
-	else if (player.getInventory().getNoOfItems() < 5)
-	{
-	ItemsTaken[5] = false;
-	}
-
-	if (player.getInventory().getNoOfItems() == 6)
-	{
-	ItemsTaken[6] = true;
-	}
-	else if (player.getInventory().getNoOfItems() < 6)
-	{
-	ItemsTaken[6] = false;
-	}
-
-	if (player.getInventory().getNoOfItems() == 7)
-	{
-	ItemsTaken[7] = true;
-	}
-	else if (player.getInventory().getNoOfItems() < 7)
-	{
-	ItemsTaken[7] = false;
-	}
-
-	if (player.getInventory().getNoOfItems() == 8)
-	{
-	ItemsTaken[8] = true;
-	}
-	else if (player.getInventory().getNoOfItems() < 8)
-	{
-	ItemsTaken[8] = false;
-	}
-
-	if (player.getInventory().getNoOfItems() == 9)
-	{
-	ItemsTaken[9] = true;
-	}
-	else if (player.getInventory().getNoOfItems() < 9)
-	{
-	ItemsTaken[9] = false;
-	}
-
-	if (player.getInventory().getNoOfItems() == 10)
-	{
-	ItemsTaken[10] = true;
-	}
-	else if (player.getInventory().getNoOfItems() < 10 )
-	{
-	ItemsTaken[10] = false;
-	}*/
-
-	Guard.update(dt, camera.position);
 	Guard.FindPlayerDistanceDifference(camera.position);
+	Guard.update(dt, camera.position);
 
 	Passerby[0].update(dt, camera.position);
 	Passerby[0].FindPlayerDistanceDifferencePasserby(camera.position);
@@ -3702,11 +3627,7 @@ void StudioProject::RenderGuard()
 	{
 		modelStack.Rotate(Guard.getDerivedAngle(), 0, 1, 0);
 	}
-	else
-	{
-		modelStack.Rotate(90, 0, 1, 0);
-	}
-
+	modelStack.Scale(1.2, 1.2, 1.2);
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, -2.285, 0);
@@ -5380,11 +5301,13 @@ void StudioProject::RenderTimeAttack()
 	{
 		RenderTextOnScreen(meshList[GEO_TEXT],timeTA, Color(1, 1,1 ), 2, 15, 29);
 	}
-	if(isTAwon == true)
+	//if TA is won, renders winning message
+	if(isTAwon == true && messageTime <= 3)
 	{
 		RenderTextOnScreen(meshList[GEO_TEXT],"Congratulations", Color(1, 1, 1), 3, 10, 10);
 	}
-	if(isTAwon == false && TAstartedOnce > 0)
+	//if TA is lost, renders losing message
+	if(isTAwon == false && TAstartedOnce > 0 && messageTime <= 3)
 	{
 		RenderTextOnScreen(meshList[GEO_TEXT],"You Lose", Color(1, 1, 1), 3, 10, 10);
 	}
@@ -5635,7 +5558,6 @@ void StudioProject::Render()
 
 	//Rendering of GuardModel
 	modelStack.PushMatrix();
-	modelStack.Scale(1.2, 1.2, 1.2);
 	RenderGuard();
 	modelStack.PopMatrix();
 

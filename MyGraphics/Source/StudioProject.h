@@ -326,6 +326,7 @@ private:
 	StopWatch Timer;
 
 	//========MiniGame============//
+	//==TimeAttack==//
 	bool TimeAttack;
 	bool generateList;
 	vector<int> TAlist;
@@ -334,6 +335,7 @@ private:
 	bool isTAwon;
 	float TAtime;
 	string timeTA;
+	float messageTime;
 
 	//=========Character=========//
 	bool movingModel;
