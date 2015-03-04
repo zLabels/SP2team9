@@ -448,6 +448,29 @@ void StudioProject::InitMesh()
 	meshList[UI_MILOCAN_PAID] = MeshBuilder::GenerateQuad("paid sardine can", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_MILOCAN_PAID]->textureID = LoadTGA("UI sprites/UI-milocan_paid.tga");
 	
+	meshList[MENUBACKGROUND] = MeshBuilder::GenerateQuad("Menu Background", Color(1, 1, 1), 1.f , 1.f);
+	meshList[MENUBACKGROUND]->textureID = LoadTGA("Image//menu.tga");
+	menu.SetBackground(MENUBACKGROUND);
+
+	meshList[MENUARROW] = MeshBuilder::GenerateQuad("Menu Arrow", Color(1, 1, 1), 1.f , 1.f);
+	meshList[MENUARROW]->textureID = LoadTGA("Image//Arrow.tga");
+	menu.SetArrow(MENUARROW);
+
+	meshList[PlayGameTrue] = MeshBuilder::GenerateQuad("Play Game True", Color(1, 1, 1), 1.f , 1.f);
+	meshList[PlayGameTrue]->textureID = LoadTGA("Image//PlayGameTrue.tga");
+	menu.SetStartGameTrue(PlayGameTrue);
+
+	meshList[PlayGameFalse] = MeshBuilder::GenerateQuad("Play Game False", Color(1, 1, 1), 1.f , 1.f);
+	meshList[PlayGameFalse]->textureID = LoadTGA("Image//PlayGameFalse.tga");
+	menu.SetStartGameFalse(PlayGameFalse);
+
+	meshList[ExitTrue] = MeshBuilder::GenerateQuad("Play Game True", Color(1, 1, 1), 1.f , 1.f);
+	meshList[ExitTrue]->textureID = LoadTGA("Image//ExitTrue.tga");
+	menu.SetEndGameTrue(ExitTrue);
+
+	meshList[ExitFalse] = MeshBuilder::GenerateQuad("Play Game False", Color(1, 1, 1), 1.f , 1.f);
+	meshList[ExitFalse]->textureID = LoadTGA("Image//ExitFalse.tga");
+	menu.SetEndGameFalse(ExitFalse);
 
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
@@ -2995,404 +3018,412 @@ void StudioProject::Update(double dt)
 	if(Application::IsKeyPressed('4'))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //wireframe mode
 
-	//Speed of by which Item is translated on Checkout
-	if(moveItem >= -4.5 && Peas == true)
-	{
-		moveItem -=(float)(5*dt);
-	}
-	else if(moveItem >= -4.5 && Beans == true)
-	{
-		moveItem -=(float)(5*dt);
-	}
-	else if(moveItem >= -4.5 && Pizza == true)
-	{
-		moveItem -=(float)(5*dt);
-	}
-	else if(moveItem >= -4.5 && Milo == true)
-	{
-		moveItem -=(float)(5*dt);
-	}
-	else if(moveItem >= -4.5 && Cereal1 == true)
-	{
-		moveItem -=(float)(5*dt);
-	}
-	else if(moveItem >= -4.5 && Cereal2 == true)
-	{
-		moveItem -=(float)(5*dt);
-	}
-	else if(moveItem >= -4.5 && Sardine == true)
-	{
-		moveItem -=(float)(5*dt);
-	}
-	else if(moveItem >= -4.5 && Lays == true)
-	{
-		moveItem -=(float)(5*dt);
-	}
-	else if(moveItem >= -4.5 && Coke == true)
-	{
-		moveItem -=(float)(5*dt);
-	}
-	else if(moveItem >= -4.5 && CokeZero == true)
-	{
-		moveItem -=(float)(5*dt);
-	}
-	else if(moveItem >= -4.5 && Pepsi == true)
-	{
-		moveItem -=(float)(5*dt);
-	}
-	//TIME ATTACK TIMER
-	if(TimeAttack == true)
-	{
-		TAtime -= (float)(dt);
-	}
-	if(isTAwon == true)
-	{
-		messageTime +=(float)(dt);
-	}
-	if(isTAwon == false && TAstartedOnce > 0)
-	{
-		messageTime +=(float)(dt);
-	}
-	std::ostringstream ssTAtime;
-	ssTAtime.precision(4);
-	ssTAtime << TAtime;
-	timeTA = ssTAtime.str();
-	
-	//Controls whether objects are affected by light or not
-	if(Application::IsKeyPressed('5'))
-	{
-		B_Light = true;
-	}
-	if(Application::IsKeyPressed('6'))
-	{
-		B_Light = false;
-	}
 
-	//===Controls===//
-
-	if(Application::IsKeyPressed('I'))
+	if (menu.getShowMenuStatus() == true)
 	{
-		isShown = true;
-	}
-
-	if(Application::IsKeyPressed('O'))
-	{
-		isShown = false;
-	}
-
-	//===Character Control===//
-	static float ROTATE_SPEED = 50.f;
-	static int count = 0;
-
-	if (Application::IsKeyPressed('8') || Application::IsKeyPressed('9')) //currently i set it to press 9 to animate character
-	{
-		movingModel = true;
+		menu.update(dt);
 	}
 	else
 	{
-		movingModel = false;
-	}
+		//Speed of by which Item is translated on Checkout
+		if(moveItem >= -4.5 && Peas == true)
+		{
+			moveItem -=(float)(5*dt);
+		}
+		else if(moveItem >= -4.5 && Beans == true)
+		{
+			moveItem -=(float)(5*dt);
+		}
+		else if(moveItem >= -4.5 && Pizza == true)
+		{
+			moveItem -=(float)(5*dt);
+		}
+		else if(moveItem >= -4.5 && Milo == true)
+		{
+			moveItem -=(float)(5*dt);
+		}
+		else if(moveItem >= -4.5 && Cereal1 == true)
+		{
+			moveItem -=(float)(5*dt);
+		}
+		else if(moveItem >= -4.5 && Cereal2 == true)
+		{
+			moveItem -=(float)(5*dt);
+		}
+		else if(moveItem >= -4.5 && Sardine == true)
+		{
+			moveItem -=(float)(5*dt);
+		}
+		else if(moveItem >= -4.5 && Lays == true)
+		{
+			moveItem -=(float)(5*dt);
+		}
+		else if(moveItem >= -4.5 && Coke == true)
+		{
+			moveItem -=(float)(5*dt);
+		}
+		else if(moveItem >= -4.5 && CokeZero == true)
+		{
+			moveItem -=(float)(5*dt);
+		}
+		else if(moveItem >= -4.5 && Pepsi == true)
+		{
+			moveItem -=(float)(5*dt);
+		}
+		//TIME ATTACK TIMER
+		if(TimeAttack == true)
+		{
+			TAtime -= (float)(dt);
+		}
+		if(isTAwon == true)
+		{
+			messageTime +=(float)(dt);
+		}
+		if(isTAwon == false && TAstartedOnce > 0)
+		{
+			messageTime +=(float)(dt);
+		}
+		std::ostringstream ssTAtime;
+		ssTAtime.precision(4);
+		ssTAtime << TAtime;
+		timeTA = ssTAtime.str();
 
-	if (movingModel == true)
-	{
-		rotateRightArms += (float)(rotatingRightArm * dt * ROTATE_SPEED);
-		rotateLeftLeg += (float)(rotatingLeftLeg * dt * ROTATE_SPEED);
-		rotateRightLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
-
-		if (rotateRightArms >= 405)//rotating right arm
+		//Controls whether objects are affected by light or not
+		if(Application::IsKeyPressed('5'))
 		{
-			rotatingRightArm = -1;
-			count++;
+			B_Light = true;
 		}
-		if(rotateRightArms <= 330)
+		if(Application::IsKeyPressed('6'))
 		{
-			rotatingRightArm = 1;
+			B_Light = false;
 		}
 
-		if (rotateLeftArms >= 405)//rotatin left arm
+		//===Controls===//
+
+		if(Application::IsKeyPressed('I'))
 		{
-			rotatingLeftArm = -1;
-		}
-		if(rotateLeftArms <= 330)
-		{
-			rotatingLeftArm = 1;
+			isShown = true;
 		}
 
-		if (rotateLeftLeg >= 405)//rotatin left leg
+		if(Application::IsKeyPressed('O'))
 		{
-			rotatingLeftLeg = -1;
-		}
-		if(rotateLeftLeg <= 315)
-		{
-			rotatingLeftLeg = 1;
+			isShown = false;
 		}
 
-		if (rotateRightLeg >= 405)//rotatin right leg
+		//===Character Control===//
+		static float ROTATE_SPEED = 50.f;
+		static int count = 0;
+
+		if (Application::IsKeyPressed('8') || Application::IsKeyPressed('9')) //currently i set it to press 9 to animate character
 		{
-			rotatingRightLeg = 1;
+			movingModel = true;
 		}
-		if(rotateRightLeg <= 315)
+		else
 		{
-			rotatingRightLeg = -1;
+			movingModel = false;
 		}
 
-		if (count >= 1)
-		{
-			rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
-		}
-	}
-
-	else if (movingModel == false)
-	{
-		count = 0;
-		rotatingRightArm = 1;
-		rotatingLeftArm = 1;
-		rotatingRightLeg = 1;
-		rotatingLeftLeg = 1;
-		if (rotateRightArms > 360)//moving back right arm
-		{
-			rotateRightArms -= (float)(rotatingRightArm * dt * ROTATE_SPEED);
-			if (rotateRightArms <= 360)
-			{
-				rotateRightArms = 360;
-			}
-		}
-		else if (rotateRightArms < 360)
+		if (movingModel == true)
 		{
 			rotateRightArms += (float)(rotatingRightArm * dt * ROTATE_SPEED);
-			if (rotateRightArms >= 360)
-			{
-				rotateRightArms = 360;
-			}
-		}
-
-		if (rotateLeftArms > 360)//moving back left arm
-		{
-			rotateLeftArms -= (float)(rotatingLeftArm * dt * ROTATE_SPEED);
-			if (rotateLeftArms <= 360)
-			{
-				rotateLeftArms = 360;
-			}
-		}
-		else if (rotateLeftArms < 360)
-		{
-			rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
-			if (rotateLeftArms >= 360)
-			{
-				rotateLeftArms = 360;
-			}
-		}
-
-		if (rotateRightLeg > 360)//moving back right leg
-		{
-			rotateRightLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
-			if (rotateRightLeg <= 360)
-			{
-				rotateRightLeg = 360;
-			}
-		}
-		else if (rotateRightLeg < 360)
-		{
-			rotateRightLeg += (float)(rotatingRightLeg * dt * ROTATE_SPEED);
-			if (rotateRightLeg >= 360)
-			{
-				rotateRightLeg = 360;
-			}
-		}
-
-		if (rotateLeftLeg > 360)//moving back left arm
-		{
-			rotateLeftLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
-			if (rotateLeftLeg <= 360)
-			{
-				rotateLeftLeg = 360;
-			}
-		}
-		else if (rotateLeftLeg < 360)
-		{
 			rotateLeftLeg += (float)(rotatingLeftLeg * dt * ROTATE_SPEED);
-			if (rotateLeftLeg >= 360)
+			rotateRightLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+
+			if (rotateRightArms >= 405)//rotating right arm
 			{
-				rotateLeftLeg = 360;
+				rotatingRightArm = -1;
+				count++;
+			}
+			if(rotateRightArms <= 330)
+			{
+				rotatingRightArm = 1;
+			}
+
+			if (rotateLeftArms >= 405)//rotatin left arm
+			{
+				rotatingLeftArm = -1;
+			}
+			if(rotateLeftArms <= 330)
+			{
+				rotatingLeftArm = 1;
+			}
+
+			if (rotateLeftLeg >= 405)//rotatin left leg
+			{
+				rotatingLeftLeg = -1;
+			}
+			if(rotateLeftLeg <= 315)
+			{
+				rotatingLeftLeg = 1;
+			}
+
+			if (rotateRightLeg >= 405)//rotatin right leg
+			{
+				rotatingRightLeg = 1;
+			}
+			if(rotateRightLeg <= 315)
+			{
+				rotatingRightLeg = -1;
+			}
+
+			if (count >= 1)
+			{
+				rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
 			}
 		}
-	}
 
-	/*if (Application::IsKeyPressed('8'))
-	{
-	charPosition.z += cos(Math::DegreeToRadian(angle)) * 10 * dt;
-	charPosition.x += sin(Math::DegreeToRadian(angle)) * 10 * dt;
-	}
-	if (Application::IsKeyPressed('9'))
-	{
-	charPosition.z -= cos(Math::DegreeToRadian(angle)) * 10 * dt;
-	charPosition.x -= sin(Math::DegreeToRadian(angle)) * 10 * dt;
-	}*/
-	if (Application::IsKeyPressed('I'))
-	{
-		angle += 100 * dt;
-	}
-	if (Application::IsKeyPressed('O'))
-	{
-		angle -= 100 * dt;
-	}
-	/*========================================================
-	Animation
-	===========================================================*/
-	updateDoor(dt);
-
-	/*=======================================================
-	Interactions
-	==========================================================*/
-	updateTakingItem();
-
-	updateCheckingOut();
-
-	updatePuttingBackItem();
-
-	updateTimeAttack();
-
-	updateDustBin();
-
-	/*=======================================================
-	Artifical Intelligence
-	==========================================================*/
-	updateAI(dt);
-	/*==============================================================
-	DEBUGGING PURPOSES
-	=================================================================*/
-
-	//====Camera coordinates===//
-	std::ostringstream ss;
-	fps = 1/dt;
-	ss << fps;
-	result = ss.str();
-
-	std::ostringstream ss2;
-	ss2 << camera.position.x;
-	camerax = ss2.str();
-
-	std::ostringstream ss3;
-	ss3 << camera.position.y;
-	cameray = ss3.str();
-
-	std::ostringstream ss4;
-	ss4 << camera.position.z;
-	cameraz = ss4.str();
-
-	//====Camera Target======//
-	std::ostringstream ss5;
-	ss5 << camera.target.x;
-	viewx = ss5.str();
-
-	std::ostringstream ss6;
-	ss6 << camera.target.y;
-	viewy = ss6.str();
-
-	std::ostringstream ss7;
-	ss7 <<  camera.target.z;
-	viewz = ss7.str();
-
-	//====Player Money===//
-	std::ostringstream ss8;
-	ss8 <<  player.getMoney();
-	Cash = ss8.str();
-
-	//================Item Inventory Image=================//
-	static float elapsedTime1 = 0, elapsedTime2 = 0;
-	elapsedTime1 = fmod(Timer.getElapsedTime(), 1);
-
-	if (elapsedTime2 <= 0.15)
-	{
-		elapsedTime2 += elapsedTime1;
-	}
-	else
-	{
-		elapsedTime2 += 0;
-	}
-
-	if(Application::IsKeyPressed(VK_TAB) && elapsedTime2 >= 0.15)
-	{
-		if (showInventory == false)
+		else if (movingModel == false)
 		{
-			showInventory = true;
-		}
-		else if (showInventory == true)
-		{
-			showInventory = false;
-		}
-		elapsedTime2 -= 0.15;
-	}
-	//std::cout << elapsedTime2 << endl;
+			count = 0;
+			rotatingRightArm = 1;
+			rotatingLeftArm = 1;
+			rotatingRightLeg = 1;
+			rotatingLeftLeg = 1;
+			if (rotateRightArms > 360)//moving back right arm
+			{
+				rotateRightArms -= (float)(rotatingRightArm * dt * ROTATE_SPEED);
+				if (rotateRightArms <= 360)
+				{
+					rotateRightArms = 360;
+				}
+			}
+			else if (rotateRightArms < 360)
+			{
+				rotateRightArms += (float)(rotatingRightArm * dt * ROTATE_SPEED);
+				if (rotateRightArms >= 360)
+				{
+					rotateRightArms = 360;
+				}
+			}
 
-	if(Application::IsKeyPressed('B'))
-	{
+			if (rotateLeftArms > 360)//moving back left arm
+			{
+				rotateLeftArms -= (float)(rotatingLeftArm * dt * ROTATE_SPEED);
+				if (rotateLeftArms <= 360)
+				{
+					rotateLeftArms = 360;
+				}
+			}
+			else if (rotateLeftArms < 360)
+			{
+				rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
+				if (rotateLeftArms >= 360)
+				{
+					rotateLeftArms = 360;
+				}
+			}
 
+			if (rotateRightLeg > 360)//moving back right leg
+			{
+				rotateRightLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+				if (rotateRightLeg <= 360)
+				{
+					rotateRightLeg = 360;
+				}
+			}
+			else if (rotateRightLeg < 360)
+			{
+				rotateRightLeg += (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+				if (rotateRightLeg >= 360)
+				{
+					rotateRightLeg = 360;
+				}
+			}
 
-		if (translateMoneyZ > -8.5 && translateMoneyY > -2.54)
-		{
-			translateMoneyZ -= (float) (10 * dt);
-			translateMoneyY -= (float) (3 * dt);
-			throwMoney = true;
-		}
-		if (translateMoneyZ <= -8.5 && translateMoneyY <= -2.54)
-		{
-			throwMoney = false;
+			if (rotateLeftLeg > 360)//moving back left arm
+			{
+				rotateLeftLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+				if (rotateLeftLeg <= 360)
+				{
+					rotateLeftLeg = 360;
+				}
+			}
+			else if (rotateLeftLeg < 360)
+			{
+				rotateLeftLeg += (float)(rotatingLeftLeg * dt * ROTATE_SPEED);
+				if (rotateLeftLeg >= 360)
+				{
+					rotateLeftLeg = 360;
+				}
+			}
 		}
 
-		//if (translateMoneyY > -2.54)
-		//{
-		//	translateMoneyY -= (float) (3 * dt);
-		//}
+		/*if (Application::IsKeyPressed('8'))
+		{
+		charPosition.z += cos(Math::DegreeToRadian(angle)) * 10 * dt;
+		charPosition.x += sin(Math::DegreeToRadian(angle)) * 10 * dt;
+		}
+		if (Application::IsKeyPressed('9'))
+		{
+		charPosition.z -= cos(Math::DegreeToRadian(angle)) * 10 * dt;
+		charPosition.x -= sin(Math::DegreeToRadian(angle)) * 10 * dt;
+		}*/
+		if (Application::IsKeyPressed('I'))
+		{
+			angle += 100 * dt;
+		}
+		if (Application::IsKeyPressed('O'))
+		{
+			angle -= 100 * dt;
+		}
+		/*========================================================
+		Animation
+		===========================================================*/
+		updateDoor(dt);
 
-		//else if( translateMoneyZ <=-8.5 && translateMoneyY <=-2.54)
-		//{
-		//	throwMoney = false;
-		//}
+		/*=======================================================
+		Interactions
+		==========================================================*/
+		updateTakingItem();
+
+		updateCheckingOut();
+
+		updatePuttingBackItem();
+
+		updateTimeAttack();
+
+		updateDustBin();
+
+		/*=======================================================
+		Artifical Intelligence
+		==========================================================*/
+		updateAI(dt);
+		/*==============================================================
+		DEBUGGING PURPOSES
+		=================================================================*/
+
+		//====Camera coordinates===//
+		std::ostringstream ss;
+		fps = 1/dt;
+		ss << fps;
+		result = ss.str();
+
+		std::ostringstream ss2;
+		ss2 << camera.position.x;
+		camerax = ss2.str();
+
+		std::ostringstream ss3;
+		ss3 << camera.position.y;
+		cameray = ss3.str();
+
+		std::ostringstream ss4;
+		ss4 << camera.position.z;
+		cameraz = ss4.str();
+
+		//====Camera Target======//
+		std::ostringstream ss5;
+		ss5 << camera.target.x;
+		viewx = ss5.str();
+
+		std::ostringstream ss6;
+		ss6 << camera.target.y;
+		viewy = ss6.str();
+
+		std::ostringstream ss7;
+		ss7 <<  camera.target.z;
+		viewz = ss7.str();
+
+		//====Player Money===//
+		std::ostringstream ss8;
+		ss8 <<  player.getMoney();
+		Cash = ss8.str();
+
+		//================Item Inventory Image=================//
+		static float elapsedTime1 = 0, elapsedTime2 = 0;
+		elapsedTime1 = fmod(Timer.getElapsedTime(), 1);
+
+		if (elapsedTime2 <= 0.15)
+		{
+			elapsedTime2 += elapsedTime1;
+		}
+		else
+		{
+			elapsedTime2 += 0;
+		}
+
+		if(Application::IsKeyPressed(VK_TAB) && elapsedTime2 >= 0.15)
+		{
+			if (showInventory == false)
+			{
+				showInventory = true;
+			}
+			else if (showInventory == true)
+			{
+				showInventory = false;
+			}
+			elapsedTime2 -= 0.15;
+		}
+		//std::cout << elapsedTime2 << endl;
+
+		if(Application::IsKeyPressed('B'))
+		{
 
 
-		//if (translateMoneyY == 0)
-		//{
-		//	translateMoneyY = 0;
-		//	translateMoneyZ = 0;
-		//modelStack.Scale(0.3, 0.3, 0.3);
-		//RenderMesh(meshList[GEO_MONEY],B_Light);
-		//}
-	}
+			if (translateMoneyZ > -8.5 && translateMoneyY > -2.54)
+			{
+				translateMoneyZ -= (float) (10 * dt);
+				translateMoneyY -= (float) (3 * dt);
+				throwMoney = true;
+			}
+			if (translateMoneyZ <= -8.5 && translateMoneyY <= -2.54)
+			{
+				throwMoney = false;
+			}
+
+			//if (translateMoneyY > -2.54)
+			//{
+			//	translateMoneyY -= (float) (3 * dt);
+			//}
+
+			//else if( translateMoneyZ <=-8.5 && translateMoneyY <=-2.54)
+			//{
+			//	throwMoney = false;
+			//}
 
 
-	//================Testing =================//
-	//cout << Container.size() << endl;
-	if (Application::IsKeyPressed('M'))
-		moving += (float) (10 * dt);
-	if (Application::IsKeyPressed('N'))
-		moving -= (float) (10 * dt);
-	//moving -= (float) (5 * dt);
-	//cout<<moving<<endl;
+			//if (translateMoneyY == 0)
+			//{
+			//	translateMoneyY = 0;
+			//	translateMoneyZ = 0;
+			//modelStack.Scale(0.3, 0.3, 0.3);
+			//RenderMesh(meshList[GEO_MONEY],B_Light);
+			//}
+		}
 
-	camera.Update(dt);
 
-	Page.setCPlayer(player);
+		//================Testing =================//
+		//cout << Container.size() << endl;
+		if (Application::IsKeyPressed('M'))
+			moving += (float) (10 * dt);
+		if (Application::IsKeyPressed('N'))
+			moving -= (float) (10 * dt);
+		//moving -= (float) (5 * dt);
+		//cout<<moving<<endl;
 
-	Passerby[0].update(dt, camera.position);
-	Passerby[0].FindPlayerDistanceDifferencePasserby(camera.position);
-	Passerby[1].update(dt, camera.position);
-	Passerby[1].FindPlayerDistanceDifferencePasserby(camera.position);
-	Passerby[2].update(dt, camera.position);
-	Passerby[2].FindPlayerDistanceDifferencePasserby(camera.position);
-	
-	if ((camera.position - Passerby[0].getPasserbyPosition()).Length() < 6 ||
-		(camera.position - Passerby[1].getPasserby2Position()).Length() < 6 ||
-		(camera.position - Passerby[2].getPasserby2Position()).Length() < 6)
-	{
-		camera.CollisionWithAi = true;
-	}
+		camera.Update(dt);
 
-	else if ((camera.position - Passerby[0].getPasserbyPosition()).Length() > 6 ||
+		Page.setCPlayer(player);
+
+		Passerby[0].update(dt, camera.position);
+		Passerby[0].FindPlayerDistanceDifferencePasserby(camera.position);
+		Passerby[1].update(dt, camera.position);
+		Passerby[1].FindPlayerDistanceDifferencePasserby(camera.position);
+		Passerby[2].update(dt, camera.position);
+		Passerby[2].FindPlayerDistanceDifferencePasserby(camera.position);
+
+		if ((camera.position - Passerby[0].getPasserbyPosition()).Length() < 6 ||
+			(camera.position - Passerby[1].getPasserby2Position()).Length() < 6 ||
+			(camera.position - Passerby[2].getPasserby2Position()).Length() < 6)
+		{
+			camera.CollisionWithAi = true;
+		}
+
+		else if ((camera.position - Passerby[0].getPasserbyPosition()).Length() > 6 ||
 			(camera.position - Passerby[1].getPasserby2Position()).Length() > 6 ||
 			(camera.position - Passerby[2].getPasserby2Position()).Length() > 6)
-	{
-		camera.CollisionWithAi = false;
+		{
+			camera.CollisionWithAi = false;
+		}
 	}
 }
 
@@ -5960,319 +5991,329 @@ void StudioProject::Render()
 	viewStack.LookAt(camera.position.x, camera.position.y, camera.position.z, camera.target.x, camera.target.y, camera.target.z, camera.up.x, camera.up.y, camera.up.z);
 	modelStack.LoadIdentity();
 
-
-	if(lights[0].type == Light::LIGHT_DIRECTIONAL)
+	//======================Renderin of Menu===================//
+	if (menu.getShowMenuStatus() == true)
 	{
-		Vector3 lightDir(lights[0].position.x, lights[0].position.y, lights[0].position.z);
-		Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
-		glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightDirection_cameraspace.x);
-	}
-	else if(lights[0].type == Light::LIGHT_SPOT)
-	{
-		Position lightPosition_cameraspace = viewStack.Top() * lights[0].position;
-		glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightPosition_cameraspace.x);
-		Vector3 spotDirection_cameraspace = viewStack.Top() * lights[0].spotDirection;
-		glUniform3fv(m_parameters[U_LIGHT0_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
+		RenderMenuOnScreen(meshList[MENUBACKGROUND], Color(1, 1, 1), 1, 1, 1);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Press UP or DOWN for navigation", Color(1, 1, 1), 2, 1, 2);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Press ENTER to enter input", Color(1, 1, 1), 2, 1, 1);
 	}
 	else
 	{
-		Position lightPosition_cameraspace = viewStack.Top() * lights[0].position;
-		glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightPosition_cameraspace.x);
-	}
 
-	//Light2
-	if(lights[1].type == Light::LIGHT_DIRECTIONAL)
-	{
-		Vector3 lightDir(lights[1].position.x, lights[1].position.y, lights[1].position.z);
-		Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
-		glUniform3fv(m_parameters[U_LIGHT1_POSITION], 1, &lightDirection_cameraspace.x);
-	}
-	else if(lights[1].type == Light::LIGHT_SPOT)
-	{
-		Position lightPosition_cameraspace = viewStack.Top() * lights[1].position;
-		glUniform3fv(m_parameters[U_LIGHT1_POSITION], 1, &lightPosition_cameraspace.x);
-		Vector3 spotDirection_cameraspace = viewStack.Top() * lights[1].spotDirection;
-		glUniform3fv(m_parameters[U_LIGHT1_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
-	}
-	else
-	{
-		Position lightPosition_cameraspace = viewStack.Top() * lights[1].position;
-		glUniform3fv(m_parameters[U_LIGHT1_POSITION], 1, &lightPosition_cameraspace.x);
-	}
+		if(lights[0].type == Light::LIGHT_DIRECTIONAL)
+		{
+			Vector3 lightDir(lights[0].position.x, lights[0].position.y, lights[0].position.z);
+			Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
+			glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightDirection_cameraspace.x);
+		}
+		else if(lights[0].type == Light::LIGHT_SPOT)
+		{
+			Position lightPosition_cameraspace = viewStack.Top() * lights[0].position;
+			glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightPosition_cameraspace.x);
+			Vector3 spotDirection_cameraspace = viewStack.Top() * lights[0].spotDirection;
+			glUniform3fv(m_parameters[U_LIGHT0_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
+		}
+		else
+		{
+			Position lightPosition_cameraspace = viewStack.Top() * lights[0].position;
+			glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightPosition_cameraspace.x);
+		}
 
-	//Light 3
-	if(lights[2].type == Light::LIGHT_DIRECTIONAL)
-	{
-		Vector3 lightDir(lights[2].position.x, lights[2].position.y, lights[2].position.z);
-		Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
-		glUniform3fv(m_parameters[U_LIGHT2_POSITION], 1, &lightDirection_cameraspace.x);
-	}
-	else if(lights[2].type == Light::LIGHT_SPOT)
-	{
-		Position lightPosition_cameraspace = viewStack.Top() * lights[2].position;
-		glUniform3fv(m_parameters[U_LIGHT2_POSITION], 1, &lightPosition_cameraspace.x);
-		Vector3 spotDirection_cameraspace = viewStack.Top() * lights[2].spotDirection;
-		glUniform3fv(m_parameters[U_LIGHT2_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
-	}
-	else
-	{
-		Position lightPosition_cameraspace = viewStack.Top() * lights[2].position;
-		glUniform3fv(m_parameters[U_LIGHT2_POSITION], 1, &lightPosition_cameraspace.x);
-	}
+		//Light2
+		if(lights[1].type == Light::LIGHT_DIRECTIONAL)
+		{
+			Vector3 lightDir(lights[1].position.x, lights[1].position.y, lights[1].position.z);
+			Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
+			glUniform3fv(m_parameters[U_LIGHT1_POSITION], 1, &lightDirection_cameraspace.x);
+		}
+		else if(lights[1].type == Light::LIGHT_SPOT)
+		{
+			Position lightPosition_cameraspace = viewStack.Top() * lights[1].position;
+			glUniform3fv(m_parameters[U_LIGHT1_POSITION], 1, &lightPosition_cameraspace.x);
+			Vector3 spotDirection_cameraspace = viewStack.Top() * lights[1].spotDirection;
+			glUniform3fv(m_parameters[U_LIGHT1_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
+		}
+		else
+		{
+			Position lightPosition_cameraspace = viewStack.Top() * lights[1].position;
+			glUniform3fv(m_parameters[U_LIGHT1_POSITION], 1, &lightPosition_cameraspace.x);
+		}
 
-	//Light 4
-	if(lights[3].type == Light::LIGHT_DIRECTIONAL)
-	{
-		Vector3 lightDir(lights[3].position.x, lights[3].position.y, lights[3].position.z);
-		Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
-		glUniform3fv(m_parameters[U_LIGHT3_POSITION], 1, &lightDirection_cameraspace.x);
-	}
-	else if(lights[3].type == Light::LIGHT_SPOT)
-	{
-		Position lightPosition_cameraspace = viewStack.Top() * lights[3].position;
-		glUniform3fv(m_parameters[U_LIGHT3_POSITION], 1, &lightPosition_cameraspace.x);
-		Vector3 spotDirection_cameraspace = viewStack.Top() * lights[3].spotDirection;
-		glUniform3fv(m_parameters[U_LIGHT3_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
-	}
-	else
-	{ 
-		Position lightPosition_cameraspace = viewStack.Top() * lights[3].position;
-		glUniform3fv(m_parameters[U_LIGHT3_POSITION], 1, &lightPosition_cameraspace.x);
-	}
+		//Light 3
+		if(lights[2].type == Light::LIGHT_DIRECTIONAL)
+		{
+			Vector3 lightDir(lights[2].position.x, lights[2].position.y, lights[2].position.z);
+			Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
+			glUniform3fv(m_parameters[U_LIGHT2_POSITION], 1, &lightDirection_cameraspace.x);
+		}
+		else if(lights[2].type == Light::LIGHT_SPOT)
+		{
+			Position lightPosition_cameraspace = viewStack.Top() * lights[2].position;
+			glUniform3fv(m_parameters[U_LIGHT2_POSITION], 1, &lightPosition_cameraspace.x);
+			Vector3 spotDirection_cameraspace = viewStack.Top() * lights[2].spotDirection;
+			glUniform3fv(m_parameters[U_LIGHT2_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
+		}
+		else
+		{
+			Position lightPosition_cameraspace = viewStack.Top() * lights[2].position;
+			glUniform3fv(m_parameters[U_LIGHT2_POSITION], 1, &lightPosition_cameraspace.x);
+		}
 
-	//Light 5
-	if(lights[4].type == Light::LIGHT_DIRECTIONAL)
-	{
-		Vector3 lightDir(lights[4].position.x, lights[4].position.y, lights[4].position.z);
-		Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
-		glUniform3fv(m_parameters[U_LIGHT4_POSITION], 1, &lightDirection_cameraspace.x);
-	}
-	else if(lights[4].type == Light::LIGHT_SPOT)
-	{
-		Position lightPosition_cameraspace = viewStack.Top() * lights[4].position;
-		glUniform3fv(m_parameters[U_LIGHT4_POSITION], 1, &lightPosition_cameraspace.x);
-		Vector3 spotDirection_cameraspace = viewStack.Top() * lights[4].spotDirection;
-		glUniform3fv(m_parameters[U_LIGHT4_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
-	}
-	else
-	{
-		Position lightPosition_cameraspace = viewStack.Top() * lights[4].position;
-		glUniform3fv(m_parameters[U_LIGHT4_POSITION], 1, &lightPosition_cameraspace.x);
-	}
+		//Light 4
+		if(lights[3].type == Light::LIGHT_DIRECTIONAL)
+		{
+			Vector3 lightDir(lights[3].position.x, lights[3].position.y, lights[3].position.z);
+			Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
+			glUniform3fv(m_parameters[U_LIGHT3_POSITION], 1, &lightDirection_cameraspace.x);
+		}
+		else if(lights[3].type == Light::LIGHT_SPOT)
+		{
+			Position lightPosition_cameraspace = viewStack.Top() * lights[3].position;
+			glUniform3fv(m_parameters[U_LIGHT3_POSITION], 1, &lightPosition_cameraspace.x);
+			Vector3 spotDirection_cameraspace = viewStack.Top() * lights[3].spotDirection;
+			glUniform3fv(m_parameters[U_LIGHT3_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
+		}
+		else
+		{ 
+			Position lightPosition_cameraspace = viewStack.Top() * lights[3].position;
+			glUniform3fv(m_parameters[U_LIGHT3_POSITION], 1, &lightPosition_cameraspace.x);
+		}
 
-	//Light 6 (Middle front (Bottom))
-	if(lights[5].type == Light::LIGHT_DIRECTIONAL)
-	{
-		Vector3 lightDir(lights[5].position.x, lights[5].position.y, lights[5].position.z);
-		Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
-		glUniform3fv(m_parameters[U_LIGHT5_POSITION], 1, &lightDirection_cameraspace.x);
-	}
-	else if(lights[5].type == Light::LIGHT_SPOT)
-	{
-		Position lightPosition_cameraspace = viewStack.Top() * lights[5].position;
-		glUniform3fv(m_parameters[U_LIGHT4_POSITION], 1, &lightPosition_cameraspace.x);
-		Vector3 spotDirection_cameraspace = viewStack.Top() * lights[5].spotDirection;
-		glUniform3fv(m_parameters[U_LIGHT5_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
-	}
-	else
-	{
-		Position lightPosition_cameraspace = viewStack.Top() * lights[5].position;
-		glUniform3fv(m_parameters[U_LIGHT5_POSITION], 1, &lightPosition_cameraspace.x);
-	}
+		//Light 5
+		if(lights[4].type == Light::LIGHT_DIRECTIONAL)
+		{
+			Vector3 lightDir(lights[4].position.x, lights[4].position.y, lights[4].position.z);
+			Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
+			glUniform3fv(m_parameters[U_LIGHT4_POSITION], 1, &lightDirection_cameraspace.x);
+		}
+		else if(lights[4].type == Light::LIGHT_SPOT)
+		{
+			Position lightPosition_cameraspace = viewStack.Top() * lights[4].position;
+			glUniform3fv(m_parameters[U_LIGHT4_POSITION], 1, &lightPosition_cameraspace.x);
+			Vector3 spotDirection_cameraspace = viewStack.Top() * lights[4].spotDirection;
+			glUniform3fv(m_parameters[U_LIGHT4_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
+		}
+		else
+		{
+			Position lightPosition_cameraspace = viewStack.Top() * lights[4].position;
+			glUniform3fv(m_parameters[U_LIGHT4_POSITION], 1, &lightPosition_cameraspace.x);
+		}
 
-	//Light 7 (Middle front (2nd floor))
-	if(lights[6].type == Light::LIGHT_DIRECTIONAL)
-	{
-		Vector3 lightDir(lights[6].position.x, lights[6].position.y, lights[6].position.z);
-		Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
-		glUniform3fv(m_parameters[U_LIGHT6_POSITION], 1, &lightDirection_cameraspace.x);
-	}
-	else if(lights[6].type == Light::LIGHT_SPOT)
-	{
-		Position lightPosition_cameraspace = viewStack.Top() * lights[6].position;
-		glUniform3fv(m_parameters[U_LIGHT6_POSITION], 1, &lightPosition_cameraspace.x);
-		Vector3 spotDirection_cameraspace = viewStack.Top() * lights[6].spotDirection;
-		glUniform3fv(m_parameters[U_LIGHT6_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
-	}
-	else
-	{
-		Position lightPosition_cameraspace = viewStack.Top() * lights[6].position;
-		glUniform3fv(m_parameters[U_LIGHT6_POSITION], 1, &lightPosition_cameraspace.x);
-	}
+		//Light 6 (Middle front (Bottom))
+		if(lights[5].type == Light::LIGHT_DIRECTIONAL)
+		{
+			Vector3 lightDir(lights[5].position.x, lights[5].position.y, lights[5].position.z);
+			Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
+			glUniform3fv(m_parameters[U_LIGHT5_POSITION], 1, &lightDirection_cameraspace.x);
+		}
+		else if(lights[5].type == Light::LIGHT_SPOT)
+		{
+			Position lightPosition_cameraspace = viewStack.Top() * lights[5].position;
+			glUniform3fv(m_parameters[U_LIGHT4_POSITION], 1, &lightPosition_cameraspace.x);
+			Vector3 spotDirection_cameraspace = viewStack.Top() * lights[5].spotDirection;
+			glUniform3fv(m_parameters[U_LIGHT5_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
+		}
+		else
+		{
+			Position lightPosition_cameraspace = viewStack.Top() * lights[5].position;
+			glUniform3fv(m_parameters[U_LIGHT5_POSITION], 1, &lightPosition_cameraspace.x);
+		}
 
-	//Light 8 (Middle front (2nd floor))
-	if(lights[7].type == Light::LIGHT_DIRECTIONAL)
-	{
-		Vector3 lightDir(lights[7].position.x, lights[7].position.y, lights[7].position.z);
-		Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
-		glUniform3fv(m_parameters[U_LIGHT7_POSITION], 1, &lightDirection_cameraspace.x);
-	}
-	else if(lights[7].type == Light::LIGHT_SPOT)
-	{
-		Position lightPosition_cameraspace = viewStack.Top() * lights[7].position;
-		glUniform3fv(m_parameters[U_LIGHT7_POSITION], 1, &lightPosition_cameraspace.x);
-		Vector3 spotDirection_cameraspace = viewStack.Top() * lights[7].spotDirection;
-		glUniform3fv(m_parameters[U_LIGHT7_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
-	}
-	else
-	{
-		Position lightPosition_cameraspace = viewStack.Top() * lights[7].position;
-		glUniform3fv(m_parameters[U_LIGHT7_POSITION], 1, &lightPosition_cameraspace.x);
-	}
+		//Light 7 (Middle front (2nd floor))
+		if(lights[6].type == Light::LIGHT_DIRECTIONAL)
+		{
+			Vector3 lightDir(lights[6].position.x, lights[6].position.y, lights[6].position.z);
+			Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
+			glUniform3fv(m_parameters[U_LIGHT6_POSITION], 1, &lightDirection_cameraspace.x);
+		}
+		else if(lights[6].type == Light::LIGHT_SPOT)
+		{
+			Position lightPosition_cameraspace = viewStack.Top() * lights[6].position;
+			glUniform3fv(m_parameters[U_LIGHT6_POSITION], 1, &lightPosition_cameraspace.x);
+			Vector3 spotDirection_cameraspace = viewStack.Top() * lights[6].spotDirection;
+			glUniform3fv(m_parameters[U_LIGHT6_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
+		}
+		else
+		{
+			Position lightPosition_cameraspace = viewStack.Top() * lights[6].position;
+			glUniform3fv(m_parameters[U_LIGHT6_POSITION], 1, &lightPosition_cameraspace.x);
+		}
 
-	//===Rendering Level 1 Lights
-	RenderLevel1Lights();
+		//Light 8 (Middle front (2nd floor))
+		if(lights[7].type == Light::LIGHT_DIRECTIONAL)
+		{
+			Vector3 lightDir(lights[7].position.x, lights[7].position.y, lights[7].position.z);
+			Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
+			glUniform3fv(m_parameters[U_LIGHT7_POSITION], 1, &lightDirection_cameraspace.x);
+		}
+		else if(lights[7].type == Light::LIGHT_SPOT)
+		{
+			Position lightPosition_cameraspace = viewStack.Top() * lights[7].position;
+			glUniform3fv(m_parameters[U_LIGHT7_POSITION], 1, &lightPosition_cameraspace.x);
+			Vector3 spotDirection_cameraspace = viewStack.Top() * lights[7].spotDirection;
+			glUniform3fv(m_parameters[U_LIGHT7_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
+		}
+		else
+		{
+			Position lightPosition_cameraspace = viewStack.Top() * lights[7].position;
+			glUniform3fv(m_parameters[U_LIGHT7_POSITION], 1, &lightPosition_cameraspace.x);
+		}
 
-	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
-	glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
-	RenderMesh(meshList[GEO_AXES], false);
+		//===Rendering Level 1 Lights
+		RenderLevel1Lights();
 
-	//Rendering skybox
-	modelStack.PushMatrix();
-	modelStack.Translate(camera.position.x, camera.position.y, camera.position.z);
-	modelStack.Rotate(180, 0, 1, 0);
-	RenderSkybox();
-	modelStack.PopMatrix();
+		MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
+		glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
+		RenderMesh(meshList[GEO_AXES], false);
 
-	//Rendering of supermarket scene
-	modelStack.PushMatrix();
-	RenderSupermarket();
-	RenderItems();
-	modelStack.PopMatrix();
+		//Rendering skybox
+		modelStack.PushMatrix();
+		modelStack.Translate(camera.position.x, camera.position.y, camera.position.z);
+		modelStack.Rotate(180, 0, 1, 0);
+		RenderSkybox();
+		modelStack.PopMatrix();
 
-
-	//Rendering of CharacterModel
-	modelStack.PushMatrix();
-	RenderModel();
-	modelStack.PopMatrix();
-
-	//Rendering of CashierModel
-	modelStack.PushMatrix(); //Moving of cashier
-	modelStack.Translate(-24, 0, 17);
-	modelStack.Rotate(90,0,1,0);
-	modelStack.PushMatrix();
-	modelStack.Scale(1.2, 1.2, 1.2);
-	modelStack.Rotate(90, 0, 90, 0);
-	RenderCashier();
-	modelStack.PopMatrix();
-	modelStack.PopMatrix();
-
-	//Rendering of CashierModel
-	modelStack.PushMatrix(); //Moving of cashier
-	modelStack.Translate(-24, 0, 0);
-	modelStack.Rotate(90,0,1,0);
-	modelStack.PushMatrix();
-	modelStack.Scale(1.2, 1.2, 1.2);
-	modelStack.Rotate(90, 0, 90, 0);
-	RenderCashier();
-	modelStack.PopMatrix();
-	modelStack.PopMatrix();
-
-	//Rendering of CashierModel
-	modelStack.PushMatrix(); //Moving of cashier
-	modelStack.Translate(-24, 0, -18);
-	modelStack.Rotate(90,0,1,0);
-	modelStack.PushMatrix();
-	modelStack.Scale(1.2, 1.2, 1.2);
-	modelStack.Rotate(90, 0, 90, 0);
-	RenderCashier();
-	modelStack.PopMatrix();
-	modelStack.PopMatrix();
-
-	//Rendering of GuardModel
-	modelStack.PushMatrix();
-	RenderGuard();
-	modelStack.PopMatrix();
-
-	//Rendering of CustomerModel1
-	modelStack.PushMatrix(); //Moving of customer
-	modelStack.Translate(Passerby[0].getPasserbyPosition().x, 0, Passerby[0].getPasserbyPosition().z);
-	modelStack.PushMatrix();
-	modelStack.Scale(1.2, 1.2, 1.2);
-	modelStack.Rotate(Passerby[0].getPasserbyAngle(), 0, 1, 0);
-	RenderCustomer();
-	modelStack.PopMatrix();
-	modelStack.PopMatrix();
-
-	//Rendering of CustomerModel2
-	modelStack.PushMatrix(); //Moving of customer
-	modelStack.Translate(Passerby[1].getPasserby2Position().x, 0, Passerby[1].getPasserby2Position().z);
-	modelStack.PushMatrix();
-	modelStack.Scale(1.2, 1.2, 1.2);
-	modelStack.Rotate(Passerby[1].getPasserbyAngle2(), 0, 1, 0);
-	RenderCustomer();
-	modelStack.PopMatrix();
-	modelStack.PopMatrix();
-
-	//Rendering of CustomerModel3
-	modelStack.PushMatrix(); //Moving of customer
-	modelStack.Translate(Passerby[2].getPasserby3Position().x, Passerby[2].getPasserby3Position().y, Passerby[2].getPasserby3Position().z);
-	modelStack.PushMatrix();
-	modelStack.Scale(1.2, 1.2, 1.2);
-	modelStack.Rotate(Passerby[2].getPasserbyAngle3(), 0, 1, 0);
-	RenderCustomer();
-	modelStack.PopMatrix();
-	modelStack.PopMatrix();
-
-	//=======DOORS=====//
-	//LEFTDOOR
-	modelStack.PushMatrix();
-	modelStack.Translate(-55.75,0.15,doorTranslate);
-	modelStack.Scale(5,5,5);
-
-	RenderMesh(meshList[GEO_DOORLEFT],B_Light);
-	modelStack.PopMatrix();
+		//Rendering of supermarket scene
+		modelStack.PushMatrix();
+		RenderSupermarket();
+		RenderItems();
+		modelStack.PopMatrix();
 
 
-	//RIGHTDOOR
-	modelStack.PushMatrix();
-	modelStack.Translate(-56,0,-doorTranslate);
-	modelStack.Scale(5,5,5);
-	RenderMesh(meshList[GEO_DOORRIGHT],B_Light);
-	modelStack.PopMatrix();
+		//Rendering of CharacterModel
+		modelStack.PushMatrix();
+		RenderModel();
+		modelStack.PopMatrix();
 
-	//Rendering of itempage
-	if (showInventory == true)
-	{
-		RenderImageOnScreen(meshList[itemInventory], Color(1, 1, 1), 100, 1, 1);
-	}
+		//Rendering of CashierModel
+		modelStack.PushMatrix(); //Moving of cashier
+		modelStack.Translate(-24, 0, 17);
+		modelStack.Rotate(90,0,1,0);
+		modelStack.PushMatrix();
+		modelStack.Scale(1.2, 1.2, 1.2);
+		modelStack.Rotate(90, 0, 90, 0);
+		RenderCashier();
+		modelStack.PopMatrix();
+		modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
-	modelStack.Scale(0.5, 0.5, 0.5);
-	modelStack.Translate(-1.43656 + -0.065, -1.43656 + 0.15, 0);
-	RenderMesh(meshList[itemInventory], false);
-	modelStack.PopMatrix();
+		//Rendering of CashierModel
+		modelStack.PushMatrix(); //Moving of cashier
+		modelStack.Translate(-24, 0, 0);
+		modelStack.Rotate(90,0,1,0);
+		modelStack.PushMatrix();
+		modelStack.Scale(1.2, 1.2, 1.2);
+		modelStack.Rotate(90, 0, 90, 0);
+		RenderCashier();
+		modelStack.PopMatrix();
+		modelStack.PopMatrix();
 
-	/*=====================================================
-	Rendering of Information for player
-	=======================================================*/
-	RenderPlayerInfo();
-	RenderItemsInfo();
+		//Rendering of CashierModel
+		modelStack.PushMatrix(); //Moving of cashier
+		modelStack.Translate(-24, 0, -18);
+		modelStack.Rotate(90,0,1,0);
+		modelStack.PushMatrix();
+		modelStack.Scale(1.2, 1.2, 1.2);
+		modelStack.Rotate(90, 0, 90, 0);
+		RenderCashier();
+		modelStack.PopMatrix();
+		modelStack.PopMatrix();
 
-	//============DEBUGGING PURPOSES====================//
+		//Rendering of GuardModel
+		modelStack.PushMatrix();
+		RenderGuard();
+		modelStack.PopMatrix();
 
-	RenderTextOnScreen(meshList[GEO_TEXT],"+", Color(1, 0, 0), 3, 13.55, 10);
+		//Rendering of CustomerModel1
+		modelStack.PushMatrix(); //Moving of customer
+		modelStack.Translate(Passerby[0].getPasserbyPosition().x, 0, Passerby[0].getPasserbyPosition().z);
+		modelStack.PushMatrix();
+		modelStack.Scale(1.2, 1.2, 1.2);
+		modelStack.Rotate(Passerby[0].getPasserbyAngle(), 0, 1, 0);
+		RenderCustomer();
+		modelStack.PopMatrix();
+		modelStack.PopMatrix();
 
-	//==Controls==//
-	if(isShown == true)
-	{
-		RenderTextOnScreen(meshList[GEO_TEXT], "WASD to Move", Color(0, 0 ,0), 2, 1, 29);
-		RenderTextOnScreen(meshList[GEO_TEXT], "Arrow Keys to turn", Color(0, 0, 0), 2, 1, 28);
-		RenderTextOnScreen(meshList[GEO_TEXT], "Press E to interact", Color(0,0,0), 2, 1, 27);
+		//Rendering of CustomerModel2
+		modelStack.PushMatrix(); //Moving of customer
+		modelStack.Translate(Passerby[1].getPasserby2Position().x, 0, Passerby[1].getPasserby2Position().z);
+		modelStack.PushMatrix();
+		modelStack.Scale(1.2, 1.2, 1.2);
+		modelStack.Rotate(Passerby[1].getPasserbyAngle2(), 0, 1, 0);
+		RenderCustomer();
+		modelStack.PopMatrix();
+		modelStack.PopMatrix();
+
+		//Rendering of CustomerModel3
+		modelStack.PushMatrix(); //Moving of customer
+		modelStack.Translate(Passerby[2].getPasserby3Position().x, Passerby[2].getPasserby3Position().y, Passerby[2].getPasserby3Position().z);
+		modelStack.PushMatrix();
+		modelStack.Scale(1.2, 1.2, 1.2);
+		modelStack.Rotate(Passerby[2].getPasserbyAngle3(), 0, 1, 0);
+		RenderCustomer();
+		modelStack.PopMatrix();
+		modelStack.PopMatrix();
+
+		//=======DOORS=====//
+		//LEFTDOOR
+		modelStack.PushMatrix();
+		modelStack.Translate(-55.75,0.15,doorTranslate);
+		modelStack.Scale(5,5,5);
+
+		RenderMesh(meshList[GEO_DOORLEFT],B_Light);
+		modelStack.PopMatrix();
+
+
+		//RIGHTDOOR
+		modelStack.PushMatrix();
+		modelStack.Translate(-56,0,-doorTranslate);
+		modelStack.Scale(5,5,5);
+		RenderMesh(meshList[GEO_DOORRIGHT],B_Light);
+		modelStack.PopMatrix();
+
+		//Rendering of itempage
+		if (showInventory == true)
+		{
+			RenderImageOnScreen(meshList[itemInventory], Color(1, 1, 1), 100, 1, 1);
+		}
+
+		modelStack.PushMatrix();
+		modelStack.Scale(0.5, 0.5, 0.5);
+		modelStack.Translate(-1.43656 + -0.065, -1.43656 + 0.15, 0);
+		RenderMesh(meshList[itemInventory], false);
+		modelStack.PopMatrix();
+
+		/*=====================================================
+		Rendering of Information for player
+		=======================================================*/
+		RenderPlayerInfo();
+		RenderItemsInfo();
+
+		//============DEBUGGING PURPOSES====================//
+
+		RenderTextOnScreen(meshList[GEO_TEXT],"+", Color(1, 0, 0), 3, 13.55, 10);
+
+		//==Controls==//
+		if(isShown == true)
+		{
+			RenderTextOnScreen(meshList[GEO_TEXT], "WASD to Move", Color(0, 0 ,0), 2, 1, 29);
+			RenderTextOnScreen(meshList[GEO_TEXT], "Arrow Keys to turn", Color(0, 0, 0), 2, 1, 28);
+			RenderTextOnScreen(meshList[GEO_TEXT], "Press E to interact", Color(0,0,0), 2, 1, 27);
 			//============DEBUGGING PURPOSES====================//
-		RenderTextOnScreen(meshList[GEO_TEXT], Framerate + result, Color(0, 1, 0), 3, 1, 2);
-		RenderTextOnScreen(meshList[GEO_TEXT],"x: " + camerax, Color(0, 1, 0), 3, 1, 3);
-		RenderTextOnScreen(meshList[GEO_TEXT],"y: " + cameray, Color(0, 1, 0), 3, 1, 4);
-		RenderTextOnScreen(meshList[GEO_TEXT],"z: " + cameraz, Color(0, 1, 0), 3, 1, 5);
+			RenderTextOnScreen(meshList[GEO_TEXT], Framerate + result, Color(0, 1, 0), 3, 1, 2);
+			RenderTextOnScreen(meshList[GEO_TEXT],"x: " + camerax, Color(0, 1, 0), 3, 1, 3);
+			RenderTextOnScreen(meshList[GEO_TEXT],"y: " + cameray, Color(0, 1, 0), 3, 1, 4);
+			RenderTextOnScreen(meshList[GEO_TEXT],"z: " + cameraz, Color(0, 1, 0), 3, 1, 5);
 
-		RenderTextOnScreen(meshList[GEO_TEXT],"targetX: " + viewx, Color(0, 1, 0), 3, 10, 3);
-		RenderTextOnScreen(meshList[GEO_TEXT],"targetY: " + viewy, Color(0, 1, 0), 3, 10, 4);
-		RenderTextOnScreen(meshList[GEO_TEXT],"targetZ: " + viewz, Color(0, 1, 0), 3, 10, 5);
+			RenderTextOnScreen(meshList[GEO_TEXT],"targetX: " + viewx, Color(0, 1, 0), 3, 10, 3);
+			RenderTextOnScreen(meshList[GEO_TEXT],"targetY: " + viewy, Color(0, 1, 0), 3, 10, 4);
+			RenderTextOnScreen(meshList[GEO_TEXT],"targetZ: " + viewz, Color(0, 1, 0), 3, 10, 5);
+		}
+
+		RenderCheckOutItems();
+
+		RenderTimeAttack();
 	}
-
-	RenderCheckOutItems();
-
-	RenderTimeAttack();
 }
 
 /******************************************************************************/
@@ -7685,6 +7726,87 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 	modelStack.PopMatrix();
 	glEnable(GL_DEPTH_TEST);
 }
+
+void StudioProject::RenderMenuOnScreen(Mesh* mesh, Color color, float size, float x, float y)
+{
+	if(!mesh || mesh->textureID <= 0) //Proper error check
+		return;
+
+	glDisable(GL_DEPTH_TEST);
+	//Add these code just after glDisable(GL_DEPTH_TEST);
+	Mtx44 ortho;
+	ortho.SetToOrtho(0, 80, 0, 60, -10, 10); //size of screen UI
+	projectionStack.PushMatrix();
+	projectionStack.LoadMatrix(ortho);
+	viewStack.PushMatrix();
+	viewStack.LoadIdentity(); //No need camera for ortho mode
+	modelStack.PushMatrix();
+	modelStack.LoadIdentity(); //Reset modelStack
+	modelStack.Scale(size, size, size);
+	modelStack.Translate(x, y, 0);
+
+	glUniform1i(m_parameters[U_TEXT_ENABLED], 1);
+	glUniform3fv(m_parameters[U_TEXT_COLOR], 1, &color.r);
+	glUniform1i(m_parameters[U_LIGHTENABLED], 0);
+	glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 1);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
+	glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);
+
+
+	modelStack.PushMatrix();
+	modelStack.Scale(120, 120, 120);
+	modelStack.Translate(0.2, 0, 0);
+	RenderMesh(meshList[menu.getBackgroundMesh()], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Scale(3, 3, 3);
+	if (menu.getPointToGame() == true && menu.getPointToExit() == false)
+	{
+		modelStack.Translate(7.8, 11.7, 0);//11.7 for PLay Game 9.7 for exit
+	}
+	else if (menu.getPointToGame() == false && menu.getPointToExit() == true)
+	{
+		modelStack.Translate(7.8, 9.7, 0);
+	}
+	RenderMesh(meshList[menu.getArrowMesh()], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Scale(25, 25, 0);
+	modelStack.Translate(1.5, 1.4, 0);
+	if (menu.getPointToGame() == true && menu.getPointToExit() == false)
+	{
+		RenderMesh(meshList[menu.getStartGameTrueMesh()], false);
+	}
+	else if (menu.getPointToGame() == false && menu.getPointToExit() == true)
+	{
+		RenderMesh(meshList[menu.getStartGameFalseMesh()], false);
+	}
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Scale(25, 25, 0);
+	modelStack.Translate(1.5, 1.15, 0);
+	if (menu.getPointToGame() == false && menu.getPointToExit() == true)
+	{
+		RenderMesh(meshList[menu.getEndGameTrueMesh()], false);
+	}
+	else if (menu.getPointToGame() == true && menu.getPointToExit() == false)
+	{
+		RenderMesh(meshList[menu.getEndGameFalseMesh()], false);
+	}
+	modelStack.PopMatrix();
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glUniform1i(m_parameters[U_TEXT_ENABLED], 0);
+	projectionStack.PopMatrix();
+	viewStack.PopMatrix();
+	modelStack.PopMatrix();
+	glEnable(GL_DEPTH_TEST);
+}
+
 /******************************************************************************/
 /*!
 \brief

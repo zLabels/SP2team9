@@ -24,6 +24,7 @@
 #include "Cashier.h"
 #include "CItemInventory.h"
 #include "Ai.h"
+#include "MenuClass.h"
 //Sound Engine
 #include <irrKlang.h>
 
@@ -254,6 +255,13 @@ private:
 		customerLeftLeg,	//Customer Left Leg
 		customerRightLeg,	//Customer Right Leg
 
+		MENUBACKGROUND,
+		MENUARROW,
+		PlayGameTrue,
+		PlayGameFalse,
+		ExitTrue,
+		ExitFalse,
+
 		itemInventory,		//Item Inventory page
 		cart,
 		UI_SARDINE_CAN,
@@ -340,6 +348,7 @@ private:
 	float translateMoneyZ;
 	float translateMoneyY;
 	StopWatch Timer;
+	Menu menu;
 	//==SoundEngine==//
 	ISoundEngine* engine;
 	ISound* Sound;
@@ -467,6 +476,7 @@ private:
 	void RenderText(Mesh* mesh, std::string text, Color color);	//Function to render text in world space
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);	//Function to render Text on screen
 	void RenderImageOnScreen(Mesh* mesh, Color color, float size, float x, float y);	//Function to render Image on screen
+	void RenderMenuOnScreen(Mesh* mesh, Color color, float size, float x, float y);	//Function to render Menu on screen
 
 };
 
