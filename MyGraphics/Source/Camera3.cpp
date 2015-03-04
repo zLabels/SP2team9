@@ -393,7 +393,7 @@ void Camera3::Update(double dt)
 	
 	if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('A') && escal == false && escaldown == false && checkingOut == false)
 	{
-		if(CAMERA_SPEED <= 30)
+		if(CAMERA_SPEED <= 40)
 		{
 			CAMERA_SPEED += (float)(10*dt);
 		}
@@ -445,7 +445,7 @@ void Camera3::Update(double dt)
 	//Sprint
 	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('S') && escal == false && escaldown == false && checkingOut == false)
 	{
-		if(CAMERA_SPEED <= 30)
+		if(CAMERA_SPEED <= 40)
 		{
 			CAMERA_SPEED += (float)(10*dt);
 		}
@@ -493,7 +493,7 @@ void Camera3::Update(double dt)
 	//Sprint
 	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('D') && escal == false && escaldown == false && checkingOut == false)
 	{
-		if(CAMERA_SPEED <= 30)
+		if(CAMERA_SPEED <= 40)
 		{
 			CAMERA_SPEED += (float)(10*dt);
 		}
@@ -545,7 +545,7 @@ void Camera3::Update(double dt)
 	//Sprint
 	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('W') && escal == false && escaldown == false && CollisionWithAi == false && checkingOut == false)
 	{
-		if(CAMERA_SPEED <= 30)
+		if(CAMERA_SPEED <= 40)
 		{
 			CAMERA_SPEED += (float)(10*dt);
 		}
