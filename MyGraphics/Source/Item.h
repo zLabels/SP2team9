@@ -16,6 +16,7 @@ public:
 	
 	void setRender(bool a);
 	void setPaid(bool b);
+	void setPrice(float a);
 	string getName(void);
 	float getPrice(void);
 	bool getRender(void);

@@ -47,11 +47,7 @@ void CGuard::guardUpdate(float dt, Vector3 camerapos)
 	}
 	if(state == S_IDLE)
 	{
-		if(guardPos != initialPos)
-		{
-			Vector3 diffinitialPos = initialPos - guardPos;
-			guardPos += (diffinitialPos.Normalized()) * 10 * dt;
-		}
+		guardPos = initialPos;
 	}
 }
 

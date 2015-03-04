@@ -309,6 +309,7 @@ private:
 	void RenderLevel1Lights();	//Renders lights in level1 of supermarket
 	void RenderCheckOutItems(); //Renders Checkout Items
 	void RenderTimeAttack(); //Renders everything related to Time Attack mini game
+	void RenderGTP(); //Renders everything related to Guess The Price mini game
 
 	//Updates
 	void updateTakingItem(); //Updates taking of items from shelf
@@ -318,6 +319,9 @@ private:
 	void updateDustBin(); //Updates throwing of item
 	void updateDoor(double dt); //Updates opening / closing of door
 	void updateAI(double dt); //Updates all AI
+	void updateGTP(); //Updates everything related to Guess The Price mini game
+	void updateGTPprice(); //Updates Item prices for Guess The Price mini game
+	void InitOrigPrice(); //Initializes item prices back to normal
 
 public:
 	StudioProject();	//default constructor
@@ -372,6 +376,18 @@ private:
 	string timeTA;
 	float messageTime;
 
+	//==Guess The Price==//
+	bool GTP;
+	bool isGTPwon;
+	int NoOfItemsTaken;
+	int GTPstartedOnce;
+	string NumItem;
+	float totalCost;
+	string CostOfItems;
+
+	//==Thief==//
+	bool ThiefGame;
+
 	//=========Character=========//
 	bool movingModel;
 	float rotateRightArms, rotateLeftArms, rotateLeftLeg, rotateRightLeg;
@@ -413,6 +429,11 @@ private:
 
 	//===Player====//
 	CPlayer player;
+
+	//===NPC====//
+	CCustomer TAnpc;
+	CCustomer Theifnpc;
+	CCustomer GTPnpc;
 
 	//===Guard AI===//
 	CGuard Guard1;

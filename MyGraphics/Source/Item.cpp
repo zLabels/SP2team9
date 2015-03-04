@@ -37,6 +37,11 @@ void CItem::setPaid(bool b)
 	isPaid = b;
 }
 
+void CItem::setPrice(float a)
+{
+	price = a;
+}
+
 string CItem::getName(void)
 {
 	return name;
