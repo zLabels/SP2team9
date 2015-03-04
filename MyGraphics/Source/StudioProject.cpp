@@ -1030,8 +1030,8 @@ void StudioProject::InitVariables()
 		CokeCan.SetData("Coke", 3.5f, true, newMesh, GEO_COKE_CAN,newTRS,false);
 		Container3.push_back(CokeCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.5);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+1,newTRS.a[13]+0.7,newTRS.a[14]+0.5);
+		Min.Set(-1+newTRS.a[12],-0.7+newTRS.a[13],-0.5+newTRS.a[14]);
 		Coke.SetBox(Max, Min);
 		boxContainer3.push_back(Coke);
 	}
@@ -1171,8 +1171,8 @@ void StudioProject::InitVariables()
 		cerealBox1.SetData("Bran Buds Cereal", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS,false);
 		Container5.push_back(cerealBox1);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59, newTRS.a[13]+2,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-1+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.5, newTRS.a[13]+2,newTRS.a[14]+1);
+		Min.Set(-0.5+newTRS.a[12],-1+newTRS.a[13],-1+newTRS.a[14]);
 		cereal1.SetBox(Max, Min);
 		boxContainer5.push_back(cereal1);
 	}
@@ -1189,8 +1189,8 @@ void StudioProject::InitVariables()
 		cerealBox1.SetData("Bran Buds Cereal", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS,false);
 		Container6.push_back(cerealBox1);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-1+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.5,newTRS.a[13]+2,newTRS.a[14]+1);
+		Min.Set(-0.5+newTRS.a[12],-1+newTRS.a[13],-1+newTRS.a[14]);
 		cereal1.SetBox(Max, Min);
 		boxContainer6.push_back(cereal1);
 	}
@@ -1207,8 +1207,8 @@ void StudioProject::InitVariables()
 		cerealBox1.SetData("Bran Buds Cereal", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS,false);
 		Container7.push_back(cerealBox1);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-1+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.5,newTRS.a[13]+2,newTRS.a[14]+1);
+		Min.Set(-0.5+newTRS.a[12],-1+newTRS.a[13],-1+newTRS.a[14]);
 		cereal1.SetBox(Max, Min);
 		boxContainer7.push_back(cereal1);
 	}
@@ -1225,8 +1225,8 @@ void StudioProject::InitVariables()
 		cerealBox1.SetData("Bran Buds Cereal", 3.5f, true, newMesh, GEO_CEREALBOX1,newTRS,false);
 		Container8.push_back(cerealBox1);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-1+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.5,newTRS.a[13]+2,newTRS.a[14]+1);
+		Min.Set(-0.5+newTRS.a[12],-1+newTRS.a[13],-1+newTRS.a[14]);
 		cereal1.SetBox(Max, Min);
 		boxContainer8.push_back(cereal1);
 	}
@@ -1251,8 +1251,8 @@ void StudioProject::InitVariables()
 		cerealBox2.SetData("Morning Chips Cereal", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS,false);
 		Container5.push_back(cerealBox2);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-1+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.5,newTRS.a[13]+2,newTRS.a[14]+1);
+		Min.Set(-0.5+newTRS.a[12],-1+newTRS.a[13],-1+newTRS.a[14]);
 		cereal2.SetBox(Max, Min);
 		boxContainer5.push_back(cereal2);
 	}
@@ -1271,8 +1271,8 @@ void StudioProject::InitVariables()
 		cerealBox2.SetData("Morning Chips Cereal", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS,false);
 		Container6.push_back(cerealBox2);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-1+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.5,newTRS.a[13]+2,newTRS.a[14]+1);
+		Min.Set(-0.5+newTRS.a[12],-1+newTRS.a[13],-1+newTRS.a[14]);
 		cereal2.SetBox(Max, Min);
 		boxContainer6.push_back(cereal2);
 	}
@@ -1289,8 +1289,8 @@ void StudioProject::InitVariables()
 		cerealBox2.SetData("Morning Chips Cereal", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS,false);
 		Container8.push_back(cerealBox2);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-1+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.5,newTRS.a[13]+2,newTRS.a[14]+1);
+		Min.Set(-0.5+newTRS.a[12],-1+newTRS.a[13],-1+newTRS.a[14]);
 		cereal2.SetBox(Max, Min);
 		boxContainer8.push_back(cereal2);
 	}
@@ -1307,8 +1307,8 @@ void StudioProject::InitVariables()
 		cerealBox2.SetData("Morning Chips Cereal", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS,false);
 		Container7.push_back(cerealBox2);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.5,newTRS.a[13]+0.7,newTRS.a[14]+1);
+		Min.Set(-0.5+newTRS.a[12],-0.7+newTRS.a[13],-1+newTRS.a[14]);
 		cereal2.SetBox(Max, Min);
 		boxContainer7.push_back(cereal2);
 	}
@@ -1509,8 +1509,8 @@ void StudioProject::InitVariables()
 		MiloCan.SetData("Milo Can", 3.5f, true, newMesh, GEO_MILOCAN,newTRS,false);
 		Container11.push_back(MiloCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+1);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-1+newTRS.a[14]);
 		MC.SetBox(Max, Min);
 		boxContainer11.push_back(MC);
 	}
@@ -1527,8 +1527,8 @@ void StudioProject::InitVariables()
 		MiloCan.SetData("Milo Can", 3.5f, true, newMesh, GEO_MILOCAN,newTRS,false);
 		Container11.push_back(MiloCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+1);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-1+newTRS.a[14]);
 		MC.SetBox(Max, Min);
 		boxContainer11.push_back(MC);
 	}
@@ -1545,8 +1545,8 @@ void StudioProject::InitVariables()
 		MiloCan.SetData("Milo Can", 3.5f, true, newMesh, GEO_MILOCAN,newTRS,false);
 		Container12.push_back(MiloCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+1);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-1+newTRS.a[14]);
 		MC.SetBox(Max, Min);
 		boxContainer12.push_back(MC);
 	}
@@ -1563,8 +1563,8 @@ void StudioProject::InitVariables()
 		MiloCan.SetData("Milo Can", 3.5f, true, newMesh, GEO_MILOCAN,newTRS,false);
 		Container12.push_back(MiloCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+2,newTRS.a[14]+1);
+		Min.Set(-0.59+newTRS.a[12],+newTRS.a[13],-1+newTRS.a[14]);
 		MC.SetBox(Max, Min);
 		boxContainer12.push_back(MC);
 	}
@@ -2986,6 +2986,7 @@ void StudioProject::updateDoor(double dt)
 				doorMoving = false;
 				Opened = true;
 				doorStop = true;
+				doorTranslate = -20;
 			}	
 
 		}
@@ -3000,6 +3001,7 @@ void StudioProject::updateDoor(double dt)
 			if(doorTranslate > 0)
 			{
 				Closed = true;
+				doorTranslate = 0;
 			}
 
 		}
@@ -3071,6 +3073,7 @@ void StudioProject::Update(double dt)
 	}
 	else
 	{
+		//menu.update(dt);
 		//Speed of by which Item is translated on Checkout
 		if(moveItem >= -4.5 && Peas == true)
 		{
@@ -3388,11 +3391,11 @@ void StudioProject::Update(double dt)
 		static float elapsedTime1 = 0, elapsedTime2 = 0;
 		elapsedTime1 = fmod(Timer.getElapsedTime(), 1);
 
-		if (elapsedTime2 <= 0.15)
+		if (elapsedTime2 <= 0.5)
 		{
 			elapsedTime2 += elapsedTime1;
 		}
-		if(Application::IsKeyPressed(VK_TAB) && elapsedTime2 >= 0.15)
+		if(Application::IsKeyPressed(VK_TAB) && elapsedTime2 >= 0.5)
 		{
 			if (showInventory == false)
 			{		
@@ -3400,21 +3403,9 @@ void StudioProject::Update(double dt)
 			}
 			else
 			{
-				elapsedTime2 += 0;
+				showInventory = false;
 			}
-
-			if(Application::IsKeyPressed(VK_TAB) && elapsedTime2 >= 0.15)
-			{
-				if (showInventory == false)
-				{
-					showInventory = true;
-				}
-				else if (showInventory == true)
-				{
-					showInventory = false;
-				}
-				elapsedTime2 -= 0.15;
-			}
+			elapsedTime2 -= 0.5;
 		}
 		//std::cout << elapsedTime2 << endl;
 
@@ -6419,11 +6410,11 @@ void StudioProject::Render()
 			RenderImageOnScreen(meshList[itemInventory], Color(1, 1, 1), 100, 1, 1);
 		}
 
-		modelStack.PushMatrix();
+		/*modelStack.PushMatrix();
 		modelStack.Scale(0.5, 0.5, 0.5);
 		modelStack.Translate(-1.43656 + -0.065, -1.43656 + 0.15, 0);
 		RenderMesh(meshList[itemInventory], false);
-		modelStack.PopMatrix();
+		modelStack.PopMatrix();*/
 
 		/*=====================================================
 		Rendering of Information for player

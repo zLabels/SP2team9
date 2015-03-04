@@ -142,4 +142,9 @@ void Menu::update(double dt)
 			exit (NULL);
 		}
 	}
+
+	if (Application::IsKeyPressed('R') == true && showMenu == false)
+	{
+		showMenu = true;
+	}
 }
