@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	StudioProject.h
+\author Princeton Chew, name, name, name,
+\par	email: 141991A@mymail.nyp.edu.sg
+\brief
+Studio Project Class
+*/
+/******************************************************************************/
 #ifndef _StudioProject_H
 #define _StudioProject_H
 
@@ -31,6 +40,13 @@
 using namespace irrklang;
 using std::string;
 
+/******************************************************************************/
+/*!
+	Struct hitBox:
+\brief
+Define the Vector3 max and min of the hit box of the object
+*/
+/******************************************************************************/
 struct hitBox
 {
 	Vector3 max;
@@ -43,9 +59,19 @@ struct hitBox
 	}
 };
 
+/******************************************************************************/
+/*!
+	Class StudioProject
+\brief
+Defines the variables and functions required for the Scene
+
+*/
+/******************************************************************************/
 class StudioProject: public Scene
 {
 private:
+ //! UNIFORM_TYPE.
+/*! Defines variables of uniform_type */
 	enum UNIFORM_TYPE
 	{
 		U_MVP = 0,
@@ -171,8 +197,8 @@ private:
 		U_TEXT_COLOR,
 		U_TOTAL,
 	};
-
-
+ //! GEOMETRY_TYPE.
+/*! Defines the different geometries */
 	enum GEOMETRY_TYPE
 	{
 		GEO_AXES,
@@ -288,7 +314,8 @@ private:
 		UI_MILOCAN_PAID,
 		NUM_GEOMETRY,
 	};
-
+ //! States.
+/*! Defines States of guard */
 	enum States
 	{
 		S_IDLE,

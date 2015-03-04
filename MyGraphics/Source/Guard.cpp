@@ -1,6 +1,20 @@
+/******************************************************************************/
+/*!
+\file	Guard.cpp
+\author Princeton Chew
+\par	email: 141991A@mymail.nyp.edu.sg
+\brief
+Guard Class
+*/
+/******************************************************************************/
 #include "Guard.h"
 
-
+/******************************************************************************/
+/*!
+\brief
+Default constructor for class
+*/
+/******************************************************************************/
 CGuard::CGuard(void)
 {
 	guardPos.SetZero();
@@ -13,11 +27,25 @@ CGuard::CGuard(void)
 	state = 0;
 }
 
-
+/******************************************************************************/
+/*!
+\brief
+Default destructor for class
+*/
+/******************************************************************************/
 CGuard::~CGuard(void)
 {
 }
 
+/******************************************************************************/
+/*!
+\brief
+Set guard's position and target
+
+\param pos - Vector3 position of guard
+\param targ - Vector3 target of guard
+*/
+/******************************************************************************/
 void CGuard::SetData(Vector3 pos, Vector3 targ)
 {
 	guardPos = pos;
@@ -25,6 +53,15 @@ void CGuard::SetData(Vector3 pos, Vector3 targ)
 	guardTarget = targ;
 	guardView = (guardTarget - guardPos).Normalized();
 }
+/******************************************************************************/
+/*!
+\brief
+Updates the guard based on delta time and camera's position
+
+\param dt - delta time
+\param camerapos - Vector3 position of camera
+*/
+/******************************************************************************/
 void CGuard::guardUpdate(float dt, Vector3 camerapos)
 {
 	//==================================GUARD=====================//
@@ -50,26 +87,65 @@ void CGuard::guardUpdate(float dt, Vector3 camerapos)
 		guardPos = initialPos;
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Get the difference between guard and camera
 
+\param camerapos - Vector3 position of camera
+*/
+/******************************************************************************/
 void CGuard::getDifference(Vector3 camerapos)
 {
 	guardDifference = camerapos - guardPos;
 }
+/******************************************************************************/
+/*!
+\brief
+Get the guard's position
+
+\return Vector3 position of guard
+*/
+/******************************************************************************/
 Vector3 CGuard::getGuardPosition()
 {
 	return guardPos;
 }
 
+/******************************************************************************/
+/*!
+\brief
+Get the derived angle of guard and player
+
+\return Float of derived angle
+*/
+/******************************************************************************/
 float CGuard::getDerivedAngle()
 {
 	return derivedAngle;
 }
 
+/******************************************************************************/
+/*!
+\brief
+Get the state of guard
+
+\return Int of guard's state
+*/
+/******************************************************************************/
 int CGuard::getState()
 {
 	return state;
 }
 
+/******************************************************************************/
+/*!
+\brief
+Set the state of guard
+
+\param a - int of state
+*/
+/******************************************************************************/
 void CGuard::setState(int a)
 {
 	state = a;

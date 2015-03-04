@@ -1,21 +1,38 @@
+/******************************************************************************/
+/*!
+\file	Guard.h
+\author Princeton Chew
+\par	email: 141991A@mymail.nyp.edu.sg
+\brief
+Guard Class
+*/
+/******************************************************************************/
 #pragma once
 #include "Character.h"
 #include "timer.h"
 #include "Application.h"
 #include "Mtx44.h"
 
+/******************************************************************************/
+/*!
+	Class CGuard
+\brief
+Defines the variables and functions required for the guard
+
+*/
+/******************************************************************************/
 class CGuard : public CCharacter
 {
 public:
-	CGuard(void);
-	~CGuard(void);
-	void SetData(Vector3 pos, Vector3 targ);
-	Vector3 getGuardPosition();
-	void getDifference(Vector3 camerapos);
-	float getDerivedAngle();
-	int getState();
-	void guardUpdate(float dt,Vector3 camerapos);
-	void setState(int a);
+	CGuard(void);	//Constructor
+	~CGuard(void);	//Destructor
+	void SetData(Vector3 pos, Vector3 targ); //Sets guard position and target
+	Vector3 getGuardPosition(); //Get guard position
+	void getDifference(Vector3 camerapos);	//Get guard difference from player
+	float getDerivedAngle();	//Get angle for guard to look at player
+	int getState();	//Get state
+	void guardUpdate(float dt,Vector3 camerapos);	//Update guard
+	void setState(int a);	//Set guard's state
 
 private:
 	Vector3 guardPos;
@@ -26,7 +43,8 @@ private:
 
 	float derivedAngle;
 	int state;
-
+ //! States.
+/*! Defines States of guard */
 	enum States
 	{
 		S_IDLE,

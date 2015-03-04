@@ -1,15 +1,46 @@
+/******************************************************************************/
+/*!
+\file	Camera3.cpp
+\author Princeton Chew, name, name, name,
+\par	email: 141991A@mymail.nyp.edu.sg
+\brief
+Camera3 Class
+*/
+/******************************************************************************/
 #include "Camera3.h"
 #include "Application.h"
 #include "Mtx44.h"
 
+/******************************************************************************/
+/*!
+\brief
+Default constructor for class
+*/
+/******************************************************************************/
 Camera3::Camera3()
 {
 }
 
+/******************************************************************************/
+/*!
+\brief
+Default destructor for class
+*/
+/******************************************************************************/
 Camera3::~Camera3()
 {
 }
 
+/******************************************************************************/
+/*!
+\brief
+Initializes all the data for the camera
+
+\param pos - Vector3 position of camera
+\param target - Vector3 target of camera
+\param up - Vector3 up of camera
+*/
+/******************************************************************************/
 void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 {
 	escal = false;
@@ -283,8 +314,27 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	minPos.Set(-63.5,0,-23);
 	maximum.push_back(maxPos);
 	minimum.push_back(minPos);
+
+	//===========NPC COLLISION===============//
+	//GTP
+	maxPos.Set(31.5,10,91);
+	minPos.Set(28,0,88);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
+
+	//TA
+	maxPos.Set(-150,10,0);
+	minPos.Set(-152,0,-4);
+	maximum.push_back(maxPos);
+	minimum.push_back(minPos);
 }
 
+/******************************************************************************/
+/*!
+\brief
+Set Bound check for the Y axis of camera
+*/
+/******************************************************************************/
 void Camera3::BoundsCheck()
 {
 	if(position.y >= 5)
@@ -299,6 +349,15 @@ void Camera3::BoundsCheck()
 	}
 }
 
+/******************************************************************************/
+/*!
+\brief
+Check if camera is going into bounds
+
+\param maximum - Vector3 maximum position 
+\param minimum - Vector3 minimum position
+*/
+/******************************************************************************/
 void Camera3::bound(Vector3 maximum, Vector3 minimum)
 {
 	//===Collision==//
@@ -314,6 +373,14 @@ void Camera3::bound(Vector3 maximum, Vector3 minimum)
 	}
 }
 
+/******************************************************************************/
+/*!
+\brief
+Updates camera based on delta time
+
+\param dt - delta time
+*/
+/******************************************************************************/
 void Camera3::Update(double dt)
 {
 	static const float TURN_SPEED = 100.f;
@@ -813,11 +880,25 @@ void Camera3::Update(double dt)
 	}
 }
 
+/******************************************************************************/
+/*!
+\brief
+Sets bool if player is checking out
+
+\param a - Bool of checking out status
+*/
+/******************************************************************************/
 void Camera3::setCheckingOut(bool a)
 {
 	checkingOut = a;
 }
 
+/******************************************************************************/
+/*!
+\brief
+Resets camera to initial position, target and up
+*/
+/******************************************************************************/
 void Camera3::Reset()
 {
 	position = defaultPosition;

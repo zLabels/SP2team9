@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	StudioProject.h
+\author Princeton Chew, name, name, name,
+\par	email: 141991A@mymail.nyp.edu.sg
+\brief
+Studio Project Class
+*/
+/******************************************************************************/
 #include "StudioProject.h"
 #include "GL\glew.h"
 
@@ -4627,7 +4636,7 @@ void StudioProject::RenderModel()
 	modelStack.PushMatrix();
 	modelStack.Scale(0.5, 0.5, 0.5);
 	modelStack.Rotate(180, 0, 180, 0);
-	modelStack.Translate(0, 10, 0);
+	modelStack.Translate(-6, 10, 0);
 	RenderText(meshList[GEO_TEXT], "Guess The Price", Color(0, 0, 1));
 	modelStack.PopMatrix();
 
@@ -7034,7 +7043,12 @@ void StudioProject::RenderTimeAttack()
 		RenderTextOnScreen(meshList[GEO_TEXT],"You Lose", Color(1, 1, 1), 3, 10, 10);
 	}
 }
-
+/******************************************************************************/
+/*!
+\brief
+Renders the Information related to Guess The Price in the scene
+*/
+/******************************************************************************/
 void StudioProject::RenderGTP()
 {
 	if(GTP == true)

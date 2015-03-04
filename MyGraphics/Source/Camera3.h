@@ -1,16 +1,29 @@
+/******************************************************************************/
+/*!
+\file	Camera3.h
+\author Princeton Chew, name, name, name,
+\par	email: 141991A@mymail.nyp.edu.sg
+\brief
+Camera3 Class
+*/
+/******************************************************************************/
 #ifndef CAMERA_3_H
 #define CAMERA_3_H
 
 #include "Camera.h"
 #include <vector>
 
+/******************************************************************************/
+/*!
+	Class Camera3
+\brief
+Defines the variables and functions required for Camera3
+
+*/
+/******************************************************************************/
 class Camera3 : public Camera
 {
 public:
-	//Vector3 position;
-	//Vector3 target;
-	//Vector3 up;
-
 	Vector3 defaultPosition;
 	Vector3 defaultTarget;
 	Vector3 defaultUp;
