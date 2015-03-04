@@ -2768,7 +2768,7 @@ void StudioProject::updateCheckingOut()
 					player.setMoney(player.getMoney() - cost);
 					toDelete.clear();
 				}
-				else
+				else if(cost > player.getMoney())
 				{
 					tempCheckOut.clear();
 					paidItems.clear();
@@ -4150,24 +4150,15 @@ void StudioProject::RenderModel()
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
+	modelStack.PushMatrix();
+	modelStack.Scale(0.5, 0.5, 0.5);
+	modelStack.Rotate(180, 0, 180, 0);
+	modelStack.Translate(-2, 10, 0);
+	RenderText(meshList[GEO_TEXT], "Time Attack", Color(0, 0, 1));
+	modelStack.PopMatrix();
 
 	modelStack.PopMatrix();
-	//modelStack.PushMatrix(); //Here lies hierachy modelling
 
-	//modelStack.PushMatrix();
-	////modelStack.Scale(0.05, 0.05, 0.05);
-	//RenderMesh(meshList[modelButt], false);
-	//modelStack.PopMatrix();
-
-	//modelStack.PushMatrix();
-	////modelStack.Scale(2, 2, 2);
-	//modelStack.Translate(-0.3, 1, 0);
-	//modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
-	//modelStack.Translate(0, -1.2, 0);
-	//RenderMesh(meshList[modelRightLeg], false);
-	//modelStack.PopMatrix();
-
-	//modelStack.PopMatrix();
 }
 /******************************************************************************/
 /*!
@@ -6448,7 +6439,6 @@ void StudioProject::Render()
 		RenderTimeAttack();
 	}
 }
-
 /******************************************************************************/
 /*!
 \brief
