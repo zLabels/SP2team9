@@ -481,6 +481,10 @@ void StudioProject::InitMesh()
 	meshList[ExitFalse]->textureID = LoadTGA("Image//ExitFalse.tga");
 	menu.SetEndGameFalse(ExitFalse);
 
+	meshList[GameOverStateMesh] = MeshBuilder::GenerateQuad("Game Over Mesh", Color(1, 1, 1), 1.f , 1.f);
+	meshList[GameOverStateMesh]->textureID = LoadTGA("Image//GameOver.tga");
+	menu.SetGameOverMesh(GameOverStateMesh);
+
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
 
@@ -517,7 +521,7 @@ Initializes the Variables to be used in the scene
 /******************************************************************************/
 void StudioProject::InitVariables()
 {
-	//Sound Engine
+		//Sound Engine
 	engine = createIrrKlangDevice();
 	if (!engine)
 	{
@@ -567,19 +571,6 @@ void StudioProject::InitVariables()
 	timeTA = "";
 	TAstartedOnce = 0;
 	messageTime = 0.f;
-
-	//==Guess The Price==//
-	GTP = false;
-	isGTPwon = false;
-	NoOfItemsTaken = 0;
-	totalCost = 0.f;
-	GTPstartedOnce = 0;
-	NumItem = "";
-	CostOfItems = "";
-
-	//==Thief==//
-	ThiefGame = false;
-
 
 	int a = 0;
 
@@ -674,8 +665,8 @@ void StudioProject::InitVariables()
 		sardineCan.SetData("Sardine Can", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS,false);
 		Container2.push_back(sardineCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12] + 0.59, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
-		Min.Set(-0.59 + newTRS.a[12], -0.7+newTRS.a[13], -0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12] + 1, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
+		Min.Set(-1.5 + newTRS.a[12], -0.7+newTRS.a[13], -0.35+newTRS.a[14]);
 		sardineBox.SetBox(Max, Min);
 		boxContainer2.push_back(sardineBox);
 	}
@@ -698,8 +689,8 @@ void StudioProject::InitVariables()
 		sardineCan.SetData("Sardine Can", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS, false);
 		Container.push_back(sardineCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12] + 0.59, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
-		Min.Set(-0.59 + newTRS.a[12], -0.7+newTRS.a[13], -0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12] + 1, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
+		Min.Set(-1.5 + newTRS.a[12], -0.7+newTRS.a[13], -0.35+newTRS.a[14]);
 		sardineBox.SetBox(Max, Min);
 		boxContainer.push_back(sardineBox);
 	}
@@ -722,8 +713,8 @@ void StudioProject::InitVariables()
 		sardineCan.SetData("Sardine Can", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS, false);
 		Container.push_back(sardineCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12] + 0.59, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
-		Min.Set(-0.59 + newTRS.a[12], -0.7+newTRS.a[13], -0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12] + 1, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
+		Min.Set(-1.5 + newTRS.a[12], -0.7+newTRS.a[13], -0.35+newTRS.a[14]);
 		sardineBox.SetBox(Max, Min);
 		boxContainer.push_back(sardineBox);
 	}
@@ -746,8 +737,8 @@ void StudioProject::InitVariables()
 		sardineCan.SetData("Sardine Can", 3.5f, true, newMesh,GEO_SARDINE_CAN,newTRS, false);
 		Container.push_back(sardineCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12] + 0.59, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
-		Min.Set(-0.59 + newTRS.a[12], -0.7+newTRS.a[13], -0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12] + 1, newTRS.a[13]+0.7, newTRS.a[14]+0.35);
+		Min.Set(-1.5 + newTRS.a[12], -0.7+newTRS.a[13], -0.35+newTRS.a[14]);
 		sardineBox.SetBox(Max, Min);
 		boxContainer.push_back(sardineBox);
 	}
@@ -814,8 +805,8 @@ void StudioProject::InitVariables()
 		PnCCan.SetData("Peas And Carrots Can", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS,false);
 		Container2.push_back(PnCCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+1,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-1.5+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
 		PnC.SetBox(Max, Min);
 		boxContainer2.push_back(PnC);
 	}
@@ -838,8 +829,8 @@ void StudioProject::InitVariables()
 		PnCCan.SetData("Peas And Carrots Can", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS,false);
 		Container.push_back(PnCCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.1+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+1,newTRS.a[13]+0.7,newTRS.a[14]+1);
+		Min.Set(-1.5+newTRS.a[12],-0.1+newTRS.a[13],-1+newTRS.a[14]);
 		PnC.SetBox(Max, Min);
 		boxContainer.push_back(PnC);
 	}
@@ -862,8 +853,8 @@ void StudioProject::InitVariables()
 		PnCCan.SetData("Peas And Carrots Can", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS,false);
 		Container.push_back(PnCCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.1+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+1,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-1.5+newTRS.a[12],-0.1+newTRS.a[13],-0.35+newTRS.a[14]);
 		PnC.SetBox(Max, Min);
 		boxContainer.push_back(PnC);
 	}
@@ -886,8 +877,8 @@ void StudioProject::InitVariables()
 		PnCCan.SetData("Peas And Carrots Can", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS,false);
 		Container.push_back(PnCCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.1+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+1,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-1.5+newTRS.a[12],-0.1+newTRS.a[13],-0.35+newTRS.a[14]);
 		PnC.SetBox(Max, Min);
 		boxContainer.push_back(PnC);
 	}
@@ -954,8 +945,8 @@ void StudioProject::InitVariables()
 		BBCan.SetData("Baked Beans Can", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS,false);
 		Container2.push_back(BBCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+1,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-1.5+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
 		BB.SetBox(Max, Min);
 		boxContainer2.push_back(BB);
 	}
@@ -978,8 +969,8 @@ void StudioProject::InitVariables()
 		BBCan.SetData("Baked Beans Can", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS,false);
 		Container.push_back(BBCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+1,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-1.5+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
 		BB.SetBox(Max, Min);
 		boxContainer.push_back(BB);
 	}
@@ -1002,8 +993,8 @@ void StudioProject::InitVariables()
 		BBCan.SetData("Baked Beans Can", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS,false);
 		Container.push_back(BBCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+1,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-1.5+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
 		BB.SetBox(Max, Min);
 		boxContainer.push_back(BB);
 	}
@@ -1026,8 +1017,8 @@ void StudioProject::InitVariables()
 		BBCan.SetData("Baked Beans Can", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS,false);
 		Container2.push_back(BBCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+1,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-1.5+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
 		BB.SetBox(Max, Min);
 		boxContainer2.push_back(BB);
 	}
@@ -1097,8 +1088,8 @@ void StudioProject::InitVariables()
 		PizzaBox.SetData("Frozen Pizza", 3.5f, true, newMesh, GEO_PIZZABOX,newTRS,false);
 		Container13.push_back(PizzaBox);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12],newTRS.a[13]+0.8,newTRS.a[14]+1);
-		Min.Set(-3+newTRS.a[12],-0.5+newTRS.a[13],-2+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+1,newTRS.a[13]+0.5,newTRS.a[14]+1);
+		Min.Set(-1.5+newTRS.a[12],-0.5+newTRS.a[13],-2+newTRS.a[14]);
 		Pizza.SetBox(Max, Min);
 		boxContainer13.push_back(Pizza);
 	}
@@ -1116,8 +1107,8 @@ void StudioProject::InitVariables()
 		PizzaBox.SetData("Frozen Pizza", 3.5f, true, newMesh, GEO_PIZZABOX,newTRS,false);
 		Container13.push_back(PizzaBox);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12],newTRS.a[13]+0.8,newTRS.a[14]+1);
-		Min.Set(-3+newTRS.a[12],-0.5+newTRS.a[13],-2+newTRS.a[14]);
+		Max.Set(newTRS.a[12] + 1,newTRS.a[13]+0.5,newTRS.a[14]+2);
+		Min.Set(-1.5+newTRS.a[12],-0.5+newTRS.a[13],-2+newTRS.a[14]);
 		Pizza.SetBox(Max, Min);
 		boxContainer13.push_back(Pizza);
 	}
@@ -1163,7 +1154,7 @@ void StudioProject::InitVariables()
 		{
 			a += 4;
 		}
-		newTRS.SetToTranslation(-33 +i + a, 2.9,-90);
+		newTRS.SetToTranslation(-33 +i + a, 2.8,-90);
 		PepsiCan.SetData("Pepsi", 3.5f, true, newMesh, GEO_PEPSI_CAN,newTRS,false);
 		Container4.push_back(PepsiCan);
 		Vector3 Min, Max;
@@ -1369,7 +1360,7 @@ void StudioProject::InitVariables()
 		{
 			a += 2;
 		}
-		newTRS.SetToTranslation(-28.5 +i + a, 2.,-35);
+		newTRS.SetToTranslation(-28.5 +i + a, 2.3,-35);
 		PotatoChip.SetData("Lays Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS,false);
 		Container9.push_back(PotatoChip);
 		Vector3 Min, Max;
@@ -1405,7 +1396,7 @@ void StudioProject::InitVariables()
 		{
 			a += 2;
 		}
-		newTRS.SetToTranslation(-28.5 +i + a, 2,33);
+		newTRS.SetToTranslation(-28.5 +i + a, 2.3,33);
 		PotatoChip.SetData("Lays Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS,false);
 		Container10.push_back(PotatoChip);
 		Vector3 Min, Max;
@@ -3423,9 +3414,10 @@ void StudioProject::Update(double dt)
 	{
 		menu.update(dt);
 	}
-	else
+	else if (menu.getShowMenuStatus() == false && Guard1.getCatchPlayerState() == false && Guard2.getCatchPlayerState() == false)
 	{
-		//menu.update(dt);
+		menu.update(dt);
+		camera.showingMenu = false;
 		//Speed of by which Item is translated on Checkout
 		if(moveItem >= -4.5 && Peas == true)
 		{
@@ -3841,7 +3833,61 @@ void StudioProject::Update(double dt)
 		{
 			camera.CollisionWithAi = false;
 		}
+	}
 
+	//=====================FOR RESETTING PURPOSE================//
+	//Page.update(dt);
+	if (Application::IsKeyPressed('R'))
+	{
+		Guard1.guardUpdate(dt, camera.position);
+		Guard2.guardUpdate(dt, camera.position);
+		menu.update(dt);
+		camera.Update(dt);
+		Passerby[0].update(dt, camera.position);
+		Passerby[1].update(dt, camera.position);
+		Passerby[2].update(dt, camera.position);
+		angle = 3600;
+		playerAngle = 0;
+		moving = 0;
+		showInventory = false;
+		//OBJ FOOD BOOLEANS
+		Pizza = false;
+		Peas = false;
+		Milo = false;
+		Cereal1 = false;
+		Cereal2 = false;
+		Sardine = false;
+		Beans = false;
+		Lays = false;
+		Coke = false;
+		CokeZero = false;
+		Pepsi = false;
+		Pizza = false;
+		moveItem = 0; // SPEED
+		peaCount = 0;
+		PizzaCount = 0;
+		MiloCount = 0;
+		Cereal1Count = 0;
+		Cereal2Count = 0;
+		SardineCount = 0;
+		BeansCount = 0;
+		LaysCount = 0;
+		CokeCount = 0;
+		CokeZeroCount = 0;
+		PepsiCount = 0;
+
+		//==Time Attack==//
+		TimeAttack = false;
+		generateList = false;
+		TAmatchedItems = 0;
+		isTAwon = false;
+		TAtime = 60.f;
+		timeTA = "";
+		TAstartedOnce = 0;
+		messageTime = 0.f;
+
+		float doorTranslate = 0;
+		bool isShown = true;
 	}
 }
 
@@ -7108,7 +7154,7 @@ void StudioProject::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press UP or DOWN for navigation", Color(1, 1, 1), 2, 1, 2);
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press ENTER to enter input", Color(1, 1, 1), 2, 1, 1);
 	}
-	else
+	else if (menu.getShowMenuStatus() == false && Guard1.getCatchPlayerState() == false && Guard2.getCatchPlayerState() == false)
 	{
 
 		if(lights[0].type == Light::LIGHT_DIRECTIONAL)
@@ -7425,6 +7471,11 @@ void StudioProject::Render()
 		RenderTimeAttack();
 
 		RenderGTP();
+	}
+	else if (menu.getShowMenuStatus() == false && Guard1.getCatchPlayerState() == true ||
+			menu.getShowMenuStatus() == false && Guard2.getCatchPlayerState() == true)
+	{
+		RenderMenuOnScreen(meshList[MENUBACKGROUND], Color(1, 1, 1), 1, 1, 1);
 	}
 }
 /******************************************************************************/
@@ -8864,51 +8915,71 @@ void StudioProject::RenderMenuOnScreen(Mesh* mesh, Color color, float size, floa
 	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
 	glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);
 
+	if (menu.getShowMenuStatus() == true ||
+		menu.getShowMenuStatus() == false && Guard1.getCatchPlayerState() == true ||
+		menu.getShowMenuStatus() == false && Guard2.getCatchPlayerState() == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Scale(120, 120, 120);
+		modelStack.Translate(0.2, 0, 0);
+		RenderMesh(meshList[menu.getBackgroundMesh()], false);
+		modelStack.PopMatrix();
+	}
 
-	modelStack.PushMatrix();
-	modelStack.Scale(120, 120, 120);
-	modelStack.Translate(0.2, 0, 0);
-	RenderMesh(meshList[menu.getBackgroundMesh()], false);
-	modelStack.PopMatrix();
+	if (menu.getShowMenuStatus() == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Scale(3, 3, 3);
+		if (menu.getPointToGame() == true && menu.getPointToExit() == false)
+		{
+			modelStack.Translate(7.8, 11.7, 0);//11.7 for PLay Game 9.7 for exit
+		}
+		else if (menu.getPointToGame() == false && menu.getPointToExit() == true)
+		{
+			modelStack.Translate(7.8, 9.7, 0);
+		}
+		RenderMesh(meshList[menu.getArrowMesh()], false);
+		modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
-	modelStack.Scale(3, 3, 3);
-	if (menu.getPointToGame() == true && menu.getPointToExit() == false)
-	{
-		modelStack.Translate(7.8, 11.7, 0);//11.7 for PLay Game 9.7 for exit
-	}
-	else if (menu.getPointToGame() == false && menu.getPointToExit() == true)
-	{
-		modelStack.Translate(7.8, 9.7, 0);
-	}
-	RenderMesh(meshList[menu.getArrowMesh()], false);
-	modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		modelStack.Scale(25, 25, 0);
+		modelStack.Translate(1.5, 1.4, 0);
+		if (menu.getPointToGame() == true && menu.getPointToExit() == false)
+		{
+			RenderMesh(meshList[menu.getStartGameTrueMesh()], false);
+		}
+		else if (menu.getPointToGame() == false && menu.getPointToExit() == true)
+		{
+			RenderMesh(meshList[menu.getStartGameFalseMesh()], false);
+		}
+		modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
-	modelStack.Scale(25, 25, 0);
-	modelStack.Translate(1.5, 1.4, 0);
-	if (menu.getPointToGame() == true && menu.getPointToExit() == false)
-	{
-		RenderMesh(meshList[menu.getStartGameTrueMesh()], false);
+		modelStack.PushMatrix();
+		modelStack.Scale(25, 25, 0);
+		modelStack.Translate(1.5, 1.15, 0);
+		if (menu.getPointToGame() == false && menu.getPointToExit() == true)
+		{
+			RenderMesh(meshList[menu.getEndGameTrueMesh()], false);
+		}
+		else if (menu.getPointToGame() == true && menu.getPointToExit() == false)
+		{
+			RenderMesh(meshList[menu.getEndGameFalseMesh()], false);
+		}
+		modelStack.PopMatrix();
 	}
-	else if (menu.getPointToGame() == false && menu.getPointToExit() == true)
-	{
-		RenderMesh(meshList[menu.getStartGameFalseMesh()], false);
-	}
-	modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
-	modelStack.Scale(25, 25, 0);
-	modelStack.Translate(1.5, 1.15, 0);
-	if (menu.getPointToGame() == false && menu.getPointToExit() == true)
+	if (Guard1.getCatchPlayerState() == true && menu.getShowMenuStatus() == false ||
+		Guard2.getCatchPlayerState() == true && menu.getShowMenuStatus() == false)
 	{
-		RenderMesh(meshList[menu.getEndGameTrueMesh()], false);
+		modelStack.PushMatrix();
+		modelStack.Scale(50, 50, 0);
+		modelStack.Translate(0.78, 0.7, 0);
+		RenderMesh(meshList[menu.getGameOverMesh()], false);
+		modelStack.PopMatrix();
+
+		RenderTextOnScreen(meshList[GEO_TEXT], "Press R to go back to menu", Color(1,1,1), 3, 1, 1);
+
 	}
-	else if (menu.getPointToGame() == true && menu.getPointToExit() == false)
-	{
-		RenderMesh(meshList[menu.getEndGameFalseMesh()], false);
-	}
-	modelStack.PopMatrix();
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glUniform1i(m_parameters[U_TEXT_ENABLED], 0);

@@ -24,6 +24,7 @@ public:
 	void SetStartGameFalse(int newObj);
 	void SetEndGameTrue(int newObj);
 	void SetEndGameFalse(int newObj);
+	void SetGameOverMesh(int newObj);
 
 	void update(double dt);
 
@@ -33,6 +34,7 @@ public:
 	int getStartGameFalseMesh();
 	int getEndGameTrueMesh();
 	int getEndGameFalseMesh();
+	int getGameOverMesh();
 	bool getPointToGame();
 	bool getPointToExit();
 	bool getShowMenuStatus();
@@ -43,11 +45,13 @@ private:
 		EndGameTrue,
 		EndGameFalse,
 		Arrow,
-		MenuBackground;
+		MenuBackground,
+		GameOver;
 
 	bool pointToGame,
 		pointToExit,
-		showMenu;
+		showMenu,
+		GameOverState;
 
 	StopWatch Timer;
 };

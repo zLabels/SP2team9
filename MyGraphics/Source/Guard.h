@@ -33,6 +33,7 @@ public:
 	int getState();	//Get state
 	void guardUpdate(float dt,Vector3 camerapos);	//Update guard
 	void setState(int a);	//Set guard's state
+	bool getCatchPlayerState();
 
 private:
 	Vector3 guardPos;
@@ -43,6 +44,7 @@ private:
 
 	float derivedAngle;
 	int state;
+	bool CatchPlayerState;
  //! States.
 /*! Defines States of guard */
 	enum States

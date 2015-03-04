@@ -66,6 +66,8 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	CAMERA_SPEED = 15.f;
 	JUMP_SPEED = 12.f;
 	CollisionWithAi = false;
+	gotCaught = false;
+	showingMenu = true;
 	//=======Collision=========//
 	//Middle shelf
 	maxPos.Set(13.4, 10, 15.2);
@@ -622,7 +624,7 @@ void Camera3::Update(double dt)
 	//==Look Down==//
 	if(temp > -20)
 	{
-		if(Application::IsKeyPressed(VK_DOWN))
+		if(Application::IsKeyPressed(VK_DOWN) && showingMenu == false)
 		{
 			float pitch = (float)(-TURN_SPEED * dt);
 			Vector3 view = (target - position).Normalized();
@@ -642,7 +644,7 @@ void Camera3::Update(double dt)
 	//==Look Up==//
 	if(temp < 20)
 	{
-		if(Application::IsKeyPressed(VK_UP))
+		if(Application::IsKeyPressed(VK_UP) && showingMenu == false)
 		{
 			float pitch = (float)(TURN_SPEED * dt);
 			Vector3 view = (target - position).Normalized();

@@ -25,6 +25,7 @@ CGuard::CGuard(void)
 
 	derivedAngle = 0.f;
 	state = 0;
+	CatchPlayerState = false;
 }
 
 /******************************************************************************/
@@ -80,11 +81,28 @@ void CGuard::guardUpdate(float dt, Vector3 camerapos)
 	if(state == S_ALERT)
 	{
 		//Movement of guard to player
-		guardPos += (guardDifference.Normalized()) * 10 * dt;
+		if ((guardPos - camerapos).Length() > 6)
+		{
+			guardPos += (guardDifference.Normalized()) * 10 * dt;
+			CatchPlayerState = false;
+		}
+		else
+		{
+			CatchPlayerState = true;
+		}
 	}
 	if(state == S_IDLE)
 	{
 		guardPos = initialPos;
+	}
+
+
+	//=====================RESET=================//
+	if (Application::IsKeyPressed('R') && CatchPlayerState == true)
+	{
+		derivedAngle = 0.f;
+		state = 0;
+		CatchPlayerState = false;
 	}
 }
 /******************************************************************************/
@@ -149,4 +167,9 @@ Set the state of guard
 void CGuard::setState(int a)
 {
 	state = a;
+}
+
+bool CGuard::getCatchPlayerState()
+{
+	return CatchPlayerState;
 }

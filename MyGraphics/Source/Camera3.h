@@ -52,6 +52,8 @@ public:
 	bool isFalling;
 	bool walk;
 	bool checkingOut;
+	bool gotCaught;
+	bool showingMenu;
 	float tempJumpY;
 	float tempJumpTargY;
 	float tempCrouchY;

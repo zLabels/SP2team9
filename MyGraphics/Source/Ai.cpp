@@ -1,7 +1,22 @@
+/******************************************************************************/
+/*!
+\file	Ai.cpp
+\author Ong Swee Seng
+\par	email: 142128G@mymail.nyp.edu.sg
+\brief
+Ai Class
+*/
+/******************************************************************************/
 #include "Ai.h"
 #include "Application.h"
 #include "Mtx44.h"
 
+/******************************************************************************/
+/*!
+\brief
+Default constructor for class
+*/
+/******************************************************************************/
 Ai::Ai()
 {
 	derivedAngle = 0;
@@ -15,7 +30,15 @@ Ai::Ai()
 Ai::~Ai()
 {
 }
+/******************************************************************************/
+/*!
+\brief
+Set guard's position and target
 
+\param pos - Vector3 position of guard
+\param target - Vector3 target of guard
+*/
+/******************************************************************************/
 void Ai::passInPositionAndTarget(Vector3 pos, Vector3 target)
 {
 	guardPos = pos;
@@ -23,6 +46,16 @@ void Ai::passInPositionAndTarget(Vector3 pos, Vector3 target)
 	guardView = (guardTarget - guardPos).Normalized();
 }
 
+
+/******************************************************************************/
+/*!
+\brief
+Updates the ai based on delta time and camera's position
+
+\param dt - delta time
+\param camera - Vector3 position of camera
+*/
+/******************************************************************************/
 void Ai::update(float dt, Vector3 camera)
 {
 	//==================================GUARD=====================//
@@ -506,63 +539,164 @@ void Ai::update(float dt, Vector3 camera)
 	}
 }
 
+/******************************************************************************/
+/*!
+\brief
+Finding the player's distance from the Guard and returning it
+
+\param cameraPosition - vector3 position of camera
+*/
+/******************************************************************************/
 void Ai::FindPlayerDistanceDifference(Vector3 cameraPosition)
 {
 	guardDifference = cameraPosition - guardPos;
 }
 
+
+/******************************************************************************/
+/*!
+\brief
+Finding the player's distance from the Passerby and returning it
+
+\param cameraPosition - vector3 position of camera
+*/
+/******************************************************************************/
 void Ai::FindPlayerDistanceDifferencePasserby(Vector3 cameraPosition)
 {
 	PasserbyDifference = cameraPosition - PasserbyPos;
 }
 
+
+/******************************************************************************/
+/*!
+\brief
+Setting the passerby's XYZ coordinates 
+
+\param PasserbyPassIn - vector3 position of passerby based on what is passed in
+*/
+/******************************************************************************/
 void Ai::SetPasserby(Vector3 PasserbyPassIn)
 {
 	PasserbyPos = PasserbyPassIn;
 	PasserbyPos2 = PasserbyPassIn;
 	PasserbyPos3 = PasserbyPassIn;
 }
+	
+/******************************************************************************/
+/*!
+\brief
+Getting derived angle of guard
 
+\return derivedAngle
+*/
+/******************************************************************************/
 float Ai::getDerivedAngle()
 {
 	return derivedAngle;
 }
 
+/******************************************************************************/
+/*!
+\brief
+Get the guard's position
+
+\return Vector3 position of guard
+*/
+/******************************************************************************/
 Vector3 Ai::getGuardPosition()
 {
 	return guardPos;
 }
 
+/******************************************************************************/
+/*!
+\brief
+Get the passerby's position
+
+\return float angle of passerby
+*/
+/******************************************************************************/
 float Ai::getPasserbyAngle()
 {
 	return PasserbyAngle;
 }
 
+/******************************************************************************/
+/*!
+\brief
+Get the passerby's position
+
+\return Vector3 position of passerby
+*/
+/******************************************************************************/
 Vector3 Ai::getPasserbyPosition()
 {
 	return PasserbyPos;
 }
 
+/******************************************************************************/
+/*!
+\brief
+Get the passerby's position
+
+\return float angle of passerby
+*/
+/******************************************************************************/
 float Ai::getPasserbyAngle2()
 {
 	return PasserbyAngle2;
 }
 
+/******************************************************************************/
+/*!
+\brief
+Get the passerby's position
+
+\return float angle of passerby
+*/
+/******************************************************************************/
 float Ai::getPasserbyAngle3()
 {
 	return PasserbyAngle3;
 }
 
+
+/******************************************************************************/
+/*!
+\brief
+Get the passerby's position
+
+\return Vector3 position of passerby
+*/
+/******************************************************************************/
 Vector3 Ai::getPasserby2Position()
 {
 	return PasserbyPos2;
 }
 
+
+/******************************************************************************/
+/*!
+\brief
+Get the passerby's position
+
+\return Vector3 position of passerby
+*/
+/******************************************************************************/
 Vector3 Ai::getPasserby3Position()
 {
 	return PasserbyPos3;
 }
 
+
+/******************************************************************************/
+/*!
+\brief
+Get the GUard's state
+
+\return bool guardAlertState
+*/
+/******************************************************************************/
 bool Ai::getAlertState()
 {
 	return guardAlertState;
