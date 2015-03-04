@@ -2026,48 +2026,55 @@ void StudioProject::InitCharacters()
 	newRLeg->textureID = LoadTGA("Image//guardLeg.tga");
 
 	Guard1.setCharacter(newHead,newTorso,newLHand,newRHand,newLLeg,newRLeg,newPosition);
-	////===============GUARD OBJs==========================//
-	//meshList[guardHead] = MeshBuilder::GenerateOBJ("Guard Head", "OBJ//cashierHead.obj");
-	//meshList[guardHead]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	//meshList[guardHead]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	//meshList[guardHead]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	//meshList[guardHead]->material.kShininess = 8.f;
-	//meshList[guardHead]->textureID = LoadTGA("Image//guardHead.tga");
 
-	//meshList[guardTorso] = MeshBuilder::GenerateOBJ("Guard Torso", "OBJ//cashierTorso.obj");
-	//meshList[guardTorso]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	//meshList[guardTorso]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	//meshList[guardTorso]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	//meshList[guardTorso]->material.kShininess = 8.f;
-	//meshList[guardTorso]->textureID = LoadTGA("Image//guardTorso.tga");
+	/*========================================================================
+	Guard2
+	===========================================================================*/
+	Guard2.SetData(Vector3(-70, 0, 21.5),Vector3(-70, 0, 20.5));
 
-	//meshList[guardRightHand] = MeshBuilder::GenerateOBJ("guard Right Hand", "OBJ//cashierHand.obj");
-	//meshList[guardRightHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	//meshList[guardRightHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	//meshList[guardRightHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	//meshList[guardRightHand]->material.kShininess = 8.f;
-	//meshList[guardRightHand]->textureID = LoadTGA("Image//guardHand.tga");
+	newHead = MeshBuilder::GenerateOBJ("Guard Head", "OBJ//cashierHead.obj");
+	newHead->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newHead->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newHead->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newHead->material.kShininess = 8.f;
+	newHead->textureID = LoadTGA("Image//guardHead.tga");
 
-	//meshList[guardLeftHand] = MeshBuilder::GenerateOBJ("guard Left Hand", "OBJ//cashierHand.obj");
-	//meshList[guardLeftHand]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	//meshList[guardLeftHand]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	//meshList[guardLeftHand]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	//meshList[guardLeftHand]->material.kShininess = 8.f;
-	//meshList[guardLeftHand]->textureID = LoadTGA("Image//guardHand.tga");
+	newTorso = MeshBuilder::GenerateOBJ("Guard Torso", "OBJ//cashierTorso.obj");
+	newTorso->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newTorso->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newTorso->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newTorso->material.kShininess = 8.f;
+	newTorso->textureID = LoadTGA("Image//guardTorso.tga");
 
-	//meshList[guardLeftLeg] = MeshBuilder::GenerateOBJ("guard Left Leg", "OBJ//cashierLeg.obj");
-	//meshList[guardLeftLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	//meshList[guardLeftLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	//meshList[guardLeftLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	//meshList[guardLeftLeg]->material.kShininess = 8.f;
-	//meshList[guardLeftLeg]->textureID = LoadTGA("Image//guardLeg.tga");
+	newLHand = MeshBuilder::GenerateOBJ("guard Left Hand", "OBJ//cashierHand.obj");
+	newLHand->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newLHand->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newLHand->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newLHand->material.kShininess = 8.f;
+	newLHand->textureID = LoadTGA("Image//guardHand.tga");
 
-	//meshList[guardRightLeg] = MeshBuilder::GenerateOBJ("guard Right Leg", "OBJ//cashierLeg.obj");
-	//meshList[guardRightLeg]->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
-	//meshList[guardRightLeg]->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
-	//meshList[guardRightLeg]->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
-	//meshList[guardRightLeg]->material.kShininess = 8.f;
-	//meshList[guardRightLeg]->textureID = LoadTGA("Image//guardLeg.tga");
+	newRHand = MeshBuilder::GenerateOBJ("guard Right Hand ", "OBJ//cashierHand.obj");
+	newRHand->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newRHand->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newRHand->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newRHand->material.kShininess = 8.f;
+	newRHand->textureID = LoadTGA("Image//guardHand.tga");
+
+	newLLeg = MeshBuilder::GenerateOBJ("guard Left Leg", "OBJ//cashierLeg.obj");
+	newLLeg->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newLLeg->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newLLeg->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newLLeg->material.kShininess = 8.f;
+	newLLeg->textureID = LoadTGA("Image//guardLeg.tga");
+
+	newRLeg = MeshBuilder::GenerateOBJ("guard Right Leg", "OBJ//cashierLeg.obj");
+	newRLeg->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
+	newRLeg->material.kDiffuse.Set(0.9f, 0.9f, 0.9f);
+	newRLeg->material.kSpecular.Set(0.5f, 0.5f, 0.5f);
+	newRLeg->material.kShininess = 8.f;
+	newRLeg->textureID = LoadTGA("Image//guardLeg.tga");
+
+	Guard2.setCharacter(newHead,newTorso,newLHand,newRHand,newLLeg,newRLeg,newPosition);
 }
 
 /******************************************************************************/
@@ -2717,7 +2724,6 @@ void StudioProject::updatePuttingBackItem()
 \brief
 Updates the Checking Out of items in the scene
 
-//DISABLE MOVEMENT WHILE CHECKING OUT  // TO DO
 */
 /******************************************************************************/ 
 void StudioProject::updateCheckingOut()
@@ -2753,12 +2759,19 @@ void StudioProject::updateCheckingOut()
 				//If there are items that are not paid
 				if((cost < player.getMoney()) && toDelete.size() > 0)
 				{
+					camera.setCheckingOut(true);
 					//Removes not paid items
 					for(int i = 0; i < toDelete.size(); ++i)
 					{
 						player.getInventory().removeItem(toDelete[i]);
 					}
 					player.setMoney(player.getMoney() - cost);
+					toDelete.clear();
+				}
+				else
+				{
+					tempCheckOut.clear();
+					paidItems.clear();
 					toDelete.clear();
 				}
 			}
@@ -2948,8 +2961,9 @@ void StudioProject::updateDustBin()
 /******************************************************************************/
 /*!
 \brief
-Updates the opening and closing of the supermarket door
+Updates the opening and closing of the supermarket door based on delta time
 
+\param dt - delta time
 */
 /******************************************************************************/
 void StudioProject::updateDoor(double dt)
@@ -2992,10 +3006,42 @@ void StudioProject::updateDoor(double dt)
 	}
 	//==============================END OF DOOR ==========================//
 }
+/******************************************************************************/
+/*!
+\brief
+Updates the AI based on delta time
+
+\param dt - delta time
+*/
+/******************************************************************************/
 void StudioProject::updateAI(double dt)
 {
-	Guard1.getDifference(camera.position);
+	/*=============================================
+	GUARD 1
+	===============================================*/
+	Guard1.getDifference(camera.position); //Finds difference between guard1 and player
+	Guard2.getDifference(camera.position); //Finds difference between guard2 and player
+
+	//Checks if player is outside of supermarket
+	if(camera.position.x <= -57)
+	{
+		for(int i = 1; i <player.getInventory().getNoOfItems() + 1; ++i)
+		{
+			if(player.getInventory().getItem(i).getPaid() == false)
+			{
+				Guard1.setState(S_ALERT);
+				Guard2.setState(S_ALERT);
+				break;
+			}
+		}
+	}
+	else
+	{
+		Guard1.setState(S_IDLE);
+		Guard2.setState(S_IDLE);
+	}
 	Guard1.guardUpdate(dt, camera.position);
+	Guard2.guardUpdate(dt, camera.position);
 }
 /******************************************************************************/
 /*!
@@ -3070,6 +3116,7 @@ void StudioProject::Update(double dt)
 		{
 			moveItem -=(float)(5*dt);
 		}
+
 		//TIME ATTACK TIMER
 		if(TimeAttack == true)
 		{
@@ -3150,28 +3197,35 @@ void StudioProject::Update(double dt)
 
 			if (rotateLeftLeg >= 405)//rotatin left leg
 			{
-				rotatingLeftLeg = -1;
-			}
-			if(rotateLeftLeg <= 315)
-			{
-				rotatingLeftLeg = 1;
-			}
 
-			if (rotateRightLeg >= 405)//rotatin right leg
-			{
-				rotatingRightLeg = 1;
 			}
-			if(rotateRightLeg <= 315)
+			if (rotateRightLeg > 360)//moving back right leg
 			{
-				rotatingRightLeg = -1;
-			}
+				rotateRightLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
+				if (rotateRightLeg <= 360)
+				{
+					rotatingLeftLeg = -1;
+				}
+				if(rotateLeftLeg <= 315)
+				{
+					rotatingLeftLeg = 1;
+				}
 
-			if (count >= 1)
-			{
-				rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
+				if (rotateRightLeg >= 405)//rotatin right leg
+				{
+					rotatingRightLeg = 1;
+				}
+				if(rotateRightLeg <= 315)
+				{
+					rotatingRightLeg = -1;
+				}
+
+				if (count >= 1)
+				{
+					rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
+				}
 			}
 		}
-
 		else if (movingModel == false)
 		{
 			count = 0;
@@ -3284,10 +3338,12 @@ void StudioProject::Update(double dt)
 
 		updateDustBin();
 
+		updateDustBin();
 		/*=======================================================
 		Artifical Intelligence
 		==========================================================*/
 		updateAI(dt);
+
 		/*==============================================================
 		DEBUGGING PURPOSES
 		=================================================================*/
@@ -3336,29 +3392,34 @@ void StudioProject::Update(double dt)
 		{
 			elapsedTime2 += elapsedTime1;
 		}
-		else
-		{
-			elapsedTime2 += 0;
-		}
-
 		if(Application::IsKeyPressed(VK_TAB) && elapsedTime2 >= 0.15)
 		{
 			if (showInventory == false)
-			{
+			{		
 				showInventory = true;
 			}
-			else if (showInventory == true)
+			else
 			{
-				showInventory = false;
+				elapsedTime2 += 0;
 			}
-			elapsedTime2 -= 0.15;
+
+			if(Application::IsKeyPressed(VK_TAB) && elapsedTime2 >= 0.15)
+			{
+				if (showInventory == false)
+				{
+					showInventory = true;
+				}
+				else if (showInventory == true)
+				{
+					showInventory = false;
+				}
+				elapsedTime2 -= 0.15;
+			}
 		}
 		//std::cout << elapsedTime2 << endl;
 
 		if(Application::IsKeyPressed('B'))
 		{
-
-
 			if (translateMoneyZ > -8.5 && translateMoneyY > -2.54)
 			{
 				translateMoneyZ -= (float) (10 * dt);
@@ -3389,7 +3450,14 @@ void StudioProject::Update(double dt)
 			//RenderMesh(meshList[GEO_MONEY],B_Light);
 			//}
 		}
-
+		//================Testing =================//
+		//cout << Container.size() << endl;
+		if (Application::IsKeyPressed('M'))
+			moving += (float) (10 * dt);
+		if (Application::IsKeyPressed('N'))
+			moving -= (float) (10 * dt);
+		//moving -= (float) (5 * dt);
+		//cout<<moving<<endl;
 
 		//================Testing =================//
 		//cout << Container.size() << endl;
@@ -3424,6 +3492,7 @@ void StudioProject::Update(double dt)
 		{
 			camera.CollisionWithAi = false;
 		}
+
 	}
 }
 
@@ -4182,6 +4251,9 @@ Renders the Guard model in the scene
 /******************************************************************************/
 void StudioProject::RenderGuard()
 {
+	/*======================================================
+	GUARD 1
+	========================================================*/
 	modelStack.PushMatrix();
 	modelStack.Translate(Guard1.getGuardPosition().x, 0, Guard1.getGuardPosition().z);
 	if(Guard1.getState() == 1)
@@ -4231,6 +4303,71 @@ void StudioProject::RenderGuard()
 	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
 	modelStack.Translate(0, -1.4, 0);
 	RenderMesh(Guard1.getRLeg(), B_Light);
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix(); //Notation
+	modelStack.Scale(0.5, 0.5, 0.5);
+	modelStack.Rotate(180, 0, 180, 0);
+	modelStack.Translate(-2, 10, 0);
+	RenderText(meshList[GEO_TEXT], "Guard", Color(0, 0, 1));
+	modelStack.PopMatrix();
+
+	modelStack.PopMatrix();
+
+
+	/*======================================================
+	GUARD 2
+	========================================================*/
+	modelStack.PushMatrix();
+	modelStack.Translate(Guard2.getGuardPosition().x, 0, Guard2.getGuardPosition().z);
+	if(Guard1.getState() == 1)
+	{
+		modelStack.Rotate(Guard2.getDerivedAngle(), 0, 1, 0);
+	}
+	modelStack.Scale(1.2, 1.2, 1.2);
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, -2.285, 0);
+	RenderMesh(Guard2.getHead(), B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 1.5, 0);
+	RenderMesh(Guard2.getTorso(), B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
+	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
+	RenderMesh(Guard2.getRHand(), B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
+	modelStack.Translate(0.8, -1.5 + 0.2, 0);
+	RenderMesh(Guard2.getLHand(), B_Light);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0.4, 0);
+	modelStack.PushMatrix();
+	modelStack.Translate(0.3, 1, 0);
+	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
+	modelStack.Translate(0, -1.4, 0);
+	RenderMesh(Guard2.getLLeg(), B_Light);
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0.4, 0);
+	modelStack.PushMatrix();
+	modelStack.Translate(-0.3, 1, 0);
+	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
+	modelStack.Translate(0, -1.4, 0);
+	RenderMesh(Guard2.getRLeg(), B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
@@ -5223,6 +5360,7 @@ void StudioProject::RenderCheckOutItems()
 				Lays = false;
 			}
 		}
+
 	}
 	// =============MIddle cashier===================//
 	if(camera.position.z >= 4.5 && camera.position.z <= 6.9 && camera.position.y >=4 && camera.position.y <= 10 && camera.position.x >= -26 && camera.position.x <= -22) 
@@ -5879,6 +6017,10 @@ void StudioProject::RenderCheckOutItems()
 				Lays = false;
 			}
 		}
+	}
+	if(peaCount == PizzaCount == MiloCount == Cereal1Count == Cereal2Count == SardineCount == BeansCount == LaysCount == CokeCount == CokeZeroCount == PepsiCount == 0)
+	{
+		camera.setCheckingOut(false);
 	}
 }
 /******************************************************************************/

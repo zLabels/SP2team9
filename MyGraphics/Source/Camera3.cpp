@@ -27,6 +27,7 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	Jumping = false;
 	isJumping = false;
 	isFalling = false;
+	checkingOut = false;
 	tempJumpY = 0.f;
 	tempJumpTargY = 0.f;
 	tempCrouchY = position.y;
@@ -323,7 +324,7 @@ void Camera3::Update(double dt)
 	//==========STRAFE LEFT===========//
 	//Sprint
 	
-	if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('A') && escal == false && escaldown == false)
+	if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('A') && escal == false && escaldown == false && checkingOut == false)
 	{
 		if(CAMERA_SPEED <= 30)
 		{
@@ -350,7 +351,7 @@ void Camera3::Update(double dt)
 
 	}
 	//Walk
-	else if(Application::IsKeyPressed('A') && escal == false && escaldown == false)
+	else if(Application::IsKeyPressed('A') && escal == false && escaldown == false && checkingOut == false)
 	{
 		if(CAMERA_SPEED >15.f)
 		{
@@ -376,7 +377,7 @@ void Camera3::Update(double dt)
 	}
 	//=========MOVE BACKWARDS==========//
 	//Sprint
-	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('S') && escal == false && escaldown == false)
+	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('S') && escal == false && escaldown == false && checkingOut == false)
 	{
 		if(CAMERA_SPEED <= 30)
 		{
@@ -399,7 +400,7 @@ void Camera3::Update(double dt)
 		}
 	}
 	//Walk
-	else if(Application::IsKeyPressed('S') && escal == false && escaldown == false)
+	else if(Application::IsKeyPressed('S') && escal == false && escaldown == false && checkingOut == false)
 	{
 		if(CAMERA_SPEED >15.f)
 		{
@@ -424,7 +425,7 @@ void Camera3::Update(double dt)
 
 	//=============STRAFE RIGHT================//
 	//Sprint
-	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('D') && escal == false && escaldown == false)
+	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('D') && escal == false && escaldown == false && checkingOut == false)
 	{
 		if(CAMERA_SPEED <= 30)
 		{
@@ -449,7 +450,7 @@ void Camera3::Update(double dt)
 		}
 	}
 	//Walk
-	else if(Application::IsKeyPressed('D') && escal == false && escaldown == false)
+	else if(Application::IsKeyPressed('D') && escal == false && escaldown == false && checkingOut == false)
 	{
 		if(CAMERA_SPEED >15.f)
 		{
@@ -476,7 +477,7 @@ void Camera3::Update(double dt)
 
 	//===============MOVE FORWARD==========//
 	//Sprint
-	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('W') && escal == false && escaldown == false && CollisionWithAi == false)
+	else if(Application::IsKeyPressed(VK_SHIFT) && Application::IsKeyPressed('W') && escal == false && escaldown == false && CollisionWithAi == false && checkingOut == false)
 	{
 		if(CAMERA_SPEED <= 30)
 		{
@@ -498,7 +499,7 @@ void Camera3::Update(double dt)
 		}
 	}
 	//Walk
-	else if(Application::IsKeyPressed('W') && escal == false && escaldown == false && CollisionWithAi == false)
+	else if(Application::IsKeyPressed('W') && escal == false && escaldown == false && CollisionWithAi == false && checkingOut == false)
 	{
 		if(CAMERA_SPEED >15.f)
 		{
@@ -813,6 +814,10 @@ void Camera3::Update(double dt)
 	}
 }
 
+void Camera3::setCheckingOut(bool a)
+{
+	checkingOut = a;
+}
 
 void Camera3::Reset()
 {

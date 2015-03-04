@@ -15,12 +15,14 @@ public:
 	float getDerivedAngle();
 	int getState();
 	void guardUpdate(float dt,Vector3 camerapos);
+	void setState(int a);
 
 private:
 	Vector3 guardPos;
 	Vector3 guardTarget;
 	Vector3 guardView;
 	Vector3 guardDifference;
+	Vector3 initialPos;
 
 	float derivedAngle;
 	int state;

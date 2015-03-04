@@ -22,6 +22,7 @@ public:
 	virtual void Reset(void);
 	void BoundsCheck(void);
 	void bound(Vector3 maximum, Vector3 minimum);
+	void setCheckingOut(bool a);
 	std::vector<Vector3> maximum;
 	std::vector<Vector3> minimum;
 	Vector3 maxPos;
@@ -37,6 +38,7 @@ public:
 	bool isJumping;
 	bool isFalling;
 	bool walk;
+	bool checkingOut;
 	float tempJumpY;
 	float tempJumpTargY;
 	float tempCrouchY;

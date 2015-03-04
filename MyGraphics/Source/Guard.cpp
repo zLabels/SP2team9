@@ -7,6 +7,7 @@ CGuard::CGuard(void)
 	guardTarget.SetZero();
 	guardView.SetZero();
 	guardDifference.SetZero();
+	initialPos.SetZero();
 
 	derivedAngle = 0.f;
 	state = 0;
@@ -20,12 +21,14 @@ CGuard::~CGuard(void)
 void CGuard::SetData(Vector3 pos, Vector3 targ)
 {
 	guardPos = pos;
+	initialPos = pos;
 	guardTarget = targ;
 	guardView = (guardTarget - guardPos).Normalized();
 }
 void CGuard::guardUpdate(float dt, Vector3 camerapos)
 {
 	//==================================GUARD=====================//
+	//Rotation following player
 	derivedAngle = Math::RadianToDegree(acos(guardView.Dot(guardDifference) / (guardView.Length() * guardDifference.Length())));
 	if(guardView.Cross(guardDifference).y > 1)
 	{
@@ -36,25 +39,20 @@ void CGuard::guardUpdate(float dt, Vector3 camerapos)
 		derivedAngle *= -1;
 	}
 	//std::cout << derivedAngle << std::endl;
-	static float elapsedTime1 = 0, elapsedTime2 = 0;
-	elapsedTime1 = fmod(Timer.getElapsedTime(), 1);
-	if (elapsedTime2 <= 1)
+
+	if(state == S_ALERT)
 	{
-		elapsedTime2 += elapsedTime1;
-	}
-	else
-	{
-		elapsedTime2 += 0;
-	}
-	if (Application::IsKeyPressed('0') && elapsedTime2 >= 1)
-	{
-		state = S_ALERT;
-	}
-	if (state == S_ALERT)
-	{
+		//Movement of guard to player
 		guardPos += (guardDifference.Normalized()) * 10 * dt;
 	}
-
+	if(state == S_IDLE)
+	{
+		if(guardPos != initialPos)
+		{
+			Vector3 diffinitialPos = initialPos - guardPos;
+			guardPos += (diffinitialPos.Normalized()) * 10 * dt;
+		}
+	}
 }
 
 void CGuard::getDifference(Vector3 camerapos)
@@ -74,4 +72,9 @@ float CGuard::getDerivedAngle()
 int CGuard::getState()
 {
 	return state;
+}
+
+void CGuard::setState(int a)
+{
+	state = a;
 }

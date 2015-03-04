@@ -289,6 +289,13 @@ private:
 		NUM_GEOMETRY,
 	};
 
+	enum States
+	{
+		S_IDLE,
+		S_ALERT,
+		S_MAX,
+	};
+
 	//Render
 	void RenderSkybox();	//Renders Skybox 
 	void RenderSupermarket();	//Renders Supermarket Layout

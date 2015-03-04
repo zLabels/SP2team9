@@ -130,7 +130,7 @@ void Menu::update(double dt)
 
 	if (pointToGame == true && pointToExit == false) //Start Game
 	{
-		if (Application::IsKeyPressed(VK_RETURN))
+		if(Application::IsKeyPressed(VK_RETURN))
 		{
 			showMenu = false;
 		}
