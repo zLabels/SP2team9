@@ -3194,7 +3194,7 @@ void StudioProject::updateGTPprice()
 	=================================*/
 	for(int i = 0; i < Container.size();++i)
 	{
-		newPrice = rand() % 4 + 1;
+		newPrice = rand() % 4 + 2;
 		Container[i].setPrice(newPrice);
 	}
 
@@ -3203,7 +3203,7 @@ void StudioProject::updateGTPprice()
 	=================================*/
 	for(int i = 0; i < Container2.size();++i)
 	{
-		newPrice = rand() % 4 + 1;
+		newPrice = rand() % 4 + 2;
 		Container2[i].setPrice(newPrice);
 	}
 
@@ -3212,7 +3212,7 @@ void StudioProject::updateGTPprice()
 	=================================*/
 	for(int i = 0; i < Container3.size();++i)
 	{
-		newPrice = rand() % 4 + 1;
+		newPrice = rand() % 4 + 2;
 		Container3[i].setPrice(newPrice);
 	}
 
@@ -3222,7 +3222,7 @@ void StudioProject::updateGTPprice()
 	=================================*/
 	for(int i = 0; i < Container4.size();++i)
 	{
-		newPrice = rand() % 4 + 1;
+		newPrice = rand() % 4 + 2;
 		Container4[i].setPrice(newPrice);
 	}
 
@@ -3231,7 +3231,7 @@ void StudioProject::updateGTPprice()
 	=================================*/
 	for(int i = 0; i < Container5.size();++i)
 	{
-		newPrice = rand() % 4 + 1;
+		newPrice = rand() % 4 + 2;
 		Container5[i].setPrice(newPrice);
 	}
 	
@@ -3240,7 +3240,7 @@ void StudioProject::updateGTPprice()
 	=================================*/
 	for(int i = 0; i < Container6.size();++i)
 	{
-		newPrice = rand() % 4 + 1;
+		newPrice = rand() % 4 + 2;
 		Container6[i].setPrice(newPrice);
 	}
 	
@@ -3249,7 +3249,7 @@ void StudioProject::updateGTPprice()
 	=================================*/
 	for(int i = 0; i < Container7.size();++i)
 	{
-		newPrice = rand() % 4 + 1;
+		newPrice = rand() % 4 + 2;
 		Container7[i].setPrice(newPrice);
 	}
 	
@@ -3258,7 +3258,7 @@ void StudioProject::updateGTPprice()
 	=================================*/
 	for(int i = 0; i < Container8.size();++i)
 	{
-		newPrice = rand() % 4 + 1;
+		newPrice = rand() % 4 + 2;
 		Container8[i].setPrice(newPrice);
 	}
 	
@@ -3267,7 +3267,7 @@ void StudioProject::updateGTPprice()
 	=================================*/
 	for(int i = 0; i < Container9.size();++i)
 	{
-		newPrice = rand() % 4 + 1;
+		newPrice = rand() % 4 + 2;
 		Container9[i].setPrice(newPrice);
 	}
 	
@@ -3276,7 +3276,7 @@ void StudioProject::updateGTPprice()
 	=================================*/
 	for(int i = 0; i < Container10.size();++i)
 	{
-		newPrice = rand() % 4 + 1;
+		newPrice = rand() % 4 + 2;
 		Container10[i].setPrice(newPrice);
 	}
 	
@@ -3285,7 +3285,7 @@ void StudioProject::updateGTPprice()
 	=================================*/
 	for(int i = 0; i < Container11.size();++i)
 	{
-		newPrice = rand() % 4 + 1;
+		newPrice = rand() % 4 + 2;
 		Container11[i].setPrice(newPrice);
 	}
 	
@@ -3294,7 +3294,7 @@ void StudioProject::updateGTPprice()
 	=================================*/
 	for(int i = 0; i < Container12.size();++i)
 	{
-		newPrice = rand() % 4 + 1;
+		newPrice = rand() % 4 + 2;
 		Container12[i].setPrice(newPrice);
 	}
 	
@@ -3303,11 +3303,18 @@ void StudioProject::updateGTPprice()
 	=================================*/
 	for(int i = 0; i < Container13.size();++i)
 	{
-		newPrice = rand() % 4 + 1;
+		newPrice = rand() % 4 + 2;
 		Container13[i].setPrice(newPrice);
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Changes the prices of items in the supermarket when Guess The Price mini game
+is playing
 
+*/
+/******************************************************************************/
 void StudioProject::updateGTP()
 {
 	if(camera.position.x <= 31 && camera.position.y <= 10 && camera.position.z <= 88 &&
@@ -7027,7 +7034,12 @@ void StudioProject::RenderGTP()
 	//if TA is lost, renders losing message
 	if(isTAwon == false && GTPstartedOnce > 0 && messageTime <= 3)
 	{
+		std::ostringstream ssTotalPrice;
+		ssTotalPrice << totalCost;
+		CostOfItems = ssTotalPrice.str();
+
 		RenderTextOnScreen(meshList[GEO_TEXT],"You Lose", Color(1, 1, 1), 3, 10, 10);
+		RenderTextOnScreen(meshList[GEO_TEXT],"Total Cost: " + CostOfItems, Color(1, 1, 1), 3, 10, 9);
 	}
 }
 
