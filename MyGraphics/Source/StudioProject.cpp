@@ -3398,6 +3398,7 @@ Updates the scene based on delta time
 */
 /******************************************************************************/
 void StudioProject::Update(double dt)
+
 {
 	float LSPEED = 10.f;
 
@@ -3890,7 +3891,6 @@ void StudioProject::Update(double dt)
 		bool isShown = true;
 	}
 }
-
 /******************************************************************************/
 /*!
 \brief
@@ -6010,7 +6010,7 @@ void StudioProject::RenderCheckOutItems()
 {
 	//Used for rendering Objs on cashier table//
 	//Extreme left cashier
-	if(camera.position.z >= -13 && camera.position.z <= -11 && camera.position.y >=4 && camera.position.y <= 10 && camera.position.x >= -26.85 && camera.position.x <= -19.47) //Extreme left cashier
+	if(camera.position.z >= -13 && camera.position.z <= -11.6 && camera.position.y >=4 && camera.position.y <= 10 && camera.position.x >= -26.f && camera.position.x <= -19.2) //Extreme left cashier
 	{
 		if(Peas == true ) // Peas and Cans
 		{
@@ -6337,8 +6337,8 @@ void StudioProject::RenderCheckOutItems()
 		}
 
 	}
-	// =============MIddle cashier===================//
-	if(camera.position.z >= 4.5 && camera.position.z <= 6.9 && camera.position.y >=4 && camera.position.y <= 10 && camera.position.x >= -26 && camera.position.x <= -22) 
+	// =============Middle cashier===================//
+	if(camera.position.z >= 4.8 && camera.position.z <= 7.1 && camera.position.y >=4 && camera.position.y <= 10 && camera.position.x >= -26 && camera.position.x <= -19.2) 
 	{
 		if(Peas == true ) // Peas and Cans
 		{
@@ -6664,7 +6664,7 @@ void StudioProject::RenderCheckOutItems()
 	}
 
 	//Extreme right cashier
-	if(camera.position.z >= 22.2 && camera.position.z <= 24.8 && camera.position.y >=4 && camera.position.y <= 10 && camera.position.x >= -25.75 && camera.position.x <= -19.63)
+	if(camera.position.z >= 22.2 && camera.position.z <= 25.f && camera.position.y >=4 && camera.position.y <= 10 && camera.position.x >= -26.f && camera.position.x <= -19.2)
 	{
 		if(Peas == true ) // Peas and Cans
 		{
@@ -7099,7 +7099,7 @@ void StudioProject::RenderGTP()
 {
 	if(GTP == true)
 	{
-		RenderTextOnScreen(meshList[GEO_TEXT],"Guess The Price", Color(1, 1, 1), 3, 10, 19);
+		RenderTextOnScreen(meshList[GEO_TEXT],"Guess The Price", Color(0, 1, 0), 3, 6, 19);
 	}
 	//if TA is won, renders winning message
 	if(isGTPwon == true && messageTime <= 3)
@@ -7112,9 +7112,9 @@ void StudioProject::RenderGTP()
 		ssTotalPrice << totalCost;
 		CostOfItems = ssTotalPrice.str();
 
-		RenderTextOnScreen(meshList[GEO_TEXT],"Congratulations", Color(1, 1, 1), 3, 10, 10);
-		RenderTextOnScreen(meshList[GEO_TEXT],"You Have Taken: " + NumItem, Color(1, 1, 1), 3, 10, 9);
-		RenderTextOnScreen(meshList[GEO_TEXT],"Total Cost: " + CostOfItems, Color(1, 1, 1), 3, 10, 8);
+		RenderTextOnScreen(meshList[GEO_TEXT],"Congratulations", Color(0, 1, 0), 3, 10, 10);
+		RenderTextOnScreen(meshList[GEO_TEXT],"You Have Taken: " + NumItem, Color(0, 1, 0), 3, 10, 9);
+		RenderTextOnScreen(meshList[GEO_TEXT],"Total Cost: " + CostOfItems, Color(0, 1, 0), 3, 10, 8);
 
 	}
 	//if TA is lost, renders losing message
@@ -7124,8 +7124,8 @@ void StudioProject::RenderGTP()
 		ssTotalPrice << totalCost;
 		CostOfItems = ssTotalPrice.str();
 
-		RenderTextOnScreen(meshList[GEO_TEXT],"You Lose", Color(1, 1, 1), 3, 10, 10);
-		RenderTextOnScreen(meshList[GEO_TEXT],"Total Cost: " + CostOfItems, Color(1, 1, 1), 3, 10, 9);
+		RenderTextOnScreen(meshList[GEO_TEXT],"You Lose", Color(1, 0, 0), 3, 10, 10);
+		RenderTextOnScreen(meshList[GEO_TEXT],"Total Cost: " + CostOfItems, Color(1, 0, 0), 3, 10, 9);
 	}
 }
 
@@ -7432,13 +7432,6 @@ void StudioProject::Render()
 		{
 			RenderImageOnScreen(meshList[itemInventory], Color(1, 1, 1), 100, 1, 1);
 		}
-
-		/*modelStack.PushMatrix();
-		modelStack.Scale(0.5, 0.5, 0.5);
-		modelStack.Translate(-1.43656 + -0.065, -1.43656 + 0.15, 0);
-		RenderMesh(meshList[itemInventory], false);
-		modelStack.PopMatrix();*/
-
 		/*=====================================================
 		Rendering of Information for player
 		=======================================================*/
@@ -7447,23 +7440,16 @@ void StudioProject::Render()
 
 		//============DEBUGGING PURPOSES====================//
 
-		RenderTextOnScreen(meshList[GEO_TEXT],"+", Color(1, 0, 0), 3, 13.55, 10);
+		RenderTextOnScreen(meshList[GEO_TEXT],"+", Color(0, 0, 0), 3, 13.55, 10);
 
 		//==Controls==//
 		if(isShown == true)
 		{
-			RenderTextOnScreen(meshList[GEO_TEXT], "WASD to Move", Color(0, 0 ,0), 2, 1, 29);
-			RenderTextOnScreen(meshList[GEO_TEXT], "Arrow Keys to turn", Color(0, 0, 0), 2, 1, 28);
-			RenderTextOnScreen(meshList[GEO_TEXT], "Press E to interact", Color(0,0,0), 2, 1, 27);
 			//============DEBUGGING PURPOSES====================//
 			RenderTextOnScreen(meshList[GEO_TEXT], Framerate + result, Color(0, 1, 0), 3, 1, 2);
 			RenderTextOnScreen(meshList[GEO_TEXT],"x: " + camerax, Color(0, 1, 0), 3, 1, 3);
 			RenderTextOnScreen(meshList[GEO_TEXT],"y: " + cameray, Color(0, 1, 0), 3, 1, 4);
 			RenderTextOnScreen(meshList[GEO_TEXT],"z: " + cameraz, Color(0, 1, 0), 3, 1, 5);
-
-			RenderTextOnScreen(meshList[GEO_TEXT],"targetX: " + viewx, Color(0, 1, 0), 3, 10, 3);
-			RenderTextOnScreen(meshList[GEO_TEXT],"targetY: " + viewy, Color(0, 1, 0), 3, 10, 4);
-			RenderTextOnScreen(meshList[GEO_TEXT],"targetZ: " + viewz, Color(0, 1, 0), 3, 10, 5);
 		}
 
 		RenderCheckOutItems();
