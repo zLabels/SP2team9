@@ -1958,6 +1958,7 @@ void StudioProject::InitCharacters()
 	/*========================================================================
 	Guard
 	===========================================================================*/
+	Guard1.SetData(Vector3(-70, 0, -21.5),Vector3(-70, 0, -22.5));
 
 	newHead = MeshBuilder::GenerateOBJ("Guard Head", "OBJ//cashierHead.obj");
 	newHead->material.kAmbient.Set(0.1f, 0.1f, 0.1f);
@@ -2073,7 +2074,6 @@ void StudioProject::Init()
 	//Initialize camera settings
 	camera.Init(Vector3(-45, 5, 15), Vector3(-45, 5, 13), Vector3(0, 1, 0));
 
-	Guard.passInPositionAndTarget(Vector3(-70, 0, -21.5),Vector3(-70, 0, -22.5));
 	Passerby[0].SetPasserby(Vector3(0, 0, 3));
 	Passerby[1].SetPasserby(Vector3(0, 0, -3));
 	Passerby[2].SetPasserby(Vector3(0, 0, 31));
@@ -2969,7 +2969,11 @@ void StudioProject::updateDoor(double dt)
 	}
 	//==============================END OF DOOR ==========================//
 }
-
+void StudioProject::updateAI(double dt)
+{
+	Guard1.getDifference(camera.position);
+	Guard1.guardUpdate(dt, camera.position);
+}
 /******************************************************************************/
 /*!
 \brief
@@ -3249,6 +3253,11 @@ void StudioProject::Update(double dt)
 	updateTimeAttack();
 
 	updateDustBin();
+
+	/*=======================================================
+	Artifical Intelligence
+	==========================================================*/
+	updateAI(dt);
 	/*==============================================================
 	DEBUGGING PURPOSES
 	=================================================================*/
@@ -3364,9 +3373,6 @@ void StudioProject::Update(double dt)
 	camera.Update(dt);
 
 	Page.setCPlayer(player);
-
-	Guard.FindPlayerDistanceDifference(camera.position);
-	Guard.update(dt, camera.position);
 
 	Passerby[0].update(dt, camera.position);
 	Passerby[0].FindPlayerDistanceDifferencePasserby(camera.position);
@@ -4146,10 +4152,10 @@ Renders the Guard model in the scene
 void StudioProject::RenderGuard()
 {
 	modelStack.PushMatrix();
-	modelStack.Translate(Guard.getGuardPosition().x, 0, Guard.getGuardPosition().z);
-	if (Guard.getAlertState() == true)
+	modelStack.Translate(Guard1.getGuardPosition().x, 0, Guard1.getGuardPosition().z);
+	if(Guard1.getState() == 1)
 	{
-		modelStack.Rotate(Guard.getDerivedAngle(), 0, 1, 0);
+		modelStack.Rotate(Guard1.getDerivedAngle(), 0, 1, 0);
 	}
 	modelStack.Scale(1.2, 1.2, 1.2);
 

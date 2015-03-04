@@ -302,6 +302,7 @@ private:
 	void updateTimeAttack();	//Updates everything related to Time Attack mini game
 	void updateDustBin(); //Updates throwing of item
 	void updateDoor(double dt); //Updates opening / closing of door
+	void updateAI(double dt); //Updates all AI
 
 public:
 	StudioProject();	//default constructor
@@ -342,6 +343,7 @@ private:
 	//==SoundEngine==//
 	ISoundEngine* engine;
 	ISound* Sound;
+
 	//========MiniGame============//
 	//==TimeAttack==//
 	bool TimeAttack;
@@ -361,6 +363,7 @@ private:
 	Vector3 charPosition;
 	float playerAngle;
 	float angle;
+
 	//========Booleans for objs ======//
 	bool Pizza;
 	bool Peas;
@@ -392,7 +395,10 @@ private:
 	vector<CItem> tempCheckOut;
 	vector<CItem> paidItems;
 
+	//===Player====//
 	CPlayer player;
+
+	//===Guard AI===//
 	CGuard Guard1;
 	CGuard Guard2;
 
@@ -404,8 +410,6 @@ private:
 
 	//Security CameraOBJ[3];
 	CItemInventory Page;
-
-	Ai Guard;
 	Ai Passerby[4];
 
 	//=========Items=========//
