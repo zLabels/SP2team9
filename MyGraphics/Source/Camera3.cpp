@@ -333,7 +333,6 @@ void Camera3::Update(double dt)
 
 		tempPos = position;
 		tempTarg = target;
-
 		Vector3 view = (target - position).Normalized();
 		Vector3 right = view.Cross(up);
 		right.y = 0;

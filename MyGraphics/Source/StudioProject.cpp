@@ -2311,6 +2311,7 @@ void StudioProject::updateTakingItem()
 					{
 						if(player.getInventory().AddItem(Container[i]) == true)
 						{
+							Sound = engine->play2D("Sound\\taking-something.wav");
 							Container[i].setRender(false);
 							break;
 						}
@@ -2333,6 +2334,7 @@ void StudioProject::updateTakingItem()
 					{
 						if(player.getInventory().AddItem(Container2[i]) == true)
 						{
+							Sound = engine->play2D("Sound\\taking-something.wav");
 							Container2[i].setRender(false);
 							break;
 						}
@@ -2355,6 +2357,7 @@ void StudioProject::updateTakingItem()
 					{
 						if(player.getInventory().AddItem(Container3[i]) == true)
 						{
+							Sound = engine->play2D("Sound\\taking-something.wav");
 							Container3[i].setRender(false);
 							break;
 						}
@@ -2377,6 +2380,7 @@ void StudioProject::updateTakingItem()
 					{
 						if(player.getInventory().AddItem(Container4[i]) == true)
 						{
+							Sound = engine->play2D("Sound\\taking-something.wav");
 							Container4[i].setRender(false);
 							break;
 						}
@@ -2399,6 +2403,7 @@ void StudioProject::updateTakingItem()
 					{
 						if(player.getInventory().AddItem(Container5[i]) == true)
 						{
+							Sound = engine->play2D("Sound\\taking-something.wav");
 							Container5[i].setRender(false);
 							break;
 						}
@@ -2421,6 +2426,7 @@ void StudioProject::updateTakingItem()
 					{
 						if(player.getInventory().AddItem(Container6[i]) == true)
 						{
+							Sound = engine->play2D("Sound\\taking-something.wav");
 							Container6[i].setRender(false);
 							break;
 						}
@@ -2443,6 +2449,7 @@ void StudioProject::updateTakingItem()
 					{
 						if(player.getInventory().AddItem(Container7[i]) == true)
 						{
+							Sound = engine->play2D("Sound\\taking-something.wav");
 							Container7[i].setRender(false);
 							break;
 						}
@@ -2465,6 +2472,7 @@ void StudioProject::updateTakingItem()
 					{
 						if(player.getInventory().AddItem(Container8[i]) == true)
 						{
+							Sound = engine->play2D("Sound\\taking-something.wav");
 							Container8[i].setRender(false);
 							break;
 						}
@@ -2486,6 +2494,7 @@ void StudioProject::updateTakingItem()
 					{
 						if(player.getInventory().AddItem(Container9[i]) == true)
 						{
+							Sound = engine->play2D("Sound\\taking-something.wav");
 							Container9[i].setRender(false);
 							break;
 						}
@@ -2507,6 +2516,7 @@ void StudioProject::updateTakingItem()
 					{
 						if(player.getInventory().AddItem(Container10[i]) == true)
 						{
+							Sound = engine->play2D("Sound\\taking-something.wav");
 							Container10[i].setRender(false);
 							break;
 						}
@@ -2529,6 +2539,7 @@ void StudioProject::updateTakingItem()
 					{
 						if(player.getInventory().AddItem(Container11[i]) == true)
 						{
+							Sound = engine->play2D("Sound\\taking-something.wav");
 							Container11[i].setRender(false);
 							break;
 						}
@@ -2550,6 +2561,7 @@ void StudioProject::updateTakingItem()
 					{
 						if(player.getInventory().AddItem(Container12[i]) == true)
 						{
+							Sound = engine->play2D("Sound\\taking-something.wav");
 							Container12[i].setRender(false);
 							break;
 						}
@@ -2572,6 +2584,7 @@ void StudioProject::updateTakingItem()
 					{
 						if(player.getInventory().AddItem(Container13[i]) == true)
 						{
+							Sound = engine->play2D("Sound\\taking-something.wav");
 							Container13[i].setRender(false);
 							break;
 						}
@@ -2610,6 +2623,7 @@ void StudioProject::updatePuttingBackItem()
 				{
 					if(player.getInventory().removeItem(Container[i]) == true)
 					{
+						Sound = engine->play2D("Sound\\taking-something.wav");
 						Container[i].setRender(true);
 						break;
 					}
@@ -2629,6 +2643,7 @@ void StudioProject::updatePuttingBackItem()
 				{
 					if(player.getInventory().removeItem(Container2[i]) == true)
 					{
+						Sound = engine->play2D("Sound\\taking-something.wav");
 						Container2[i].setRender(true);
 						break;
 					}
@@ -2649,6 +2664,7 @@ void StudioProject::updatePuttingBackItem()
 				{
 					if(player.getInventory().removeItem(Container3[i]) == true)
 					{
+						Sound = engine->play2D("Sound\\taking-something.wav");
 						Container3[i].setRender(true);
 						break;
 					}
@@ -2670,6 +2686,7 @@ void StudioProject::updatePuttingBackItem()
 				{
 					if(player.getInventory().removeItem(Container4[i]) == true)
 					{
+						Sound = engine->play2D("Sound\\taking-something.wav");
 						Container4[i].setRender(true);
 						break;
 					}
@@ -2689,6 +2706,7 @@ void StudioProject::updatePuttingBackItem()
 				{
 					if(player.getInventory().removeItem(Container5[i]) == true)
 					{
+						Sound = engine->play2D("Sound\\taking-something.wav");
 						Container5[i].setRender(true);
 						break;
 					}
@@ -2709,6 +2727,7 @@ void StudioProject::updatePuttingBackItem()
 				{
 					if(player.getInventory().removeItem(Container6[i]) == true)
 					{
+						Sound = engine->play2D("Sound\\taking-something.wav");
 						Container6[i].setRender(true);
 						break;
 					}
@@ -2728,6 +2747,7 @@ void StudioProject::updatePuttingBackItem()
 				{
 					if(player.getInventory().removeItem(Container7[i]) == true)
 					{
+						Sound = engine->play2D("Sound\\taking-something.wav");
 						Container7[i].setRender(true);
 						break;
 					}
@@ -2748,6 +2768,7 @@ void StudioProject::updatePuttingBackItem()
 				{
 					if(player.getInventory().removeItem(Container8[i]) == true)
 					{
+						Sound = engine->play2D("Sound\\taking-something.wav");
 						Container8[i].setRender(true);
 						break;
 					}
@@ -2767,6 +2788,7 @@ void StudioProject::updatePuttingBackItem()
 				{
 					if(player.getInventory().removeItem(Container9[i]) == true)
 					{
+						Sound = engine->play2D("Sound\\taking-something.wav");
 						Container9[i].setRender(true);
 						break;
 					}
@@ -2786,6 +2808,7 @@ void StudioProject::updatePuttingBackItem()
 				{
 					if(player.getInventory().removeItem(Container10[i]) == true)
 					{
+						Sound = engine->play2D("Sound\\taking-something.wav");
 						Container10[i].setRender(true);
 						break;
 					}
@@ -2805,6 +2828,7 @@ void StudioProject::updatePuttingBackItem()
 				{
 					if(player.getInventory().removeItem(Container11[i]) == true)
 					{
+						Sound = engine->play2D("Sound\\taking-something.wav");
 						Container11[i].setRender(true);
 						break;
 					}
@@ -2824,6 +2848,7 @@ void StudioProject::updatePuttingBackItem()
 				{
 					if(player.getInventory().removeItem(Container12[i]) == true)
 					{
+						Sound = engine->play2D("Sound\\taking-something.wav");
 						Container12[i].setRender(true);
 						break;
 					}
@@ -2844,6 +2869,7 @@ void StudioProject::updatePuttingBackItem()
 				{
 					if(player.getInventory().removeItem(Container13[i]) == true)
 					{
+						Sound = engine->play2D("Sound\\taking-something.wav");
 						Container13[i].setRender(true);
 						break;
 					}
