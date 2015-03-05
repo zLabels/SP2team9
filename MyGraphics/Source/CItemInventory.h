@@ -1,10 +1,10 @@
 /******************************************************************************/
 /*!
-\file	Camera3.h
-\author Princeton Chew, name, name, name,
+\file	CItemInventory.h
+\author Ong Swee Seng
 \par	email: 141991A@mymail.nyp.edu.sg
 \brief
-Camera3 Class
+CItemInventory Class
 */
 /******************************************************************************/
 #pragma once
@@ -18,9 +18,9 @@ Camera3 Class
 using std::string;
 /******************************************************************************/
 /*!
-	Class CCharacter
+	Class CItemInventory
 \brief
-Defines the variables and functions required for the Inventory
+Defines the variables and functions required for the CItemInventory
 
 */
 /******************************************************************************/

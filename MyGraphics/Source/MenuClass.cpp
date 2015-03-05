@@ -1,10 +1,10 @@
 /******************************************************************************/
 /*!
 \file	Character.cpp
-\author Princeton Chew
-\par	email: 141991A@mymail.nyp.edu.sg
+\author Ong Swee Seng
+\par	email: 142128G@mymail.nyp.edu.sg
 \brief
-Character Class
+MenuClass Class
 */
 /******************************************************************************/
 #include "MenuClass.h"

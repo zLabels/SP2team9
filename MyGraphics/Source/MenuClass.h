@@ -1,10 +1,10 @@
 /******************************************************************************/
 /*!
-\file	Camera3.h
-\author Princeton Chew, name, name, name,
+\file	MenuClass.h
+\author On gSwee Seng
 \par	email: 141991A@mymail.nyp.edu.sg
 \brief
-Camera3 Class
+MenuClass Class
 */
 /******************************************************************************/
 #pragma once
@@ -22,9 +22,9 @@ using std::cout;
 using std::endl;
 /******************************************************************************/
 /*!
-	Class CInventory
+	Class MenuClass
 \brief
-Defines the variables and functions required for the Menu
+Defines the variables and functions required for the MenuClass
 
 */
 /******************************************************************************/

@@ -1,4 +1,12 @@
-
+/******************************************************************************/
+/*!
+\file	StudioProject.h
+\author Princeton Chew, name, name, name,
+\par	email: 141991A@mymail.nyp.edu.sg
+\brief
+Studio Project Class
+*/
+/******************************************************************************/
 #ifndef APPLICATION_H
 #define APPLICATION_H
 

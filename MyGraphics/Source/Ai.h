@@ -1,10 +1,10 @@
 /******************************************************************************/
 /*!
-\file	Character.h
-\author Princeton Chew
-\par	email: 141991A@mymail.nyp.edu.sg
+\file	Ai.h
+\author Ong Swee Seng
+\par	email: 142128G@mymail.nyp.edu.sg
 \brief
-Character Class
+Ai Class
 */
 /******************************************************************************/
 #ifndef AI_H
@@ -17,7 +17,7 @@ Character Class
 #include "timer.h"
 /******************************************************************************/
 /*!
-	Class CCharacter
+	Class Ai
 \brief
 Defines the variables and functions required for the AI
 
