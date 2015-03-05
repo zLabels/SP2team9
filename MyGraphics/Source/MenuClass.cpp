@@ -9,7 +9,8 @@ Menu::Menu(void)
 	EndGameFalse =
 	Arrow =
 	MenuBackground =
-	GameOver = 0;
+	GameOver = 
+	Win = 0;
 
 	pointToGame = true;
 	pointToExit = false;
@@ -17,6 +18,7 @@ Menu::Menu(void)
 	GameOverState = false;
 	pointToControl = false;
 	showControl = false;
+	WinState = false;
 }
 
 Menu::~Menu(void)
@@ -146,6 +148,16 @@ bool Menu::getShowContorlStatus()
 bool Menu::getPointToContorl()
 {
 	return pointToControl;
+}
+
+void Menu::SetWinMesh(int newObj)
+{
+	Win = newObj;
+}
+
+int Menu::getWinMesh()
+{
+	return Win;
 }
 
 void Menu::update(double dt)

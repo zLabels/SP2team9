@@ -291,6 +291,7 @@ private:
 		ContorlMesh,
 		ControlTrue,
 		ControlFalse,
+		WinStateMesh,
 
 		itemInventory,		//Item Inventory page
 		cart,
@@ -395,6 +396,7 @@ private:
 	float translateMoneyZ;
 	float translateMoneyY;
 	StopWatch Timer;
+	bool winState;
 	Menu menu;
 	//==SoundEngine==//
 	ISoundEngine* engine;

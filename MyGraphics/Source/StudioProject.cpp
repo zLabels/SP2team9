@@ -456,7 +456,7 @@ void StudioProject::InitMesh()
 
 	meshList[UI_MILOCAN_PAID] = MeshBuilder::GenerateQuad("paid sardine can", Color(1, 1, 1), 1.f , 1.f);
 	meshList[UI_MILOCAN_PAID]->textureID = LoadTGA("UI sprites/UI-milocan_paid.tga");
-	
+
 	meshList[MENUBACKGROUND] = MeshBuilder::GenerateQuad("Menu Background", Color(1, 1, 1), 1.f , 1.f);
 	meshList[MENUBACKGROUND]->textureID = LoadTGA("Image//menu.tga");
 	menu.SetBackground(MENUBACKGROUND);
@@ -496,6 +496,10 @@ void StudioProject::InitMesh()
 	meshList[ControlFalse] = MeshBuilder::GenerateQuad("Control false Mesh", Color(1, 1, 1), 1.f , 1.f);
 	meshList[ControlFalse]->textureID = LoadTGA("Image//ControlFalse.tga");
 	menu.SetPointControlFalse(ControlFalse);
+
+	meshList[WinStateMesh] = MeshBuilder::GenerateQuad("Win Mesh", Color(1, 1, 1), 1.f , 1.f);
+	meshList[WinStateMesh]->textureID = LoadTGA("Image//YouWon.tga");
+	menu.SetWinMesh(WinStateMesh);
 
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
@@ -573,6 +577,7 @@ void StudioProject::InitVariables()
 	CokeCount = 0;
 	CokeZeroCount = 0;
 	PepsiCount = 0;
+	winState = false;
 
 	//==Time Attack==//
 	TimeAttack = false;
@@ -1859,7 +1864,7 @@ void StudioProject::InitShaders()
 	lights[7].exponent = 3.f;
 	lights[7].spotDirection.Set(1.f, 1.f, 0.f);
 
-	
+
 	// Make sure you pass uniform parameters after glUseProgram()
 	glUniform1i(m_parameters[U_NUMLIGHTS], 8);
 
@@ -1951,8 +1956,8 @@ void StudioProject::InitShaders()
 	glUniform1f(m_parameters[U_LIGHT7_COSINNER], lights[7].cosInner);
 	glUniform1f(m_parameters[U_LIGHT7_EXPONENT], lights[7].exponent);
 
-	
-	
+
+
 }
 /******************************************************************************/
 /*!
@@ -2201,7 +2206,7 @@ void StudioProject::InitOrigPrice()
 		Container3[i].setPrice(newPrice);
 	}
 
-	
+
 	/*==============================
 	Container 4
 	=================================*/
@@ -2217,7 +2222,7 @@ void StudioProject::InitOrigPrice()
 	{
 		Container5[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 6
 	=================================*/
@@ -2225,7 +2230,7 @@ void StudioProject::InitOrigPrice()
 	{
 		Container6[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 7
 	=================================*/
@@ -2233,7 +2238,7 @@ void StudioProject::InitOrigPrice()
 	{
 		Container7[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 8
 	=================================*/
@@ -2241,7 +2246,7 @@ void StudioProject::InitOrigPrice()
 	{
 		Container8[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 9
 	=================================*/
@@ -2250,7 +2255,7 @@ void StudioProject::InitOrigPrice()
 
 		Container9[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 10
 	=================================*/
@@ -2258,7 +2263,7 @@ void StudioProject::InitOrigPrice()
 	{
 		Container10[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 11
 	=================================*/
@@ -2266,7 +2271,7 @@ void StudioProject::InitOrigPrice()
 	{
 		Container11[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 12
 	=================================*/
@@ -2274,7 +2279,7 @@ void StudioProject::InitOrigPrice()
 	{
 		Container12[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 13
 	=================================*/
@@ -3273,7 +3278,7 @@ void StudioProject::updateGTPprice()
 		Container3[i].setPrice(newPrice);
 	}
 
-	
+
 	/*==============================
 	Container 4
 	=================================*/
@@ -3291,7 +3296,7 @@ void StudioProject::updateGTPprice()
 		newPrice = rand() % 4 + 2;
 		Container5[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 6
 	=================================*/
@@ -3300,7 +3305,7 @@ void StudioProject::updateGTPprice()
 		newPrice = rand() % 4 + 2;
 		Container6[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 7
 	=================================*/
@@ -3309,7 +3314,7 @@ void StudioProject::updateGTPprice()
 		newPrice = rand() % 4 + 2;
 		Container7[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 8
 	=================================*/
@@ -3318,7 +3323,7 @@ void StudioProject::updateGTPprice()
 		newPrice = rand() % 4 + 2;
 		Container8[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 9
 	=================================*/
@@ -3327,7 +3332,7 @@ void StudioProject::updateGTPprice()
 		newPrice = rand() % 4 + 2;
 		Container9[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 10
 	=================================*/
@@ -3336,7 +3341,7 @@ void StudioProject::updateGTPprice()
 		newPrice = rand() % 4 + 2;
 		Container10[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 11
 	=================================*/
@@ -3345,7 +3350,7 @@ void StudioProject::updateGTPprice()
 		newPrice = rand() % 4 + 2;
 		Container11[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 12
 	=================================*/
@@ -3354,7 +3359,7 @@ void StudioProject::updateGTPprice()
 		newPrice = rand() % 4 + 2;
 		Container12[i].setPrice(newPrice);
 	}
-	
+
 	/*==============================
 	Container 13
 	=================================*/
@@ -3503,6 +3508,7 @@ void StudioProject::ResetAll(double dt)
 	CokeCount = 0;
 	CokeZeroCount = 0;
 	PepsiCount = 0;
+	winState = false;
 
 	//==Time Attack==//
 	TimeAttack = false;
@@ -3562,7 +3568,7 @@ void StudioProject::ResetAll(double dt)
 		Container3[i].setRender(true);
 	}
 
-	
+
 	/*==============================
 	Container 4
 	=================================*/
@@ -3578,7 +3584,7 @@ void StudioProject::ResetAll(double dt)
 	{
 		Container5[i].setRender(true);
 	}
-	
+
 	/*==============================
 	Container 6
 	=================================*/
@@ -3586,7 +3592,7 @@ void StudioProject::ResetAll(double dt)
 	{
 		Container6[i].setRender(true);
 	}
-	
+
 	/*==============================
 	Container 7
 	=================================*/
@@ -3594,7 +3600,7 @@ void StudioProject::ResetAll(double dt)
 	{
 		Container7[i].setRender(true);
 	}
-	
+
 	/*==============================
 	Container 8
 	=================================*/
@@ -3602,7 +3608,7 @@ void StudioProject::ResetAll(double dt)
 	{
 		Container8[i].setRender(true);
 	}
-	
+
 	/*==============================
 	Container 9
 	=================================*/
@@ -3611,7 +3617,7 @@ void StudioProject::ResetAll(double dt)
 
 		Container9[i].setRender(true);
 	}
-	
+
 	/*==============================
 	Container 10
 	=================================*/
@@ -3619,7 +3625,7 @@ void StudioProject::ResetAll(double dt)
 	{
 		Container10[i].setRender(true);
 	}
-	
+
 	/*==============================
 	Container 11
 	=================================*/
@@ -3627,7 +3633,7 @@ void StudioProject::ResetAll(double dt)
 	{
 		Container11[i].setRender(true);
 	}
-	
+
 	/*==============================
 	Container 12
 	=================================*/
@@ -3635,7 +3641,7 @@ void StudioProject::ResetAll(double dt)
 	{
 		Container12[i].setRender(true);
 	}
-	
+
 	/*==============================
 	Container 13
 	=================================*/
@@ -3669,7 +3675,7 @@ void StudioProject::Update(double dt)
 	{
 		menu.update(dt);
 	}
-	else if (menu.getShowMenuStatus() == false && Guard1.getCatchPlayerState() == false && Guard2.getCatchPlayerState() == false)
+	else if (menu.getShowMenuStatus() == false && Guard1.getCatchPlayerState() == false && Guard2.getCatchPlayerState() == false && winState == false)
 	{
 		/*Sound = engine->play2D("Sound\\magical_moment.mp3");*/
 		menu.update(dt);
@@ -3772,14 +3778,7 @@ void StudioProject::Update(double dt)
 		static float ROTATE_SPEED = 50.f;
 		static int count = 0;
 
-		if (Application::IsKeyPressed('8') || Application::IsKeyPressed('9')) //currently i set it to press 9 to animate character
-		{
-			movingModel = true;
-		}
-		else
-		{
-			movingModel = false;
-		}
+		movingModel= true;
 
 		if (movingModel == true)
 		{
@@ -3808,33 +3807,25 @@ void StudioProject::Update(double dt)
 
 			if (rotateLeftLeg >= 405)//rotatin left leg
 			{
-
+				rotatingLeftLeg = -1;
 			}
-			if (rotateRightLeg > 360)//moving back right leg
+			if(rotateLeftLeg <= 315)
 			{
-				rotateRightLeg -= (float)(rotatingRightLeg * dt * ROTATE_SPEED);
-				if (rotateRightLeg <= 360)
-				{
-					rotatingLeftLeg = -1;
-				}
-				if(rotateLeftLeg <= 315)
-				{
-					rotatingLeftLeg = 1;
-				}
+				rotatingLeftLeg = 1;
+			}
 
-				if (rotateRightLeg >= 405)//rotatin right leg
-				{
-					rotatingRightLeg = 1;
-				}
-				if(rotateRightLeg <= 315)
-				{
-					rotatingRightLeg = -1;
-				}
+			if (rotateRightLeg >= 405)//rotatin right leg
+			{
+				rotatingRightLeg = 1;
+			}
+			if(rotateRightLeg <= 315)
+			{
+				rotatingRightLeg = -1;
+			}
 
-				if (count >= 1)
-				{
-					rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
-				}
+			if (count >= 1)
+			{
+				rotateLeftArms += (float)(rotatingLeftArm * dt * ROTATE_SPEED);
 			}
 		}
 		else if (movingModel == false)
@@ -4040,9 +4031,15 @@ void StudioProject::Update(double dt)
 		{
 			camera.CollisionWithAi = false;
 		}
+		
+		if ((Theifnpc.getPosition() - camera.position).Length() < 6 && Guard1.getState() == 1 ||
+			(Theifnpc.getPosition() - camera.position).Length() < 6 && Guard2.getState() == 1)
+		{
+			winState = true;
+		}
 	}
-	//=====================FOR RESETTING PURPOSE================//
 
+	//=====================FOR RESETTING PURPOSE================//
 	if (Application::IsKeyPressed('R'))
 	{
 		ResetAll(dt);
@@ -4286,10 +4283,10 @@ void StudioProject::RenderSupermarket()
 	//Railings near the escalator 
 	for(int x = -2; x < 3; x ++ )
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(x*9.5,20,61.5);
-	RenderMesh(meshList[GEO_RAIL],B_Light);
-	modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		modelStack.Translate(x*9.5,20,61.5);
+		RenderMesh(meshList[GEO_RAIL],B_Light);
+		modelStack.PopMatrix();
 	}
 
 	modelStack.PushMatrix();
@@ -4323,96 +4320,96 @@ void StudioProject::RenderSupermarket()
 	modelStack.Scale(0.5,1,1);
 	RenderMesh(meshList[GEO_RAIL],B_Light);
 	modelStack.PopMatrix();
-	
+
 	//=============2nd Floor left row shelf===============//
 	for(int x = 2; x < 4; x++)
 	{
-	//Wooden shelf
-	modelStack.PushMatrix();
-	modelStack.Translate(5,19.8,x*12);
-	modelStack.Rotate(90,0,1,0);
-	RenderMesh(meshList[GEO_SHELF],B_Light);
-	modelStack.PopMatrix();
+		//Wooden shelf
+		modelStack.PushMatrix();
+		modelStack.Translate(5,19.8,x*12);
+		modelStack.Rotate(90,0,1,0);
+		RenderMesh(meshList[GEO_SHELF],B_Light);
+		modelStack.PopMatrix();
 	}
 
 	for(int x = 3; x < 8; x++)
 	{
-	//Metal shelf
-	modelStack.PushMatrix();
-	modelStack.Translate(-14.5,20,x*6);
-	RenderMesh(meshList[GEO_SHELF2],B_Light);
-	modelStack.PopMatrix();
+		//Metal shelf
+		modelStack.PushMatrix();
+		modelStack.Translate(-14.5,20,x*6);
+		RenderMesh(meshList[GEO_SHELF2],B_Light);
+		modelStack.PopMatrix();
 	}
 
 	for(int x = 3; x < 8; x++)
 	{
-	//Metal shelf
-	modelStack.PushMatrix();
-	modelStack.Translate(23,20,x*6);
-	RenderMesh(meshList[GEO_SHELF2],B_Light);
-	modelStack.PopMatrix();
+		//Metal shelf
+		modelStack.PushMatrix();
+		modelStack.Translate(23,20,x*6);
+		RenderMesh(meshList[GEO_SHELF2],B_Light);
+		modelStack.PopMatrix();
 	}
 
 	// =========2nd Floor middle row shelf ======== //
-	
+
 	//Wooden shelf
 	modelStack.PushMatrix();
 	modelStack.Translate(5,19.8,-12);
 	modelStack.Rotate(90,0,1,0);
 	RenderMesh(meshList[GEO_SHELF],B_Light);
 	modelStack.PopMatrix();
-	
+
 	for(int x = -3; x < 0; x++)
 	{
-	//Metal shelf
-	modelStack.PushMatrix();
-	modelStack.Translate(-14.5,20,x*6);
-	RenderMesh(meshList[GEO_SHELF2],B_Light);
-	modelStack.PopMatrix();
+		//Metal shelf
+		modelStack.PushMatrix();
+		modelStack.Translate(-14.5,20,x*6);
+		RenderMesh(meshList[GEO_SHELF2],B_Light);
+		modelStack.PopMatrix();
 	}
 
 	for(int x = -3; x < 0; x++)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(23,20,x*6);
-	RenderMesh(meshList[GEO_SHELF2],B_Light);
-	modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		modelStack.Translate(23,20,x*6);
+		RenderMesh(meshList[GEO_SHELF2],B_Light);
+		modelStack.PopMatrix();
 	}
 
 	//===============2nd Floor Extreme right row shelf==================//
 	for(int x = -5.5; x < -3.5; x++)
 	{
-	//Wooden shelf
-	modelStack.PushMatrix();
-	modelStack.Translate(5,19.8,x*12);
-	modelStack.Rotate(90,0,1,0);
-	RenderMesh(meshList[GEO_SHELF],B_Light);
-	modelStack.PopMatrix();
+		//Wooden shelf
+		modelStack.PushMatrix();
+		modelStack.Translate(5,19.8,x*12);
+		modelStack.Rotate(90,0,1,0);
+		RenderMesh(meshList[GEO_SHELF],B_Light);
+		modelStack.PopMatrix();
 	}
 
 	for(int x = -11; x < -6; x++)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-14.5,20,x*6);
-	RenderMesh(meshList[GEO_SHELF2],B_Light);
-	modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		modelStack.Translate(-14.5,20,x*6);
+		RenderMesh(meshList[GEO_SHELF2],B_Light);
+		modelStack.PopMatrix();
 	}
 
 	for(int x = -11; x < -6; x++)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(23,20,x*6);
-	RenderMesh(meshList[GEO_SHELF2],B_Light);
-	modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		modelStack.Translate(23,20,x*6);
+		RenderMesh(meshList[GEO_SHELF2],B_Light);
+		modelStack.PopMatrix();
 	}
 
 	//=======================2nd floor Frozen food shelf====================//
 	for(int x = -5; x < 4 ; x++)
 	{
-	modelStack.PushMatrix();
-	modelStack.Translate(-52,20,x*14);
-	RenderMesh(meshList[GEO_COLDFOODSHELF],B_Light);
-	modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		modelStack.Translate(-52,20,x*14);
+		RenderMesh(meshList[GEO_COLDFOODSHELF],B_Light);
+		modelStack.PopMatrix();
 	}
 }
 /******************************************************************************/
@@ -4682,14 +4679,14 @@ void StudioProject::RenderModel()
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3 + 0.2, 0);
-	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
+	//modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
 	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
 	RenderMesh(TAnpc.getRHand(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3 + 0.2, 0);
-	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
+//	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
 	modelStack.Translate(0.8, -1.5 + 0.2, 0);
 	RenderMesh(TAnpc.getLHand(), B_Light);
 	modelStack.PopMatrix();
@@ -4698,7 +4695,7 @@ void StudioProject::RenderModel()
 	modelStack.Translate(0, 0.4, 0);
 	modelStack.PushMatrix();
 	modelStack.Translate(0.3, 1, 0);
-	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
+	//modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
 	modelStack.Translate(0, -1.4, 0);
 	RenderMesh(TAnpc.getLLeg(), B_Light);
 	modelStack.PopMatrix();
@@ -4708,7 +4705,7 @@ void StudioProject::RenderModel()
 	modelStack.Translate(0, 0.4, 0);
 	modelStack.PushMatrix();
 	modelStack.Translate(-0.3, 1, 0);
-	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
+	//modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
 	modelStack.Translate(0, -1.4, 0);
 	RenderMesh(TAnpc.getRLeg(), B_Light);
 	modelStack.PopMatrix();
@@ -4743,14 +4740,14 @@ void StudioProject::RenderModel()
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3 + 0.2, 0);
-	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
+	//modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
 	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
 	RenderMesh(Theifnpc.getRHand(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3 + 0.2, 0);
-	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
+	//modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
 	modelStack.Translate(0.8, -1.5 + 0.2, 0);
 	RenderMesh(Theifnpc.getLHand(), B_Light);
 	modelStack.PopMatrix();
@@ -4759,7 +4756,7 @@ void StudioProject::RenderModel()
 	modelStack.Translate(0, 0.4, 0);
 	modelStack.PushMatrix();
 	modelStack.Translate(0.3, 1, 0);
-	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
+	//modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
 	modelStack.Translate(0, -1.4, 0);
 	RenderMesh(Theifnpc.getLLeg(), B_Light);
 	modelStack.PopMatrix();
@@ -4769,7 +4766,7 @@ void StudioProject::RenderModel()
 	modelStack.Translate(0, 0.4, 0);
 	modelStack.PushMatrix();
 	modelStack.Translate(-0.3, 1, 0);
-	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
+	//modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
 	modelStack.Translate(0, -1.4, 0);
 	RenderMesh(Theifnpc.getRLeg(), B_Light);
 	modelStack.PopMatrix();
@@ -4778,7 +4775,7 @@ void StudioProject::RenderModel()
 	modelStack.PushMatrix();
 	modelStack.Scale(0.5, 0.5, 0.5);
 	modelStack.Rotate(180, 0, 180, 0);
-	modelStack.Translate(0, 10, 0);
+	modelStack.Translate(-5, 10, 0);
 	RenderText(meshList[GEO_TEXT], "Theif Master", Color(0, 0, 1));
 	modelStack.PopMatrix();
 
@@ -4804,14 +4801,14 @@ void StudioProject::RenderModel()
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3 + 0.2, 0);
-	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
+	//modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
 	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
 	RenderMesh(GTPnpc.getRHand(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3 + 0.2, 0);
-	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
+	//modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
 	modelStack.Translate(0.8, -1.5 + 0.2, 0);
 	RenderMesh(GTPnpc.getLHand(), B_Light);
 	modelStack.PopMatrix();
@@ -4820,7 +4817,7 @@ void StudioProject::RenderModel()
 	modelStack.Translate(0, 0.4, 0);
 	modelStack.PushMatrix();
 	modelStack.Translate(0.3, 1, 0);
-	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
+	//modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
 	modelStack.Translate(0, -1.4, 0);
 	RenderMesh(GTPnpc.getLLeg(), B_Light);
 	modelStack.PopMatrix();
@@ -4830,7 +4827,7 @@ void StudioProject::RenderModel()
 	modelStack.Translate(0, 0.4, 0);
 	modelStack.PushMatrix();
 	modelStack.Translate(-0.3, 1, 0);
-	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
+	//modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
 	modelStack.Translate(0, -1.4, 0);
 	RenderMesh(GTPnpc.getRLeg(), B_Light);
 	modelStack.PopMatrix();
@@ -4869,14 +4866,14 @@ void StudioProject::RenderCashier()
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3.f + 0.2f, 0);
-	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
+	//modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
 	modelStack.Translate(-0.8f, -1.5f + 0.2f, 0);
 	RenderMesh(meshList[cashierRightHand], B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3.f + 0.2f, 0);
-	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
+	//modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
 	modelStack.Translate(0.8f, -1.5f + 0.2f, 0);
 	RenderMesh(meshList[cashierLeftHand], B_Light);
 	modelStack.PopMatrix();
@@ -4885,7 +4882,7 @@ void StudioProject::RenderCashier()
 	modelStack.Translate(0, 0.4f, 0);
 	modelStack.PushMatrix();
 	modelStack.Translate(0.3f, 1, 0);
-	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
+	//modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
 	modelStack.Translate(0, -1.4f, 0);
 	RenderMesh(meshList[cashierLeftLeg], B_Light);
 	modelStack.PopMatrix();
@@ -4895,7 +4892,7 @@ void StudioProject::RenderCashier()
 	modelStack.Translate(0, 0.4f, 0);
 	modelStack.PushMatrix();
 	modelStack.Translate(-0.3f, 1, 0);
-	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
+	//modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
 	modelStack.Translate(0, -1.4f, 0);
 	RenderMesh(meshList[cashierRightLeg], B_Light);
 	modelStack.PopMatrix();
@@ -4941,14 +4938,20 @@ void StudioProject::RenderGuard()
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3 + 0.2f, 0);
-	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
+	if (Guard1.getState() == 1)
+	{
+		modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
+	}
 	modelStack.Translate(-0.8f, -1.5f + 0.2f, 0);
 	RenderMesh(Guard1.getRHand(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3.f + 0.2f, 0);
-	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
+	if (Guard1.getState() == 1)
+	{
+		modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
+	}
 	modelStack.Translate(0.8f, -1.5f + 0.2f, 0);
 	RenderMesh(Guard1.getLHand(), B_Light);
 	modelStack.PopMatrix();
@@ -4957,7 +4960,10 @@ void StudioProject::RenderGuard()
 	modelStack.Translate(0, 0.4f, 0);
 	modelStack.PushMatrix();
 	modelStack.Translate(0.3f, 1, 0);
-	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
+	if (Guard1.getState() == 1)
+	{
+		modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
+	}
 	modelStack.Translate(0, -1.4f, 0);
 	RenderMesh(Guard1.getLLeg(), B_Light);
 	modelStack.PopMatrix();
@@ -4967,7 +4973,10 @@ void StudioProject::RenderGuard()
 	modelStack.Translate(0, 0.4f, 0);
 	modelStack.PushMatrix();
 	modelStack.Translate(-0.3f, 1, 0);
-	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
+	if (Guard1.getState() == 1)
+	{
+		modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
+	}
 	modelStack.Translate(0, -1.4f, 0);
 	RenderMesh(Guard1.getRLeg(), B_Light);
 	modelStack.PopMatrix();
@@ -5006,14 +5015,20 @@ void StudioProject::RenderGuard()
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3.f + 0.2f, 0);
-	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
+	if (Guard2.getState() == 1)
+	{
+		modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
+	}
 	modelStack.Translate(-0.8f, -1.5f + 0.2f, 0);
 	RenderMesh(Guard2.getRHand(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 3.f + 0.2f, 0);
-	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
+	if (Guard2.getState() == 1)
+	{
+		modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
+	}
 	modelStack.Translate(0.8f, -1.5f + 0.2f, 0);
 	RenderMesh(Guard2.getLHand(), B_Light);
 	modelStack.PopMatrix();
@@ -5022,7 +5037,10 @@ void StudioProject::RenderGuard()
 	modelStack.Translate(0, 0.4f, 0);
 	modelStack.PushMatrix();
 	modelStack.Translate(0.3f, 1, 0);
-	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
+	if (Guard2.getState() == 1)
+	{
+		modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
+	}
 	modelStack.Translate(0, -1.4f, 0);
 	RenderMesh(Guard2.getLLeg(), B_Light);
 	modelStack.PopMatrix();
@@ -5032,7 +5050,10 @@ void StudioProject::RenderGuard()
 	modelStack.Translate(0, 0.4f, 0);
 	modelStack.PushMatrix();
 	modelStack.Translate(-0.3f, 1, 0);
-	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
+	if (Guard2.getState() == 1)
+	{
+		modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
+	}
 	modelStack.Translate(0, -1.4f, 0);
 	RenderMesh(Guard2.getRLeg(), B_Light);
 	modelStack.PopMatrix();
@@ -7167,7 +7188,7 @@ void StudioProject::RenderTimeAttack()
 	if(generateList == false && TAlist.size() > 1)
 	{
 		/*==========================================================================================
-										RENDERING OF LIST OF ITEMS
+		RENDERING OF LIST OF ITEMS
 		============================================================================================*/
 		int ListHeight = 28;
 		int ListX = 24;
@@ -7336,7 +7357,7 @@ void StudioProject::Render()
 			RenderTextOnScreen(meshList[GEO_TEXT], "Press ENTER to enter input", Color(1, 1, 1), 2, 1, 1);
 		}
 	}
-	else if (menu.getShowMenuStatus() == false && Guard1.getCatchPlayerState() == false && Guard2.getCatchPlayerState() == false)
+	else if (menu.getShowMenuStatus() == false && Guard1.getCatchPlayerState() == false && Guard2.getCatchPlayerState() == false && winState == false)
 	{
 
 		if(lights[0].type == Light::LIGHT_DIRECTIONAL)
@@ -7643,7 +7664,12 @@ void StudioProject::Render()
 		RenderThiefGame();
 	}
 	else if (menu.getShowMenuStatus() == false && Guard1.getCatchPlayerState() == true ||
-			menu.getShowMenuStatus() == false && Guard2.getCatchPlayerState() == true)
+		menu.getShowMenuStatus() == false && Guard2.getCatchPlayerState() == true)
+	{
+		RenderMenuOnScreen(meshList[MENUBACKGROUND], Color(1, 1, 1), 1, 1, 1);
+	}
+
+	if (winState == true)
 	{
 		RenderMenuOnScreen(meshList[MENUBACKGROUND], Color(1, 1, 1), 1, 1, 1);
 	}
@@ -9087,13 +9113,23 @@ void StudioProject::RenderMenuOnScreen(Mesh* mesh, Color color, float size, floa
 
 	if (menu.getShowMenuStatus() == true ||
 		menu.getShowMenuStatus() == false && Guard1.getCatchPlayerState() == true ||
-		menu.getShowMenuStatus() == false && Guard2.getCatchPlayerState() == true)
+		menu.getShowMenuStatus() == false && Guard2.getCatchPlayerState() == true ||
+		winState == true)
 	{
 		modelStack.PushMatrix();
 		modelStack.Scale(120, 120, 120);
 		modelStack.Translate(0.2, 0, 0);
 		RenderMesh(meshList[menu.getBackgroundMesh()], false);
 		modelStack.PopMatrix();
+		if (winState == true)
+		{
+			modelStack.PushMatrix();
+			modelStack.Scale(50, 50, 0);
+			modelStack.Translate(0.78, 0.7, 0);
+			RenderMesh(meshList[menu.getWinMesh()], false);
+			modelStack.PopMatrix();
+			RenderTextOnScreen(meshList[GEO_TEXT], "Press R to go back to menu", Color(1,1,1), 3, 1, 1);
+		}
 	}
 
 	if (menu.getShowMenuStatus() == true && menu.getShowContorlStatus() == false)
@@ -9124,7 +9160,7 @@ void StudioProject::RenderMenuOnScreen(Mesh* mesh, Color color, float size, floa
 			RenderMesh(meshList[menu.getStartGameTrueMesh()], false);
 		}//=============================When not point at Play game render white================//
 		else if (menu.getPointToGame() == false && menu.getPointToExit() == true && menu.getPointToContorl() == false ||
-				menu.getPointToGame() == false && menu.getPointToExit() == false && menu.getPointToContorl() == true)
+			menu.getPointToGame() == false && menu.getPointToExit() == false && menu.getPointToContorl() == true)
 		{
 			RenderMesh(meshList[menu.getStartGameFalseMesh()], false);
 		}
@@ -9140,7 +9176,7 @@ void StudioProject::RenderMenuOnScreen(Mesh* mesh, Color color, float size, floa
 			RenderMesh(meshList[menu.getControlTrueMesh()], false);
 		}//=============================When not pointing at contorl render white================//
 		else if (menu.getPointToGame() == false && menu.getPointToExit() == true && menu.getPointToContorl() == false ||
-				menu.getPointToGame() == true && menu.getPointToExit() == false && menu.getPointToContorl() == false)
+			menu.getPointToGame() == true && menu.getPointToExit() == false && menu.getPointToContorl() == false)
 		{
 			RenderMesh(meshList[menu.getControlFalseMesh()], false);
 		}
@@ -9156,7 +9192,7 @@ void StudioProject::RenderMenuOnScreen(Mesh* mesh, Color color, float size, floa
 			RenderMesh(meshList[menu.getEndGameTrueMesh()], false);
 		}//=============================When not pointing at exit render white================//
 		else if (menu.getPointToGame() == false && menu.getPointToExit() == false && menu.getPointToContorl() == true ||
-				menu.getPointToGame() == true && menu.getPointToExit() == false && menu.getPointToContorl() == false)
+			menu.getPointToGame() == true && menu.getPointToExit() == false && menu.getPointToContorl() == false)
 		{
 			RenderMesh(meshList[menu.getEndGameFalseMesh()], false);
 		}

@@ -28,6 +28,7 @@ public:
 	void SetPointControlFalse(int newObj);
 	void SetGameOverMesh(int newObj);
 	void SetControlMesh(int newObj);
+	void SetWinMesh(int newObj);
 
 	void update(double dt);
 
@@ -41,6 +42,7 @@ public:
 	int getControlFalseMesh();
 	int getControlMesh();
 	int getGameOverMesh();
+	int getWinMesh();
 	bool getPointToGame();
 	bool getPointToExit();
 	bool getPointToContorl();
@@ -55,6 +57,7 @@ private:
 		Arrow,
 		MenuBackground,
 		GameOver,
+		Win,
 		Control,
 		PointToControlTrue,
 		PointToControlFalse;
@@ -64,7 +67,8 @@ private:
 		pointToControl,
 		showMenu,
 		showControl,
-		GameOverState;
+		GameOverState,
+		WinState;
 
 	StopWatch Timer;
 };
