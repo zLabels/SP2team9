@@ -83,7 +83,7 @@ void CGuard::guardUpdate(float dt, Vector3 camerapos)
 		//Movement of guard to player
 		if ((guardPos - camerapos).Length() > 6)
 		{
-		guardPos += (guardDifference.Normalized()) * 25 * dt;
+			guardPos += (guardDifference.Normalized()) * 25 * dt;
 			CatchPlayerState = false;
 		}
 		else

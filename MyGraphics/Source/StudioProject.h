@@ -338,6 +338,7 @@ private:
 	void RenderCheckOutItems(); //Renders Checkout Items
 	void RenderTimeAttack(); //Renders everything related to Time Attack mini game
 	void RenderGTP(); //Renders everything related to Guess The Price mini game
+	void RenderThiefGame();	//Renders everything related to Theif mini game
 
 	//Updates
 	void updateTakingItem(); //Updates taking of items from shelf
@@ -349,6 +350,8 @@ private:
 	void updateAI(double dt); //Updates all AI
 	void updateGTP(); //Updates everything related to Guess The Price mini game
 	void updateGTPprice(); //Updates Item prices for Guess The Price mini game
+	void updateThiefGame();	//Updates everything related to Theif mini game
+
 	void InitOrigPrice(); //Initializes item prices back to normal
 
 	void ResetAll(double dt);
@@ -417,6 +420,9 @@ private:
 
 	//==Thief==//
 	bool ThiefGame;
+	bool isThiefwon;
+	int NoOfItemsStolen;
+	string NumStolen;
 
 	//=========Character=========//
 	bool movingModel;

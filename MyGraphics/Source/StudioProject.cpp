@@ -583,6 +583,9 @@ void StudioProject::InitVariables()
 
 	//==Thief==//
 	ThiefGame = false;
+	isThiefwon = false;
+	NoOfItemsStolen = 0;
+	NumStolen = "";
 
 
 	int a = 0;
@@ -1273,7 +1276,7 @@ void StudioProject::InitVariables()
 		{
 			a += 1;
 		}
-		newTRS.SetToTranslation(-32 +i + a, 2.3,-56.7);
+		newTRS.SetToTranslation(-32 +i + a, 2.3f,-56.7f);
 		cerealBox2.SetData("Morning Chips Cereal", 3.5f, true, newMesh, GEO_CEREALBOX2,newTRS,false);
 		Container5.push_back(cerealBox2);
 		Vector3 Min, Max;
@@ -3405,6 +3408,43 @@ void StudioProject::updateGTP()
 /******************************************************************************/
 /*!
 \brief
+Updates the Theif mini game in the scene
+
+*/
+/******************************************************************************/
+void StudioProject::updateThiefGame()
+{
+	if(camera.position.x <= -147 && camera.position.y <= 10 && camera.position.z <= 91 &&
+		camera.position.x >= -150 && camera.position.y >= 2 && camera.position.z >= 88.5)
+	{
+		if(Application::IsKeyPressed('E') && TimeAttack == false && GTP == false && ThiefGame == false)
+		{
+			isThiefwon = false;
+			ThiefGame = true;
+			messageTime = 0.f;
+			NoOfItemsStolen = 0;
+		}
+		if(Application::IsKeyPressed('Q') && ThiefGame == true)
+		{
+			//Loop to go through each item in player's inventory
+			for(int i = 1; i < player.getInventory().getNoOfItems() + 1;++i)
+			{
+				//Item must not be checked out
+				if(player.getInventory().getItem(i).getPaid() == false)
+				{
+					totalCost += player.getInventory().getItem(i).getPrice();
+					NoOfItemsStolen++;
+				}
+			}
+
+			player.getInventory().DeleteAll();
+			ThiefGame = false;
+		}
+	}
+}
+/******************************************************************************/
+/*!
+\brief
 Resets all variables to restart the scene
 
 */
@@ -3469,6 +3509,13 @@ void StudioProject::ResetAll(double dt)
 	GTPstartedOnce = 0;
 	NumItem = "";
 	CostOfItems = "";
+
+	//==Theif Game==//
+	ThiefGame = false;
+	isThiefwon = false;
+	NoOfItemsStolen = 0;
+	NumStolen = "";
+
 
 	//==player inventory==//
 	player.getInventory().DeleteAll();
@@ -3674,6 +3721,10 @@ void StudioProject::Update(double dt)
 		{
 			messageTime +=(float)(dt);
 		}
+		if(isThiefwon == true)
+		{
+			messageTime +=(float)(dt);
+		}
 		std::ostringstream ssTAtime;
 		ssTAtime.precision(4);
 		ssTAtime << TAtime;
@@ -3870,6 +3921,8 @@ void StudioProject::Update(double dt)
 		updateTimeAttack();
 
 		updateGTP();
+
+		updateThiefGame();
 
 		updateDustBin();
 
@@ -4789,53 +4842,53 @@ void StudioProject::RenderCashier()
 	modelStack.Rotate(angle, 0, angle, 1);
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, -2.285, 0);
+	modelStack.Translate(0, -2.285f, 0);
 	RenderMesh(meshList[cashierHead], B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 1.5, 0);
+	modelStack.Translate(0, 1.5f, 0);
 	RenderMesh(meshList[cashierTorso], B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Translate(0, 3.f + 0.2f, 0);
 	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
-	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
+	modelStack.Translate(-0.8f, -1.5f + 0.2f, 0);
 	RenderMesh(meshList[cashierRightHand], B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Translate(0, 3.f + 0.2f, 0);
 	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
-	modelStack.Translate(0.8, -1.5 + 0.2, 0);
+	modelStack.Translate(0.8f, -1.5f + 0.2f, 0);
 	RenderMesh(meshList[cashierLeftHand], B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 0.4, 0);
+	modelStack.Translate(0, 0.4f, 0);
 	modelStack.PushMatrix();
-	modelStack.Translate(0.3, 1, 0);
+	modelStack.Translate(0.3f, 1, 0);
 	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
-	modelStack.Translate(0, -1.4, 0);
+	modelStack.Translate(0, -1.4f, 0);
 	RenderMesh(meshList[cashierLeftLeg], B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 0.4, 0);
+	modelStack.Translate(0, 0.4f, 0);
 	modelStack.PushMatrix();
-	modelStack.Translate(-0.3, 1, 0);
+	modelStack.Translate(-0.3f, 1, 0);
 	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
-	modelStack.Translate(0, -1.4, 0);
+	modelStack.Translate(0, -1.4f, 0);
 	RenderMesh(meshList[cashierRightLeg], B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix(); //Notation
-	modelStack.Scale(0.5, 0.5, 0.5);
+	modelStack.Scale(0.5f, 0.5f, 0.5f);
 	modelStack.Rotate(180, 0, 180, 0);
-	modelStack.Translate(-3, 10, 0);
+	modelStack.Translate(-3.f, 10.f, 0);
 	RenderText(meshList[GEO_TEXT], "Cashier", Color(0, 0, 1));
 	modelStack.PopMatrix();
 
@@ -4858,54 +4911,54 @@ void StudioProject::RenderGuard()
 	{
 		modelStack.Rotate(Guard1.getDerivedAngle(), 0, 1, 0);
 	}
-	modelStack.Scale(1.2, 1.2, 1.2);
+	modelStack.Scale(1.2f, 1.2f, 1.2f);
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, -2.285, 0);
+	modelStack.Translate(0, -2.285f, 0);
 	RenderMesh(Guard1.getHead(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 1.5, 0);
+	modelStack.Translate(0, 1.5f, 0);
 	RenderMesh(Guard1.getTorso(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Translate(0, 3 + 0.2f, 0);
 	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
-	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
+	modelStack.Translate(-0.8f, -1.5f + 0.2f, 0);
 	RenderMesh(Guard1.getRHand(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Translate(0, 3.f + 0.2f, 0);
 	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
-	modelStack.Translate(0.8, -1.5 + 0.2, 0);
+	modelStack.Translate(0.8f, -1.5f + 0.2f, 0);
 	RenderMesh(Guard1.getLHand(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 0.4, 0);
+	modelStack.Translate(0, 0.4f, 0);
 	modelStack.PushMatrix();
-	modelStack.Translate(0.3, 1, 0);
+	modelStack.Translate(0.3f, 1, 0);
 	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
-	modelStack.Translate(0, -1.4, 0);
+	modelStack.Translate(0, -1.4f, 0);
 	RenderMesh(Guard1.getLLeg(), B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 0.4, 0);
+	modelStack.Translate(0, 0.4f, 0);
 	modelStack.PushMatrix();
-	modelStack.Translate(-0.3, 1, 0);
+	modelStack.Translate(-0.3f, 1, 0);
 	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
-	modelStack.Translate(0, -1.4, 0);
+	modelStack.Translate(0, -1.4f, 0);
 	RenderMesh(Guard1.getRLeg(), B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix(); //Notation
-	modelStack.Scale(0.5, 0.5, 0.5);
+	modelStack.Scale(0.5f, 0.5f, 0.5f);
 	modelStack.Rotate(180, 0, 180, 0);
 	modelStack.Translate(-2, 10, 0);
 	RenderText(meshList[GEO_TEXT], "Guard", Color(0, 0, 1));
@@ -4923,54 +4976,54 @@ void StudioProject::RenderGuard()
 	{
 		modelStack.Rotate(Guard2.getDerivedAngle(), 0, 1, 0);
 	}
-	modelStack.Scale(1.2, 1.2, 1.2);
+	modelStack.Scale(1.2f, 1.2f, 1.2f);
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, -2.285, 0);
+	modelStack.Translate(0, -2.285f, 0);
 	RenderMesh(Guard2.getHead(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 1.5, 0);
+	modelStack.Translate(0, 1.5f, 0);
 	RenderMesh(Guard2.getTorso(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Translate(0, 3.f + 0.2f, 0);
 	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
-	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
+	modelStack.Translate(-0.8f, -1.5f + 0.2f, 0);
 	RenderMesh(Guard2.getRHand(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Translate(0, 3.f + 0.2f, 0);
 	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
-	modelStack.Translate(0.8, -1.5 + 0.2, 0);
+	modelStack.Translate(0.8f, -1.5f + 0.2f, 0);
 	RenderMesh(Guard2.getLHand(), B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 0.4, 0);
+	modelStack.Translate(0, 0.4f, 0);
 	modelStack.PushMatrix();
-	modelStack.Translate(0.3, 1, 0);
+	modelStack.Translate(0.3f, 1, 0);
 	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
-	modelStack.Translate(0, -1.4, 0);
+	modelStack.Translate(0, -1.4f, 0);
 	RenderMesh(Guard2.getLLeg(), B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 0.4, 0);
+	modelStack.Translate(0, 0.4f, 0);
 	modelStack.PushMatrix();
-	modelStack.Translate(-0.3, 1, 0);
+	modelStack.Translate(-0.3f, 1, 0);
 	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
-	modelStack.Translate(0, -1.4, 0);
+	modelStack.Translate(0, -1.4f, 0);
 	RenderMesh(Guard2.getRLeg(), B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix(); //Notation
-	modelStack.Scale(0.5, 0.5, 0.5);
+	modelStack.Scale(0.5f, 0.5f, 0.5f);
 	modelStack.Rotate(180, 0, 180, 0);
 	modelStack.Translate(-2, 10, 0);
 	RenderText(meshList[GEO_TEXT], "Guard", Color(0, 0, 1));
@@ -4991,53 +5044,53 @@ void StudioProject::RenderCustomer()
 	modelStack.Rotate(angle, 0, angle, 1);
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, -2.285, 0);
+	modelStack.Translate(0, -2.285f, 0);
 	RenderMesh(meshList[customerHead], B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 1.5, 0);
+	modelStack.Translate(0, 1.5f, 0);
 	RenderMesh(meshList[customerTorso], B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Translate(0, 3.f + 0.2f, 0);
 	modelStack.Rotate(1+ rotateRightArms, 1+rotateRightArms, 0, 0);
-	modelStack.Translate(-0.8, -1.5 + 0.2, 0);
+	modelStack.Translate(-0.8f, -1.5f + 0.2f, 0);
 	RenderMesh(meshList[customerRightHand], B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 3 + 0.2, 0);
+	modelStack.Translate(0, 3.f + 0.2f, 0);
 	modelStack.Rotate(1 + rotateLeftArms, 1 + rotateLeftArms, 0, 0);
-	modelStack.Translate(0.8, -1.5 + 0.2, 0);
+	modelStack.Translate(0.8f, -1.5f + 0.2f, 0);
 	RenderMesh(meshList[customerLeftHand], B_Light);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 0.4, 0);
+	modelStack.Translate(0, 0.4f, 0);
 	modelStack.PushMatrix();
-	modelStack.Translate(0.3, 1, 0);
+	modelStack.Translate(0.3f, 1, 0);
 	modelStack.Rotate(1+ rotateLeftLeg, 1+ rotateLeftLeg, 0, 0);
-	modelStack.Translate(0, -1.4, 0);
+	modelStack.Translate(0, -1.4f, 0);
 	RenderMesh(meshList[customerLeftLeg], B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(0, 0.4, 0);
+	modelStack.Translate(0, 0.4f, 0);
 	modelStack.PushMatrix();
-	modelStack.Translate(-0.3, 1, 0);
+	modelStack.Translate(-0.3f, 1, 0);
 	modelStack.Rotate(1+ rotateRightLeg, 1+rotateRightLeg, 0, 0);
-	modelStack.Translate(0, -1.4, 0);
+	modelStack.Translate(0, -1.4f, 0);
 	RenderMesh(meshList[customerRightLeg], B_Light);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix(); //Notation
-	modelStack.Scale(0.5, 0.5, 0.5);
+	modelStack.Scale(0.5f, 0.5f, 0.5f);
 	modelStack.Rotate(180, 0, 180, 0);
-	modelStack.Translate(-3, 10, 0);
+	modelStack.Translate(-3.f, 10.f, 0);
 	RenderText(meshList[GEO_TEXT], "Customer", Color(0, 0, 1));
 	modelStack.PopMatrix();
 
@@ -5051,7 +5104,7 @@ Renders the Player Information on the screen
 /******************************************************************************/
 void StudioProject::RenderPlayerInfo()
 {
-	RenderTextOnScreen(meshList[GEO_TEXT],"Money: " + Cash, Color(0, 0, 1), 3, 1, 18);
+	RenderTextOnScreen(meshList[GEO_TEXT],"Money: " + Cash, Color(0, 0, 1), 3.f, 1.f, 18.f);
 }
 /******************************************************************************/
 /*!
@@ -5066,28 +5119,28 @@ void StudioProject::RenderLevel1Lights()
 	//Right back Lightball
 	modelStack.PushMatrix();
 	modelStack.Translate(lights[1].position.x, lights[1].position.y, lights[1].position.z);
-	modelStack.Scale(3,0.5,8);
+	modelStack.Scale(3.f,0.5f,8.f);
 	RenderMesh(meshList[GEO_LIGHTBALL2], false);
 	modelStack.PopMatrix();
 
 	//Center back Lightball
 	modelStack.PushMatrix();
 	modelStack.Translate(lights[0].position.x, lights[0].position.y, lights[0].position.z);
-	modelStack.Scale(3,0.5,8);
+	modelStack.Scale(3.f,0.5f,8.f);
 	RenderMesh(meshList[GEO_LIGHTBALL], false);
 	modelStack.PopMatrix();
 
 	//Left back Lightball
 	modelStack.PushMatrix();
 	modelStack.Translate(lights[2].position.x, lights[2].position.y, lights[2].position.z);
-	modelStack.Scale(3,0.5,8);
+	modelStack.Scale(3.f,0.5f,8.f);
 	RenderMesh(meshList[GEO_LIGHTBALL3], false);
 	modelStack.PopMatrix();
 
 	//Left back Lightball
 	modelStack.PushMatrix();
 	modelStack.Translate(lights[3].position.x, lights[3].position.y, lights[3].position.z);
-	modelStack.Scale(3,0.5,8);
+	modelStack.Scale(3.f,0.5f,8.f);
 	RenderMesh(meshList[GEO_LIGHTBALL4], false);
 	modelStack.PopMatrix();
 
@@ -7205,8 +7258,8 @@ void StudioProject::RenderGTP()
 		RenderTextOnScreen(meshList[GEO_TEXT],"Total Cost: " + CostOfItems, Color(0, 1, 0), 3, 10, 8);
 
 	}
-	//if TA is lost, renders losing message
-	if(isTAwon == false && GTPstartedOnce > 0 && messageTime <= 3)
+	//if GTP is lost, renders losing message
+	if(isGTPwon == false && GTPstartedOnce > 0 && messageTime <= 3)
 	{
 		std::ostringstream ssTotalPrice;
 		ssTotalPrice << totalCost;
@@ -7216,7 +7269,29 @@ void StudioProject::RenderGTP()
 		RenderTextOnScreen(meshList[GEO_TEXT],"Total Cost: " + CostOfItems, Color(1, 0, 0), 3, 10, 9);
 	}
 }
+/******************************************************************************/
+/*!
+\brief
+Renders the Information related to Theif mini game in the scene
+*/
+/******************************************************************************/
+void StudioProject::RenderThiefGame()
+{
+	if(ThiefGame == true)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT],"Steal Items", Color(0, 1, 0), 3, 6, 19);
+	}
+	//if TA is won, renders winning message
+	if(isThiefwon == true && messageTime <= 3)
+	{
+		std::ostringstream ssNoOfItemStolen;
+		ssNoOfItemStolen << NoOfItemsStolen;
+		NumStolen = ssNoOfItemStolen.str();
 
+		RenderTextOnScreen(meshList[GEO_TEXT],"Congratulations", Color(0, 1, 0), 3, 10, 10);
+		RenderTextOnScreen(meshList[GEO_TEXT],"You Have Stolen: " + NumStolen, Color(0, 1, 0), 3, 10, 9);
+	}
+}
 /******************************************************************************/
 /*!
 \brief
@@ -7545,6 +7620,8 @@ void StudioProject::Render()
 		RenderTimeAttack();
 
 		RenderGTP();
+
+		RenderThiefGame();
 	}
 	else if (menu.getShowMenuStatus() == false && Guard1.getCatchPlayerState() == true ||
 			menu.getShowMenuStatus() == false && Guard2.getCatchPlayerState() == true)
@@ -7697,8 +7774,8 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 	if (Page.getItemsTaken1() == true)
 	{
 		modelStack.PushMatrix();
-		modelStack.Translate(-0.91, -0.95, 0);
-		modelStack.Scale(0.07, 0.07, 0.07);
+		modelStack.Translate(-0.91f, -0.95f, 0);
+		modelStack.Scale(0.07f, 0.07f, 0.07f);
 		if (player.getInventory().getItem(1).getName() == Page.getSardineName() 
 			&& player.getInventory().getItem(1).getPaid() == false)
 		{
@@ -9062,7 +9139,6 @@ void StudioProject::RenderMenuOnScreen(Mesh* mesh, Color color, float size, floa
 	modelStack.PopMatrix();
 	glEnable(GL_DEPTH_TEST);
 }
-
 /******************************************************************************/
 /*!
 \brief
