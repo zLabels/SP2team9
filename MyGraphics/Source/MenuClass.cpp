@@ -15,6 +15,8 @@ Menu::Menu(void)
 	pointToExit = false;
 	showMenu = true;
 	GameOverState = false;
+	pointToControl = false;
+	showControl = false;
 }
 
 Menu::~Menu(void)
@@ -106,6 +108,46 @@ int Menu::getGameOverMesh()
 	return GameOver;
 }
 
+void Menu::SetControlMesh(int newObj)
+{
+	Control = newObj;
+}
+
+int Menu::getControlMesh()
+{
+	return Control;
+}
+
+void Menu::SetPointControlTrue(int newObj)
+{
+	PointToControlTrue = newObj;
+}
+
+int Menu::getControlTrueMesh()
+{
+	return PointToControlTrue;
+}
+
+void Menu::SetPointControlFalse(int newObj)
+{
+	PointToControlFalse = newObj;
+}
+
+int Menu::getControlFalseMesh()
+{
+	return PointToControlFalse;
+}
+
+bool Menu::getShowContorlStatus()
+{
+	return showControl;
+}
+
+bool Menu::getPointToContorl()
+{
+	return pointToControl;
+}
+
 void Menu::update(double dt)
 {
 	static float elapsedTime1 = 0, elapsedTime2 = 0;
@@ -120,34 +162,71 @@ void Menu::update(double dt)
 		elapsedTime2 += 0;
 	}
 
-	if(Application::IsKeyPressed(VK_UP) && elapsedTime2 >= 0.5 ||
-		Application::IsKeyPressed(VK_DOWN) && elapsedTime2 >= 0.5)
+	//======================UP ARROW KEY==================//
+	if(Application::IsKeyPressed(VK_UP) && elapsedTime2 >= 0.5)
 	{
-
 		//=======================Pointing to start game====================//
-		if (pointToGame == true && pointToExit == false ||
-			pointToGame == true && pointToExit == false)
+		if (pointToGame == true && pointToExit == false && pointToControl == false)
 		{
 			pointToGame = false;
 			pointToExit = true;
-		}//=======================Pointing to End game====================//
-		else if (pointToGame == false && pointToExit == true ||
-				pointToGame == false && pointToExit == true)
+			pointToControl = false;
+		}//=======================Pointing to Controls====================//
+		else if (pointToGame == false && pointToExit == false && pointToControl == true)
 		{
 			pointToGame = true;
 			pointToExit = false;
+			pointToControl = false;
+		}//=======================Pointing to End game====================//
+		else if (pointToGame == false && pointToExit == true && pointToControl == false)
+		{
+			pointToGame = false;
+			pointToExit = false;
+			pointToControl = true;
 		}
 		elapsedTime2 -= 0.5;
 	}
 
-	if (pointToGame == true && pointToExit == false) //Start Game
+	//======================DOWN ARROW KEY==================//
+	if(Application::IsKeyPressed(VK_DOWN) && elapsedTime2 >= 0.5)
+	{
+		//=======================Pointing to start game====================//
+		if (pointToGame == true && pointToExit == false && pointToControl == false)
+		{
+			pointToGame = false;
+			pointToExit = false;
+			pointToControl = true;
+		}//=======================Pointing to Controls====================//
+		else if (pointToGame == false && pointToExit == false && pointToControl == true)
+		{
+			pointToGame = false;
+			pointToExit = true;
+			pointToControl = false;
+		}//=======================Pointing to End game====================//
+		else if (pointToGame == false && pointToExit == true && pointToControl == false)
+		{
+			pointToGame = true;
+			pointToExit = false;
+			pointToControl = false;
+		}
+		elapsedTime2 -= 0.5;
+	}
+
+	if (pointToGame == true && pointToExit == false && pointToControl == false) //Start Game
 	{
 		if(Application::IsKeyPressed(VK_RETURN))
 		{
 			showMenu = false;
 		}
 	}
-	if (pointToGame == false && pointToExit == true) // End Game
+	if (pointToGame == false && pointToExit == false && pointToControl == true) //Show Control
+	{
+		if(Application::IsKeyPressed(VK_RETURN))
+		{
+			showControl = true;
+		}
+	}
+	if (pointToGame == false && pointToExit == true && pointToControl == false) // End Game
 	{
 		if (Application::IsKeyPressed(VK_RETURN))
 		{
@@ -155,10 +234,13 @@ void Menu::update(double dt)
 		}
 	}
 
-	if (Application::IsKeyPressed('R') == true && showMenu == false)
+	if (Application::IsKeyPressed('R') && showMenu == false ||
+		Application::IsKeyPressed('R') && showControl == true)
 	{
 		showMenu = true;
 		pointToGame = true;
 		pointToExit = false;
+		pointToControl = false;
+		showControl = false;
 	}
 }

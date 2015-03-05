@@ -485,6 +485,18 @@ void StudioProject::InitMesh()
 	meshList[GameOverStateMesh]->textureID = LoadTGA("Image//GameOver.tga");
 	menu.SetGameOverMesh(GameOverStateMesh);
 
+	meshList[ContorlMesh] = MeshBuilder::GenerateQuad("Control Mesh", Color(1, 1, 1), 1.f , 1.f);
+	meshList[ContorlMesh]->textureID = LoadTGA("Image//Controls.tga");
+	menu.SetControlMesh(ContorlMesh);
+
+	meshList[ControlTrue] = MeshBuilder::GenerateQuad("Control true Mesh", Color(1, 1, 1), 1.f , 1.f);
+	meshList[ControlTrue]->textureID = LoadTGA("Image//ControlTrue.tga");
+	menu.SetPointControlTrue(ControlTrue);
+
+	meshList[ControlFalse] = MeshBuilder::GenerateQuad("Control false Mesh", Color(1, 1, 1), 1.f , 1.f);
+	meshList[ControlFalse]->textureID = LoadTGA("Image//ControlFalse.tga");
+	menu.SetPointControlFalse(ControlFalse);
+
 	//meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	//meshList[GEO_TOP]->textureID = LoadTGA("Image//hills_up.tga");
 
@@ -7314,8 +7326,11 @@ void StudioProject::Render()
 	if (menu.getShowMenuStatus() == true)
 	{
 		RenderMenuOnScreen(meshList[MENUBACKGROUND], Color(1, 1, 1), 1, 1, 1);
-		RenderTextOnScreen(meshList[GEO_TEXT], "Press UP or DOWN for navigation", Color(1, 1, 1), 2, 1, 2);
-		RenderTextOnScreen(meshList[GEO_TEXT], "Press ENTER to enter input", Color(1, 1, 1), 2, 1, 1);
+		if (menu.getShowContorlStatus() == false)
+		{
+			RenderTextOnScreen(meshList[GEO_TEXT], "Press UP or DOWN for navigation", Color(1, 1, 1), 2, 1, 2);
+			RenderTextOnScreen(meshList[GEO_TEXT], "Press ENTER to enter input", Color(1, 1, 1), 2, 1, 1);
+		}
 	}
 	else if (menu.getShowMenuStatus() == false && Guard1.getCatchPlayerState() == false && Guard2.getCatchPlayerState() == false)
 	{
@@ -9077,17 +9092,21 @@ void StudioProject::RenderMenuOnScreen(Mesh* mesh, Color color, float size, floa
 		modelStack.PopMatrix();
 	}
 
-	if (menu.getShowMenuStatus() == true)
+	if (menu.getShowMenuStatus() == true && menu.getShowContorlStatus() == false)
 	{
 		modelStack.PushMatrix();
 		modelStack.Scale(3, 3, 3);
-		if (menu.getPointToGame() == true && menu.getPointToExit() == false)
+		if (menu.getPointToGame() == true && menu.getPointToExit() == false && menu.getPointToContorl() == false) //Play Game
 		{
 			modelStack.Translate(7.8, 11.7, 0);//11.7 for PLay Game 9.7 for exit
 		}
-		else if (menu.getPointToGame() == false && menu.getPointToExit() == true)
+		else if (menu.getPointToGame() == false && menu.getPointToExit() == false && menu.getPointToContorl() == true)//Contorl
 		{
 			modelStack.Translate(7.8, 9.7, 0);
+		}
+		else if (menu.getPointToGame() == false && menu.getPointToExit() == true && menu.getPointToContorl() == false)//End Game
+		{
+			modelStack.Translate(7.8, 7.6, 0);
 		}
 		RenderMesh(meshList[menu.getArrowMesh()], false);
 		modelStack.PopMatrix();
@@ -9095,28 +9114,59 @@ void StudioProject::RenderMenuOnScreen(Mesh* mesh, Color color, float size, floa
 		modelStack.PushMatrix();
 		modelStack.Scale(25, 25, 0);
 		modelStack.Translate(1.5, 1.4, 0);
-		if (menu.getPointToGame() == true && menu.getPointToExit() == false)
+		//=============================When pointing at Play game render red================//
+		if (menu.getPointToGame() == true && menu.getPointToExit() == false && menu.getPointToContorl() == false)
 		{
 			RenderMesh(meshList[menu.getStartGameTrueMesh()], false);
-		}
-		else if (menu.getPointToGame() == false && menu.getPointToExit() == true)
+		}//=============================When not point at Play game render white================//
+		else if (menu.getPointToGame() == false && menu.getPointToExit() == true && menu.getPointToContorl() == false ||
+				menu.getPointToGame() == false && menu.getPointToExit() == false && menu.getPointToContorl() == true)
 		{
 			RenderMesh(meshList[menu.getStartGameFalseMesh()], false);
 		}
 		modelStack.PopMatrix();
 
+
+		modelStack.PushMatrix();
+		modelStack.Scale(20, 20, 0);
+		modelStack.Translate(1.86, 1.45, 0);
+		//=============================When pointing at contorl render red================//
+		if (menu.getPointToGame() == false && menu.getPointToExit() == false && menu.getPointToContorl() == true)
+		{
+			RenderMesh(meshList[menu.getControlTrueMesh()], false);
+		}//=============================When not pointing at contorl render white================//
+		else if (menu.getPointToGame() == false && menu.getPointToExit() == true && menu.getPointToContorl() == false ||
+				menu.getPointToGame() == true && menu.getPointToExit() == false && menu.getPointToContorl() == false)
+		{
+			RenderMesh(meshList[menu.getControlFalseMesh()], false);
+		}
+		modelStack.PopMatrix();
+
+
 		modelStack.PushMatrix();
 		modelStack.Scale(25, 25, 0);
-		modelStack.Translate(1.5, 1.15, 0);
-		if (menu.getPointToGame() == false && menu.getPointToExit() == true)
+		modelStack.Translate(1.5, 0.9, 0);
+		//=============================When pointing at exit render red================//
+		if (menu.getPointToGame() == false && menu.getPointToExit() == true && menu.getPointToContorl() == false)
 		{
 			RenderMesh(meshList[menu.getEndGameTrueMesh()], false);
-		}
-		else if (menu.getPointToGame() == true && menu.getPointToExit() == false)
+		}//=============================When not pointing at exit render white================//
+		else if (menu.getPointToGame() == false && menu.getPointToExit() == false && menu.getPointToContorl() == true ||
+				menu.getPointToGame() == true && menu.getPointToExit() == false && menu.getPointToContorl() == false)
 		{
 			RenderMesh(meshList[menu.getEndGameFalseMesh()], false);
 		}
 		modelStack.PopMatrix();
+	}
+
+	if (menu.getShowContorlStatus() == true)
+	{
+		modelStack.PushMatrix();
+		modelStack.Scale(70, 70, 0);
+		modelStack.Translate(0.6, 0.4, 0);
+		RenderMesh(meshList[menu.getControlMesh()], false);
+		modelStack.PopMatrix();
+		RenderTextOnScreen(meshList[GEO_TEXT], "Press R to go back to menu", Color(1,1,1), 3, 1, 1);
 	}
 
 	if (Guard1.getCatchPlayerState() == true && menu.getShowMenuStatus() == false ||
@@ -9129,7 +9179,6 @@ void StudioProject::RenderMenuOnScreen(Mesh* mesh, Color color, float size, floa
 		modelStack.PopMatrix();
 
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press R to go back to menu", Color(1,1,1), 3, 1, 1);
-
 	}
 
 	glBindTexture(GL_TEXTURE_2D, 0);

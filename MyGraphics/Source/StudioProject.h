@@ -288,6 +288,9 @@ private:
 		ExitTrue,
 		ExitFalse,
 		GameOverStateMesh,
+		ContorlMesh,
+		ControlTrue,
+		ControlFalse,
 
 		itemInventory,		//Item Inventory page
 		cart,
