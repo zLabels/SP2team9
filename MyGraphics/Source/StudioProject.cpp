@@ -1072,7 +1072,7 @@ void StudioProject::InitVariables()
 		{
 			a += 4;
 		}
-		newTRS.SetToTranslation(51.3, 4.7,-74+i + a);
+		newTRS.SetToTranslation(51.5, 4.69,-74+i + a);
 		CokeCan.SetData("Coke", 3.5f, true, newMesh, GEO_COKE_CAN,newTRS,false);
 		Container3.push_back(CokeCan);
 		Vector3 Min, Max;
@@ -1393,7 +1393,7 @@ void StudioProject::InitVariables()
 		{
 			a += 2;
 		}
-		newTRS.SetToTranslation(-28.5 +i + a, 2.,-35);
+		newTRS.SetToTranslation(-28.5 +i + a, 2.3,-35);
 		PotatoChip.SetData("Lays Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS,false);
 		Container9.push_back(PotatoChip);
 		Vector3 Min, Max;
@@ -1429,7 +1429,7 @@ void StudioProject::InitVariables()
 		{
 			a += 2;
 		}
-		newTRS.SetToTranslation(-28.5 +i + a, 2,33);
+		newTRS.SetToTranslation(-28.5 +i + a, 2.3,33);
 		PotatoChip.SetData("Lays Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS,false);
 		Container10.push_back(PotatoChip);
 		Vector3 Min, Max;
@@ -2957,7 +2957,8 @@ void StudioProject::updateCheckingOut()
 					{
 						player.getInventory().removeItem(toDelete[i]);
 					}
-					player.setMoney(player.getMoney() - cost);
+					float temp = player.getMoney() - cost;
+					player.setMoney(temp);
 					toDelete.clear();
 				}
 				else if(cost > player.getMoney())
@@ -3444,22 +3445,6 @@ void StudioProject::updateThiefGame()
 			messageTime = 0.f;
 			NoOfItemsStolen = 0;
 		}
-		if(Application::IsKeyPressed('Q') && ThiefGame == true)
-		{
-			//Loop to go through each item in player's inventory
-			for(int i = 1; i < player.getInventory().getNoOfItems() + 1;++i)
-			{
-				//Item must not be checked out
-				if(player.getInventory().getItem(i).getPaid() == false)
-				{
-					totalCost += player.getInventory().getItem(i).getPrice();
-					NoOfItemsStolen++;
-				}
-			}
-
-			player.getInventory().DeleteAll();
-			ThiefGame = false;
-		}
 	}
 }
 /******************************************************************************/
@@ -3519,8 +3504,9 @@ void StudioProject::ResetAll(double dt)
 	timeTA = "";
 	TAstartedOnce = 0;
 	messageTime = 0.f;
-	float doorTranslate = 0;
-	bool isShown = true;
+	doorTranslate = 0;
+	isShown = true;
+	TAlist.clear();
 
 	//==Guess The Price==//
 	GTP = false;
@@ -7812,7 +7798,6 @@ void StudioProject::RenderImageOnScreen(Mesh* mesh, Color color, float size, flo
 	modelStack.PushMatrix();
 	modelStack.Translate(-0.6, -0.6,0);
 	modelStack.Scale(0.8, 0.8, 0.8);
-	/*modelStack.Translate(-1.43656 + -0.065, -1.43656 + 0.15, 0);*/
 	RenderMesh(meshList[itemInventory], false);
 	modelStack.PopMatrix();
 
