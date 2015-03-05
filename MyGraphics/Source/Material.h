@@ -1,6 +1,21 @@
+/******************************************************************************/
+/*!
+\file	Material.h
+\author Ong Swee Seng, Lazarus Tan , Princeton Chew , Adela Quek
+\par	email: 142128G@mymail.nyp.edu.sg
+\brief
+Material Struct
+*/
+/******************************************************************************/
 #ifndef MATERIAL_H
 #define MATERIAL_H
-
+/******************************************************************************/
+/*!
+	Struct hitBox:
+\brief
+Defines the component.(Color)
+*/
+/******************************************************************************/
 struct Component
 {
 	float r, g, b;
@@ -18,7 +33,13 @@ struct Component
 	}
 
 };
-
+/******************************************************************************/
+/*!
+	Struct hitBox:
+\brief
+Defines the material (Ambient,Diffuse and shininess)
+*/
+/******************************************************************************/
 struct Material
 {
 	Component kAmbient;

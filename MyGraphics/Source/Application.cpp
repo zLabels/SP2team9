@@ -1,4 +1,12 @@
-
+/******************************************************************************/
+/*!
+\file	Application.cpp
+\author On gSwee Seng
+\par	email: 141991A@mymail.nyp.edu.sg
+\brief
+Application
+*/
+/******************************************************************************/
 #include "Application.h"
 
 //Include GLEW

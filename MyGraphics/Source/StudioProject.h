@@ -1,10 +1,10 @@
 /******************************************************************************/
 /*!
 \file	StudioProject.h
-\author Princeton Chew, name, name, name,
-\par	email: 141991A@mymail.nyp.edu.sg
+\author Ong Swee Seng, Lazarus Tan , Princeton Chew , Adela Quek
+\par	email: 142128G@mymail.nyp.edu.sg
 \brief
-Studio Project Class
+Structs
 */
 /******************************************************************************/
 #ifndef _StudioProject_H

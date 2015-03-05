@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	MeshBuilder.h
+\author Ong Swee Seng, Lazarus Tan , Princeton Chew , Adela Quek
+\par	email: 142128G@mymail.nyp.edu.sg
+\brief
+Mesh Builder class
+*/
+/******************************************************************************/
 #ifndef MESH_BUILDER_H
 #define MESH_BUILDER_H
 

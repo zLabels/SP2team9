@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	Camera.cpp
+\author Princeton Chew
+\par	email: 141991A@mymail.nyp.edu.sg
+\brief
+Camera Class
+*/
+/******************************************************************************/
 #include "Camera.h"
 #include "Application.h"
 #include "Mtx44.h"

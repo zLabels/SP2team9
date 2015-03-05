@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	LoadOBJ.h
+\author Ong Swee Seng, Lazarus Tan , Princeton Chew , Adela Quek
+\par	email: 142128G@mymail.nyp.edu.sg
+\brief
+Bool for LoadOBJ.h
+*/
+/******************************************************************************/
 #ifndef LOAD_OBJ_H
 #define LOAD_OBJ_H
 

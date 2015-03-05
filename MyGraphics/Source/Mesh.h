@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	Mesuh.h
+\author Princeton Chew, Lazarus Tan , Adela Quek , Ong Swee Seng
+\par	email: 141991A@mymail.nyp.edu.sg
+\brief
+Mesh
+*/
+/******************************************************************************/
 #ifndef MESH_H
 #define MESH_H
 

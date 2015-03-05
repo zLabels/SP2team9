@@ -11,7 +11,14 @@ Studio Project Class
 #define CAMERA_H
 
 #include "Vector3.h"
+/******************************************************************************/
+/*!
+	Class Camera
+\brief
+Defines the variables and functions required for the Camera
 
+*/
+/******************************************************************************/
 class Camera
 {
 public:
