@@ -351,6 +351,8 @@ private:
 	void updateGTPprice(); //Updates Item prices for Guess The Price mini game
 	void InitOrigPrice(); //Initializes item prices back to normal
 
+	void ResetAll(double dt);
+
 public:
 	StudioProject();	//default constructor
 	~StudioProject();	//default destructor

@@ -1,21 +1,6 @@
-/******************************************************************************/
-/*!
-\file	Ai.cpp
-\author Ong Swee Seng
-\par	email: 142128G@mymail.nyp.edu.sg
-\brief
-Ai Class
-*/
-/******************************************************************************/
-
 #include "MenuClass.h"
 
-/******************************************************************************/
-/*!
-\brief
-Default constructor for class
-*/
-/******************************************************************************/
+
 Menu::Menu(void)
 {
 	StartGameTrue =
@@ -35,143 +20,62 @@ Menu::Menu(void)
 Menu::~Menu(void)
 {
 }
-/******************************************************************************/
-/*!
-\brief
-Set background enum position
 
-\param newObj - enum position
-*/
-/******************************************************************************/
 void Menu::SetBackground(int newObj)
 {
 	MenuBackground = newObj;
 }
 
-/******************************************************************************/
-/*!
-\brief
-get background enum position
-*/
-/******************************************************************************/
 int Menu::getBackgroundMesh()
 {
 	return MenuBackground;
 }
 
-/******************************************************************************/
-/*!
-\brief
-Set arrow enum position
-
-\param newObj - enum position
-*/
-/******************************************************************************/
 void Menu::SetArrow(int newObj)
 {
 	Arrow = newObj;
 }
-/******************************************************************************/
-/*!
-\brief
-get arrow enum position
-*/
-/******************************************************************************/
 int Menu::getArrowMesh()
 {
 	return Arrow;
 }
 
 //=========================SET GAME TRUE================================//
-/******************************************************************************/
-/*!
-\brief
-Set StartGametrue enum position
-
-\param newObj - enum position
-*/
-/******************************************************************************/
 void Menu::SetStartGameTrue(int newObj)
 {
 	StartGameTrue = newObj;
 }
-/******************************************************************************/
-/*!
-\brief
-get StartGametrue enum position
-*/
-/******************************************************************************/
 int Menu::getStartGameTrueMesh()
 {
 	return StartGameTrue;
 }
 
 //=========================SET GAME FALSE================================//
-/******************************************************************************/
-/*!
-\brief
-Set StartGameFalse enum position
-
-\param newObj - enum position
-*/
-/******************************************************************************/
 void Menu::SetStartGameFalse(int newObj)
 {
 	StartGameFalse = newObj;
 }
-/******************************************************************************/
-/*!
-\brief
-get StartGameFalse enum position
-*/
-/******************************************************************************/
 int Menu::getStartGameFalseMesh()
 {
 	return StartGameFalse;
 }
 
 //=========================END GAME TRUE================================//
-/******************************************************************************/
-/*!
-\brief
-Set EndGameTrue enum position
-
-\param newObj - enum position
-*/
-/******************************************************************************/
 void Menu::SetEndGameTrue(int newObj)
 {
 	EndGameTrue = newObj;
 }
-/******************************************************************************/
-/*!
-\brief
-get EndGameTrue enum position
-*/
-/******************************************************************************/
+
 int Menu::getEndGameTrueMesh()
 {
 	return EndGameTrue;
 }
 //=========================END GAME FALSE================================//
-/******************************************************************************/
-/*!
-\brief
-Set EndGameFalse enum position
-
-\param newObj - enum position
-*/
-/******************************************************************************/
 void Menu::SetEndGameFalse(int newObj)
 {
 	EndGameFalse = newObj;
 }
-/******************************************************************************/
-/*!
-\brief
-get EndGameFalse enum position
-*/
-/******************************************************************************/
+
 int Menu::getEndGameFalseMesh()
 {
 	return EndGameFalse;

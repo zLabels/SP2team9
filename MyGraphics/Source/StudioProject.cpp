@@ -521,7 +521,7 @@ Initializes the Variables to be used in the scene
 /******************************************************************************/
 void StudioProject::InitVariables()
 {
-		//Sound Engine
+	//Sound Engine
 	engine = createIrrKlangDevice();
 	if (!engine)
 	{
@@ -571,6 +571,19 @@ void StudioProject::InitVariables()
 	timeTA = "";
 	TAstartedOnce = 0;
 	messageTime = 0.f;
+
+	//==Guess The Price==//
+	GTP = false;
+	isGTPwon = false;
+	NoOfItemsTaken = 0;
+	totalCost = 0.f;
+	GTPstartedOnce = 0;
+	NumItem = "";
+	CostOfItems = "";
+
+	//==Thief==//
+	ThiefGame = false;
+
 
 	int a = 0;
 
@@ -829,8 +842,8 @@ void StudioProject::InitVariables()
 		PnCCan.SetData("Peas And Carrots Can", 3.5f, true, newMesh,GEO_PEA_N_CARROTS,newTRS,false);
 		Container.push_back(PnCCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+1,newTRS.a[13]+0.7,newTRS.a[14]+1);
-		Min.Set(-1.5+newTRS.a[12],-0.1+newTRS.a[13],-1+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+1,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-1.5+newTRS.a[12],-0.1+newTRS.a[13],-0.35+newTRS.a[14]);
 		PnC.SetBox(Max, Min);
 		boxContainer.push_back(PnC);
 	}
@@ -903,8 +916,8 @@ void StudioProject::InitVariables()
 		BBCan.SetData("Baked Beans Can", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS,false);
 		Container.push_back(BBCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+1,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-1.5+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
 		BB.SetBox(Max, Min);
 		boxContainer.push_back(BB);
 	}
@@ -921,8 +934,8 @@ void StudioProject::InitVariables()
 		BBCan.SetData("Baked Beans Can", 3.5f, true, newMesh,GEO_BAKED_BEANS_CAN,newTRS,false);
 		Container2.push_back(BBCan);
 		Vector3 Min, Max;
-		Max.Set(newTRS.a[12]+0.59,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
-		Min.Set(-0.59+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
+		Max.Set(newTRS.a[12]+1,newTRS.a[13]+0.7,newTRS.a[14]+0.35);
+		Min.Set(-1.5+newTRS.a[12],-0.7+newTRS.a[13],-0.35+newTRS.a[14]);
 		BB.SetBox(Max, Min);
 		boxContainer2.push_back(BB);
 	}
@@ -1360,7 +1373,7 @@ void StudioProject::InitVariables()
 		{
 			a += 2;
 		}
-		newTRS.SetToTranslation(-28.5 +i + a, 2.3,-35);
+		newTRS.SetToTranslation(-28.5 +i + a, 2.,-35);
 		PotatoChip.SetData("Lays Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS,false);
 		Container9.push_back(PotatoChip);
 		Vector3 Min, Max;
@@ -1396,7 +1409,7 @@ void StudioProject::InitVariables()
 		{
 			a += 2;
 		}
-		newTRS.SetToTranslation(-28.5 +i + a, 2.3,33);
+		newTRS.SetToTranslation(-28.5 +i + a, 2,33);
 		PotatoChip.SetData("Lays Potato Chips", 3.5f, true, newMesh, GEO_POTATOCHIPS,newTRS,false);
 		Container10.push_back(PotatoChip);
 		Vector3 Min, Max;
@@ -3392,13 +3405,192 @@ void StudioProject::updateGTP()
 /******************************************************************************/
 /*!
 \brief
+Resets all variables to restart the scene
+
+*/
+/******************************************************************************/
+void StudioProject::ResetAll(double dt)
+{
+	Guard1.guardUpdate(dt, camera.position);
+	Guard2.guardUpdate(dt, camera.position);
+	menu.update(dt);
+	camera.Update(dt);
+	Passerby[0].update(dt, camera.position);
+	Passerby[1].update(dt, camera.position);
+	Passerby[2].update(dt, camera.position);
+	//Page.update(dt);
+	angle = 3600;
+	playerAngle = 0;
+	moving = 0;
+	showInventory = false;
+	//OBJ FOOD BOOLEANS
+	Pizza = false;
+	Peas = false;
+	Milo = false;
+	Cereal1 = false;
+	Cereal2 = false;
+	Sardine = false;
+	Beans = false;
+	Lays = false;
+	Coke = false;
+	CokeZero = false;
+	Pepsi = false;
+	Pizza = false;
+	moveItem = 0; // SPEED
+	peaCount = 0;
+	PizzaCount = 0;
+	MiloCount = 0;
+	Cereal1Count = 0;
+	Cereal2Count = 0;
+	SardineCount = 0;
+	BeansCount = 0;
+	LaysCount = 0;
+	CokeCount = 0;
+	CokeZeroCount = 0;
+	PepsiCount = 0;
+
+	//==Time Attack==//
+	TimeAttack = false;
+	generateList = false;
+	TAmatchedItems = 0;
+	isTAwon = false;
+	TAtime = 60.f;
+	timeTA = "";
+	TAstartedOnce = 0;
+	messageTime = 0.f;
+	float doorTranslate = 0;
+	bool isShown = true;
+
+	//==Guess The Price==//
+	GTP = false;
+	isGTPwon = false;
+	NoOfItemsTaken = 0;
+	totalCost = 0.f;
+	GTPstartedOnce = 0;
+	NumItem = "";
+	CostOfItems = "";
+
+	//==player inventory==//
+	player.getInventory().DeleteAll();
+	player.setMoney(50.f);
+
+	//==Items reset===//
+	float newPrice = 3.5f;
+	/*==============================
+	Container 1
+	=================================*/
+	for(int i = 0; i < Container.size();++i)
+	{
+		Container[i].setRender(true);
+	}
+
+	/*==============================
+	Container 2
+	=================================*/
+	for(int i = 0; i < Container2.size();++i)
+	{
+		Container2[i].setRender(true);
+	}
+
+	/*==============================
+	Container 3
+	=================================*/
+	for(int i = 0; i < Container3.size();++i)
+	{
+		Container3[i].setRender(true);
+	}
+
+	
+	/*==============================
+	Container 4
+	=================================*/
+	for(int i = 0; i < Container4.size();++i)
+	{
+		Container4[i].setRender(true);
+	}
+
+	/*==============================
+	Container 5
+	=================================*/
+	for(int i = 0; i < Container5.size();++i)
+	{
+		Container5[i].setRender(true);
+	}
+	
+	/*==============================
+	Container 6
+	=================================*/
+	for(int i = 0; i < Container6.size();++i)
+	{
+		Container6[i].setRender(true);
+	}
+	
+	/*==============================
+	Container 7
+	=================================*/
+	for(int i = 0; i < Container7.size();++i)
+	{
+		Container7[i].setRender(true);
+	}
+	
+	/*==============================
+	Container 8
+	=================================*/
+	for(int i = 0; i < Container8.size();++i)
+	{
+		Container8[i].setRender(true);
+	}
+	
+	/*==============================
+	Container 9
+	=================================*/
+	for(int i = 0; i < Container9.size();++i)
+	{
+
+		Container9[i].setRender(true);
+	}
+	
+	/*==============================
+	Container 10
+	=================================*/
+	for(int i = 0; i < Container10.size();++i)
+	{
+		Container10[i].setRender(true);
+	}
+	
+	/*==============================
+	Container 11
+	=================================*/
+	for(int i = 0; i < Container11.size();++i)
+	{
+		Container11[i].setRender(true);
+	}
+	
+	/*==============================
+	Container 12
+	=================================*/
+	for(int i = 0; i < Container12.size();++i)
+	{
+		Container12[i].setRender(true);
+	}
+	
+	/*==============================
+	Container 13
+	=================================*/
+	for(int i = 0; i < Container13.size();++i)
+	{
+		Container13[i].setRender(true);
+	}
+}
+/******************************************************************************/
+/*!
+\brief
 Updates the scene based on delta time
 
 \param	dt - delta time
 */
 /******************************************************************************/
 void StudioProject::Update(double dt)
-
 {
 	float LSPEED = 10.f;
 
@@ -3653,17 +3845,6 @@ void StudioProject::Update(double dt)
 				}
 			}
 		}
-
-		/*if (Application::IsKeyPressed('8'))
-		{
-		charPosition.z += cos(Math::DegreeToRadian(angle)) * 10 * dt;
-		charPosition.x += sin(Math::DegreeToRadian(angle)) * 10 * dt;
-		}
-		if (Application::IsKeyPressed('9'))
-		{
-		charPosition.z -= cos(Math::DegreeToRadian(angle)) * 10 * dt;
-		charPosition.x -= sin(Math::DegreeToRadian(angle)) * 10 * dt;
-		}*/
 		if (Application::IsKeyPressed('I'))
 		{
 			angle += 100 * dt;
@@ -3758,40 +3939,6 @@ void StudioProject::Update(double dt)
 			}
 			elapsedTime2 -= 0.5;
 		}
-		//std::cout << elapsedTime2 << endl;
-
-		if(Application::IsKeyPressed('B'))
-		{
-			if (translateMoneyZ > -8.5 && translateMoneyY > -2.54)
-			{
-				translateMoneyZ -= (float) (10 * dt);
-				translateMoneyY -= (float) (3 * dt);
-				throwMoney = true;
-			}
-			if (translateMoneyZ <= -8.5 && translateMoneyY <= -2.54)
-			{
-				throwMoney = false;
-			}
-
-			//if (translateMoneyY > -2.54)
-			//{
-			//	translateMoneyY -= (float) (3 * dt);
-			//}
-
-			//else if( translateMoneyZ <=-8.5 && translateMoneyY <=-2.54)
-			//{
-			//	throwMoney = false;
-			//}
-
-
-			//if (translateMoneyY == 0)
-			//{
-			//	translateMoneyY = 0;
-			//	translateMoneyZ = 0;
-			//modelStack.Scale(0.3, 0.3, 0.3);
-			//RenderMesh(meshList[GEO_MONEY],B_Light);
-			//}
-		}
 		//================Testing =================//
 		//cout << Container.size() << endl;
 		if (Application::IsKeyPressed('M'))
@@ -3800,16 +3947,6 @@ void StudioProject::Update(double dt)
 			moving -= (float) (10 * dt);
 		//moving -= (float) (5 * dt);
 		//cout<<moving<<endl;
-
-		//================Testing =================//
-		//cout << Container.size() << endl;
-		if (Application::IsKeyPressed('M'))
-			moving += (float) (10 * dt);
-		if (Application::IsKeyPressed('N'))
-			moving -= (float) (10 * dt);
-		//moving -= (float) (5 * dt);
-		//cout<<moving<<endl;
-
 		camera.Update(dt);
 
 		Page.setCPlayer(player);
@@ -3835,60 +3972,11 @@ void StudioProject::Update(double dt)
 			camera.CollisionWithAi = false;
 		}
 	}
-
 	//=====================FOR RESETTING PURPOSE================//
-	//Page.update(dt);
+
 	if (Application::IsKeyPressed('R'))
 	{
-		Guard1.guardUpdate(dt, camera.position);
-		Guard2.guardUpdate(dt, camera.position);
-		menu.update(dt);
-		camera.Update(dt);
-		Passerby[0].update(dt, camera.position);
-		Passerby[1].update(dt, camera.position);
-		Passerby[2].update(dt, camera.position);
-		angle = 3600;
-		playerAngle = 0;
-		moving = 0;
-		showInventory = false;
-		//OBJ FOOD BOOLEANS
-		Pizza = false;
-		Peas = false;
-		Milo = false;
-		Cereal1 = false;
-		Cereal2 = false;
-		Sardine = false;
-		Beans = false;
-		Lays = false;
-		Coke = false;
-		CokeZero = false;
-		Pepsi = false;
-		Pizza = false;
-		moveItem = 0; // SPEED
-		peaCount = 0;
-		PizzaCount = 0;
-		MiloCount = 0;
-		Cereal1Count = 0;
-		Cereal2Count = 0;
-		SardineCount = 0;
-		BeansCount = 0;
-		LaysCount = 0;
-		CokeCount = 0;
-		CokeZeroCount = 0;
-		PepsiCount = 0;
-
-		//==Time Attack==//
-		TimeAttack = false;
-		generateList = false;
-		TAmatchedItems = 0;
-		isTAwon = false;
-		TAtime = 60.f;
-		timeTA = "";
-		TAstartedOnce = 0;
-		messageTime = 0.f;
-
-		float doorTranslate = 0;
-		bool isShown = true;
+		ResetAll(dt);
 	}
 }
 /******************************************************************************/

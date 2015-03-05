@@ -5,7 +5,6 @@
 #include "Mtx44.h"
 #include "Player.h"
 #include "MatrixStack.h"
-#include "Application.h"
 
 using std::string;
 
@@ -28,7 +27,6 @@ public:
 	void setCokeZero(string newName, int newObj);
 	void setMilo(string newName, int newObj);
 	void setCPlayer(CPlayer);
-	void update(double);
 
 	int getBackgroundMesh();
 	int getSardineMesh();
