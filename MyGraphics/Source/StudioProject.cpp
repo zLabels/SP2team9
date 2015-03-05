@@ -3159,6 +3159,7 @@ void StudioProject::updateDoor(double dt)
 
 	if (camera.position.z <= 20.1 && camera.position.z >= -19.7 && camera.position.y >= 2 && camera.position.y <= 10 && camera.position.x <=-41.5 && camera.position.x >= -76.3)
 	{
+
 		if(Opened == false &&  Closed == true && doorStop == true)
 		{
 			Closed = false;
@@ -3167,9 +3168,11 @@ void StudioProject::updateDoor(double dt)
 
 		if(Closed == false && doorMoving == true)
 		{
+			
 			doorTranslate -=(float)(35*dt);
 			if(doorTranslate < -20)
 			{
+				Sound = engine->play2D("Sound\\doorbell.wav");
 				doorMoving = false;
 				Opened = true;
 				doorStop = true;
@@ -3668,6 +3671,7 @@ void StudioProject::Update(double dt)
 	}
 	else if (menu.getShowMenuStatus() == false && Guard1.getCatchPlayerState() == false && Guard2.getCatchPlayerState() == false)
 	{
+		/*Sound = engine->play2D("Sound\\magical_moment.mp3");*/
 		menu.update(dt);
 		camera.showingMenu = false;
 		//Speed of by which Item is translated on Checkout

@@ -13,6 +13,7 @@ Camera3 Class
 #include "Camera.h"
 #include <vector>
 
+
 /******************************************************************************/
 /*!
 	Class Camera3
