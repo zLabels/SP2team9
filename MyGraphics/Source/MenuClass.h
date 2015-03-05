@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	Camera3.h
+\author Princeton Chew, name, name, name,
+\par	email: 141991A@mymail.nyp.edu.sg
+\brief
+Camera3 Class
+*/
+/******************************************************************************/
 #pragma once
 #include <string>
 #include "Vector3.h"
@@ -11,7 +20,14 @@
 using std::string;
 using std::cout;
 using std::endl;
+/******************************************************************************/
+/*!
+	Class CInventory
+\brief
+Defines the variables and functions required for the Menu
 
+*/
+/******************************************************************************/
 class Menu
 {
 public:

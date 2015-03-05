@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	Character.h
+\author Princeton Chew
+\par	email: 141991A@mymail.nyp.edu.sg
+\brief
+Character Class
+*/
+/******************************************************************************/
 #ifndef AI_H
 #define AI_H
 
@@ -6,7 +15,14 @@
 #include <vector>
 #include "Vector3.h"
 #include "timer.h"
+/******************************************************************************/
+/*!
+	Class CCharacter
+\brief
+Defines the variables and functions required for the AI
 
+*/
+/******************************************************************************/
 class Ai : public Camera
 {
 public:

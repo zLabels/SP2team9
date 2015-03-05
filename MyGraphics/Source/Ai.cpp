@@ -1,7 +1,22 @@
 #include "Ai.h"
 #include "Application.h"
 #include "Mtx44.h"
+/******************************************************************************/
+/*!
+\file	Character.cpp
+\author Princeton Chew
+\par	email: 141991A@mymail.nyp.edu.sg
+\brief
+Character Class
+*/
+/******************************************************************************/
 
+/******************************************************************************/
+/*!
+\brief
+Default constructor for AI
+*/
+/******************************************************************************/
 Ai::Ai()
 {
 	derivedAngle = 0;
@@ -11,18 +26,38 @@ Ai::Ai()
 	PasserbyAngle3 = 90;
 	Passerby1Phase1 = Passerby1Phase2 = Passerby1Phase3 = Passerby1Phase4 = false;
 }
-
+/******************************************************************************/
+/*!
+\brief
+Default destructor for class
+*/
+/******************************************************************************/
 Ai::~Ai()
 {
 }
+/******************************************************************************/
+/*!
+\brief
+Sets AI Position and target
 
+\param pos - Vector3 position of AI
+\param targ - Vector3 target of AI
+*/
+/******************************************************************************/
 void Ai::passInPositionAndTarget(Vector3 pos, Vector3 target)
 {
 	guardPos = pos;
 	guardTarget = target;
 	guardView = (guardTarget - guardPos).Normalized();
 }
+/******************************************************************************/
+/*!
+\brief
+ Sets the update status for the ai. Telling it what to do every frame
 
+ \param derivedAngle = angle difference between player and ai
+*/
+/******************************************************************************/
 void Ai::update(float dt, Vector3 camera)
 {
 	//==================================GUARD=====================//
@@ -505,64 +540,124 @@ void Ai::update(float dt, Vector3 camera)
 		}
 	}
 }
-
+ /******************************************************************************/
+/*!
+\brief
+Finds the distance between player and Guard
+*/
+/******************************************************************************/
 void Ai::FindPlayerDistanceDifference(Vector3 cameraPosition)
 {
 	guardDifference = cameraPosition - guardPos;
 }
-
+/******************************************************************************/
+/*!
+\brief
+Finds the distance between ai and customer
+*/
+/******************************************************************************/
 void Ai::FindPlayerDistanceDifferencePasserby(Vector3 cameraPosition)
 {
 	PasserbyDifference = cameraPosition - PasserbyPos;
 }
-
+/******************************************************************************/
+/*!
+\brief
+Default constructor for passerbys
+*/
+/******************************************************************************/
 void Ai::SetPasserby(Vector3 PasserbyPassIn)
 {
 	PasserbyPos = PasserbyPassIn;
 	PasserbyPos2 = PasserbyPassIn;
 	PasserbyPos3 = PasserbyPassIn;
 }
-
+/******************************************************************************/
+/*!
+\brief
+returns ai (float) angle
+*/
+/******************************************************************************/
 float Ai::getDerivedAngle()
 {
 	return derivedAngle;
 }
-
+/******************************************************************************/
+/*!
+\brief
+Returns guard position
+*/
+/******************************************************************************/
 Vector3 Ai::getGuardPosition()
 {
 	return guardPos;
 }
-
+/******************************************************************************/
+/*!
+\brief
+Returns passerby's angle(float)
+*/
+/******************************************************************************/
 float Ai::getPasserbyAngle()
 {
 	return PasserbyAngle;
 }
-
+ /******************************************************************************/
+/*!
+\brief
+Returns passerby's Position(float)
+*/
+/******************************************************************************/
 Vector3 Ai::getPasserbyPosition()
 {
 	return PasserbyPos;
 }
-
+ /******************************************************************************/
+/*!
+\brief
+Returns passerby's Angle(float)
+*/
+/******************************************************************************/
 float Ai::getPasserbyAngle2()
 {
 	return PasserbyAngle2;
 }
-
+ /******************************************************************************/
+/*!
+\brief
+Returns passerby's Angle(float)
+*/
+/******************************************************************************/
 float Ai::getPasserbyAngle3()
 {
 	return PasserbyAngle3;
 }
-
+ /******************************************************************************/
+/*!
+\brief
+Returns passerby's Position(float)
+*/
+/******************************************************************************/
 Vector3 Ai::getPasserby2Position()
 {
 	return PasserbyPos2;
 }
-
+ /******************************************************************************/
+/*!
+\brief
+Returns passerby's Position(float)
+*/
+/******************************************************************************/
 Vector3 Ai::getPasserby3Position()
 {
 	return PasserbyPos3;
 }
-
+ /******************************************************************************/
+/*!
+\brief
+Returns Guards state (Bool)
+*/
+/******************************************************************************/
 bool Ai::getAlertState()
 {
 	return guardAlertState;

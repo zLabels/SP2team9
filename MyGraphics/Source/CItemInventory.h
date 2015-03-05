@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	Camera3.h
+\author Princeton Chew, name, name, name,
+\par	email: 141991A@mymail.nyp.edu.sg
+\brief
+Camera3 Class
+*/
+/******************************************************************************/
 #pragma once
 #include <string>
 #include "Vector3.h"
@@ -7,7 +16,14 @@
 #include "MatrixStack.h"
 
 using std::string;
+/******************************************************************************/
+/*!
+	Class CCharacter
+\brief
+Defines the variables and functions required for the Inventory
 
+*/
+/******************************************************************************/
 class CItemInventory
 {
 public:

@@ -168,7 +168,14 @@ void CGuard::setState(int a)
 {
 	state = a;
 }
+/******************************************************************************/
+/*!
+\brief
+Returns the player state (Caught or not)
 
+\param bool of state
+*/
+/******************************************************************************/
 bool CGuard::getCatchPlayerState()
 {
 	return CatchPlayerState;
